@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>English Language Program &mdash; CELE UTS</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --blue: #004c8f;
+      --blue-mid: #00367a;
+      --blue-deep: #002a5e;
+      --yellow: #f5c500;
+      --green: #00a859;
+      --green-dark: #008a48;
+      --green-dim: rgba(0, 168, 89, .10);
+      --blue-dim: rgba(0, 76, 143, .07);
+      --blue-line: rgba(0, 76, 143, .15);
+      --green-line: rgba(0, 168, 89, .20);
+      --page: #f7f5f2;
+      --card: #ffffff;
+      --ink: #1a1a1f;
+      --body: #3d3d45;
+      --muted: #7a7a88;
+      --rule: #e4e2de
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
+
+    html {
+      scroll-behavior: smooth
+    }
+
+    body {
+      background: var(--page);
+      color: var(--body);
+      font-family: 'Lora', Georgia, serif;
+      min-height: 100vh
+    }
+
+    .display {
+      font-family: 'Playfair Display', Georgia, serif
+    }
+
+    .mono {
+      font-family: 'JetBrains Mono', monospace
+    }
+
+    header {
+      background: var(--blue);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 20px rgba(0, 0, 0, .18)
+    }
+
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 clamp(1rem, 5vw, 3rem);
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem
+    }
+
+    .logo-pill {
+      background: rgba(255, 255, 255, .14);
+      border: 1.5px solid rgba(255, 255, 255, .28);
+      border-radius: 8px;
+      padding: 4px 12px;
+      backdrop-filter: blur(6px);
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      flex-shrink: 0
+    }
+
+    .logo-pill img {
+      height: 40px;
+      width: auto
+    }
+
+    .logo-fallback {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: 1.2rem;
+      color: #fff
+    }
+
+    .header-center {
+      flex: 1;
+      text-align: center;
+      pointer-events: none;
+      padding: 0 1rem
+    }
+
+    .header-center .eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .55rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .5);
+      margin-bottom: 2px
+    }
+
+    .header-center .h-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 900;
+      color: #fff
+    }
+
+    .hero {
+      background: var(--blue);
+      background-image: repeating-linear-gradient(-55deg, rgba(255, 255, 255, .025) 0px, rgba(255, 255, 255, .025) 1px, transparent 1px, transparent 18px);
+      padding: clamp(2.5rem, 7vw, 5rem) clamp(1rem, 5vw, 3rem) clamp(2rem, 5vw, 4rem);
+      border-bottom: 4px solid var(--green)
+    }
+
+    .hero-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 2rem;
+      align-items: end
+    }
+
+    .hero-eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .63rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 10px
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 28px;
+      height: 1.5px;
+      background: var(--green)
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      font-weight: 900;
+      line-height: 1.06;
+      color: #fff
+    }
+
+    .hero-title em {
+      color: var(--yellow);
+      font-style: italic
+    }
+
+    .hero-sub {
+      margin-top: 1rem;
+      max-width: 560px;
+      font-size: .9rem;
+      line-height: 1.8;
+      color: rgba(255, 255, 255, .62)
+    }
+
+    .hero-meta {
+      text-align: right;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .62rem;
+      color: rgba(255, 255, 255, .38);
+      letter-spacing: .07em;
+      line-height: 2.1;
+      border-left: 1px solid rgba(255, 255, 255, .12);
+      padding-left: 1.6rem
+    }
+
+    .hero-meta strong {
+      display: block;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.9rem;
+      color: var(--yellow);
+      letter-spacing: 0;
+      line-height: 1
+    }
+
+    .quick-nav {
+      background: var(--blue-deep);
+      border-bottom: 1px solid rgba(255, 255, 255, .08)
+    }
+
+    .quick-nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: .8rem clamp(1rem, 5vw, 3rem);
+      display: flex;
+      gap: .45rem;
+      flex-wrap: wrap
+    }
+
+    .qn-chip {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .58rem;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .42);
+      text-decoration: none;
+      border: 1px solid rgba(255, 255, 255, .1);
+      border-radius: 3px;
+      padding: 4px 10px;
+      transition: color .15s, border-color .15s, background .15s
+    }
+
+    .qn-chip:hover {
+      color: var(--yellow);
+      border-color: rgba(245, 197, 0, .35);
+      background: rgba(245, 197, 0, .07)
+    }
+
+    .main-wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 clamp(1rem, 5vw, 3rem) 5rem
+    }
+
+    .grade-section {
+      padding: 3rem 0 1rem
+    }
+
+    .grade-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1.2rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: .8rem;
+      border-bottom: 2px solid var(--blue)
+    }
+
+    .grade-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .58rem;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      background: var(--blue);
+      color: #fff;
+      padding: 4px 10px;
+      border-radius: 2px
+    }
+
+    .grade-badge.yellow {
+      background: var(--yellow);
+      color: var(--blue-deep)
+    }
+
+    .grade-badge.green {
+      background: var(--green);
+      color: #fff
+    }
+
+    .grade-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+      font-weight: 900;
+      color: var(--blue)
+    }
+
+    .grade-desc {
+      font-size: .84rem;
+      color: var(--muted);
+      line-height: 1.72;
+      max-width: 760px;
+      margin-bottom: 1.8rem
+    }
+
+    .levels-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.1rem;
+      margin-bottom: 3rem
+    }
+
+    .level-card {
+      background: var(--card);
+      border: 1px solid var(--blue-line);
+      border-top: 4px solid var(--blue);
+      border-radius: 2px;
+      padding: 1.4rem 1.6rem;
+      text-decoration: none;
+      color: var(--body);
+      display: flex;
+      flex-direction: column;
+      gap: .55rem;
+      box-shadow: 0 2px 8px rgba(0, 76, 143, .06);
+      transition: box-shadow .2s, transform .18s, border-top-color .18s
+    }
+
+    .level-card:hover {
+      box-shadow: 0 6px 22px rgba(0, 76, 143, .14);
+      transform: translateY(-2px);
+      border-top-color: var(--green)
+    }
+
+    .level-card.yellow-top {
+      border-top-color: var(--yellow)
+    }
+
+    .level-card.yellow-top:hover {
+      border-top-color: var(--green)
+    }
+
+    .level-card.green-top {
+      border-top-color: var(--green)
+    }
+
+    .level-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.6rem;
+      font-weight: 900;
+      line-height: 1;
+      color: rgba(0, 76, 143, .12)
+    }
+
+    .level-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .58rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--green)
+    }
+
+    .level-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-weight: 900;
+      color: var(--blue)
+    }
+
+    .level-topics {
+      font-size: .78rem;
+      color: var(--muted);
+      line-height: 1.6
+    }
+
+    .level-arrow {
+      font-size: .75rem;
+      color: var(--blue);
+      font-family: 'JetBrains Mono', monospace;
+      margin-top: auto;
+      padding-top: .4rem
+    }
+
+    footer {
+      background: var(--blue);
+      border-top: 3px solid var(--green);
+      padding: 2.5rem clamp(1rem, 5vw, 3rem);
+      text-align: center;
+      margin-top: 2rem
+    }
+
+    .f-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 900;
+      color: #fff;
+      margin-bottom: .25rem
+    }
+
+    .f-sub {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .58rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .38)
+    }
+
+    .f-accent {
+      color: var(--yellow)
+    }
+
+    @media(max-width:700px) {
+      .hero-inner {
+        grid-template-columns: 1fr
+      }
+
+      .hero-meta {
+        display: none
+      }
+
+      .header-center {
+        display: none
+      }
+
+      .levels-grid {
+        grid-template-columns: 1fr
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="header-inner">
+      <div class="logo-pill">
+        <img src="assets/images/logo-uts-2024.png" alt="UTS"
+          onerror="this.parentElement.innerHTML='<span class=\'logo-fallback\'>UTS</span>'">
+      </div>
+
+      <div class="header-center">
+        <p class="eyebrow">Centro de Lenguas &middot; UTS</p>
+        <p class="h-title display">English Language Program</p>
+      </div>
+
+      <div class="logo-pill">
+        <img src="assets/images/logo_cele.png" alt="CELE"
+          onerror="this.parentElement.innerHTML='<span class=\'logo-fallback\'>CELE</span>'">
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-inner">
+      <div>
+        <p class="hero-eyebrow">CELE &mdash; Centro de Lenguas UTS</p>
+        <h1 class="hero-title display"><em>English</em><br>Language Program</h1>
+        <p class="hero-sub">A complete English curriculum from A1 to C1. Choose your grade to explore levels and access
+          interactive grammar materials developed by the CELE teaching team.</p>
+      </div>
+      <div class="hero-meta">
+        <strong>3</strong>Grades<br>
+        <strong>12</strong>Levels<br>
+        <strong>A1&rarr;C1</strong>CEFR<br>
+        &mdash;&mdash;<br>
+        Basic &middot; Int.<br>Advanced
+      </div>
+    </div>
+  </section>
+
+  <nav class="quick-nav">
+    <div class="quick-nav-inner">
+      <a class="qn-chip" href="#basic">Basic (A1&ndash;A2)</a>
+      <a class="qn-chip" href="#intermediate">Intermediate (B1&ndash;B2)</a>
+      <a class="qn-chip" href="#advanced">Advanced (C1)</a>
+    </div>
+  </nav>
+
+  <div class="main-wrap">
+
+    <!-- BASIC -->
+    <section id="basic" class="grade-section">
+      <div class="grade-header">
+        <span class="grade-badge">A1 &ndash; A2</span>
+        <h2 class="grade-title display">Basic</h2>
+      </div>
+      <p class="grade-desc">Foundational English covering everyday expressions, simple grammar structures, and basic
+        communication skills. Covers CEFR levels A1 and A2 across four progressive levels.</p>
+      <div class="levels-grid">
+        <a class="level-card" href="basic/basic1.html">
+          <span class="level-num display">I</span>
+          <span class="level-label">Level A1</span>
+          <span class="level-title display">Basic I</span>
+          <span class="level-topics">Greetings &middot; To Be &middot; Simple Present &middot; Articles &middot; Numbers
+            &middot; Family</span>
+          <span class="level-arrow mono">Explore level &rarr;</span>
+        </a>
+        <a class="level-card" href="basic/basic2.html">
+          <span class="level-num display">II</span>
+          <span class="level-label">Level A1</span>
+          <span class="level-title display">Basic II</span>
+          <span class="level-topics">There is/are &middot; Do/Does &middot; Was/Were &middot; Simple Past &middot;
+            Can/Can&#39;t</span>
+          <span class="level-arrow mono">Explore level &rarr;</span>
+        </a>
+        <a class="level-card yellow-top" href="basic/basic3.html">
+          <span class="level-num display">III</span>
+          <span class="level-label">Level A2</span>
+          <span class="level-title display">Basic III</span>
+          <span class="level-topics">Simple Past review &middot; Time Expressions &middot; Present Progressive &middot;
+            Future &middot; Comparatives</span>
+          <span class="level-arrow mono">Explore level &rarr;</span>
+        </a>
+        <a class="level-card yellow-top" href="basic/basic4.html">
+          <span class="level-num display">IV</span>
+          <span class="level-label">Level A2</span>
+          <span class="level-title display">Basic IV</span>
+          <span class="level-topics">Modal Verbs &middot; Past Continuous &middot; Present Perfect &middot;
+            Feelings</span>
+          <span class="level-arrow mono">Explore level &rarr;</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- INTERMEDIATE -->
+    <section id="intermediate" class="grade-section">
+      <div class="grade-header">
+        <span class="grade-badge yellow">B1 &ndash; B2</span>
+        <h2 class="grade-title display">Intermediate</h2>
+      </div>
+      <p class="grade-desc">Expanding communicative competence with more complex grammar, conditionals, reported speech,
+        and a broader vocabulary. Equivalent to CEFR B1 and B2.</p>
+      <div class="levels-grid">
+        <a class="level-card" href="intermediate/int1.html">
+          <span class="level-num display">I</span>
+          <span class="level-label">Level B1</span>
+          <span class="level-title display">Intermediate I</span>
+          <span class="level-topics">Verb Patterns &middot; First Conditional &middot; Pres. Perfect vs Past Simple
+            &middot; For/Since</span>
+          <span class="level-arrow mono">Explore level &rarr;</span>
+        </a>
+        <a class="level-card" href="intermediate/int2.html">
+          <span class="level-num display">II</span>
+          <span class="level-label">Level B1</span>
+          <span class="level-title display">Intermediate II</span>
+          <span class="level-topics">2nd Conditional &middot; Reported Speech &middot; Passive Voice &middot; PP
+            Progressive</span>
+          <span class="level-arrow mono">Explore level &rarr;</span>
+        </a>
+        <a class="level-card yellow-top" href="intermediate/int3.html">
+          <span class="level-num display">III</span>
+          <span class="level-label">Level B2</span>
+          <span class="level-title display">Intermediate III</span>
+          <span class="level-topics">Advanced Passive &middot; Perfect Tenses &middot; Wish/If only &middot; Used
+            to</span>
+          <span class="level-arrow mono">Explore level &rarr;</span>
+        </a>
+        <a class="level-card yellow-top" href="intermediate/int4.html">
+          <span class="level-num display">IV</span>
+          <span class="level-label">Level B2</span>
+          <span class="level-title display">Intermediate IV</span>
+          <span class="level-topics">Mixed/Third Conditional &middot; Relative Clauses &middot; Reflexive Pronouns
+            &middot; Phrasal Verbs</span>
+          <span class="level-arrow mono">Explore level &rarr;</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ADVANCED -->
+    <section id="advanced" class="grade-section">
+      <div class="grade-header">
+        <span class="grade-badge green">C1</span>
+        <h2 class="grade-title display">Advanced</h2>
+      </div>
+      <p class="grade-desc">Mastery-level English for academic, professional, and social contexts. Fluency, complex
+        structures, idiomatic use, and preparation for international examinations. CEFR C1.</p>
+      <div class="levels-grid">
+        <a class="level-card green-top" href="advanced/adv1.html">
+          <span class="level-num display">I</span>
+          <span class="level-label">Level C1</span>
+          <span class="level-title display">Advanced I</span>
+          <span class="level-topics">Subjunctive &middot; Inversion &middot; Future Forms &middot; Modals &middot;
+            Business Language</span>
+          <span class="level-arrow mono">Explore level &rarr;</span>
+        </a>
+        <a class="level-card green-top" href="advanced/adv2.html">
+          <span class="level-num display">II</span>
+          <span class="level-label">Level C1</span>
+          <span class="level-title display">Advanced II</span>
+          <span class="level-topics">Collocations &middot; Academic Writing &middot; All Tenses Review &middot;
+            Determiners</span>
+          <span class="level-arrow mono">Explore level &rarr;</span>
+        </a>
+        <a class="level-card green-top" href="advanced/adv3.html">
+          <span class="level-num display">III</span>
+          <span class="level-label">Level C1</span>
+          <span class="level-title display">Advanced III</span>
+          <span class="level-topics">Business English &middot; Formal Writing &middot; Meetings &amp; Presentations
+            &middot; Report Writing</span>
+          <span class="level-arrow mono">Explore level &rarr;</span>
+        </a>
+        <a class="level-card green-top" href="advanced/adv4.html">
+          <span class="level-num display">IV</span>
+          <span class="level-label">Level C1</span>
+          <span class="level-title display">Advanced IV</span>
+          <span class="level-topics">CAE/IELTS Prep &middot; Conditionals &middot; Metaphorical Language &middot;
+            Linking Devices</span>
+          <span class="level-arrow mono">Explore level &rarr;</span>
+        </a>
+      </div>
+    </section>
+
+  </div>
+
+  <footer>
+    <p class="f-logo display">CELE &mdash; Centro de Lenguas UTS</p>
+    <p class="f-sub">Universidad Tecnol&oacute;gica de Salamanca <span class="f-accent">&middot;</span> English Language
+      Program <span class="f-accent">&middot;</span> &copy; 2025</p>
+  </footer>
+
+</body>
+
+</html>

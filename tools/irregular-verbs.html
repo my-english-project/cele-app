@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Irregular Verb Finder — CELE UTS English</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --blue: #004c8f;
+      --blue-mid: #00367a;
+      --blue-deep: #002a5e;
+      --yellow: #f5c500;
+      --green: #00a859;
+      --green-dark: #008a48;
+      --green-dim: rgba(0, 168, 89, .10);
+      --blue-dim: rgba(0, 76, 143, .07);
+      --blue-line: rgba(0, 76, 143, .15);
+      --red: #c0392b;
+      --red-dim: rgba(192, 57, 43, .07);
+      --page: #f7f5f2;
+      --card: #ffffff;
+      --ink: #1a1a1f;
+      --body: #3d3d45;
+      --muted: #7a7a88;
+      --rule: #e4e2de;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
+
+    html {
+      scroll-behavior: smooth
+    }
+
+    body {
+      background: var(--page);
+      color: var(--body);
+      font-family: 'Lora', Georgia, serif;
+      min-height: 100vh
+    }
+
+    .display {
+      font-family: 'Playfair Display', Georgia, serif
+    }
+
+    .mono {
+      font-family: 'JetBrains Mono', monospace
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: var(--blue);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 20px rgba(0, 0, 0, .18)
+    }
+
+    .header-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 clamp(1rem, 5vw, 3rem);
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem
+    }
+
+    .logo-pill {
+      background: rgba(255, 255, 255, .14);
+      border: 1.5px solid rgba(255, 255, 255, .28);
+      border-radius: 8px;
+      padding: 4px 12px;
+      backdrop-filter: blur(6px);
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      flex-shrink: 0
+    }
+
+    .logo-pill img {
+      height: 40px;
+      width: auto
+    }
+
+    .logo-fallback {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: 1.2rem;
+      color: #fff
+    }
+
+    .header-center {
+      flex: 1;
+      text-align: center;
+      pointer-events: none;
+      padding: 0 .5rem
+    }
+
+    .header-center .eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .55rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .5);
+      margin-bottom: 2px
+    }
+
+    .header-center .h-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 900;
+      color: #fff
+    }
+
+    /* ── BREADCRUMB ── */
+    .breadcrumb-bar {
+      background: var(--blue-deep);
+      border-bottom: 1px solid rgba(255, 255, 255, .07)
+    }
+
+    .breadcrumb-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: .55rem clamp(1rem, 5vw, 3rem);
+      display: flex;
+      align-items: center;
+      gap: .35rem;
+      flex-wrap: wrap
+    }
+
+    .breadcrumb-inner a,
+    .breadcrumb-inner span {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .6rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: rgba(255, 255, 255, .45);
+      transition: color .15s
+    }
+
+    .breadcrumb-inner a:hover {
+      color: var(--yellow)
+    }
+
+    .breadcrumb-inner .bc-sep {
+      color: rgba(255, 255, 255, .2)
+    }
+
+    .breadcrumb-inner .bc-current {
+      color: rgba(255, 255, 255, .8)
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--blue);
+      background-image: repeating-linear-gradient(-55deg, rgba(255, 255, 255, .025) 0px, rgba(255, 255, 255, .025) 1px, transparent 1px, transparent 18px);
+      padding: clamp(2.5rem, 6vw, 4.5rem) clamp(1rem, 5vw, 3rem) clamp(2rem, 5vw, 3.5rem);
+      border-bottom: 4px solid var(--green)
+    }
+
+    .hero-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 2rem;
+      align-items: end
+    }
+
+    .hero-eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .63rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 10px
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 28px;
+      height: 1.5px;
+      background: var(--green)
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4.5vw, 3.4rem);
+      font-weight: 900;
+      line-height: 1.06;
+      color: #fff
+    }
+
+    .hero-title em {
+      color: var(--yellow);
+      font-style: italic
+    }
+
+    .hero-sub {
+      margin-top: 1rem;
+      max-width: 520px;
+      font-size: .9rem;
+      line-height: 1.8;
+      color: rgba(255, 255, 255, .62)
+    }
+
+    .hero-meta {
+      text-align: right;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .62rem;
+      color: rgba(255, 255, 255, .38);
+      letter-spacing: .07em;
+      line-height: 2.1;
+      border-left: 1px solid rgba(255, 255, 255, .12);
+      padding-left: 1.6rem
+    }
+
+    .hero-meta strong {
+      display: block;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.9rem;
+      color: var(--yellow);
+      letter-spacing: 0;
+      line-height: 1
+    }
+
+    /* ── MAIN ── */
+    .main-wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 clamp(1rem, 5vw, 3rem) 5rem
+    }
+
+    /* ── TABS (Search / Browse) ── */
+    .mode-tabs {
+      display: flex;
+      gap: 0;
+      border-bottom: 2px solid var(--blue);
+      margin: 2.5rem 0 2rem
+    }
+
+    .mode-tab {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .7rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      padding: 10px 22px;
+      cursor: pointer;
+      color: var(--muted);
+      background: none;
+      border: none;
+      border-bottom: 3px solid transparent;
+      margin-bottom: -2px;
+      transition: color .15s, border-color .15s
+    }
+
+    .mode-tab:hover {
+      color: var(--blue)
+    }
+
+    .mode-tab.active {
+      color: var(--blue);
+      border-bottom-color: var(--blue);
+      font-weight: 700
+    }
+
+    .mode-panel {
+      display: none
+    }
+
+    .mode-panel.active {
+      display: block
+    }
+
+    /* ── SEARCH PANEL ── */
+    .search-box-wrap {
+      max-width: 560px;
+      margin: 0 auto 2rem
+    }
+
+    .search-box {
+      display: flex;
+      gap: .5rem;
+      align-items: stretch
+    }
+
+    .search-input {
+      flex: 1;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .95rem;
+      padding: .85rem 1.2rem;
+      border: 2px solid var(--blue-line);
+      border-radius: 3px;
+      background: var(--card);
+      color: var(--ink);
+      outline: none;
+      transition: border-color .15s
+    }
+
+    .search-input:focus {
+      border-color: var(--blue)
+    }
+
+    .search-input::placeholder {
+      color: var(--muted);
+      font-style: italic
+    }
+
+    .search-btn {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .7rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      padding: .85rem 1.6rem;
+      background: var(--blue);
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: background .15s;
+      white-space: nowrap
+    }
+
+    .search-btn:hover {
+      background: var(--blue-mid)
+    }
+
+    .search-hint {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .62rem;
+      color: var(--muted);
+      text-align: center;
+      margin-top: .55rem;
+      letter-spacing: .04em
+    }
+
+    /* ── RESULT CARD ── */
+    .result-card {
+      background: var(--card);
+      border: 1px solid var(--blue-line);
+      border-left: 4px solid var(--blue);
+      border-radius: 2px;
+      padding: 1.8rem 2rem;
+      box-shadow: 0 4px 18px rgba(0, 76, 143, .09);
+      max-width: 560px;
+      margin: 0 auto;
+      display: none
+    }
+
+    .result-card.show {
+      display: block
+    }
+
+    .result-found-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .58rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 8px
+    }
+
+    .result-found-label::before {
+      content: '';
+      display: block;
+      width: 20px;
+      height: 1.5px;
+      background: var(--green)
+    }
+
+    .result-verb-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem;
+      font-weight: 900;
+      color: var(--blue);
+      margin-bottom: 1.4rem;
+      line-height: 1
+    }
+
+    .result-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: .7rem
+    }
+
+    .result-field {
+      background: var(--page);
+      border: 1px solid var(--rule);
+      border-radius: 2px;
+      padding: .75rem 1rem;
+      grid-column: 1/-1
+    }
+
+    .result-field-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .58rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: .3rem
+    }
+
+    .result-field-value {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--ink)
+    }
+
+    .result-field.highlight .result-field-value {
+      color: var(--green-dark)
+    }
+
+    .result-field.meaning .result-field-value {
+      font-family: 'Lora', Georgia, serif;
+      font-size: .95rem;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--body)
+    }
+
+    .result-field.meaning {
+      grid-column: 1/-1
+    }
+
+    /* Not found */
+    .not-found {
+      background: var(--red-dim);
+      border: 1px solid rgba(192, 57, 43, .2);
+      border-left: 4px solid var(--red);
+      border-radius: 2px;
+      padding: 1.2rem 1.4rem;
+      max-width: 560px;
+      margin: 0 auto;
+      display: none;
+      font-size: .88rem;
+      color: var(--red)
+    }
+
+    .not-found.show {
+      display: block
+    }
+
+    .not-found strong {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .72rem;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: .3rem
+    }
+
+    /* ── BROWSE PANEL ── */
+    .alpha-filter {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .35rem;
+      margin-bottom: 1.8rem
+    }
+
+    .alpha-btn {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .68rem;
+      font-weight: 700;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--card);
+      border: 1.5px solid var(--rule);
+      border-radius: 2px;
+      cursor: pointer;
+      color: var(--muted);
+      transition: background .12s, border-color .12s, color .12s;
+      text-transform: uppercase
+    }
+
+    .alpha-btn:hover {
+      background: var(--blue-dim);
+      border-color: rgba(0, 76, 143, .3);
+      color: var(--blue)
+    }
+
+    .alpha-btn.active {
+      background: var(--blue);
+      border-color: var(--blue);
+      color: #fff
+    }
+
+    .alpha-btn.all-btn {
+      width: auto;
+      padding: 0 10px;
+      letter-spacing: .06em
+    }
+
+    .verbs-table-wrap {
+      overflow-x: auto
+    }
+
+    table.verbs-tbl {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .84rem
+    }
+
+    table.verbs-tbl thead th {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .6rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 9px 14px;
+      border-bottom: 2px solid var(--rule);
+      text-align: left;
+      white-space: nowrap;
+      background: var(--card)
+    }
+
+    table.verbs-tbl thead th:first-child {
+      border-left: 4px solid var(--blue)
+    }
+
+    table.verbs-tbl tbody tr {
+      border-bottom: 1px solid var(--rule);
+      transition: background .1s;
+      cursor: pointer
+    }
+
+    table.verbs-tbl tbody tr:hover {
+      background: var(--blue-dim)
+    }
+
+    table.verbs-tbl tbody td {
+      padding: 9px 14px;
+      color: var(--body)
+    }
+
+    table.verbs-tbl tbody td:first-child {
+      border-left: 4px solid transparent;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+      font-size: .86rem;
+      color: var(--blue)
+    }
+
+    table.verbs-tbl tbody tr:hover td:first-child {
+      border-left-color: var(--green)
+    }
+
+    table.verbs-tbl .td-past {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--green-dark);
+      font-weight: 700
+    }
+
+    table.verbs-tbl .td-part {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--blue-mid)
+    }
+
+    table.verbs-tbl .td-mean {
+      font-style: italic;
+      color: var(--muted)
+    }
+
+    .tbl-count {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .62rem;
+      color: var(--muted);
+      margin-bottom: .7rem;
+      letter-spacing: .06em
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--blue);
+      border-top: 3px solid var(--green);
+      padding: 2.5rem clamp(1rem, 5vw, 3rem);
+      text-align: center;
+      margin-top: 3rem
+    }
+
+    .f-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 900;
+      color: #fff;
+      margin-bottom: .25rem
+    }
+
+    .f-sub {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .58rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .38)
+    }
+
+    .f-accent {
+      color: var(--yellow)
+    }
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:680px) {
+      .hero-inner {
+        grid-template-columns: 1fr
+      }
+
+      .hero-meta {
+        display: none
+      }
+
+      .header-center {
+        display: none
+      }
+
+      .result-grid {
+        grid-template-columns: 1fr
+      }
+
+      .result-field.meaning {
+        grid-column: 1
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ════════ HEADER ════════ -->
+  <header>
+    <div class="header-inner">
+      <a href="index.html" class="logo-pill">
+        <img src="https://www.utsalamanca.edu.mx/assets/img/pagina-principal/logo-uts-2024.png" alt="CELE UTS"
+          onerror="this.parentElement.innerHTML='<span class=\'logo-fallback\'>CELE</span>'">
+      </a>
+      <div class="header-center">
+        <p class="eyebrow">CELE · English Language Program</p>
+        <p class="h-title display">Irregular Verb Finder</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ════════ BREADCRUMB ════════ -->
+  <nav class="breadcrumb-bar">
+    <div class="breadcrumb-inner">
+      <a href="../index.html">Home</a>
+      <span class="bc-sep"> | </span>
+      <a href="basic/basic2.html">Tools</a>
+      <span class="bc-sep"> | </span>
+      <span class="bc-current">Irregular Verb Finder</span>
+    </div>
+  </nav>
+
+  <!-- ════════ HERO ════════ -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div>
+        <p class="hero-eyebrow">Grammar Reference Tool</p>
+        <h1 class="hero-title display">Irregular <em>Verb</em><br>Finder</h1>
+        <p class="hero-sub">Search any irregular verb by its base form to instantly find its Simple Past, Past
+          Participle, and Spanish translation. Browse the full list alphabetically.</p>
+      </div>
+      <div class="hero-meta">
+        <strong>180+</strong>Verbs<br>
+        <strong>4</strong>Fields<br>
+        ——<br>
+        Infinitive<br>
+        Past Simple<br>
+        Past Part.<br>
+        Meaning
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ MAIN ════════ -->
+  <div class="main-wrap">
+
+    <!-- Mode tabs -->
+    <div class="mode-tabs">
+      <button class="mode-tab active" onclick="switchMode(this,'search')">🔍 &nbsp;Search a Verb</button>
+      <button class="mode-tab" onclick="switchMode(this,'browse')">📋 &nbsp;Browse Full List</button>
+    </div>
+
+    <!-- ══ SEARCH PANEL ══ -->
+    <div id="panel-search" class="mode-panel active">
+
+      <div class="search-box-wrap">
+        <div class="search-box">
+          <input type="text" id="verbInput" class="search-input" placeholder="e.g. run, think, be…" autocomplete="off"
+            spellcheck="false" onkeydown="if(event.key==='Enter')doSearch()">
+          <button class="search-btn" onclick="doSearch()">Search →</button>
+        </div>
+        <p class="search-hint">Type the <strong>base form</strong> of the verb (without "to") and press Search or Enter
+        </p>
+      </div>
+
+      <!-- Result -->
+      <div id="result-card" class="result-card">
+        <p class="result-found-label">Verb found</p>
+        <h2 class="result-verb-title display" id="res-title"></h2>
+        <div class="result-grid">
+          <div class="result-field">
+            <p class="result-field-label">Infinitive</p>
+            <p class="result-field-value" id="res-inf"></p>
+          </div>
+          <div class="result-field highlight">
+            <p class="result-field-label">Simple Past</p>
+            <p class="result-field-value" id="res-past"></p>
+          </div>
+          <div class="result-field">
+            <p class="result-field-label">Past Participle</p>
+            <p class="result-field-value" id="res-part"></p>
+          </div>
+          <div class="result-field meaning">
+            <p class="result-field-label">Spanish Meaning</p>
+            <p class="result-field-value" id="res-mean"></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Not found -->
+      <div id="not-found" class="not-found">
+        <strong>Verb not found</strong>
+        Make sure you typed the <em>base form</em> of the verb (e.g. "go", not "went" or "gone").
+        You can also browse the full list in the <strong>Browse</strong> tab.
+      </div>
+
+    </div>
+
+    <!-- ══ BROWSE PANEL ══ -->
+    <div id="panel-browse" class="mode-panel">
+      <div class="alpha-filter" id="alpha-filter"></div>
+      <p class="tbl-count" id="tbl-count"></p>
+      <div class="verbs-table-wrap">
+        <table class="verbs-tbl" id="verbs-table">
+          <thead>
+            <tr>
+              <th>Infinitive</th>
+              <th>Simple Past</th>
+              <th>Past Participle</th>
+              <th>Spanish Meaning</th>
+            </tr>
+          </thead>
+          <tbody id="verbs-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+  </div><!-- /main-wrap -->
+
+  <!-- ════════ FOOTER ════════ -->
+  <footer>
+    <p class="f-logo display">CELE — Centro de Lenguas UTS</p>
+    <p class="f-sub">Universidad Tecnológica de Salamanca <span class="f-accent">·</span> English Language Program <span
+        class="f-accent">·</span> © 2025</p>
+  </footer>
+
+  <!-- ════════ VERB DATABASE ════════ -->
+  <script>
+    const VERBS = [
+      ["arise", "arose", "arisen", "surgir, aparecer"],
+      ["awake", "awoke", "awoken", "despertar(se)"],
+      ["be", "was/were", "been", "ser / estar"],
+      ["bear", "bore", "born/borne", "soportar; dar a luz"],
+      ["beat", "beat", "beaten", "golpear, vencer"],
+      ["become", "became", "become", "llegar a ser, convertirse"],
+      ["begin", "began", "begun", "comenzar, empezar"],
+      ["bend", "bent", "bent", "doblar, curvar"],
+      ["bet", "bet", "bet", "apostar"],
+      ["bind", "bound", "bound", "atar, vincular"],
+      ["bite", "bit", "bitten", "morder"],
+      ["bleed", "bled", "bled", "sangrar"],
+      ["blow", "blew", "blown", "soplar"],
+      ["break", "broke", "broken", "romper"],
+      ["breed", "bred", "bred", "criar, reproducir"],
+      ["bring", "brought", "brought", "traer"],
+      ["broadcast", "broadcast", "broadcast", "transmitir, difundir"],
+      ["build", "built", "built", "construir"],
+      ["burn", "burnt/burned", "burnt/burned", "quemar"],
+      ["burst", "burst", "burst", "explotar, reventar"],
+      ["buy", "bought", "bought", "comprar"],
+      ["catch", "caught", "caught", "atrapar, coger"],
+      ["choose", "chose", "chosen", "elegir, escoger"],
+      ["come", "came", "come", "venir"],
+      ["cost", "cost", "cost", "costar"],
+      ["creep", "crept", "crept", "arrastrarse, reptar"],
+      ["cut", "cut", "cut", "cortar"],
+      ["deal", "dealt", "dealt", "tratar, repartir"],
+      ["dig", "dug", "dug", "cavar, excavar"],
+      ["dive", "dived/dove", "dived", "zambullirse"],
+      ["do", "did", "done", "hacer"],
+      ["draw", "drew", "drawn", "dibujar; atraer"],
+      ["dream", "dreamt/dreamed", "dreamt/dreamed", "soñar"],
+      ["drink", "drank", "drunk", "beber"],
+      ["drive", "drove", "driven", "conducir, manejar"],
+      ["eat", "ate", "eaten", "comer"],
+      ["fall", "fell", "fallen", "caer"],
+      ["feed", "fed", "fed", "alimentar"],
+      ["feel", "felt", "felt", "sentir"],
+      ["fight", "fought", "fought", "luchar, pelear"],
+      ["find", "found", "found", "encontrar"],
+      ["flee", "fled", "fled", "huir"],
+      ["fling", "flung", "flung", "lanzar, arrojar"],
+      ["fly", "flew", "flown", "volar"],
+      ["forbid", "forbade", "forbidden", "prohibir"],
+      ["forget", "forgot", "forgotten", "olvidar"],
+      ["forgive", "forgave", "forgiven", "perdonar"],
+      ["freeze", "froze", "frozen", "congelar"],
+      ["get", "got", "got/gotten", "obtener, conseguir"],
+      ["give", "gave", "given", "dar"],
+      ["go", "went", "gone", "ir"],
+      ["grow", "grew", "grown", "crecer; cultivar"],
+      ["hang", "hung", "hung", "colgar"],
+      ["have", "had", "had", "tener; haber"],
+      ["hear", "heard", "heard", "oír, escuchar"],
+      ["hide", "hid", "hidden", "esconder"],
+      ["hit", "hit", "hit", "golpear"],
+      ["hold", "held", "held", "sostener, tener"],
+      ["hurt", "hurt", "hurt", "herir, lastimar"],
+      ["keep", "kept", "kept", "guardar, mantener"],
+      ["kneel", "knelt", "knelt", "arrodillarse"],
+      ["know", "knew", "known", "saber, conocer"],
+      ["lay", "laid", "laid", "poner, colocar"],
+      ["lead", "led", "led", "liderar, guiar"],
+      ["learn", "learnt/learned", "learnt/learned", "aprender"],
+      ["leave", "left", "left", "dejar, irse"],
+      ["lend", "lent", "lent", "prestar"],
+      ["let", "let", "let", "dejar, permitir"],
+      ["lie", "lay", "lain", "yacer, acostarse"],
+      ["light", "lit/lighted", "lit/lighted", "encender, iluminar"],
+      ["lose", "lost", "lost", "perder"],
+      ["make", "made", "made", "hacer, fabricar"],
+      ["mean", "meant", "meant", "significar, querer decir"],
+      ["meet", "met", "met", "conocer, encontrarse"],
+      ["mistake", "mistook", "mistaken", "equivocarse, confundir"],
+      ["overcome", "overcame", "overcome", "superar, vencer"],
+      ["pay", "paid", "paid", "pagar"],
+      ["put", "put", "put", "poner, colocar"],
+      ["quit", "quit", "quit", "dejar, abandonar"],
+      ["read", "read", "read", "leer"],
+      ["ride", "rode", "ridden", "montar, cabalgar"],
+      ["ring", "rang", "rung", "sonar; llamar"],
+      ["rise", "rose", "risen", "levantarse, subir"],
+      ["run", "ran", "run", "correr"],
+      ["say", "said", "said", "decir"],
+      ["see", "saw", "seen", "ver"],
+      ["seek", "sought", "sought", "buscar"],
+      ["sell", "sold", "sold", "vender"],
+      ["send", "sent", "sent", "enviar, mandar"],
+      ["set", "set", "set", "poner, fijar"],
+      ["shake", "shook", "shaken", "sacudir, agitar"],
+      ["shine", "shone", "shone", "brillar"],
+      ["shoot", "shot", "shot", "disparar"],
+      ["show", "showed", "shown/showed", "mostrar"],
+      ["shrink", "shrank", "shrunk", "encoger"],
+      ["shut", "shut", "shut", "cerrar"],
+      ["sing", "sang", "sung", "cantar"],
+      ["sink", "sank", "sunk", "hundir, naufragar"],
+      ["sit", "sat", "sat", "sentarse"],
+      ["sleep", "slept", "slept", "dormir"],
+      ["slide", "slid", "slid", "deslizar"],
+      ["smell", "smelt/smelled", "smelt/smelled", "oler"],
+      ["speak", "spoke", "spoken", "hablar"],
+      ["spend", "spent", "spent", "gastar; pasar tiempo"],
+      ["spill", "spilt/spilled", "spilt/spilled", "derramar"],
+      ["split", "split", "split", "dividir, partir"],
+      ["spoil", "spoilt/spoiled", "spoilt/spoiled", "arruinar, echar a perder"],
+      ["spread", "spread", "spread", "extender, esparcir"],
+      ["stand", "stood", "stood", "estar de pie, pararse"],
+      ["steal", "stole", "stolen", "robar"],
+      ["stick", "stuck", "stuck", "pegar, adherir"],
+      ["sting", "stung", "stung", "picar, aguijonear"],
+      ["strike", "struck", "struck/stricken", "golpear"],
+      ["strive", "strove", "striven", "esforzarse"],
+      ["swear", "swore", "sworn", "jurar; maldecir"],
+      ["sweep", "swept", "swept", "barrer"],
+      ["swim", "swam", "swum", "nadar"],
+      ["swing", "swung", "swung", "balancear, columpiarse"],
+      ["take", "took", "taken", "tomar, llevar"],
+      ["teach", "taught", "taught", "enseñar"],
+      ["tear", "tore", "torn", "rasgar, desgarrar"],
+      ["tell", "told", "told", "decir, contar"],
+      ["think", "thought", "thought", "pensar"],
+      ["throw", "threw", "thrown", "lanzar, tirar"],
+      ["understand", "understood", "understood", "entender, comprender"],
+      ["wake", "woke", "woken", "despertar(se)"],
+      ["wear", "wore", "worn", "llevar puesto, usar"],
+      ["weep", "wept", "wept", "llorar"],
+      ["win", "won", "won", "ganar"],
+      ["write", "wrote", "written", "escribir"],
+      ["withdraw", "withdrew", "withdrawn", "retirar"],
+      ["withstand", "withstood", "withstood", "resistir"],
+      ["shake", "shook", "shaken", "sacudir, agitar"],
+      ["spell", "spelt/spelled", "spelt/spelled", "deletrear"],
+      ["speed", "sped", "sped", "acelerar; ir a toda velocidad"],
+      ["spring", "sprang", "sprung", "saltar, brotar"],
+      ["forecast", "forecast", "forecast", "pronosticar"],
+      ["forbid", "forbade", "forbidden", "prohibir"],
+      ["forget", "forgot", "forgotten", "olvidar"],
+      ["forgive", "forgave", "forgiven", "perdonar"],
+      ["grind", "ground", "ground", "moler, triturar"],
+      ["hit", "hit", "hit", "golpear"],
+      ["hold", "held", "held", "sostener, tener"],
+      ["lean", "leant/leaned", "leant/leaned", "inclinarse, apoyarse"],
+      ["leap", "leapt/leaped", "leapt/leaped", "saltar"],
+      ["sew", "sewed", "sewn/sewed", "coser"],
+      ["sow", "sowed", "sown/sowed", "sembrar"],
+      ["knit", "knit/knitted", "knit/knitted", "tejer"],
+      ["rid", "rid", "rid", "librar, deshacerse"],
+      ["slide", "slid", "slid", "deslizar"],
+      ["slay", "slew", "slain", "matar (formal/literario)"],
+      ["weave", "wove", "woven", "tejer (en telar)"],
+      ["wind", "wound", "wound", "enrollar; dar cuerda"],
+      ["wring", "wrung", "wrung", "retorcer, escurrir"],
+    ];
+
+    // Remove duplicates
+    const verbMap = {};
+    VERBS.forEach(v => { if (!verbMap[v[0]]) verbMap[v[0]] = v; });
+    const VERB_LIST = Object.values(verbMap).sort((a, b) => a[0].localeCompare(b[0]));
+
+    /* ── MODE SWITCH ── */
+    function switchMode(btn, mode) {
+      document.querySelectorAll('.mode-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.mode-panel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('panel-' + mode).classList.add('active');
+    }
+
+    /* ── SEARCH ── */
+    function doSearch() {
+      const raw = document.getElementById('verbInput').value.trim().toLowerCase();
+      const rc = document.getElementById('result-card');
+      const nf = document.getElementById('not-found');
+      rc.classList.remove('show');
+      nf.classList.remove('show');
+
+      if (!raw) return;
+
+      // Search base form, past, or participle
+      const found = VERB_LIST.find(v =>
+        v[0] === raw ||
+        v[1].split('/').map(x => x.trim()).includes(raw) ||
+        v[2].split('/').map(x => x.trim()).includes(raw)
+      );
+
+      if (found) {
+        document.getElementById('res-title').textContent = found[0];
+        document.getElementById('res-inf').textContent = found[0];
+        document.getElementById('res-past').textContent = found[1];
+        document.getElementById('res-part').textContent = found[2];
+        document.getElementById('res-mean').textContent = found[3];
+        rc.classList.add('show');
+        rc.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      } else {
+        nf.classList.add('show');
+      }
+    }
+
+    /* ── BROWSE / ALPHA FILTER ── */
+    let currentLetter = 'ALL';
+
+    function buildAlphaFilter() {
+      const letters = ['ALL', ...new Set(VERB_LIST.map(v => v[0][0].toUpperCase()))].sort((a, b) => a === 'ALL' ? -1 : a.localeCompare(b));
+      const wrap = document.getElementById('alpha-filter');
+      wrap.innerHTML = '';
+      letters.forEach(l => {
+        const btn = document.createElement('button');
+        btn.className = 'alpha-btn' + (l === 'ALL' ? ' all-btn' : '') + (l === currentLetter ? ' active' : '');
+        btn.textContent = l === 'ALL' ? 'All' : l;
+        btn.onclick = () => { currentLetter = l; buildAlphaFilter(); renderTable(); };
+        wrap.appendChild(btn);
+      });
+    }
+
+    function renderTable() {
+      const filtered = currentLetter === 'ALL'
+        ? VERB_LIST
+        : VERB_LIST.filter(v => v[0][0].toUpperCase() === currentLetter);
+
+      document.getElementById('tbl-count').textContent =
+        filtered.length + ' verb' + (filtered.length !== 1 ? 's' : '') + (currentLetter !== 'ALL' ? ' starting with "' + currentLetter + '"' : ' total');
+
+      const tbody = document.getElementById('verbs-tbody');
+      tbody.innerHTML = '';
+      filtered.forEach(v => {
+        const tr = document.createElement('tr');
+        tr.onclick = () => {
+          // Switch to search panel and show result
+          document.querySelectorAll('.mode-tab')[0].click();
+          document.getElementById('verbInput').value = v[0];
+          doSearch();
+        };
+        tr.innerHTML =
+          '<td>' + v[0] + '</td>' +
+          '<td class="td-past">' + v[1] + '</td>' +
+          '<td class="td-part">' + v[2] + '</td>' +
+          '<td class="td-mean">' + v[3] + '</td>';
+        tbody.appendChild(tr);
+      });
+    }
+
+    window.onload = () => {
+      buildAlphaFilter();
+      renderTable();
+
+      // Also enable Enter key on input
+      document.getElementById('verbInput').addEventListener('keydown', e => {
+        if (e.key === 'Enter') doSearch();
+      });
+    };
+  </script>
+</body>
+
+</html>

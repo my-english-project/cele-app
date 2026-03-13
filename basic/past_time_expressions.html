@@ -1,0 +1,3133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Past Time Expressions — UTS English Department</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;700&display=swap"
+    rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+  <style>
+    /* ── DESIGN TOKENS (UTS palette) ── */
+    :root {
+      --blue: #004c8f;
+      --blue-mid: #00367a;
+      --blue-deep: #002a5e;
+      --green: #00a859;
+      --green-dark: #008a48;
+      --green-dim: rgba(0, 168, 89, 0.10);
+      --blue-dim: rgba(0, 76, 143, 0.07);
+      --blue-line: rgba(0, 76, 143, 0.15);
+      --green-line: rgba(0, 168, 89, 0.20);
+      --page: #f7f5f2;
+      --card: #ffffff;
+      --ink: #1a1a1f;
+      --body: #3d3d45;
+      --muted: #7a7a88;
+      --rule: #e4e2de;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--page);
+      color: var(--body);
+      font-family: 'Lora', Georgia, serif;
+      min-height: 100vh;
+    }
+
+    /* ── TYPOGRAPHY HELPERS ── */
+    .display {
+      font-family: 'Playfair Display', Georgia, serif;
+    }
+
+    .mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* ══════════════════════════════
+       HEADER
+    ══════════════════════════════ */
+    header {
+      background: var(--blue);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 20px rgba(0, 0, 0, .18);
+    }
+
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 clamp(1rem, 5vw, 3rem);
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    /* Logo container — frosted pill so logo pops from the blue */
+    .logo-pill {
+      background: rgba(255, 255, 255, .14);
+      border: 1.5px solid rgba(255, 255, 255, .28);
+      border-radius: 8px;
+      padding: 5px 14px;
+      backdrop-filter: blur(6px);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, .15), inset 0 1px 0 rgba(255, 255, 255, .18);
+      display: flex;
+      align-items: center;
+    }
+
+    .logo-pill img {
+      height: 38px;
+      width: auto;
+      /*filter: brightness(0) invert(1) drop-shadow(0 0 5px rgba(255, 255, 255, .4));*/
+    }
+
+    /* Fallback text when img fails */
+    .logo-fallback {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: 1.3rem;
+      color: #fff;
+      letter-spacing: .04em;
+    }
+
+    .header-center {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      pointer-events: none;
+    }
+
+    .header-center .eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .58rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .55);
+      margin-bottom: 2px;
+    }
+
+    .header-center .h-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: .01em;
+    }
+
+    .nav-pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .68rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .75);
+      text-decoration: none;
+      border: 1px solid rgba(255, 255, 255, .22);
+      border-radius: 4px;
+      padding: 6px 14px;
+      transition: color .2s, border-color .2s, background .2s;
+    }
+
+    .nav-pill:hover {
+      color: #fff;
+      border-color: rgba(255, 255, 255, .55);
+      background: rgba(255, 255, 255, .1);
+    }
+
+    /* ══════════════════════════════
+       HERO
+    ══════════════════════════════ */
+    .hero {
+      background: var(--blue);
+      /* subtle diagonal stripe texture */
+      background-image:
+        repeating-linear-gradient(-55deg,
+          rgba(255, 255, 255, .025) 0px, rgba(255, 255, 255, .025) 1px,
+          transparent 1px, transparent 18px);
+      padding: clamp(3rem, 8vw, 5.5rem) clamp(1rem, 5vw, 3rem) clamp(2.5rem, 6vw, 4.5rem);
+      border-bottom: 4px solid var(--green);
+    }
+
+    .hero-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 2rem;
+      align-items: end;
+    }
+
+    .hero-eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .65rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 28px;
+      height: 1.5px;
+      background: var(--green);
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+      font-weight: 900;
+      line-height: 1.06;
+      color: #fff;
+    }
+
+    .hero-title em {
+      color: var(--green);
+      font-style: italic;
+    }
+
+    .hero-sub {
+      margin-top: 1.2rem;
+      max-width: 540px;
+      font-size: .93rem;
+      line-height: 1.8;
+      color: rgba(255, 255, 255, .65);
+    }
+
+    .hero-meta {
+      text-align: right;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .64rem;
+      color: rgba(255, 255, 255, .4);
+      letter-spacing: .07em;
+      line-height: 2.1;
+      border-left: 1px solid rgba(255, 255, 255, .12);
+      padding-left: 1.8rem;
+    }
+
+    .hero-meta strong {
+      display: block;
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: var(--green);
+      letter-spacing: 0;
+      line-height: 1;
+    }
+
+    /* ── quick-nav ── */
+    .quick-nav {
+      background: var(--blue-deep);
+      border-bottom: 1px solid rgba(255, 255, 255, .08);
+    }
+
+    .quick-nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: .9rem clamp(1rem, 5vw, 3rem);
+      display: flex;
+      gap: .5rem;
+      flex-wrap: wrap;
+    }
+
+    .qn-chip {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .6rem;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .45);
+      text-decoration: none;
+      border: 1px solid rgba(255, 255, 255, .1);
+      border-radius: 3px;
+      padding: 4px 10px;
+      transition: color .15s, border-color .15s, background .15s;
+    }
+
+    .qn-chip:hover {
+      color: var(--green);
+      border-color: var(--green-line);
+      background: rgba(0, 168, 89, .08);
+    }
+
+    /* ══════════════════════════════
+       MAIN CONTENT
+    ══════════════════════════════ */
+    .main-wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 clamp(1rem, 5vw, 3rem) 5rem;
+    }
+
+    /* ── ENTRY (one expression) ── */
+    .entry {
+      display: grid;
+      grid-template-columns: 72px 1fr;
+      gap: 0 2.2rem;
+      padding: 3.5rem 0;
+      border-bottom: 1px solid var(--rule);
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity .55s ease, transform .55s ease;
+    }
+
+    .entry.show {
+      opacity: 1;
+      transform: none;
+    }
+
+    .entry-num {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: 4.5rem;
+      line-height: 1;
+      color: var(--blue-dim);
+      /* make it a real tinted number by adding contrast */
+      color: rgba(0, 76, 143, .13);
+      text-align: right;
+      padding-top: 6px;
+      user-select: none;
+    }
+
+    .entry-body {
+      min-width: 0;
+    }
+
+    .entry-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .62rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: .45rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .entry-label::after {
+      content: '';
+      flex: 1;
+      max-width: 40px;
+      height: 1px;
+      background: var(--green-line);
+    }
+
+    .entry-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 900;
+      color: var(--blue);
+      line-height: 1.1;
+      margin-bottom: .8rem;
+    }
+
+    .entry-subtitle {
+      font-size: .84rem;
+      color: var(--muted);
+      font-style: italic;
+      border-left: 2.5px solid var(--green);
+      padding-left: .75rem;
+      margin-bottom: 1.4rem;
+    }
+
+    /* ── TABS ── */
+    .tabs {
+      display: flex;
+      gap: 0;
+      border-bottom: 1.5px solid var(--rule);
+      margin-bottom: 1.4rem;
+    }
+
+    .tab {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .62rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: 8px 16px;
+      cursor: pointer;
+      color: var(--muted);
+      background: none;
+      border: none;
+      border-bottom: 2.5px solid transparent;
+      margin-bottom: -1.5px;
+      transition: color .15s, border-color .15s;
+    }
+
+    .tab:hover {
+      color: var(--blue);
+    }
+
+    .tab.active {
+      color: var(--blue);
+      border-bottom-color: var(--blue);
+    }
+
+    .tab-panel {
+      display: none;
+    }
+
+    .tab-panel.active {
+      display: block;
+    }
+
+    /* ── CONTENT BLOCKS ── */
+    .def-block {
+      background: var(--card);
+      border: 1px solid var(--blue-line);
+      border-left: 3px solid var(--blue);
+      border-radius: 2px;
+      padding: .95rem 1.15rem;
+      margin-bottom: .8rem;
+      font-size: .87rem;
+      line-height: 1.72;
+      color: var(--body);
+      box-shadow: 0 1px 4px rgba(0, 76, 143, .05);
+    }
+
+    .def-block strong {
+      color: var(--blue);
+    }
+
+    .def-block em {
+      color: var(--green-dark);
+      font-weight: 600;
+    }
+
+    .def-block.green-accent {
+      border-left-color: var(--green);
+    }
+
+    .def-block.warn-accent {
+      border-left-color: #c0392b;
+      background: #fff8f7;
+    }
+
+    .struct-pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .72rem;
+      color: var(--blue);
+      background: var(--blue-dim);
+      padding: 2px 7px;
+      border-radius: 3px;
+      display: inline-block;
+      margin-bottom: .4rem;
+    }
+
+    /* wrong / right */
+    .wrong {
+      color: #c0392b;
+      font-size: .82rem;
+    }
+
+    .right {
+      color: var(--green-dark);
+      font-size: .82rem;
+    }
+
+    .wrong::before {
+      content: "✗  ";
+    }
+
+    .right::before {
+      content: "✓  ";
+    }
+
+    /* example lines */
+    .ex-list {
+      list-style: none;
+    }
+
+    .ex-list li {
+      font-style: italic;
+      font-size: .87rem;
+      color: var(--muted);
+      padding: 6px 0;
+      border-bottom: 1px solid var(--rule);
+      line-height: 1.6;
+    }
+
+    .ex-list li:last-child {
+      border-bottom: none;
+    }
+
+    .ex-list li strong {
+      color: var(--blue);
+      font-style: normal;
+      font-weight: 700;
+    }
+
+    .ex-n {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .6rem;
+      color: var(--green);
+      margin-right: 6px;
+      font-style: normal;
+    }
+
+    /* ── MINI TABLE ── */
+    .mini-tbl {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .82rem;
+      margin-top: .6rem;
+    }
+
+    .mini-tbl thead th {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .6rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 400;
+      padding: 7px 10px;
+      border-bottom: 1.5px solid var(--rule);
+      text-align: left;
+    }
+
+    .mini-tbl tbody td {
+      padding: 7px 10px;
+      border-bottom: 1px solid var(--rule);
+      color: var(--body);
+    }
+
+    .mini-tbl tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    .mini-tbl tbody tr:hover td {
+      background: var(--blue-dim);
+    }
+
+    .t-blue {
+      color: var(--blue);
+      font-weight: 700;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .78rem;
+    }
+
+    .t-green {
+      color: var(--green);
+      font-weight: 700;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .78rem;
+    }
+
+    /* ── COMPARISON TABLE ── */
+    .comp-tbl {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .82rem;
+      margin-top: .6rem;
+    }
+
+    .comp-tbl thead th {
+      padding: 9px 14px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .64rem;
+      letter-spacing: .08em;
+    }
+
+    .comp-tbl thead .th-label {
+      text-align: left;
+      color: var(--muted);
+      font-weight: 400;
+      background: none;
+    }
+
+    .comp-tbl thead .th-a {
+      background: var(--blue);
+      color: #fff;
+      text-align: center;
+    }
+
+    .comp-tbl thead .th-b {
+      background: var(--green);
+      color: #fff;
+      text-align: center;
+    }
+
+    .comp-tbl tbody td {
+      padding: 8px 14px;
+      border-top: 1px solid var(--rule);
+      color: var(--body);
+    }
+
+    .comp-tbl tbody td:first-child {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .62rem;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .comp-tbl tbody td:not(:first-child) {
+      text-align: center;
+    }
+
+    .comp-tbl tbody tr:hover td {
+      background: var(--blue-dim);
+    }
+
+    /* ── THREE-COL GRID ── */
+    .triple {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: .7rem;
+    }
+
+    /* ══════════════════════════════
+       EXERCISES
+    ══════════════════════════════ */
+    .exercises-section {
+      margin-top: 4rem;
+      padding-top: 3rem;
+      border-top: 2px solid var(--blue);
+    }
+
+    .section-hdr {
+      display: flex;
+      align-items: baseline;
+      gap: 1.4rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .section-hdr h2 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+      color: var(--blue);
+    }
+
+    .section-hdr p {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .6rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .ex-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .88rem;
+    }
+
+    .ex-table thead th {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .6rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 10px 16px;
+      border-bottom: 1.5px solid var(--rule);
+      text-align: left;
+      font-weight: 400;
+      background: #fafaf9;
+    }
+
+    .ex-table tbody tr {
+      border-bottom: 1px solid var(--rule);
+      transition: background .12s;
+    }
+
+    .ex-table tbody tr:hover {
+      background: var(--blue-dim);
+    }
+
+    .ex-table tbody td {
+      padding: 13px 16px;
+      color: var(--body);
+      vertical-align: middle;
+    }
+
+    .td-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .65rem;
+      color: rgba(0, 76, 143, .25);
+      width: 36px;
+      text-align: center;
+    }
+
+    .td-ctx {
+      color: var(--muted);
+      font-style: italic;
+      font-size: .8rem;
+    }
+
+    .td-expr {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .82rem;
+      color: var(--green);
+      font-weight: 700;
+    }
+
+    .td-sent {
+      font-style: italic;
+    }
+
+    /* ══════════════════════════════
+       QUIZ
+    ══════════════════════════════ */
+    .quiz-section {
+      margin-top: 3.5rem;
+      background: var(--card);
+      border: 1px solid var(--blue-line);
+      border-top: 4px solid var(--blue);
+      box-shadow: 0 4px 24px rgba(0, 76, 143, .08);
+    }
+
+    .quiz-header {
+      background: var(--blue);
+      padding: 1.6rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .quiz-header .quiz-eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .6rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: .35rem;
+    }
+
+    .quiz-header .quiz-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: #fff;
+    }
+
+    .quiz-header .quiz-desc {
+      font-size: .8rem;
+      color: rgba(255, 255, 255, .55);
+      margin-top: .2rem;
+    }
+
+    .quiz-body {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 0;
+    }
+
+    .quiz-left {
+      padding: 2rem;
+      border-right: 1px solid var(--rule);
+    }
+
+    .quiz-right {
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .8rem;
+    }
+
+    /* progress bar */
+    .prog-wrap {
+      margin-bottom: 1.6rem;
+    }
+
+    .prog-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .6rem;
+      color: var(--muted);
+      letter-spacing: .07em;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 5px;
+    }
+
+    .prog-track {
+      height: 3px;
+      background: var(--rule);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .prog-fill {
+      height: 100%;
+      background: var(--green);
+      border-radius: 2px;
+      transition: width .4s ease;
+    }
+
+    #q-number {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .6rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: block;
+      margin-bottom: .5rem;
+    }
+
+    #q-sentence {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.55;
+      margin-bottom: 1.5rem;
+    }
+
+    .quiz-opt {
+      display: block;
+      width: 100%;
+      text-align: left;
+      padding: 11px 15px;
+      margin-bottom: .45rem;
+      background: var(--page);
+      border: 1.5px solid var(--rule);
+      border-radius: 3px;
+      cursor: pointer;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .8rem;
+      color: var(--body);
+      transition: background .14s, border-color .14s, color .14s;
+    }
+
+    .quiz-opt:hover:not(:disabled) {
+      background: var(--blue-dim);
+      border-color: rgba(0, 76, 143, .3);
+      color: var(--blue);
+    }
+
+    .quiz-opt.correct {
+      background: rgba(0, 168, 89, .08);
+      border-color: var(--green);
+      color: var(--green-dark);
+      font-weight: 700;
+    }
+
+    .quiz-opt.wrong {
+      background: rgba(192, 57, 43, .06);
+      border-color: #c0392b;
+      color: #c0392b;
+    }
+
+    #q-feedback {
+      font-size: .82rem;
+      font-style: italic;
+      padding: 10px 14px;
+      border-radius: 3px;
+      margin-top: .9rem;
+      display: none;
+    }
+
+    #q-feedback.ok {
+      background: rgba(0, 168, 89, .08);
+      color: var(--green-dark);
+      border: 1px solid var(--green-line);
+    }
+
+    #q-feedback.err {
+      background: rgba(192, 57, 43, .06);
+      color: #c0392b;
+      border: 1px solid rgba(192, 57, 43, .25);
+    }
+
+    #next-button {
+      margin-top: 1.1rem;
+      width: 100%;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .7rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      padding: 12px;
+      background: var(--blue);
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: background .15s;
+      display: none;
+    }
+
+    #next-button:hover {
+      background: var(--blue-mid);
+    }
+
+    .score-label-sm {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .58rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    #score-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem;
+      font-weight: 900;
+      color: var(--blue);
+    }
+
+    /* ══════════════════════════════
+       FOOTER
+    ══════════════════════════════ */
+    footer {
+      background: var(--blue);
+      border-top: 3px solid var(--green);
+      padding: 2.8rem clamp(1rem, 5vw, 3rem);
+      text-align: center;
+    }
+
+    footer .f-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      font-weight: 900;
+      color: #fff;
+      margin-bottom: .3rem;
+    }
+
+    footer .f-sub {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .6rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .4);
+    }
+
+    footer .f-accent {
+      color: var(--green);
+    }
+
+    /* ══ INTERACTIVE EXERCISES ══ */
+    .ex-type-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .ex-type-letter {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--blue);
+      color: #fff;
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .ex-type-title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: 1.1rem;
+      color: var(--blue);
+      margin-bottom: .15rem;
+    }
+
+    .ex-type-desc {
+      font-size: .8rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .ex-card {
+      background: var(--card);
+      border: 1px solid var(--blue-line);
+      border-radius: 2px;
+      padding: 1.4rem 1.6rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 1px 6px rgba(0, 76, 143, .05);
+    }
+
+    .ex-card-top {
+      display: flex;
+      align-items: baseline;
+      gap: .8rem;
+      margin-bottom: .8rem;
+    }
+
+    .ex-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .68rem;
+      font-weight: 700;
+      color: var(--green);
+      background: var(--green-dim);
+      padding: 2px 7px;
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+
+    .ex-instruction {
+      font-size: .83rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .ex-sentence {
+      font-family: 'Lora', Georgia, serif;
+      font-style: italic;
+      font-size: .96rem;
+      color: var(--ink);
+      background: var(--page);
+      padding: .7rem 1rem;
+      border-left: 3px solid var(--blue-line);
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+
+    .ex-highlight {
+      color: var(--blue);
+      font-weight: 700;
+      font-style: normal;
+      text-decoration: underline dotted;
+    }
+
+    .ex-opts-row {
+      display: flex;
+      gap: .5rem;
+      flex-wrap: wrap;
+    }
+
+    .ex-opt {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .74rem;
+      padding: 8px 14px;
+      background: var(--page);
+      border: 1.5px solid var(--rule);
+      border-radius: 3px;
+      cursor: pointer;
+      color: var(--body);
+      transition: background .14s, border-color .14s, color .14s;
+    }
+
+    .ex-opt:hover:not(:disabled) {
+      background: var(--blue-dim);
+      border-color: rgba(0, 76, 143, .3);
+      color: var(--blue);
+    }
+
+    .ex-opt.ex-correct {
+      background: rgba(0, 168, 89, .1);
+      border-color: var(--green);
+      color: var(--green-dark);
+      font-weight: 700;
+    }
+
+    .ex-opt.ex-wrong {
+      background: rgba(192, 57, 43, .07);
+      border-color: #c0392b;
+      color: #c0392b;
+    }
+
+    .ex-opt:disabled {
+      cursor: default;
+    }
+
+    .ex-feedback {
+      font-size: .82rem;
+      font-style: italic;
+      padding: 0;
+      margin-top: .7rem;
+      display: none;
+      line-height: 1.5;
+    }
+
+    .ex-feedback.ok {
+      color: var(--green-dark);
+      display: block;
+    }
+
+    .ex-feedback.err {
+      color: #c0392b;
+      display: block;
+    }
+
+    .ex-feedback.info {
+      color: var(--blue);
+      display: block;
+    }
+
+    /* Word order */
+    .wo-target {
+      min-height: 44px;
+      border: 2px dashed var(--blue-line);
+      border-radius: 3px;
+      padding: .5rem .7rem;
+      margin-bottom: .6rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: .4rem;
+      align-items: center;
+      background: var(--blue-dim);
+      transition: border-color .15s;
+    }
+
+    .wo-target.wo-correct {
+      border-color: var(--green);
+      border-style: solid;
+      background: rgba(0, 168, 89, .06);
+    }
+
+    .wo-target.wo-wrong {
+      border-color: #c0392b;
+      border-style: solid;
+      background: rgba(192, 57, 43, .05);
+    }
+
+    .wo-placeholder {
+      font-size: .75rem;
+      color: var(--muted);
+      font-style: italic;
+      font-family: 'Lora', serif;
+    }
+
+    .wo-bank {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .4rem;
+      min-height: 36px;
+    }
+
+    .wo-chip {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .74rem;
+      padding: 5px 11px;
+      background: var(--card);
+      border: 1.5px solid var(--blue-line);
+      border-radius: 3px;
+      cursor: pointer;
+      color: var(--blue);
+      transition: background .12s, transform .1s;
+      user-select: none;
+    }
+
+    .wo-chip:hover {
+      background: var(--blue-dim);
+      transform: translateY(-1px);
+    }
+
+    .wo-chip.wo-placed {
+      background: var(--blue);
+      color: #fff;
+      border-color: var(--blue);
+      cursor: pointer;
+    }
+
+    .wo-chip.wo-placed:hover {
+      background: var(--blue-mid);
+    }
+
+    .wo-btn-check,
+    .wo-btn-reset {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .68rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: 8px 18px;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .wo-btn-check {
+      background: var(--blue);
+      color: #fff;
+    }
+
+    .wo-btn-check:hover {
+      background: var(--blue-mid);
+    }
+
+    .wo-btn-reset {
+      background: var(--page);
+      color: var(--muted);
+      border: 1px solid var(--rule);
+    }
+
+    .wo-btn-reset:hover {
+      background: var(--rule);
+    }
+
+    /* Classify */
+    .classify-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: .8rem;
+      margin-bottom: .8rem;
+    }
+
+    .classify-col {
+      border: 2px dashed var(--blue-line);
+      border-radius: 3px;
+      min-height: 80px;
+      padding: .6rem;
+      background: var(--blue-dim);
+      transition: border-color .15s, background .15s;
+    }
+
+    .classify-col.drag-over {
+      border-color: var(--blue);
+      background: rgba(0, 76, 143, .12);
+    }
+
+    .classify-col.col-correct {
+      border-color: var(--green);
+      border-style: solid;
+      background: rgba(0, 168, 89, .07);
+    }
+
+    .classify-col.col-wrong {
+      border-color: #c0392b;
+      border-style: solid;
+      background: rgba(192, 57, 43, .05);
+    }
+
+    .classify-col-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .62rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: .5rem;
+    }
+
+    .classify-drop-zone {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .35rem;
+      min-height: 32px;
+    }
+
+    .classify-cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .4rem;
+    }
+
+    .cl-chip {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .74rem;
+      padding: 5px 12px;
+      background: var(--card);
+      border: 1.5px solid var(--green-line);
+      border-radius: 3px;
+      cursor: grab;
+      color: var(--green-dark);
+      user-select: none;
+      transition: transform .1s, box-shadow .1s;
+    }
+
+    .cl-chip:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, .1);
+    }
+
+    .cl-chip.cl-placed {
+      cursor: pointer;
+      opacity: .85;
+    }
+
+    .cl-chip.cl-correct {
+      border-color: var(--green);
+      background: rgba(0, 168, 89, .1);
+      color: var(--green-dark);
+    }
+
+    .cl-chip.cl-wrong {
+      border-color: #c0392b;
+      background: rgba(192, 57, 43, .07);
+      color: #c0392b;
+    }
+
+    /* Review */
+    .review-row {
+      display: flex;
+      align-items: baseline;
+      gap: .8rem;
+      padding: .55rem .8rem;
+      border-radius: 2px;
+      font-size: .83rem;
+    }
+
+    .review-row.rv-ok {
+      background: rgba(0, 168, 89, .07);
+    }
+
+    .review-row.rv-err {
+      background: rgba(192, 57, 43, .05);
+    }
+
+    .review-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .65rem;
+      color: var(--muted);
+      flex-shrink: 0;
+      width: 28px;
+    }
+
+    .review-icon {
+      flex-shrink: 0;
+    }
+
+    .review-text {
+      flex: 1;
+      color: var(--body);
+      line-height: 1.5;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 700px) {
+      .hero-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-meta {
+        display: none;
+      }
+
+      .entry {
+        grid-template-columns: 1fr;
+      }
+
+      .entry-num {
+        display: none;
+      }
+
+      .quiz-body {
+        grid-template-columns: 1fr;
+      }
+
+      .quiz-right {
+        border-top: 1px solid var(--rule);
+      }
+
+      .header-center {
+        display: none;
+      }
+    }
+
+    .breadcrumb-bar {
+      background: var(--blue-deep);
+      border-bottom: 1px solid rgba(255, 255, 255, .07)
+    }
+
+    .breadcrumb-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: .55rem clamp(1rem, 5vw, 3rem);
+      display: flex;
+      align-items: center;
+      gap: .35rem;
+      flex-wrap: wrap
+    }
+
+    .breadcrumb-inner a,
+    .breadcrumb-inner span {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .6rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: rgba(255, 255, 255, .45);
+      transition: color .15s
+    }
+
+    .breadcrumb-inner a:hover {
+      color: var(--yellow, #f5c500)
+    }
+
+    .breadcrumb-inner .bc-sep {
+      color: rgba(255, 255, 255, .2)
+    }
+
+    .breadcrumb-inner .bc-current {
+      color: rgba(255, 255, 255, .8)
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ════════════ HEADER ════════════ -->
+  <header>
+    <div class="header-inner">
+      <div class="logo-pill">
+        <img src="../assets/images/logo-uts-2024.png" alt="UTS"
+          onerror="this.parentElement.innerHTML='<span class=\'logo-fallback\'>UTS</span>'">
+      </div>
+
+      <div class="header-center">
+        <p class="eyebrow">CELE</p>
+        <p class="h-title display">Past Time Expressions</p>
+      </div>
+
+      <div class="logo-pill">
+        <img src="../assets/images/logo_cele.png" alt="UTS"
+          onerror="this.parentElement.innerHTML='<span class=\'logo-fallback\'>UTS</span>'">
+      </div>
+    </div>
+  </header>
+  <nav class="breadcrumb-bar">
+    <div class="breadcrumb-inner"><a href="../index.html">Home</a><span class="bc-sep"> | </span><a
+        href="../index.html#basic">Basic</a><span class="bc-sep"> | </span><a href="basic3.html">Basic III</a><span
+        class="bc-sep"> | </span><span class="bc-current">Past Time Expressions</span></div>
+  </nav>
+
+  <!-- ════════════ HERO ════════════ -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div>
+        <p class="hero-eyebrow">Grammar Module — Simple Past &amp; Beyond</p>
+        <h1 class="hero-title display">Mastering<br>Past Time <em>Expressions</em></h1>
+        <p class="hero-sub">
+          Precise temporal language separates a competent speaker from a fluent one.
+          This guide covers nine essential categories of past-time markers — structure,
+          nuances, common mistakes, and examples.
+        </p>
+      </div>
+      <div class="hero-meta">
+        <strong>9</strong> Expressions<br>
+        <strong>10</strong> Exercises<br>
+        <strong>10</strong> Quiz items<br>
+        ——<br>
+        Simple Past<br>
+        Pres. Perfect
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════ QUICK NAV ════════════ -->
+  <nav class="quick-nav">
+    <div class="quick-nav-inner">
+      <a class="qn-chip" href="#s1">01 Yesterday</a>
+      <a class="qn-chip" href="#s2">02 Last</a>
+      <a class="qn-chip" href="#s3">03 Ago</a>
+      <a class="qn-chip" href="#s4">04 This / That</a>
+      <a class="qn-chip" href="#s5">05 The Other</a>
+      <a class="qn-chip" href="#s6">06 Before / Earlier</a>
+      <a class="qn-chip" href="#s7">07 Once / Formerly</a>
+      <a class="qn-chip" href="#s8">08 On / In</a>
+      <a class="qn-chip" href="#s9">09 Previously / Lately</a>
+      <a class="qn-chip" href="#exercises">↓ Exercises</a>
+      <a class="qn-chip" href="#quiz">↓ Quiz</a>
+    </div>
+  </nav>
+
+  <!-- ════════════ MAIN ════════════ -->
+  <div class="main-wrap">
+
+    <!-- ── 01 YESTERDAY ── -->
+    <article id="s1" class="entry">
+      <div class="entry-num display">01</div>
+      <div class="entry-body">
+        <p class="entry-label">Time Adverb / Noun</p>
+        <h2 class="entry-title display">Yesterday</h2>
+        <p class="entry-subtitle">The day immediately before today — always used with the Simple Past.</p>
+
+        <div class="tabs">
+          <button class="tab active" onclick="switchTab(this,'y','def')">Definition</button>
+          <button class="tab" onclick="switchTab(this,'y','struct')">Structure</button>
+          <button class="tab" onclick="switchTab(this,'y','rules')">Rules</button>
+          <button class="tab" onclick="switchTab(this,'y','ex')">Examples</button>
+        </div>
+
+        <div id="y-def" class="tab-panel active">
+          <div class="def-block">
+            <strong>"Yesterday"</strong> refers to the day immediately before today. It is a <em>relative</em> term — if
+            today is Wednesday, yesterday is Tuesday. Because it refers to a completed period, it is used exclusively
+            with the <strong>Simple Past</strong>.
+          </div>
+          <table class="mini-tbl">
+            <thead>
+              <tr>
+                <th>Combination</th>
+                <th>Meaning</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="t-blue">yesterday morning</td>
+                <td>Sunrise to noon on the previous day</td>
+              </tr>
+              <tr>
+                <td class="t-blue">yesterday afternoon</td>
+                <td>Noon to ~5:00 PM on the previous day</td>
+              </tr>
+              <tr>
+                <td class="t-blue">yesterday evening</td>
+                <td>5:00 PM until bedtime on the previous day</td>
+              </tr>
+              <tr>
+                <td class="t-blue">the day before yesterday</td>
+                <td>Two days ago</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div id="y-struct" class="tab-panel">
+          <div class="def-block" style="margin-bottom:.8rem">
+            "Yesterday" usually appears at the very <strong>beginning</strong> or very <strong>end</strong> of a
+            sentence.<br><br>
+            <span class="struct-pill">[Subject] + [Past Verb] + [Object] + <strong>yesterday</strong></span><br>
+            <span style="font-style:italic;color:var(--muted);font-size:.85rem;display:block;margin:.4rem 0 .8rem">I
+              bought a new car <strong>yesterday</strong>.</span>
+            <span class="struct-pill"><strong>Yesterday,</strong> + [Subject] + [Past Verb] + [Object]</span><br>
+            <span
+              style="font-style:italic;color:var(--muted);font-size:.85rem;display:block;margin:.4rem 0 0"><strong>Yesterday,</strong>
+              the weather was beautiful.</span>
+          </div>
+        </div>
+
+        <div id="y-rules" class="tab-panel">
+          <div class="def-block warn-accent" style="margin-bottom:.8rem">
+            <strong>Rule 1 — The "Night" exception.</strong> We do not say "yesterday night."<br>
+            <span class="wrong">I watched a movie yesterday night.</span><br>
+            <span class="right">I watched a movie <strong>last night</strong>.</span>
+          </div>
+          <div class="def-block warn-accent" style="margin-bottom:.8rem">
+            <strong>Rule 2 — No prepositions.</strong> Unlike months or dates, "yesterday" needs no preposition.<br>
+            <span class="wrong">On yesterday, I went to the park.</span><br>
+            <span class="right">Yesterday, I went to the park.</span>
+          </div>
+          <div class="def-block warn-accent">
+            <strong>Rule 3 — Reported speech.</strong> In reported speech, "yesterday" becomes "the previous day."<br>
+            <span style="font-style:italic;color:var(--muted);font-size:.84rem">Direct: "I arrived
+              <strong>yesterday</strong>."</span><br>
+            <span style="font-style:italic;color:var(--muted);font-size:.84rem">Reported: "He said he had arrived
+              <strong>the previous day</strong>."</span>
+          </div>
+        </div>
+
+        <div id="y-ex" class="tab-panel">
+          <ul class="ex-list">
+            <li><span class="ex-n">01</span>"I finished the entire project <strong>yesterday afternoon</strong>."</li>
+            <li><span class="ex-n">02</span>"<strong>Yesterday</strong> was a very long and stressful day at the
+              office."</li>
+            <li><span class="ex-n">03</span>"We met <strong>the day before yesterday</strong> at the conference."</li>
+            <li><span class="ex-n">04</span>"I didn't see you at the gym <strong>yesterday morning</strong>; were you
+              late?"</li>
+            <li><span class="ex-n">05</span>"What did you eat for dinner <strong>yesterday</strong>?"</li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <!-- ── 02 LAST ── -->
+    <article id="s2" class="entry">
+      <div class="entry-num display">02</div>
+      <div class="entry-body">
+        <p class="entry-label">Determiner</p>
+        <h2 class="entry-title display">Last</h2>
+        <p class="entry-subtitle">The most recently completed version of a time period — Simple Past.</p>
+        <div class="tabs">
+          <button class="tab active" onclick="switchTab(this,'la','def')">Definition</button>
+          <button class="tab" onclick="switchTab(this,'la','struct')">Structure</button>
+          <button class="tab" onclick="switchTab(this,'la','rules')">Rules</button>
+          <button class="tab" onclick="switchTab(this,'la','ex')">Examples</button>
+        </div>
+        <div id="la-def" class="tab-panel active">
+          <div class="def-block">
+            <strong>"Last"</strong> points to the previous unit of time relative to today. Because that period is
+            finished, it is almost always used with the <strong>Simple Past</strong>. It is extremely versatile — it
+            pairs with virtually any calendar unit or day.
+          </div>
+          <table class="mini-tbl">
+            <thead>
+              <tr>
+                <th>Interval</th>
+                <th>Common Phrases</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="t-green">Days</td>
+                <td>last Monday, last Tuesday, last weekend</td>
+              </tr>
+              <tr>
+                <td class="t-green">Months</td>
+                <td>last January, last month, last June</td>
+              </tr>
+              <tr>
+                <td class="t-green">Seasons</td>
+                <td>last summer, last winter, last spring</td>
+              </tr>
+              <tr>
+                <td class="t-green">Special</td>
+                <td>last night, last year, last century</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div id="la-struct" class="tab-panel">
+          <div class="def-block">
+            "Last" always comes <strong>before</strong> the time noun. <strong>Never</strong> use an article ("the")
+            before "last" when it is a time marker.<br><br>
+            <span class="struct-pill"><strong>Last</strong> + [Time Noun]</span><br>
+            <span style="font-style:italic;color:var(--muted);font-size:.85rem;display:block;margin:.4rem 0 .8rem">I saw
+              a movie <strong>last night</strong>. / We traveled to Japan <strong>last year</strong>.</span>
+            <span class="wrong">I went to Paris the last week.</span><br>
+            <span class="right">I went to Paris <strong>last week</strong>.</span>
+          </div>
+        </div>
+        <div id="la-rules" class="tab-panel">
+          <div class="def-block warn-accent" style="margin-bottom:.8rem">
+            <strong>"Last Night" vs. "Yesterday Night"</strong> — "Last night" is always standard.<br>
+            <span class="right">I slept poorly <strong>last night</strong>.</span>
+          </div>
+          <div class="def-block warn-accent" style="margin-bottom:.8rem">
+            <strong>"Last week" vs. "In the last week"</strong><br>
+            <span style="font-style:italic;color:var(--muted);font-size:.84rem">I was sick <strong>last week</strong>. →
+              The previous calendar week (Simple Past).</span><br>
+            <span style="font-style:italic;color:var(--muted);font-size:.84rem">I have been sick <strong>in the last
+                week</strong>. → 7 days up to right now (Present Perfect).</span>
+          </div>
+          <div class="def-block warn-accent">
+            <strong>Last vs. Next</strong> — Opposite directions on the timeline.<br>
+            <span style="font-style:italic;color:var(--muted);font-size:.84rem"><strong>Last Monday</strong> — the
+              Monday that just passed.</span><br>
+            <span style="font-style:italic;color:var(--muted);font-size:.84rem"><strong>Next Monday</strong> — the
+              Monday that is coming soon.</span>
+          </div>
+        </div>
+        <div id="la-ex" class="tab-panel">
+          <ul class="ex-list">
+            <li><span class="ex-n">01</span>"I started my new job <strong>last Monday</strong>, and I'm really enjoying
+              it."</li>
+            <li><span class="ex-n">02</span>"Did you hear that thunderstorm <strong>last night</strong>? It was very
+              loud."</li>
+            <li><span class="ex-n">03</span>"We went skiing <strong>last winter</strong>, but this year we are staying
+              home."</li>
+            <li><span class="ex-n">04</span>"I haven't seen her since <strong>last month</strong>'s meeting."</li>
+            <li><span class="ex-n">05</span>"Revenue increased significantly <strong>last year</strong>."</li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <!-- ── 03 AGO ── -->
+    <article id="s3" class="entry">
+      <div class="entry-num display">03</div>
+      <div class="entry-body">
+        <p class="entry-label">Adverb — position: AFTER the time period</p>
+        <h2 class="entry-title display">Ago</h2>
+        <p class="entry-subtitle">Counts backward from the present moment. Exclusively Simple Past.</p>
+        <div class="tabs">
+          <button class="tab active" onclick="switchTab(this,'ag','def')">Definition</button>
+          <button class="tab" onclick="switchTab(this,'ag','struct')">Structure</button>
+          <button class="tab" onclick="switchTab(this,'ag','ex')">Examples</button>
+        </div>
+        <div id="ag-def" class="tab-panel active">
+          <div class="def-block">
+            <strong>"Ago"</strong> transforms a period of time into a specific point in history, always counting back
+            from <em>now</em>. Because it refers to a finished action at a specific past time, it is used almost
+            exclusively with the <strong>Simple Past</strong>.
+          </div>
+          <table class="mini-tbl">
+            <thead>
+              <tr>
+                <th>Range</th>
+                <th>Examples</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="t-blue">Short</td>
+                <td>a moment ago, a few minutes ago, an hour ago</td>
+              </tr>
+              <tr>
+                <td class="t-blue">Medium</td>
+                <td>four days ago, two weeks ago, a month ago</td>
+              </tr>
+              <tr>
+                <td class="t-blue">Long</td>
+                <td>decades ago, centuries ago, a long time ago</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div id="ag-struct" class="tab-panel">
+          <div class="def-block">
+            Unlike most time markers, <strong>"ago"</strong> always comes <em>after</em> the time measurement.<br><br>
+            <span class="struct-pill">[Time Period] + <strong>ago</strong></span><br>
+            <span style="font-style:italic;color:var(--muted);font-size:.85rem;display:block;margin:.4rem 0 .8rem">Two
+              weeks <strong>ago</strong>. / Ten minutes <strong>ago</strong>.</span>
+            <span class="struct-pill">[Subject] + [Past Verb] + [Time Period] + <strong>ago</strong></span><br>
+            <span style="font-style:italic;color:var(--muted);font-size:.85rem;display:block;margin:.4rem 0 0">I
+              graduated three years <strong>ago</strong>.</span>
+          </div>
+        </div>
+        <div id="ag-ex" class="tab-panel">
+          <ul class="ex-list">
+            <li><span class="ex-n">01</span>"You just missed him; he left the office five minutes <strong>ago</strong>."
+            </li>
+            <li><span class="ex-n">02</span>"Dinosaurs became extinct millions of years <strong>ago</strong>."</li>
+            <li><span class="ex-n">03</span>"We started this project a few months <strong>ago</strong>, and it's nearly
+              finished."</li>
+            <li><span class="ex-n">04</span>"Long <strong>ago</strong>, in a land far away, there lived a king."</li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <!-- ── 04 THIS / THAT ── -->
+    <article id="s4" class="entry">
+      <div class="entry-num display">04</div>
+      <div class="entry-body">
+        <p class="entry-label">Demonstrative Determiners</p>
+        <h2 class="entry-title display">This / That</h2>
+        <p class="entry-subtitle">Psychological and temporal distance from the present moment.</p>
+        <div class="tabs">
+          <button class="tab active" onclick="switchTab(this,'tt','def')">Definition</button>
+          <button class="tab" onclick="switchTab(this,'tt','compare')">Comparison</button>
+          <button class="tab" onclick="switchTab(this,'tt','rules')">Rules</button>
+          <button class="tab" onclick="switchTab(this,'tt','ex')">Examples</button>
+        </div>
+        <div id="tt-def" class="tab-panel active">
+          <div class="def-block" style="margin-bottom:.8rem">
+            <strong>"This" (Immediate/Recent Past):</strong> Refers to a period still belonging to the current cycle —
+            today, this week, this month. It feels <em>"close"</em> to the present.
+          </div>
+          <div class="def-block green-accent">
+            <strong>"That" (Remote/Specific Past):</strong> Refers to a specific point in the more distant past, or a
+            time already introduced in a narrative. It creates <em>"distance"</em>.
+          </div>
+          <table class="mini-tbl" style="margin-top:1rem">
+            <thead>
+              <tr>
+                <th>Marker</th>
+                <th>Phrases</th>
+                <th>Context</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="t-blue">this</td>
+                <td>this morning, this afternoon, this Monday</td>
+                <td>Within the same day or week</td>
+              </tr>
+              <tr>
+                <td class="t-green">that</td>
+                <td>that day, that year, that summer</td>
+                <td>Storytelling or historical reference</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div id="tt-compare" class="tab-panel">
+          <table class="comp-tbl">
+            <thead>
+              <tr>
+                <th class="th-label">Feature</th>
+                <th class="th-a">This</th>
+                <th class="th-b">That</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Distance</td>
+                <td>Near / Current</td>
+                <td>Far / Finished</td>
+              </tr>
+              <tr>
+                <td>Atmosphere</td>
+                <td>Immediate / Personal</td>
+                <td>Narrative / Historical</td>
+              </tr>
+              <tr>
+                <td>Common Tense</td>
+                <td>Sim. Past / Pres. Perfect</td>
+                <td>Sim. Past / Past Perfect</td>
+              </tr>
+              <tr>
+                <td>Example</td>
+                <td>I saw him <em>this</em> afternoon.</td>
+                <td>I saw him <em>that</em> afternoon in 1999.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div id="tt-rules" class="tab-panel">
+          <div class="def-block warn-accent" style="margin-bottom:.8rem">
+            <strong>The Storytelling "That"</strong> — When narrating the past, use "that" to signal distance from the
+            present.<br>
+            <span style="font-style:italic;color:var(--muted);font-size:.84rem">"I moved to London in 2015. <strong>That
+                year</strong> was the most exciting of my life."</span>
+          </div>
+          <div class="def-block warn-accent">
+            <strong>"This" for the Very Recent Past</strong> — Use "this" if the larger time unit is still ongoing.<br>
+            <span style="font-style:italic;color:var(--muted);font-size:.84rem">"I've been very busy <strong>this
+                week</strong>." (The week is still happening.)</span>
+          </div>
+        </div>
+        <div id="tt-ex" class="tab-panel">
+          <ul class="ex-list">
+            <li><span class="ex-n">01</span>"I have already finished two reports <strong>this morning</strong>." (It is
+              currently 11:00 AM).</li>
+            <li><span class="ex-n">02</span>"My grandparents met in 1950. <strong>That summer</strong> was unusually
+              hot."</li>
+            <li><span class="ex-n">03</span>"Did you hear the loud noise <strong>this morning</strong>?"</li>
+            <li><span class="ex-n">04</span>"I lost my keys on Tuesday. <strong>That day</strong> was a complete
+              nightmare."</li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <!-- ── 05 THE OTHER ── -->
+    <article id="s5" class="entry">
+      <div class="entry-num display">05</div>
+      <div class="entry-body">
+        <p class="entry-label">Indefinite Time Marker — Spoken English</p>
+        <h2 class="entry-title display">The Other</h2>
+        <p class="entry-subtitle">Vague, conversational reference to a recent but unspecified past day.</p>
+        <div class="tabs">
+          <button class="tab active" onclick="switchTab(this,'to','def')">Definition</button>
+          <button class="tab" onclick="switchTab(this,'to','rules')">Rules</button>
+          <button class="tab" onclick="switchTab(this,'to','ex')">Examples</button>
+        </div>
+        <div id="to-def" class="tab-panel active">
+          <div class="def-block">
+            <strong>"The other + [time noun]"</strong> signals a time close to the present where the exact date either
+            isn't remembered or doesn't matter. Very common in <em>spoken, conversational English</em>. Used with the
+            <strong>Simple Past</strong>.
+          </div>
+          <table class="mini-tbl">
+            <thead>
+              <tr>
+                <th>Phrase</th>
+                <th>Approximate Meaning</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="t-blue">the other day</td>
+                <td>2 to 5 days ago</td>
+              </tr>
+              <tr>
+                <td class="t-blue">the other week</td>
+                <td>1 to 3 weeks ago</td>
+              </tr>
+              <tr>
+                <td class="t-blue">the other night</td>
+                <td>A recent evening (often storytelling)</td>
+              </tr>
+              <tr>
+                <td class="t-blue">the other month</td>
+                <td>1 to 2 months ago (less common)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div id="to-rules" class="tab-panel">
+          <div class="def-block warn-accent" style="margin-bottom:.8rem">
+            <strong>Vagueness is the point.</strong> Don't use "the other" if you want to be precise.<br>
+            <span style="font-style:italic;color:var(--muted);font-size:.84rem">Precise: "I saw him <strong>on
+                Tuesday</strong>." / Vague: "I saw him <strong>the other day</strong>."</span>
+          </div>
+          <div class="def-block warn-accent" style="margin-bottom:.8rem">
+            <strong>Not for the distant past.</strong><br>
+            <span class="wrong">I graduated university the other year (in 2010).</span><br>
+            <span class="right">I graduated university <strong>a few years ago</strong>.</span>
+          </div>
+          <div class="def-block warn-accent">
+            <strong>"The other day" (past) vs. "Another day" (future/different).</strong><br>
+            <span style="font-style:italic;color:var(--muted);font-size:.84rem">"I saw her <strong>the other
+                day</strong>." → past event.</span><br>
+            <span style="font-style:italic;color:var(--muted);font-size:.84rem">"Let's meet <strong>another
+                day</strong>." → future or a different day.</span>
+          </div>
+        </div>
+        <div id="to-ex" class="tab-panel">
+          <ul class="ex-list">
+            <li><span class="ex-n">01</span>"I was walking downtown <strong>the other day</strong> when I saw that new
+              cafe."</li>
+            <li><span class="ex-n">02</span>"We had a really strange dream <strong>the other night</strong>."</li>
+            <li><span class="ex-n">03</span>"I think I left my umbrella at your house <strong>the other week</strong>."
+            </li>
+            <li><span class="ex-n">04</span>"I saw a beautiful sunrise <strong>the other morning</strong> while
+              jogging."</li>
+            <li><span class="ex-n">05</span>"Someone called you <strong>the other day</strong>, but didn't leave a
+              message."</li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <!-- ── 06 BEFORE / EARLIER ── -->
+    <article id="s6" class="entry">
+      <div class="entry-num display">06</div>
+      <div class="entry-body">
+        <p class="entry-label">Preposition / Conjunction vs. Adverb</p>
+        <h2 class="entry-title display">Before / Earlier</h2>
+        <p class="entry-subtitle">One needs a reference anchor; the other stands alone.</p>
+        <div class="tabs">
+          <button class="tab active" onclick="switchTab(this,'be','def')">Definition</button>
+          <button class="tab" onclick="switchTab(this,'be','struct')">Structure</button>
+          <button class="tab" onclick="switchTab(this,'be','compare')">Comparison</button>
+          <button class="tab" onclick="switchTab(this,'be','ex')">Examples</button>
+        </div>
+        <div id="be-def" class="tab-panel active">
+          <div class="def-block" style="margin-bottom:.8rem">
+            <strong>"Before"</strong> is a preposition or conjunction. It requires a reference point — an event, time,
+            or action — to follow it. It answers: <em>Before what?</em>
+          </div>
+          <div class="def-block green-accent">
+            <strong>"Earlier"</strong> is the comparative adverb of "early." It means "at a time before now" or "before
+            the time previously mentioned." It can stand alone (typically meaning <em>earlier today</em>).
+          </div>
+          <table class="mini-tbl" style="margin-top:1rem">
+            <thead>
+              <tr>
+                <th>Phrase</th>
+                <th>Usage</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="t-blue">before then</td>
+                <td>Before a specific past moment</td>
+              </tr>
+              <tr>
+                <td class="t-blue">earlier today</td>
+                <td>Some time ago within the current day</td>
+              </tr>
+              <tr>
+                <td class="t-blue">years before</td>
+                <td>Long prior to a specific event</td>
+              </tr>
+              <tr>
+                <td class="t-blue">much earlier</td>
+                <td>Significantly before expected time</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div id="be-struct" class="tab-panel">
+          <div class="def-block" style="margin-bottom:.8rem">
+            <strong>Before + [Noun / -ing / Clause]</strong><br>
+            <span style="font-style:italic;color:var(--muted);font-size:.85rem">I arrived <strong>before the
+                meeting</strong>. / Wash your hands <strong>before eating</strong>. / I left <strong>before it
+                started</strong> to rain.</span>
+          </div>
+          <div class="def-block green-accent">
+            <strong>Earlier — standalone or with This/That</strong><br>
+            <span style="font-style:italic;color:var(--muted);font-size:.85rem">I saw him <strong>earlier</strong>. (=
+              earlier today)</span><br>
+            <span style="font-style:italic;color:var(--muted);font-size:.85rem">I finished the task <strong>earlier this
+                morning</strong>.</span>
+          </div>
+        </div>
+        <div id="be-compare" class="tab-panel">
+          <table class="comp-tbl">
+            <thead>
+              <tr>
+                <th class="th-label">Feature</th>
+                <th class="th-a">Before</th>
+                <th class="th-b">Earlier</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Grammar</td>
+                <td>Preposition / Conjunction</td>
+                <td>Adverb</td>
+              </tr>
+              <tr>
+                <td>Reference</td>
+                <td>Needs a specific anchor point</td>
+                <td>Refers to "now" or "then"</td>
+              </tr>
+              <tr>
+                <td>Standalone?</td>
+                <td>Only to mean "ever in my life"</td>
+                <td>Yes — usually "earlier today"</td>
+              </tr>
+              <tr>
+                <td>vs. Ago</td>
+                <td>Counts from another past event</td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td>Example</td>
+                <td>Call me <em>before</em> you leave.</td>
+                <td>I called you <em>earlier</em>.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div id="be-ex" class="tab-panel">
+          <ul class="ex-list">
+            <li><span class="ex-n">01</span>"Please finish the report <strong>before Friday</strong>."</li>
+            <li><span class="ex-n">02</span>"I went to the bank <strong>earlier</strong>, but it was closed."</li>
+            <li><span class="ex-n">03</span>"Have we met <strong>before</strong>? Your face looks familiar."</li>
+            <li><span class="ex-n">04</span>"The meeting was at 3:00, but we started <strong>earlier</strong>."</li>
+            <li><span class="ex-n">05</span>"Check the tires <strong>before</strong> you start the long drive."</li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <!-- ── 07 ONCE / FORMERLY ── -->
+    <article id="s7" class="entry">
+      <div class="entry-num display">07</div>
+      <div class="entry-body">
+        <p class="entry-label">Adverbs of Completed States</p>
+        <h2 class="entry-title display">Once / At One Time / Formerly</h2>
+        <p class="entry-subtitle">States from the past now completely over — varying in formality.</p>
+        <div class="tabs">
+          <button class="tab active" onclick="switchTab(this,'oc','def')">Definition</button>
+          <button class="tab" onclick="switchTab(this,'oc','compare')">Comparison</button>
+          <button class="tab" onclick="switchTab(this,'oc','rules')">Rules</button>
+          <button class="tab" onclick="switchTab(this,'oc','ex')">Examples</button>
+        </div>
+        <div id="oc-def" class="tab-panel active">
+          <div class="def-block" style="margin-bottom:.8rem">
+            <strong>"Once"</strong> — Something was true at an unspecified past time; a single state or long period that
+            is now completely over.
+          </div>
+          <div class="def-block" style="margin-bottom:.8rem">
+            <strong>"At one time"</strong> — Very similar to "once," but emphasizes a specific (though unnamed) period
+            or stage in someone's life.
+          </div>
+          <div class="def-block green-accent">
+            <strong>"Formerly"</strong> — The most formal option. Describes a previous status, title, name, or function.
+            Common in professional or historical contexts.
+          </div>
+          <table class="mini-tbl" style="margin-top:1rem">
+            <thead>
+              <tr>
+                <th>Phrase</th>
+                <th>Combination</th>
+                <th>Context</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="t-blue">once upon a time</td>
+                <td>Start of stories</td>
+                <td>Narrative / Fiction</td>
+              </tr>
+              <tr>
+                <td class="t-blue">formerly known as</td>
+                <td>Name changes</td>
+                <td>Professional / Official</td>
+              </tr>
+              <tr>
+                <td class="t-blue">at one time or another</td>
+                <td>Universal experiences</td>
+                <td>Idiomatic</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div id="oc-compare" class="tab-panel">
+          <table class="comp-tbl">
+            <thead>
+              <tr>
+                <th class="th-label">Feature</th>
+                <th class="th-a">Once</th>
+                <th class="th-b">Formerly</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Formality</td>
+                <td>Low / Medium (conversational)</td>
+                <td>High (professional)</td>
+              </tr>
+              <tr>
+                <td>Focus</td>
+                <td>General memory or state</td>
+                <td>Previous title or function</td>
+              </tr>
+              <tr>
+                <td>Placement</td>
+                <td>Before verb / sentence start</td>
+                <td>Before noun / adjective</td>
+              </tr>
+              <tr>
+                <td>Example</td>
+                <td>I <em>once</em> had a cat.</td>
+                <td>He is a <em>formerly</em> famous actor.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div id="oc-rules" class="tab-panel">
+          <div class="def-block warn-accent" style="margin-bottom:.8rem">
+            <strong>"Once" vs. "One time"</strong><br>
+            <span style="font-style:italic;color:var(--muted);font-size:.84rem"><strong>Once</strong> → continuous
+              state: "I once had long hair."</span><br>
+            <span style="font-style:italic;color:var(--muted);font-size:.84rem"><strong>One time</strong> → single
+              specific event: "One time, I fell off my bike."</span>
+          </div>
+          <div class="def-block warn-accent" style="margin-bottom:.8rem">
+            <strong>Formal "Formerly"</strong> — Avoid in casual speech; use "used to" or "once" instead.<br>
+            <span style="font-style:italic;color:var(--muted);font-size:.84rem">Casual: "I <strong>used to</strong> work
+              at the mall."</span><br>
+            <span style="font-style:italic;color:var(--muted);font-size:.84rem">Formal: "I was <strong>formerly</strong>
+              employed as a retail consultant."</span>
+          </div>
+          <div class="def-block warn-accent">
+            <strong>The "Used to" Connection</strong> — All three often pair with <em>used to + Verb</em> to emphasize
+            the habit has stopped.<br>
+            <span style="font-style:italic;color:var(--muted);font-size:.84rem">"<strong>At one time</strong>, I
+              <strong>used to</strong> smoke, but I quit years ago."</span>
+          </div>
+        </div>
+        <div id="oc-ex" class="tab-panel">
+          <ul class="ex-list">
+            <li><span class="ex-n">01</span>"This neighborhood was <strong>once</strong> very quiet, but now it is full
+              of traffic."</li>
+            <li><span class="ex-n">02</span>"<strong>At one time</strong>, scientists believed the earth was flat."</li>
+            <li><span class="ex-n">03</span>"Istanbul was <strong>formerly</strong> known as Constantinople."</li>
+            <li><span class="ex-n">04</span>"I <strong>once</strong> met the president at a charity event."</li>
+            <li><span class="ex-n">05</span>"The <strong>formerly</strong> independent company was acquired by a large
+              corporation."</li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <!-- ── 08 ON / IN ── -->
+    <article id="s8" class="entry">
+      <div class="entry-num display">08</div>
+      <div class="entry-body">
+        <p class="entry-label">Prepositions of Time</p>
+        <h2 class="entry-title display">On / In</h2>
+        <p class="entry-subtitle">Anchors for specific time periods — scale determines the choice.</p>
+        <div class="tabs">
+          <button class="tab active" onclick="switchTab(this,'oi','def')">Definition</button>
+          <button class="tab" onclick="switchTab(this,'oi','compare')">Comparison</button>
+          <button class="tab" onclick="switchTab(this,'oi','rules')">Rules</button>
+          <button class="tab" onclick="switchTab(this,'oi','ex')">Examples</button>
+        </div>
+        <div id="oi-def" class="tab-panel active">
+          <div class="def-block" style="margin-bottom:.8rem">
+            <strong>"In"</strong> — Used for larger, enclosed, or non-specific periods: months, years, centuries, and
+            seasons.
+          </div>
+          <div class="def-block green-accent">
+            <strong>"On"</strong> — Used for specific, smaller units of time: days of the week and exact dates.
+          </div>
+          <table class="mini-tbl" style="margin-top:1rem">
+            <thead>
+              <tr>
+                <th>Preposition</th>
+                <th>Category</th>
+                <th>Examples</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="t-blue">in</td>
+                <td>Months</td>
+                <td>in January, in October</td>
+              </tr>
+              <tr>
+                <td class="t-blue">in</td>
+                <td>Years</td>
+                <td>in 1988, in the 90s</td>
+              </tr>
+              <tr>
+                <td class="t-blue">in</td>
+                <td>Seasons</td>
+                <td>in the summer, in winter</td>
+              </tr>
+              <tr>
+                <td class="t-green">on</td>
+                <td>Days</td>
+                <td>on Monday, on my birthday</td>
+              </tr>
+              <tr>
+                <td class="t-green">on</td>
+                <td>Dates</td>
+                <td>on May 5th, on the 1st of July</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div id="oi-compare" class="tab-panel">
+          <table class="comp-tbl">
+            <thead>
+              <tr>
+                <th class="th-label">Feature</th>
+                <th class="th-a">In</th>
+                <th class="th-b">On</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Time Scale</td>
+                <td>Long / General</td>
+                <td>Short / Specific</td>
+              </tr>
+              <tr>
+                <td>Calendar View</td>
+                <td>The whole month / year</td>
+                <td>A single day / date</td>
+              </tr>
+              <tr>
+                <td>Typical Nouns</td>
+                <td>2024, Summer, April</td>
+                <td>Tuesday, Anniversary, 12th</td>
+              </tr>
+              <tr>
+                <td>Example</td>
+                <td>We met <em>in</em> July.</td>
+                <td>We met <em>on</em> July 4th.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div id="oi-rules" class="tab-panel">
+          <div class="def-block warn-accent" style="margin-bottom:.8rem">
+            <strong>Parts of the Day</strong> — "In" for general periods; "On" when you specify which day.<br>
+            <span style="font-style:italic;color:var(--muted);font-size:.84rem">I usually study <strong>in the
+                morning</strong>. / I had a meeting <strong>on Monday morning</strong>.</span>
+          </div>
+          <div class="def-block warn-accent" style="margin-bottom:.8rem">
+            <strong>The "At" Exception</strong> — Use "in" for morning/afternoon/evening, but "at" for night.<br>
+            <span style="font-style:italic;color:var(--muted);font-size:.84rem">It was cold <strong>at
+                night</strong>.</span>
+          </div>
+          <div class="def-block warn-accent">
+            <strong>Holidays</strong> — "At" for the whole period; "On" for the specific day.<br>
+            <span style="font-style:italic;color:var(--muted);font-size:.84rem">I saw them <strong>at
+                Christmas</strong>. / I saw them <strong>on Christmas Day</strong>.</span>
+          </div>
+        </div>
+        <div id="oi-ex" class="tab-panel">
+          <ul class="ex-list">
+            <li><span class="ex-n">01</span>"The Berlin Wall fell <strong>in 1989</strong>."</li>
+            <li><span class="ex-n">02</span>"I started my current job <strong>on January 15th</strong>."</li>
+            <li><span class="ex-n">03</span>"We moved to this city <strong>in the spring</strong> of last year."</li>
+            <li><span class="ex-n">04</span>"Were you at the office <strong>on Friday</strong>?"</li>
+            <li><span class="ex-n">05</span>"I was born <strong>in June</strong>, specifically <strong>on a
+                Sunday</strong>."</li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <!-- ── 09 PREVIOUSLY / RECENTLY / LATELY ── -->
+    <article id="s9" class="entry">
+      <div class="entry-num display">09</div>
+      <div class="entry-body">
+        <p class="entry-label">Adverbs of Recency</p>
+        <h2 class="entry-title display">Previously / Recently / Lately</h2>
+        <p class="entry-subtitle">Three degrees of "not long ago" — formality, tense, and repetition set them apart.</p>
+        <div class="tabs">
+          <button class="tab active" onclick="switchTab(this,'pr','def')">Definitions</button>
+          <button class="tab" onclick="switchTab(this,'pr','struct')">Structures</button>
+          <button class="tab" onclick="switchTab(this,'pr','rules')">Rules</button>
+          <button class="tab" onclick="switchTab(this,'pr','ex')">Examples</button>
+        </div>
+        <div id="pr-def" class="tab-panel active">
+          <div class="triple">
+            <div class="def-block">
+              <span class="struct-pill" style="margin-bottom:.6rem;display:inline-block">Previously</span><br>
+              Refers to a time <em>before</em> a specific point. Formal writing. Describes a former state or sequence of
+              events.<br>
+              <span
+                style="font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--muted);display:block;margin-top:.5rem">Months
+                or years ago.</span>
+            </div>
+            <div class="def-block">
+              <span class="struct-pill" style="margin-bottom:.6rem;display:inline-block">Recently</span><br>
+              The near past — a short time ago. Works for a single finished action or a state that began not long
+              ago.<br>
+              <span
+                style="font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--muted);display:block;margin-top:.5rem">Days
+                or weeks ago.</span>
+            </div>
+            <div class="def-block green-accent">
+              <span class="struct-pill" style="margin-bottom:.6rem;display:inline-block">Lately</span><br>
+              A <em>repeated action or continuing state</em> that started in the near past and is still relevant
+              now.<br>
+              <span
+                style="font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--muted);display:block;margin-top:.5rem">A
+                few weeks ago until today.</span>
+            </div>
+          </div>
+        </div>
+        <div id="pr-struct" class="tab-panel">
+          <div class="def-block" style="margin-bottom:.8rem">
+            <strong>Previously</strong> — contrasts a past state with the present.<br>
+            <span style="font-style:italic;color:var(--muted);font-size:.85rem">He works in sales now, but
+              <strong>previously</strong> he was a teacher.</span>
+          </div>
+          <div class="def-block" style="margin-bottom:.8rem">
+            <strong>Recently</strong> — pairs with Simple Past (one-time) or Present Perfect.<br>
+            <span style="font-style:italic;color:var(--muted);font-size:.85rem">I <strong>bought</strong> a new car
+              <strong>recently</strong>. (Simple Past)</span><br>
+            <span style="font-style:italic;color:var(--muted);font-size:.85rem">I <strong>have visited</strong> London
+              <strong>recently</strong>. (Present Perfect)</span>
+          </div>
+          <div class="def-block green-accent">
+            <strong>Lately</strong> — almost exclusively Present Perfect or Pres. Perfect Continuous. Common in
+            questions and negatives.<br>
+            <span style="font-style:italic;color:var(--muted);font-size:.85rem">I <strong>have been feeling</strong>
+              tired <strong>lately</strong>. / Have you seen any movies <strong>lately</strong>?</span>
+          </div>
+        </div>
+        <div id="pr-rules" class="tab-panel">
+          <div class="def-block warn-accent" style="margin-bottom:.8rem">
+            <strong>Position of "Lately"</strong> — Usually at the end of the sentence.<br>
+            <span class="right">I haven't talked to her <strong>lately</strong>.</span>
+          </div>
+          <div class="def-block warn-accent" style="margin-bottom:.8rem">
+            <strong>"Previously" vs. "Before"</strong> — Previously is more formal.<br>
+            <span style="font-style:italic;color:var(--muted);font-size:.84rem">Informal: "I've seen this
+              <strong>before</strong>." / Formal: "As <strong>previously</strong> stated…"</span>
+          </div>
+          <div class="def-block warn-accent">
+            <strong>One-time Events</strong> — Cannot use "lately" for a single completed action.<br>
+            <span class="wrong">I went to the dentist lately.</span><br>
+            <span class="right">I went to the dentist <strong>recently</strong>.</span>
+          </div>
+        </div>
+        <div id="pr-ex" class="tab-panel">
+          <ul class="ex-list">
+            <li><span class="ex-n">01</span>"He works in sales now, but <strong>previously</strong> he was a teacher."
+            </li>
+            <li><span class="ex-n">02</span>"The company <strong>recently</strong> announced a change in its policy."
+            </li>
+            <li><span class="ex-n">03</span>"Have you noticed any changes in the weather <strong>lately</strong>?"</li>
+            <li><span class="ex-n">04</span>"We went to that new Italian restaurant <strong>recently</strong>; it was
+              great."</li>
+            <li><span class="ex-n">05</span>"I haven't been sleeping very well <strong>lately</strong> due to the
+              stress."</li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <!-- ════════════ INTERACTIVE EXERCISES ════════════ -->
+    <section id="exercises" class="exercises-section">
+
+      <div class="section-hdr">
+        <h2 class="display">Practice Exercises</h2>
+        <p>10 exercises · 3 activity types · self-graded</p>
+      </div>
+
+      <!-- ── Exercise score tracker bar ── -->
+      <div id="ex-tracker" style="
+      display:flex; align-items:center; gap:1rem;
+      background:var(--card); border:1px solid var(--blue-line);
+      border-left:3px solid var(--blue);
+      padding:.8rem 1.2rem; margin-bottom:2rem; border-radius:2px;
+      font-family:'JetBrains Mono',monospace; font-size:.72rem; color:var(--muted);
+    ">
+        <span>Progress:</span>
+        <div style="flex:1; height:4px; background:var(--rule); border-radius:2px; overflow:hidden">
+          <div id="ex-prog-fill"
+            style="height:100%;background:var(--green);width:0%;transition:width .4s ease;border-radius:2px"></div>
+        </div>
+        <span id="ex-counter" style="color:var(--blue);font-weight:700">0 / 10</span>
+        <span id="ex-score-badge" style="color:var(--green);font-weight:700"></span>
+      </div>
+
+      <!-- ══════════════════════
+         § A — SPOT THE ERROR
+    ══════════════════════ -->
+      <div class="ex-type-header">
+        <span class="ex-type-letter">A</span>
+        <div>
+          <p class="ex-type-title">Spot the Error</p>
+          <p class="ex-type-desc">Each sentence contains one incorrect time expression. Identify the wrong word or
+            phrase and choose the correct replacement.</p>
+        </div>
+      </div>
+
+      <!-- A1 -->
+      <div class="ex-card" id="ex1">
+        <div class="ex-card-top">
+          <span class="ex-num">01</span>
+          <p class="ex-instruction">Read the sentence carefully. One option below identifies the <strong>real
+              error</strong> and its fix — choose it.</p>
+        </div>
+        <p class="ex-sentence">"I watched a horror film yesterday night and couldn't sleep at all."</p>
+        <div class="ex-opts-row" id="ex1-opts">
+          <button class="ex-opt"
+            onclick="gradeSpot(this,'ex1','last night','Yesterday night is never correct — use <strong>last night</strong> instead.')">yesterday
+            night → last night</button>
+          <button class="ex-opt" onclick="gradeSpot(this,'ex1','__wrong__','')">couldn't → can't</button>
+          <button class="ex-opt" onclick="gradeSpot(this,'ex1','__wrong__','')">watched → was watching</button>
+        </div>
+        <div class="ex-feedback" id="ex1-fb"></div>
+      </div>
+
+      <!-- A2 -->
+      <div class="ex-card" id="ex2">
+        <div class="ex-card-top">
+          <span class="ex-num">02</span>
+          <p class="ex-instruction">Read the sentence carefully. One option below identifies the <strong>real
+              error</strong> and its fix — choose it.</p>
+        </div>
+        <p class="ex-sentence">"She graduated on 2019 with a degree in engineering."</p>
+        <div class="ex-opts-row" id="ex2-opts">
+          <button class="ex-opt" onclick="gradeSpot(this,'ex2','__wrong__','')">graduated → was graduated</button>
+          <button class="ex-opt"
+            onclick="gradeSpot(this,'ex2','in 2019','We use <strong>in</strong> with years, never <strong>on</strong>. The correct form is <em>in 2019</em>.')">on
+            → in</button>
+          <button class="ex-opt" onclick="gradeSpot(this,'ex2','__wrong__','')">degree → title</button>
+        </div>
+        <div class="ex-feedback" id="ex2-fb"></div>
+      </div>
+
+      <!-- A3 -->
+      <div class="ex-card" id="ex3">
+        <div class="ex-card-top">
+          <span class="ex-num">03</span>
+          <p class="ex-instruction">Read the sentence carefully. One option below identifies the <strong>real
+              error</strong> and its fix — choose it.</p>
+        </div>
+        <p class="ex-sentence">"On yesterday, the whole team met to review the project results."</p>
+        <div class="ex-opts-row" id="ex3-opts">
+          <button class="ex-opt"
+            onclick="gradeSpot(this,'ex3','Yesterday (no preposition)','<strong>Yesterday</strong> never takes a preposition. Say simply <em>Yesterday, the whole team met…</em>')">On
+            yesterday → Yesterday</button>
+          <button class="ex-opt" onclick="gradeSpot(this,'ex3','__wrong__','')">whole → entire</button>
+          <button class="ex-opt" onclick="gradeSpot(this,'ex3','__wrong__','')">met → have met</button>
+        </div>
+        <div class="ex-feedback" id="ex3-fb"></div>
+      </div>
+
+      <!-- ══════════════════════
+         § B — WORD ORDER
+    ══════════════════════ -->
+      <div class="ex-type-header" style="margin-top:2.5rem">
+        <span class="ex-type-letter" style="background:var(--green)">B</span>
+        <div>
+          <p class="ex-type-title">Word Order</p>
+          <p class="ex-type-desc">Click the words in the correct order to build a grammatically accurate sentence. Reset
+            and try again as many times as you need.</p>
+        </div>
+      </div>
+
+      <!-- B4 -->
+      <div class="ex-card" id="ex4">
+        <div class="ex-card-top">
+          <span class="ex-num">04</span>
+          <p class="ex-instruction">Build the sentence in the correct order:</p>
+        </div>
+        <div class="wo-target" id="ex4-target"><span class="wo-placeholder">Click words below to build the
+            sentence…</span></div>
+        <div class="wo-bank" id="ex4-bank"></div>
+        <div style="display:flex;gap:.5rem;margin-top:.8rem">
+          <button class="wo-btn-check" onclick="checkWordOrder('ex4')">Check ✓</button>
+          <button class="wo-btn-reset" onclick="resetWordOrder('ex4')">Reset ↺</button>
+        </div>
+        <div class="ex-feedback" id="ex4-fb"></div>
+      </div>
+
+      <!-- B5 -->
+      <div class="ex-card" id="ex5">
+        <div class="ex-card-top">
+          <span class="ex-num">05</span>
+          <p class="ex-instruction">Build the sentence in the correct order:</p>
+        </div>
+        <div class="wo-target" id="ex5-target"><span class="wo-placeholder">Click words below to build the
+            sentence…</span></div>
+        <div class="wo-bank" id="ex5-bank"></div>
+        <div style="display:flex;gap:.5rem;margin-top:.8rem">
+          <button class="wo-btn-check" onclick="checkWordOrder('ex5')">Check ✓</button>
+          <button class="wo-btn-reset" onclick="resetWordOrder('ex5')">Reset ↺</button>
+        </div>
+        <div class="ex-feedback" id="ex5-fb"></div>
+      </div>
+
+      <!-- B6 -->
+      <div class="ex-card" id="ex6">
+        <div class="ex-card-top">
+          <span class="ex-num">06</span>
+          <p class="ex-instruction">Build the sentence in the correct order:</p>
+        </div>
+        <div class="wo-target" id="ex6-target"><span class="wo-placeholder">Click words below to build the
+            sentence…</span></div>
+        <div class="wo-bank" id="ex6-bank"></div>
+        <div style="display:flex;gap:.5rem;margin-top:.8rem">
+          <button class="wo-btn-check" onclick="checkWordOrder('ex6')">Check ✓</button>
+          <button class="wo-btn-reset" onclick="resetWordOrder('ex6')">Reset ↺</button>
+        </div>
+        <div class="ex-feedback" id="ex6-fb"></div>
+      </div>
+
+      <!-- ══════════════════════
+         § C — CLASSIFY
+    ══════════════════════ -->
+      <div class="ex-type-header" style="margin-top:2.5rem">
+        <span class="ex-type-letter" style="background:var(--blue-mid)">C</span>
+        <div>
+          <p class="ex-type-title">Classify</p>
+          <p class="ex-type-desc">Drag each expression card into the correct category, or tap a card then tap its target
+            column.</p>
+        </div>
+      </div>
+
+      <!-- C7 · Formal vs Informal -->
+      <div class="ex-card" id="ex7">
+        <div class="ex-card-top">
+          <span class="ex-num">07</span>
+          <p class="ex-instruction">Classify each expression as <strong>Formal</strong> or
+            <strong>Conversational</strong>:
+          </p>
+        </div>
+        <div class="classify-wrap" id="ex7-wrap">
+          <div class="classify-col" id="ex7-formal" data-label="Formal" ondragover="event.preventDefault()"
+            ondrop="dropCard(event,'ex7-formal','ex7')">
+            <p class="classify-col-label">📋 Formal</p>
+            <div class="classify-drop-zone" id="ex7-formal-zone"></div>
+          </div>
+          <div class="classify-col" id="ex7-conv" data-label="Conversational" ondragover="event.preventDefault()"
+            ondrop="dropCard(event,'ex7-conv','ex7')">
+            <p class="classify-col-label">💬 Conversational</p>
+            <div class="classify-drop-zone" id="ex7-conv-zone"></div>
+          </div>
+        </div>
+        <div class="classify-cards" id="ex7-cards"></div>
+        <button class="wo-btn-check" style="margin-top:.8rem" onclick="checkClassify('ex7')">Check ✓</button>
+        <button class="wo-btn-reset" style="margin-top:.8rem;margin-left:.5rem" onclick="resetClassify('ex7')">Reset
+          ↺</button>
+        <div class="ex-feedback" id="ex7-fb"></div>
+      </div>
+
+      <!-- C8 · Simple Past vs Present Perfect -->
+      <div class="ex-card" id="ex8">
+        <div class="ex-card-top">
+          <span class="ex-num">08</span>
+          <p class="ex-instruction">Which tense does each time expression <strong>typically</strong> require?</p>
+        </div>
+        <div class="classify-wrap" id="ex8-wrap">
+          <div class="classify-col" id="ex8-sp" data-label="Simple Past" ondragover="event.preventDefault()"
+            ondrop="dropCard(event,'ex8-sp','ex8')">
+            <p class="classify-col-label">🕐 Simple Past</p>
+            <div class="classify-drop-zone" id="ex8-sp-zone"></div>
+          </div>
+          <div class="classify-col" id="ex8-pp" data-label="Present Perfect" ondragover="event.preventDefault()"
+            ondrop="dropCard(event,'ex8-pp','ex8')">
+            <p class="classify-col-label">🔄 Present Perfect</p>
+            <div class="classify-drop-zone" id="ex8-pp-zone"></div>
+          </div>
+        </div>
+        <div class="classify-cards" id="ex8-cards"></div>
+        <button class="wo-btn-check" style="margin-top:.8rem" onclick="checkClassify('ex8')">Check ✓</button>
+        <button class="wo-btn-reset" style="margin-top:.8rem;margin-left:.5rem" onclick="resetClassify('ex8')">Reset
+          ↺</button>
+        <div class="ex-feedback" id="ex8-fb"></div>
+      </div>
+
+      <!-- C9 · Near vs Distant past -->
+      <div class="ex-card" id="ex9">
+        <div class="ex-card-top">
+          <span class="ex-num">09</span>
+          <p class="ex-instruction">Is each expression used for <strong>Near Past</strong> (days/weeks) or
+            <strong>Distant Past</strong> (months/years+)?
+          </p>
+        </div>
+        <div class="classify-wrap" id="ex9-wrap">
+          <div class="classify-col" id="ex9-near" data-label="Near Past" ondragover="event.preventDefault()"
+            ondrop="dropCard(event,'ex9-near','ex9')">
+            <p class="classify-col-label">📅 Near Past</p>
+            <div class="classify-drop-zone" id="ex9-near-zone"></div>
+          </div>
+          <div class="classify-col" id="ex9-dist" data-label="Distant Past" ondragover="event.preventDefault()"
+            ondrop="dropCard(event,'ex9-dist','ex9')">
+            <p class="classify-col-label">🗓️ Distant Past</p>
+            <div class="classify-drop-zone" id="ex9-dist-zone"></div>
+          </div>
+        </div>
+        <div class="classify-cards" id="ex9-cards"></div>
+        <button class="wo-btn-check" style="margin-top:.8rem" onclick="checkClassify('ex9')">Check ✓</button>
+        <button class="wo-btn-reset" style="margin-top:.8rem;margin-left:.5rem" onclick="resetClassify('ex9')">Reset
+          ↺</button>
+        <div class="ex-feedback" id="ex9-fb"></div>
+      </div>
+
+      <!-- C10 · Specific vs Vague -->
+      <div class="ex-card" id="ex10">
+        <div class="ex-card-top">
+          <span class="ex-num">10</span>
+          <p class="ex-instruction">Is each expression <strong>Specific</strong> (exact time known) or
+            <strong>Vague</strong> (approximate/unspecified)?
+          </p>
+        </div>
+        <div class="classify-wrap" id="ex10-wrap">
+          <div class="classify-col" id="ex10-spec" data-label="Specific" ondragover="event.preventDefault()"
+            ondrop="dropCard(event,'ex10-spec','ex10')">
+            <p class="classify-col-label">🎯 Specific</p>
+            <div class="classify-drop-zone" id="ex10-spec-zone"></div>
+          </div>
+          <div class="classify-col" id="ex10-vague" data-label="Vague" ondragover="event.preventDefault()"
+            ondrop="dropCard(event,'ex10-vague','ex10')">
+            <p class="classify-col-label">🌫️ Vague</p>
+            <div class="classify-drop-zone" id="ex10-vague-zone"></div>
+          </div>
+        </div>
+        <div class="classify-cards" id="ex10-cards"></div>
+        <button class="wo-btn-check" style="margin-top:.8rem" onclick="checkClassify('ex10')">Check ✓</button>
+        <button class="wo-btn-reset" style="margin-top:.8rem;margin-left:.5rem" onclick="resetClassify('ex10')">Reset
+          ↺</button>
+        <div class="ex-feedback" id="ex10-fb"></div>
+      </div>
+
+      <!-- ── FINAL REVIEW (hidden until all done) ── -->
+      <div id="ex-review"
+        style="display:none; margin-top:2.5rem; background:var(--card); border:1px solid var(--blue-line); border-top:4px solid var(--blue);">
+        <div style="background:var(--blue);padding:1.4rem 1.8rem">
+          <p
+            style="font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--green);margin-bottom:.3rem">
+            — Exercises Complete</p>
+          <p class="display" style="font-size:1.6rem;font-weight:900;color:#fff" id="review-title">Results</p>
+        </div>
+        <div style="padding:1.8rem">
+          <p
+            style="font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--muted);margin-bottom:1.2rem;letter-spacing:.06em;text-transform:uppercase">
+            Answer Key</p>
+          <div id="review-list" style="display:flex;flex-direction:column;gap:.5rem"></div>
+          <button onclick="resetAllExercises()" style="
+          margin-top:1.8rem;
+          font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;
+          padding:12px 32px;background:var(--blue);color:#fff;border:none;border-radius:3px;cursor:pointer;font-weight:700;
+        ">Try Again ↺</button>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ════════════ QUIZ ════════════ -->
+    <section id="quiz" class="quiz-section" style="margin-top:3.5rem">
+      <div class="quiz-header">
+        <div>
+          <p class="quiz-eyebrow">— Interactive Practice</p>
+          <p class="quiz-title display">Self-Evaluation Quiz</p>
+          <p class="quiz-desc">Select the correct time expression. Ten questions. Immediate feedback.</p>
+        </div>
+      </div>
+      <div class="quiz-body">
+        <div class="quiz-left">
+          <div class="prog-wrap">
+            <div class="prog-label">
+              <span id="q-number">Question 1 of 10</span>
+              <span id="prog-pct">10%</span>
+            </div>
+            <div class="prog-track">
+              <div class="prog-fill" id="prog-fill" style="width:10%"></div>
+            </div>
+          </div>
+          <p id="q-sentence">Loading…</p>
+          <div id="options-container"></div>
+          <div id="q-feedback"></div>
+          <button id="next-button">Continue →</button>
+        </div>
+        <div class="quiz-right">
+          <p class="score-label-sm">Your Score</p>
+          <canvas id="progressChart" width="180" height="180"></canvas>
+          <span id="score-text">0 / 10</span>
+          <p class="score-label-sm">Correct Answers</p>
+        </div>
+      </div>
+    </section>
+
+  </div><!-- /main-wrap -->
+
+  <!-- ════════════ FOOTER ════════════ -->
+  <footer>
+    <p class="f-logo display">Universidad Tecnológica de Salamanca</p>
+    <p class="f-sub">"Trasciende a la Vanguardia Educativa" &nbsp;<span class="f-accent">·</span>&nbsp; English Language
+      Department &nbsp;<span class="f-accent">·</span>&nbsp; © 2025</p>
+  </footer>
+
+  <!-- ════════════ SCRIPTS ════════════ -->
+  <script>
+    /* ── Tab switching ── */
+    function switchTab(btn, prefix, id) {
+      btn.closest('.tabs').querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      btn.classList.add('active');
+      const scope = btn.closest('article') || btn.closest('section');
+      scope.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      document.getElementById(`${prefix}-${id}`).classList.add('active');
+    }
+
+    /* ── Scroll reveal ── */
+    const io = new IntersectionObserver(
+      entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('show'); }),
+      { threshold: 0.06 }
+    );
+    document.querySelectorAll('.entry').forEach(el => io.observe(el));
+
+    /* ── Quiz ── */
+    const QUESTIONS = [
+      { q: "The student presented his thesis _________ Tuesday.", opts: ["on", "in", "last"], correct: "on" },
+      { q: "We finished the lab experiment 30 minutes _________.", opts: ["ago", "before", "last"], correct: "ago" },
+      { q: "I haven't seen the coordinator _________ week.", opts: ["ago", "last", "in"], correct: "last" },
+      { q: "The library was closed _________ afternoon.", opts: ["last", "this", "ago"], correct: "this" },
+      { q: "Computers were much bigger _________ the past.", opts: ["on", "in", "when"], correct: "in" },
+      { q: "I met the new professor _________ day at the cafeteria.", opts: ["the other", "once", "ago"], correct: "the other" },
+      { q: "She had _________ worked as an engineer before joining the faculty.", opts: ["previously", "ago", "last"], correct: "previously" },
+      { q: "_________ I was in high school, I didn't know how to code.", opts: ["When", "In", "On"], correct: "When" },
+      { q: "I sent you the email _________ today — did you see it?", opts: ["earlier", "ago", "last"], correct: "earlier" },
+      { q: "I graduated from high school _________ 2021.", opts: ["in", "on", "last"], correct: "in" }
+    ];
+
+    let idx = 0, score = 0, chart = null;
+
+    function initChart() {
+      chart = new Chart(document.getElementById('progressChart').getContext('2d'), {
+        type: 'doughnut',
+        data: {
+          labels: ['Correct', 'Remaining'],
+          datasets: [{ data: [0, 10], backgroundColor: ['#00a859', '#e4e2de'], borderWidth: 0 }]
+        },
+        options: { responsive: false, cutout: '78%', plugins: { legend: { display: false } } }
+      });
+    }
+
+    function loadQ() {
+      const q = QUESTIONS[idx];
+      const pct = Math.round(((idx + 1) / QUESTIONS.length) * 100);
+      document.getElementById('q-number').textContent = `Question ${idx + 1} of ${QUESTIONS.length}`;
+      document.getElementById('prog-pct').textContent = `${pct}%`;
+      document.getElementById('prog-fill').style.width = `${pct}%`;
+      document.getElementById('q-sentence').textContent = q.q;
+      document.getElementById('options-container').innerHTML = '';
+      const fb = document.getElementById('q-feedback');
+      fb.style.display = 'none'; fb.className = '';
+      document.getElementById('next-button').style.display = 'none';
+
+      q.opts.forEach(opt => {
+        const b = document.createElement('button');
+        b.className = 'quiz-opt';
+        b.textContent = opt;
+        b.onclick = () => checkAns(opt);
+        document.getElementById('options-container').appendChild(b);
+      });
+    }
+
+    function checkAns(sel) {
+      const correct = QUESTIONS[idx].correct;
+      document.querySelectorAll('.quiz-opt').forEach(b => {
+        b.disabled = true;
+        if (b.textContent === correct) b.classList.add('correct');
+        if (b.textContent === sel && sel !== correct) b.classList.add('wrong');
+      });
+      const fb = document.getElementById('q-feedback');
+      fb.style.display = 'block';
+      if (sel === correct) {
+        score++;
+        fb.textContent = '✓  Correct. Well done.';
+        fb.className = 'ok';
+      } else {
+        fb.textContent = `✗  Incorrect. The correct answer is "${correct}".`;
+        fb.className = 'err';
+      }
+      document.getElementById('score-text').textContent = `${score} / ${QUESTIONS.length}`;
+      chart.data.datasets[0].data = [score, QUESTIONS.length - score];
+      chart.update();
+      document.getElementById('next-button').style.display = 'block';
+    }
+
+    document.getElementById('next-button').onclick = () => {
+      idx++;
+      if (idx < QUESTIONS.length) { loadQ(); return; }
+      const pct = Math.round((score / QUESTIONS.length) * 100);
+      const msg = pct >= 80 ? 'Excellent work.' : pct >= 60 ? 'Good effort. Keep practising.' : 'Keep studying — you\'re making progress.';
+      document.querySelector('.quiz-section').innerHTML = `
+      <div style="text-align:center;padding:3.5rem 2rem">
+        <p style="font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--green);margin-bottom:.9rem">— Session Complete</p>
+        <h2 style="font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:900;color:var(--blue);margin-bottom:.7rem">${msg}</h2>
+        <p style="color:var(--muted);font-size:.95rem;margin-bottom:.4rem">You answered <strong style="color:var(--blue)">${score}</strong> of ${QUESTIONS.length} questions correctly.</p>
+        <p style="font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:900;color:var(--green);margin:1rem 0 2rem">${pct}%</p>
+        <button onclick="location.reload()"
+          style="font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;padding:13px 36px;background:var(--blue);color:#fff;border:none;border-radius:3px;cursor:pointer;font-weight:700;transition:background .15s"
+          onmouseover="this.style.background='var(--blue-mid)'"
+          onmouseout="this.style.background='var(--blue)'">
+          Retake Quiz
+        </button>
+      </div>`;
+    };
+
+    /* ══════════════════════════════════════════════════
+       INTERACTIVE EXERCISES ENGINE
+    ══════════════════════════════════════════════════ */
+
+    /* ── State ── */
+    const EX_TOTAL = 10;
+    let exDone = 0, exCorrect = 0;
+    const exResults = {}; // id -> { correct: bool, label: str, answer: str }
+
+    function markExercise(id, correct, label, answer) {
+      if (exResults[id]) return; // don't double-count
+      exResults[id] = { correct, label, answer };
+      exDone++;
+      if (correct) exCorrect++;
+      // update tracker
+      document.getElementById('ex-counter').textContent = `${exDone} / ${EX_TOTAL}`;
+      document.getElementById('ex-score-badge').textContent = exDone > 0 ? `✓ ${exCorrect}` : '';
+      document.getElementById('ex-prog-fill').style.width = `${(exDone / EX_TOTAL) * 100}%`;
+      if (exDone === EX_TOTAL) showReview();
+    }
+
+    function showReview() {
+      const pct = Math.round((exCorrect / EX_TOTAL) * 100);
+      const msg = pct === 100 ? 'Perfect score!' : pct >= 70 ? 'Great work!' : pct >= 50 ? 'Good effort.' : 'Keep practising!';
+      document.getElementById('review-title').textContent = `${msg} — ${exCorrect} / ${EX_TOTAL} correct (${pct}%)`;
+      const list = document.getElementById('review-list');
+      list.innerHTML = '';
+      Object.entries(exResults).forEach(([id, r]) => {
+        const num = id.replace('ex', '');
+        const row = document.createElement('div');
+        row.className = `review-row ${r.correct ? 'rv-ok' : 'rv-err'}`;
+        row.innerHTML = `<span class="review-num">${num.padStart(2, '0')}</span>
+        <span class="review-icon">${r.correct ? '✓' : '✗'}</span>
+        <span class="review-text"><strong>${r.label}</strong> — ${r.correct ? 'Correct.' : `Correct answer: <em>${r.answer}</em>`}</span>`;
+        list.appendChild(row);
+      });
+      const rev = document.getElementById('ex-review');
+      rev.style.display = 'block';
+      rev.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function resetAllExercises() { location.reload(); }
+
+    /* ════════════════════
+       § A — SPOT THE ERROR
+    ════════════════════ */
+    function gradeSpot(btn, exId, correctKey, explanation) {
+      if (exResults[exId]) return;
+      const isCorrect = correctKey !== '__wrong__';
+      const opts = btn.closest('.ex-opts-row').querySelectorAll('.ex-opt');
+      opts.forEach(b => b.disabled = true);
+      const fb = document.getElementById(`${exId}-fb`);
+      // Find the correct button's explanation from data attribute
+      let correctExpl = '';
+      opts.forEach(b => {
+        const m = b.getAttribute('onclick').match(/gradeSpot\(this,'[^']+','([^']+)','([^']*)'\)/);
+        if (m && m[1] !== '__wrong__') { correctExpl = m[2]; b.classList.add('ex-correct'); }
+      });
+      if (isCorrect) {
+        btn.classList.remove('ex-correct'); btn.classList.add('ex-correct'); // ensure
+        fb.className = 'ex-feedback ok';
+        fb.innerHTML = `✓ Correct! ${explanation}`;
+      } else {
+        btn.classList.add('ex-wrong');
+        fb.className = 'ex-feedback err';
+        fb.innerHTML = `✗ Not quite. ${correctExpl || 'Review the highlighted expression.'}`;
+      }
+      markExercise(exId, isCorrect, 'Spot the Error', correctKey);
+    }
+
+    /* ════════════════════
+       § B — WORD ORDER
+    ════════════════════ */
+    const WO_DATA = {
+      ex4: {
+        words: ['hours', 'the', 'ago', 'three', 'ended', 'meeting'],
+        correct: 'the meeting ended three hours ago',
+        explanation: '<strong>Ago</strong> always comes AFTER the time period: <em>three hours ago</em>.'
+      },
+      ex5: {
+        words: ['traveled', 'we', 'Europe', 'last', 'across', 'summer'],
+        correct: 'last summer we traveled across europe',
+        explanation: '<strong>Last</strong> comes before the time noun and can open the sentence.'
+      },
+      ex6: {
+        words: ['before', 'never', 'been', 'Tokyo', 'to', 'had', 'I'],
+        correct: 'i had never been to tokyo before',
+        explanation: '<strong>Before</strong> at the end of a sentence means "at any time in the past (ever)".'
+      }
+    };
+
+    const woState = {}; // exId -> { placed: [], remaining: [] }
+
+    function initWordOrder(exId) {
+      const data = WO_DATA[exId];
+      // Always shuffle a fresh copy so words are never in correct order
+      const shuffled = [...data.words].sort(() => Math.random() - .5);
+      // Ensure it's not accidentally in correct order
+      const correctNorm = data.correct.toLowerCase();
+      if (shuffled.join(' ').toLowerCase() === correctNorm) shuffled.reverse();
+      woState[exId] = { placed: [], remaining: shuffled };
+      renderWO(exId);
+    }
+
+    function shuffleSpotOptions() {
+      ['ex1-opts', 'ex2-opts', 'ex3-opts'].forEach(rowId => {
+        const row = document.getElementById(rowId);
+        if (!row) return;
+        const btns = [...row.querySelectorAll('.ex-opt')];
+        btns.sort(() => Math.random() - .5);
+        btns.forEach(b => row.appendChild(b));
+      });
+    }
+
+    function renderWO(exId) {
+      const state = woState[exId];
+      const target = document.getElementById(`${exId}-target`);
+      const bank = document.getElementById(`${exId}-bank`);
+      target.innerHTML = state.placed.length === 0
+        ? '<span class="wo-placeholder">Click words below to build the sentence…</span>'
+        : '';
+      state.placed.forEach((w, i) => {
+        const chip = document.createElement('span');
+        chip.className = 'wo-chip wo-placed';
+        chip.textContent = w;
+        chip.onclick = () => { if (exResults[exId]) return; state.placed.splice(i, 1); state.remaining.push(w); renderWO(exId); };
+        target.appendChild(chip);
+      });
+      bank.innerHTML = '';
+      state.remaining.forEach((w, i) => {
+        const chip = document.createElement('span');
+        chip.className = 'wo-chip';
+        chip.textContent = w;
+        chip.onclick = () => { if (exResults[exId]) return; state.remaining.splice(i, 1); state.placed.push(w); renderWO(exId); };
+        bank.appendChild(chip);
+      });
+    }
+
+    function checkWordOrder(exId) {
+      if (exResults[exId]) return;
+      const state = woState[exId];
+      if (state.placed.length === 0) return;
+      const data = WO_DATA[exId];
+      const attempt = state.placed.join(' ').toLowerCase();
+      const isCorrect = attempt === data.correct;
+      const target = document.getElementById(`${exId}-target`);
+      const fb = document.getElementById(`${exId}-fb`);
+      target.classList.remove('wo-correct', 'wo-wrong');
+      target.classList.add(isCorrect ? 'wo-correct' : 'wo-wrong');
+      if (isCorrect) {
+        fb.className = 'ex-feedback ok';
+        fb.innerHTML = `✓ Correct! ${data.explanation}`;
+        // disable bank
+        document.getElementById(`${exId}-bank`).querySelectorAll('.wo-chip').forEach(c => c.style.pointerEvents = 'none');
+      } else {
+        fb.className = 'ex-feedback err';
+        fb.innerHTML = `✗ Not quite. Try rearranging. ${data.explanation}`;
+      }
+      markExercise(exId, isCorrect, 'Word Order', data.words.join(' '));
+    }
+
+    function resetWordOrder(exId) {
+      if (exResults[exId]) return;
+      const data = WO_DATA[exId];
+      woState[exId] = { placed: [], remaining: [...data.words] };
+      renderWO(exId);
+      const target = document.getElementById(`${exId}-target`);
+      target.classList.remove('wo-correct', 'wo-wrong');
+      const fb = document.getElementById(`${exId}-fb`);
+      fb.className = 'ex-feedback'; fb.style.display = 'none';
+    }
+
+    /* ════════════════════
+       § C — CLASSIFY
+    ════════════════════ */
+    const CL_DATA = {
+      ex7: {
+        items: [
+          { text: 'formerly', col: 'ex7-formal' },
+          { text: 'the other day', col: 'ex7-conv' },
+          { text: 'previously', col: 'ex7-formal' },
+          { text: 'last night', col: 'ex7-conv' }
+        ],
+        cols: ['ex7-formal', 'ex7-conv'],
+        explanation: '<strong>Formerly</strong> and <strong>previously</strong> are formal/written. <strong>The other day</strong> and <strong>last night</strong> are conversational.'
+      },
+      ex8: {
+        items: [
+          { text: 'ago', col: 'ex8-sp' },
+          { text: 'yesterday', col: 'ex8-sp' },
+          { text: 'lately', col: 'ex8-pp' },
+          { text: 'recently', col: 'ex8-pp' }
+        ],
+        cols: ['ex8-sp', 'ex8-pp'],
+        explanation: '<strong>Ago</strong> and <strong>yesterday</strong> → Simple Past only. <strong>Lately</strong> and <strong>recently</strong> → often Present Perfect.'
+      },
+      ex9: {
+        items: [
+          { text: 'the other day', col: 'ex9-near' },
+          { text: 'this morning', col: 'ex9-near' },
+          { text: 'formerly', col: 'ex9-dist' },
+          { text: 'once', col: 'ex9-dist' }
+        ],
+        cols: ['ex9-near', 'ex9-dist'],
+        explanation: '<strong>The other day</strong> and <strong>this morning</strong> are near past. <strong>Formerly</strong> and <strong>once</strong> describe distant or completed states.'
+      },
+      ex10: {
+        items: [
+          { text: 'on July 4th', col: 'ex10-spec' },
+          { text: 'in 1995', col: 'ex10-spec' },
+          { text: 'the other week', col: 'ex10-vague' },
+          { text: 'at one time', col: 'ex10-vague' }
+        ],
+        cols: ['ex10-spec', 'ex10-vague'],
+        explanation: '<strong>On July 4th</strong> and <strong>in 1995</strong> are exact dates. <strong>The other week</strong> and <strong>at one time</strong> are deliberately vague.'
+      }
+    };
+
+    const clState = {}; // exId -> { placements: { chipText -> colId } }
+    let selectedChip = null; // for tap-to-place on mobile
+
+    function initClassify(exId) {
+      clState[exId] = { placements: {} };
+      const data = CL_DATA[exId];
+      const cardsEl = document.getElementById(`${exId}-cards`);
+      cardsEl.innerHTML = '';
+      // shuffle items
+      const shuffled = [...data.items].sort(() => Math.random() - .5);
+      shuffled.forEach(item => {
+        const chip = document.createElement('div');
+        chip.className = 'cl-chip';
+        chip.textContent = item.text;
+        chip.draggable = true;
+        chip.dataset.text = item.text;
+        chip.dataset.exid = exId;
+        chip.addEventListener('dragstart', e => { e.dataTransfer.setData('text', JSON.stringify({ text: item.text, exid: exId })); });
+        chip.addEventListener('click', () => handleChipClick(chip, exId));
+        cardsEl.appendChild(chip);
+      });
+      // dragover highlight
+      data.cols.forEach(colId => {
+        const col = document.getElementById(colId);
+        col.addEventListener('dragover', () => col.classList.add('drag-over'));
+        col.addEventListener('dragleave', () => col.classList.remove('drag-over'));
+      });
+    }
+
+    function handleChipClick(chip, exId) {
+      if (exResults[exId]) return;
+      if (chip.classList.contains('cl-placed')) {
+        // return to bank
+        clState[exId].placements[chip.dataset.text] = null;
+        chip.classList.remove('cl-placed');
+        document.getElementById(`${exId}-cards`).appendChild(chip);
+        selectedChip = null;
+        return;
+      }
+      if (selectedChip === chip) { selectedChip = null; chip.style.outline = ''; return; }
+      selectedChip = chip;
+      chip.style.outline = '2px solid var(--blue)';
+    }
+
+    function dropCard(event, colId, exId) {
+      event.preventDefault();
+      if (exResults[exId]) return;
+      document.getElementById(colId).classList.remove('drag-over');
+      let text, eid;
+      try { const d = JSON.parse(event.dataTransfer.getData('text')); text = d.text; eid = d.exid; }
+      catch (e) { return; }
+      if (eid !== exId) return;
+      placeChipInCol(text, colId, exId);
+    }
+
+    function placeChipInCol(text, colId, exId) {
+      const zone = document.getElementById(`${colId}-zone`);
+      const cardsEl = document.getElementById(`${exId}-cards`);
+      // find chip in bank or other zones
+      let chip = [...cardsEl.querySelectorAll('.cl-chip'), ...document.querySelectorAll(`#${exId}-wrap .cl-chip`)]
+        .find(c => c.dataset.text === text);
+      if (!chip) return;
+      chip.style.outline = '';
+      chip.classList.add('cl-placed');
+      zone.appendChild(chip);
+      clState[exId].placements[text] = colId;
+      selectedChip = null;
+    }
+
+    // allow click on column to place selected chip
+    document.addEventListener('click', e => {
+      if (!selectedChip) return;
+      const col = e.target.closest('.classify-col');
+      if (!col) return;
+      const exId = selectedChip.dataset.exid;
+      if (exResults[exId]) return;
+      selectedChip.style.outline = '';
+      placeChipInCol(selectedChip.dataset.text, col.id, exId);
+      selectedChip = null;
+    });
+
+    function checkClassify(exId) {
+      if (exResults[exId]) return;
+      const data = CL_DATA[exId];
+      const placements = clState[exId].placements;
+      let allPlaced = data.items.every(item => placements[item.text]);
+      if (!allPlaced) {
+        const fb = document.getElementById(`${exId}-fb`);
+        fb.className = 'ex-feedback info'; fb.textContent = 'Place all cards before checking.'; return;
+      }
+      let allCorrect = true;
+      data.items.forEach(item => {
+        const chip = [...document.querySelectorAll(`#${exId}-wrap .cl-chip`)]
+          .find(c => c.dataset.text === item.text);
+        const correct = placements[item.text] === item.col;
+        if (!correct) allCorrect = false;
+        if (chip) { chip.classList.remove('cl-correct', 'cl-wrong'); chip.classList.add(correct ? 'cl-correct' : 'cl-wrong'); }
+      });
+      // colour columns
+      data.cols.forEach(colId => {
+        const col = document.getElementById(colId);
+        const itemsInCol = data.items.filter(i => i.col === colId);
+        const allRight = itemsInCol.every(i => placements[i.text] === colId);
+        col.classList.remove('col-correct', 'col-wrong');
+        col.classList.add(allRight ? 'col-correct' : 'col-wrong');
+      });
+      const fb = document.getElementById(`${exId}-fb`);
+      fb.className = `ex-feedback ${allCorrect ? 'ok' : 'err'}`;
+      fb.innerHTML = allCorrect ? `✓ Perfect! ${data.explanation}` : `✗ Some items are in the wrong column. ${data.explanation}`;
+      markExercise(exId, allCorrect, 'Classify', data.items.map(i => i.text + ' → ' + i.col.split('-').pop()).join(', '));
+    }
+
+    function resetClassify(exId) {
+      if (exResults[exId]) return;
+      CL_DATA[exId].cols.forEach(colId => {
+        document.getElementById(`${colId}-zone`).innerHTML = '';
+        document.getElementById(colId).classList.remove('col-correct', 'col-wrong');
+      });
+      clState[exId] = { placements: {} };
+      initClassify(exId);
+      const fb = document.getElementById(`${exId}-fb`);
+      fb.className = 'ex-feedback'; fb.style.display = 'none';
+    }
+
+    window.onload = () => {
+      // Quiz
+      initChart(); loadQ();
+      // Shuffle Spot the Error options so correct answer isn't always first
+      shuffleSpotOptions();
+      // Word order exercises
+      ['ex4', 'ex5', 'ex6'].forEach(id => initWordOrder(id));
+      // Classify exercises
+      ['ex7', 'ex8', 'ex9', 'ex10'].forEach(id => initClassify(id));
+    };
+  </script>
+</body>
+
+</html>
