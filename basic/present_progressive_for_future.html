@@ -1,0 +1,2618 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Present Progressive for Future — CELE UTS English</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;700&display=swap"
+    rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+  <style>
+    /* ── TOKENS ── */
+    :root {
+      --blue: #004c8f;
+      --blue-mid: #00367a;
+      --blue-deep: #002a5e;
+      --green: #00a859;
+      --green-dark: #008a48;
+      --green-dim: rgba(0, 168, 89, .10);
+      --blue-dim: rgba(0, 76, 143, .07);
+      --blue-line: rgba(0, 76, 143, .15);
+      --green-line: rgba(0, 168, 89, .20);
+      --red: #c0392b;
+      --red-dim: rgba(192, 57, 43, .07);
+      --page: #f7f5f2;
+      --card: #ffffff;
+      --ink: #1a1a1f;
+      --body: #3d3d45;
+      --muted: #7a7a88;
+      --rule: #e4e2de;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
+
+    html {
+      scroll-behavior: smooth
+    }
+
+    body {
+      background: var(--page);
+      color: var(--body);
+      font-family: 'Lora', Georgia, serif;
+      min-height: 100vh
+    }
+
+    .display {
+      font-family: 'Playfair Display', Georgia, serif
+    }
+
+    .mono {
+      font-family: 'JetBrains Mono', monospace
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: var(--blue);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 20px rgba(0, 0, 0, .18)
+    }
+
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 clamp(1rem, 5vw, 3rem);
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between
+    }
+
+    .logo-pill {
+      background: rgba(255, 255, 255, .14);
+      border: 1.5px solid rgba(255, 255, 255, .28);
+      border-radius: 8px;
+      padding: 5px 14px;
+      backdrop-filter: blur(6px);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, .15), inset 0 1px 0 rgba(255, 255, 255, .18);
+      display: flex;
+      align-items: center;
+      text-decoration: none
+    }
+
+    .logo-pill img {
+      height: 38px;
+      width: auto
+    }
+
+    .logo-fallback {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: 1.3rem;
+      color: #fff;
+      letter-spacing: .04em
+    }
+
+    .header-center {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      pointer-events: none
+    }
+
+    .header-center .eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .58rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .55);
+      margin-bottom: 2px
+    }
+
+    .header-center .h-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: .01em
+    }
+
+    /* ── BREADCRUMB ── */
+    .breadcrumb-bar {
+      background: var(--blue-deep);
+      border-bottom: 1px solid rgba(255, 255, 255, .07)
+    }
+
+    .breadcrumb-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: .55rem clamp(1rem, 5vw, 3rem);
+      display: flex;
+      align-items: center;
+      gap: .35rem;
+      flex-wrap: wrap
+    }
+
+    .breadcrumb-inner a,
+    .breadcrumb-inner span {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .6rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: rgba(255, 255, 255, .45);
+      transition: color .15s
+    }
+
+    .breadcrumb-inner a:hover {
+      color: var(--green)
+    }
+
+    .breadcrumb-inner .bc-sep {
+      color: rgba(255, 255, 255, .2)
+    }
+
+    .breadcrumb-inner .bc-current {
+      color: rgba(255, 255, 255, .85)
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--blue);
+      background-image: repeating-linear-gradient(-55deg, rgba(255, 255, 255, .025) 0px, rgba(255, 255, 255, .025) 1px, transparent 1px, transparent 18px);
+      padding: clamp(3rem, 8vw, 5.5rem) clamp(1rem, 5vw, 3rem) clamp(2.5rem, 6vw, 4.5rem);
+      border-bottom: 4px solid var(--green)
+    }
+
+    .hero-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 2rem;
+      align-items: end
+    }
+
+    .hero-eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .65rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 10px
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 28px;
+      height: 1.5px;
+      background: var(--green)
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+      font-weight: 900;
+      line-height: 1.06;
+      color: #fff
+    }
+
+    .hero-title em {
+      color: var(--green);
+      font-style: italic
+    }
+
+    .hero-sub {
+      margin-top: 1.2rem;
+      max-width: 540px;
+      font-size: .93rem;
+      line-height: 1.8;
+      color: rgba(255, 255, 255, .65)
+    }
+
+    .hero-meta {
+      text-align: right;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .64rem;
+      color: rgba(255, 255, 255, .4);
+      letter-spacing: .07em;
+      line-height: 2.1;
+      border-left: 1px solid rgba(255, 255, 255, .12);
+      padding-left: 1.8rem
+    }
+
+    .hero-meta strong {
+      display: block;
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: var(--green);
+      letter-spacing: 0;
+      line-height: 1
+    }
+
+    /* ── QUICK NAV ── */
+    .quick-nav {
+      background: var(--blue-deep);
+      border-bottom: 1px solid rgba(255, 255, 255, .08)
+    }
+
+    .quick-nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: .9rem clamp(1rem, 5vw, 3rem);
+      display: flex;
+      gap: .5rem;
+      flex-wrap: wrap
+    }
+
+    .qn-chip {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .6rem;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .45);
+      text-decoration: none;
+      border: 1px solid rgba(255, 255, 255, .1);
+      border-radius: 3px;
+      padding: 4px 10px;
+      transition: color .15s, border-color .15s, background .15s
+    }
+
+    .qn-chip:hover {
+      color: var(--green);
+      border-color: var(--green-line);
+      background: rgba(0, 168, 89, .08)
+    }
+
+    /* ── MAIN ── */
+    .main-wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 clamp(1rem, 5vw, 3rem) 5rem
+    }
+
+    /* ── ENTRY ── */
+    .entry {
+      display: grid;
+      grid-template-columns: 72px 1fr;
+      gap: 0 2.2rem;
+      padding: 3.5rem 0;
+      border-bottom: 1px solid var(--rule);
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity .55s ease, transform .55s ease
+    }
+
+    .entry.show {
+      opacity: 1;
+      transform: none
+    }
+
+    .entry-num {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: 4.5rem;
+      line-height: 1;
+      color: rgba(0, 76, 143, .13);
+      text-align: right;
+      padding-top: 6px;
+      user-select: none
+    }
+
+    .entry-body {
+      min-width: 0
+    }
+
+    .entry-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .62rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: .45rem;
+      display: flex;
+      align-items: center;
+      gap: 8px
+    }
+
+    .entry-label::after {
+      content: '';
+      flex: 1;
+      max-width: 40px;
+      height: 1px;
+      background: var(--green-line)
+    }
+
+    .entry-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 900;
+      color: var(--blue);
+      line-height: 1.1;
+      margin-bottom: .8rem
+    }
+
+    .entry-subtitle {
+      font-size: .84rem;
+      color: var(--muted);
+      font-style: italic;
+      border-left: 2.5px solid var(--green);
+      padding-left: .75rem;
+      margin-bottom: 1.4rem
+    }
+
+    /* ── TABS ── */
+    .tabs {
+      display: flex;
+      gap: 0;
+      border-bottom: 1.5px solid var(--rule);
+      margin-bottom: 1.4rem
+    }
+
+    .tab {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .62rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: 8px 16px;
+      cursor: pointer;
+      color: var(--muted);
+      background: none;
+      border: none;
+      border-bottom: 2.5px solid transparent;
+      margin-bottom: -1.5px;
+      transition: color .15s, border-color .15s
+    }
+
+    .tab:hover {
+      color: var(--blue)
+    }
+
+    .tab.active {
+      color: var(--blue);
+      border-bottom-color: var(--blue)
+    }
+
+    .tab-panel {
+      display: none
+    }
+
+    .tab-panel.active {
+      display: block
+    }
+
+    /* ── CONTENT BLOCKS ── */
+    .def-block {
+      background: var(--card);
+      border: 1px solid var(--blue-line);
+      border-left: 3px solid var(--blue);
+      border-radius: 2px;
+      padding: .95rem 1.15rem;
+      margin-bottom: .8rem;
+      font-size: .87rem;
+      line-height: 1.72;
+      color: var(--body);
+      box-shadow: 0 1px 4px rgba(0, 76, 143, .05)
+    }
+
+    .def-block strong {
+      color: var(--blue)
+    }
+
+    .def-block em {
+      color: var(--green-dark);
+      font-weight: 600
+    }
+
+    .def-block.green-accent {
+      border-left-color: var(--green)
+    }
+
+    .def-block.warn-accent {
+      border-left-color: var(--red);
+      background: #fff8f7
+    }
+
+    .def-block.dark-bg {
+      background: var(--blue);
+      border-color: var(--blue);
+      color: #fff
+    }
+
+    .def-block.dark-bg strong {
+      color: var(--green)
+    }
+
+    .struct-pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .72rem;
+      color: var(--blue);
+      background: var(--blue-dim);
+      padding: 2px 7px;
+      border-radius: 3px;
+      display: inline-block;
+      margin-bottom: .4rem
+    }
+
+    .struct-pill.green {
+      color: var(--green-dark);
+      background: var(--green-dim)
+    }
+
+    .struct-pill.red {
+      color: var(--red);
+      background: var(--red-dim)
+    }
+
+    .wrong {
+      color: var(--red);
+      font-size: .82rem
+    }
+
+    .right {
+      color: var(--green-dark);
+      font-size: .82rem
+    }
+
+    .wrong::before {
+      content: "✗  "
+    }
+
+    .right::before {
+      content: "✓  "
+    }
+
+    .ex-list {
+      list-style: none
+    }
+
+    .ex-list li {
+      font-style: italic;
+      font-size: .87rem;
+      color: var(--muted);
+      padding: 6px 0;
+      border-bottom: 1px solid var(--rule);
+      line-height: 1.6
+    }
+
+    .ex-list li:last-child {
+      border-bottom: none
+    }
+
+    .ex-list li strong {
+      color: var(--blue);
+      font-style: normal;
+      font-weight: 700
+    }
+
+    .ex-n {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .6rem;
+      color: var(--green);
+      margin-right: 6px;
+      font-style: normal
+    }
+
+    .mini-tbl {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .82rem;
+      margin-top: .6rem
+    }
+
+    .mini-tbl thead th {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .6rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 400;
+      padding: 7px 10px;
+      border-bottom: 1.5px solid var(--rule);
+      text-align: left
+    }
+
+    .mini-tbl tbody td {
+      padding: 7px 10px;
+      border-bottom: 1px solid var(--rule);
+      color: var(--body)
+    }
+
+    .mini-tbl tbody tr:last-child td {
+      border-bottom: none
+    }
+
+    .mini-tbl tbody tr:hover td {
+      background: var(--blue-dim)
+    }
+
+    .t-blue {
+      color: var(--blue);
+      font-weight: 700;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .78rem
+    }
+
+    .t-green {
+      color: var(--green);
+      font-weight: 700;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .78rem
+    }
+
+    .t-red {
+      color: var(--red);
+      font-weight: 700;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .78rem
+    }
+
+    .triple {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: .7rem
+    }
+
+    /* ── VERB GRID ── */
+    .verb-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: .55rem;
+      margin-top: .5rem
+    }
+
+    .verb-card {
+      background: var(--card);
+      border: 1px solid var(--blue-line);
+      border-top: 3px solid var(--blue);
+      border-radius: 2px;
+      padding: .65rem .85rem;
+      box-shadow: 0 1px 4px rgba(0, 76, 143, .05);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .82rem;
+      color: var(--blue);
+      font-weight: 700
+    }
+
+    .verb-card span {
+      display: block;
+      font-size: .68rem;
+      color: var(--muted);
+      font-weight: 400;
+      margin-top: 2px
+    }
+
+    /* ── TIME CHIPS ── */
+    .time-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .4rem;
+      margin-top: .5rem
+    }
+
+    .time-chip {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .74rem;
+      padding: 5px 12px;
+      background: var(--green-dim);
+      border: 1.5px solid var(--green-line);
+      border-radius: 3px;
+      color: var(--green-dark);
+      font-weight: 700
+    }
+
+    /* ── EXERCISES ── */
+    .exercises-section {
+      margin-top: 4rem;
+      padding-top: 3rem;
+      border-top: 2px solid var(--blue)
+    }
+
+    .section-hdr {
+      display: flex;
+      align-items: baseline;
+      gap: 1.4rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap
+    }
+
+    .section-hdr h2 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+      color: var(--blue)
+    }
+
+    .section-hdr p {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .6rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--muted)
+    }
+
+    #ex-tracker {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background: var(--card);
+      border: 1px solid var(--blue-line);
+      border-left: 3px solid var(--blue);
+      padding: .8rem 1.2rem;
+      margin-bottom: 2rem;
+      border-radius: 2px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .72rem;
+      color: var(--muted)
+    }
+
+    .ex-type-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1.2rem
+    }
+
+    .ex-type-letter {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--blue);
+      color: #fff;
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px
+    }
+
+    .ex-type-title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: 1.1rem;
+      color: var(--blue);
+      margin-bottom: .15rem
+    }
+
+    .ex-type-desc {
+      font-size: .8rem;
+      color: var(--muted);
+      line-height: 1.6
+    }
+
+    .ex-card {
+      background: var(--card);
+      border: 1px solid var(--blue-line);
+      border-radius: 2px;
+      padding: 1.4rem 1.6rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 1px 6px rgba(0, 76, 143, .05)
+    }
+
+    .ex-card-top {
+      display: flex;
+      align-items: baseline;
+      gap: .8rem;
+      margin-bottom: .8rem
+    }
+
+    .ex-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .68rem;
+      font-weight: 700;
+      color: var(--green);
+      background: var(--green-dim);
+      padding: 2px 7px;
+      border-radius: 2px;
+      flex-shrink: 0
+    }
+
+    .ex-instruction {
+      font-size: .83rem;
+      color: var(--muted);
+      line-height: 1.5
+    }
+
+    .ex-sentence {
+      font-family: 'Lora', Georgia, serif;
+      font-style: italic;
+      font-size: .96rem;
+      color: var(--ink);
+      background: var(--page);
+      padding: .7rem 1rem;
+      border-left: 3px solid var(--blue-line);
+      margin-bottom: 1rem;
+      line-height: 1.6
+    }
+
+    .ex-opts-row {
+      display: flex;
+      gap: .5rem;
+      flex-wrap: wrap
+    }
+
+    .ex-opt {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .74rem;
+      padding: 8px 14px;
+      background: var(--page);
+      border: 1.5px solid var(--rule);
+      border-radius: 3px;
+      cursor: pointer;
+      color: var(--body);
+      transition: background .14s, border-color .14s, color .14s
+    }
+
+    .ex-opt:hover:not(:disabled) {
+      background: var(--blue-dim);
+      border-color: rgba(0, 76, 143, .3);
+      color: var(--blue)
+    }
+
+    .ex-opt.ex-correct {
+      background: rgba(0, 168, 89, .1);
+      border-color: var(--green);
+      color: var(--green-dark);
+      font-weight: 700
+    }
+
+    .ex-opt.ex-wrong {
+      background: var(--red-dim);
+      border-color: var(--red);
+      color: var(--red)
+    }
+
+    .ex-opt:disabled {
+      cursor: default
+    }
+
+    .ex-feedback {
+      font-size: .82rem;
+      font-style: italic;
+      padding: 0;
+      margin-top: .7rem;
+      display: none;
+      line-height: 1.5
+    }
+
+    .ex-feedback.ok {
+      color: var(--green-dark);
+      display: block
+    }
+
+    .ex-feedback.err {
+      color: var(--red);
+      display: block
+    }
+
+    .ex-feedback.info {
+      color: var(--blue);
+      display: block
+    }
+
+    /* ── WORD ORDER ── */
+    .wo-target {
+      min-height: 44px;
+      border: 2px dashed var(--blue-line);
+      border-radius: 3px;
+      padding: .5rem .7rem;
+      margin-bottom: .6rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: .4rem;
+      align-items: center;
+      background: var(--blue-dim);
+      transition: border-color .15s
+    }
+
+    .wo-target.wo-correct {
+      border-color: var(--green);
+      border-style: solid;
+      background: rgba(0, 168, 89, .06)
+    }
+
+    .wo-target.wo-wrong {
+      border-color: var(--red);
+      border-style: solid;
+      background: var(--red-dim)
+    }
+
+    .wo-placeholder {
+      font-size: .75rem;
+      color: var(--muted);
+      font-style: italic;
+      font-family: 'Lora', serif
+    }
+
+    .wo-bank {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .4rem;
+      min-height: 36px
+    }
+
+    .wo-chip {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .74rem;
+      padding: 5px 11px;
+      background: var(--card);
+      border: 1.5px solid var(--blue-line);
+      border-radius: 3px;
+      cursor: pointer;
+      color: var(--blue);
+      transition: background .12s, transform .1s;
+      user-select: none
+    }
+
+    .wo-chip:hover {
+      background: var(--blue-dim);
+      transform: translateY(-1px)
+    }
+
+    .wo-chip.wo-placed {
+      background: var(--blue);
+      color: #fff;
+      border-color: var(--blue)
+    }
+
+    .wo-chip.wo-placed:hover {
+      background: var(--blue-mid)
+    }
+
+    .wo-btn-check,
+    .wo-btn-reset {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .68rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: 8px 18px;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      font-weight: 700
+    }
+
+    .wo-btn-check {
+      background: var(--blue);
+      color: #fff
+    }
+
+    .wo-btn-check:hover {
+      background: var(--blue-mid)
+    }
+
+    .wo-btn-reset {
+      background: var(--page);
+      color: var(--muted);
+      border: 1px solid var(--rule)
+    }
+
+    .wo-btn-reset:hover {
+      background: var(--rule)
+    }
+
+    /* ── CLASSIFY ── */
+    .classify-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: .8rem;
+      margin-bottom: .8rem
+    }
+
+    .classify-col {
+      border: 2px dashed var(--blue-line);
+      border-radius: 3px;
+      min-height: 80px;
+      padding: .6rem;
+      background: var(--blue-dim);
+      transition: border-color .15s, background .15s
+    }
+
+    .classify-col.drag-over {
+      border-color: var(--blue);
+      background: rgba(0, 76, 143, .12)
+    }
+
+    .classify-col.col-correct {
+      border-color: var(--green);
+      border-style: solid;
+      background: rgba(0, 168, 89, .07)
+    }
+
+    .classify-col.col-wrong {
+      border-color: var(--red);
+      border-style: solid;
+      background: var(--red-dim)
+    }
+
+    .classify-col-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .62rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: .5rem
+    }
+
+    .classify-drop-zone {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .35rem;
+      min-height: 32px
+    }
+
+    .classify-cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .4rem
+    }
+
+    .cl-chip {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .74rem;
+      padding: 5px 12px;
+      background: var(--card);
+      border: 1.5px solid var(--green-line);
+      border-radius: 3px;
+      cursor: grab;
+      color: var(--green-dark);
+      user-select: none;
+      transition: transform .1s, box-shadow .1s
+    }
+
+    .cl-chip:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, .1)
+    }
+
+    .cl-chip.cl-placed {
+      cursor: pointer;
+      opacity: .85
+    }
+
+    .cl-chip.cl-correct {
+      border-color: var(--green);
+      background: rgba(0, 168, 89, .1);
+      color: var(--green-dark)
+    }
+
+    .cl-chip.cl-wrong {
+      border-color: var(--red);
+      background: var(--red-dim);
+      color: var(--red)
+    }
+
+    /* ── REVIEW ── */
+    .review-row {
+      display: flex;
+      align-items: baseline;
+      gap: .8rem;
+      padding: .55rem .8rem;
+      border-radius: 2px;
+      font-size: .83rem
+    }
+
+    .review-row.rv-ok {
+      background: rgba(0, 168, 89, .07)
+    }
+
+    .review-row.rv-err {
+      background: var(--red-dim)
+    }
+
+    .review-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .65rem;
+      color: var(--muted);
+      flex-shrink: 0;
+      width: 28px
+    }
+
+    .review-icon {
+      flex-shrink: 0
+    }
+
+    .review-text {
+      flex: 1;
+      color: var(--body);
+      line-height: 1.5
+    }
+
+    /* ── QUIZ ── */
+    .quiz-section {
+      margin-top: 3.5rem;
+      background: var(--card);
+      border: 1px solid var(--blue-line);
+      border-top: 4px solid var(--blue);
+      box-shadow: 0 4px 24px rgba(0, 76, 143, .08)
+    }
+
+    .quiz-header {
+      background: var(--blue);
+      padding: 1.6rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap
+    }
+
+    .quiz-header .quiz-eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .6rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: .35rem
+    }
+
+    .quiz-header .quiz-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: #fff
+    }
+
+    .quiz-header .quiz-desc {
+      font-size: .8rem;
+      color: rgba(255, 255, 255, .55);
+      margin-top: .2rem
+    }
+
+    .quiz-body {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 0
+    }
+
+    .quiz-left {
+      padding: 2rem;
+      border-right: 1px solid var(--rule)
+    }
+
+    .quiz-right {
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .8rem
+    }
+
+    .prog-wrap {
+      margin-bottom: 1.6rem
+    }
+
+    .prog-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .6rem;
+      color: var(--muted);
+      letter-spacing: .07em;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 5px
+    }
+
+    .prog-track {
+      height: 3px;
+      background: var(--rule);
+      border-radius: 2px;
+      overflow: hidden
+    }
+
+    .prog-fill {
+      height: 100%;
+      background: var(--green);
+      border-radius: 2px;
+      transition: width .4s ease
+    }
+
+    #q-number {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .6rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: block;
+      margin-bottom: .5rem
+    }
+
+    #q-sentence {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.55;
+      margin-bottom: 1.5rem
+    }
+
+    .quiz-opt {
+      display: block;
+      width: 100%;
+      text-align: left;
+      padding: 11px 15px;
+      margin-bottom: .45rem;
+      background: var(--page);
+      border: 1.5px solid var(--rule);
+      border-radius: 3px;
+      cursor: pointer;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .8rem;
+      color: var(--body);
+      transition: background .14s, border-color .14s, color .14s
+    }
+
+    .quiz-opt:hover:not(:disabled) {
+      background: var(--blue-dim);
+      border-color: rgba(0, 76, 143, .3);
+      color: var(--blue)
+    }
+
+    .quiz-opt.correct {
+      background: rgba(0, 168, 89, .08);
+      border-color: var(--green);
+      color: var(--green-dark);
+      font-weight: 700
+    }
+
+    .quiz-opt.wrong {
+      background: var(--red-dim);
+      border-color: var(--red);
+      color: var(--red)
+    }
+
+    #q-feedback {
+      font-size: .82rem;
+      font-style: italic;
+      padding: 10px 14px;
+      border-radius: 3px;
+      margin-top: .9rem;
+      display: none
+    }
+
+    #q-feedback.ok {
+      background: rgba(0, 168, 89, .08);
+      color: var(--green-dark);
+      border: 1px solid var(--green-line)
+    }
+
+    #q-feedback.err {
+      background: var(--red-dim);
+      color: var(--red);
+      border: 1px solid rgba(192, 57, 43, .25)
+    }
+
+    #next-button {
+      margin-top: 1.1rem;
+      width: 100%;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .7rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      padding: 12px;
+      background: var(--blue);
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: background .15s;
+      display: none
+    }
+
+    #next-button:hover {
+      background: var(--blue-mid)
+    }
+
+    .score-label-sm {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .58rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--muted)
+    }
+
+    #score-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem;
+      font-weight: 900;
+      color: var(--blue)
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--blue);
+      border-top: 3px solid var(--green);
+      padding: 2.8rem clamp(1rem, 5vw, 3rem);
+      text-align: center
+    }
+
+    footer .f-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      font-weight: 900;
+      color: #fff;
+      margin-bottom: .3rem
+    }
+
+    footer .f-sub {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .6rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .4)
+    }
+
+    footer .f-accent {
+      color: var(--green)
+    }
+
+    /* ── FONT SIZE BAR ── */
+    .font-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 200;
+      background: var(--blue-deep);
+      border-top: 2px solid var(--green);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: .6rem;
+      padding: .5rem 1rem;
+      box-shadow: 0 -2px 16px rgba(0, 0, 0, .22)
+    }
+
+    .font-bar-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .58rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .45)
+    }
+
+    .font-btn {
+      height: 28px;
+      min-width: 28px;
+      padding: 0 8px;
+      border-radius: 5px;
+      border: 1.5px solid rgba(255, 255, 255, .22);
+      background: rgba(255, 255, 255, .08);
+      color: #fff;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .78rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .14s, border-color .14s;
+      user-select: none
+    }
+
+    .font-btn:hover {
+      background: rgba(255, 255, 255, .20);
+      border-color: rgba(255, 255, 255, .55)
+    }
+
+    .font-btn.active-size {
+      background: var(--green);
+      border-color: var(--green);
+      color: #fff
+    }
+
+    .font-sep {
+      width: 1px;
+      height: 18px;
+      background: rgba(255, 255, 255, .15)
+    }
+
+    body {
+      padding-bottom: 48px
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 700px) {
+      .hero-inner {
+        grid-template-columns: 1fr
+      }
+
+      .hero-meta {
+        display: none
+      }
+
+      .entry {
+        grid-template-columns: 1fr
+      }
+
+      .entry-num {
+        display: none
+      }
+
+      .quiz-body {
+        grid-template-columns: 1fr
+      }
+
+      .quiz-right {
+        border-top: 1px solid var(--rule)
+      }
+
+      .header-center {
+        display: none
+      }
+
+      .classify-wrap {
+        grid-template-columns: 1fr
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ════ HEADER ════ -->
+  <header>
+    <div class="header-inner">
+      <a href="../index.html">
+        <div class="logo-pill">
+          <img src="../assets/images/logo-uts-2024.png" alt="UTS"
+            onerror="this.parentElement.innerHTML='<span class=\'logo-fallback\'>UTS</span>'">
+        </div>
+      </a>
+      <div class="header-center">
+        <p class="eyebrow">CELE &middot; English Language Program</p>
+        <p class="h-title display">Present Progressive for Future</p>
+      </div>
+      <a href="../index.html">
+        <div class="logo-pill">
+          <img src="../assets/images/logo_cele.png" alt="CELE"
+            onerror="this.parentElement.innerHTML='<span class=\'logo-fallback\'>CELE</span>'">
+        </div>
+      </a>
+    </div>
+  </header>
+
+  <!-- ════ BREADCRUMB ════ -->
+  <nav class="breadcrumb-bar">
+    <div class="breadcrumb-inner">
+      <a href="../index.html">Home</a><span class="bc-sep"> | </span>
+      <a href="../index.html#basic">Basic</a><span class="bc-sep"> | </span>
+      <a href="basic3.html">Basic III</a><span class="bc-sep"> | </span>
+      <span class="bc-current">Present Progressive for Future</span>
+    </div>
+  </nav>
+
+  <!-- ════ HERO ════ -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div>
+        <p class="hero-eyebrow">Grammar Module — Level A2–B1</p>
+        <h1 class="hero-title display">Present Progressive<br>for <em>Future</em></h1>
+        <p class="hero-sub">The Present Progressive is not only for actions happening now — it is also used to talk
+          about
+          future arrangements that have already been planned or agreed upon.</p>
+      </div>
+      <div class="hero-meta">
+        <strong>5</strong>Topics<br>
+        <strong>10</strong>Exercises<br>
+        <strong>10</strong>Quiz items<br>
+        ——<br>
+        Plans &amp; Arrangements<br>
+        Aff · Neg · Q
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ QUICK NAV ════ -->
+  <nav class="quick-nav">
+    <div class="quick-nav-inner">
+      <a class="qn-chip" href="#s1">01 What is an Arrangement?</a>
+      <a class="qn-chip" href="#s2">02 Time Expressions</a>
+      <a class="qn-chip" href="#s3">03 Key Verbs</a>
+      <a class="qn-chip" href="#s4">04 Structures</a>
+      <a class="qn-chip" href="#s5">05 vs Going to</a>
+      <a class="qn-chip" href="#exercises">↓ Exercises</a>
+      <a class="qn-chip" href="#quiz">↓ Quiz</a>
+    </div>
+  </nav>
+
+  <!-- ════ MAIN ════ -->
+  <div class="main-wrap">
+
+    <!-- ── 01 WHAT IS AN ARRANGEMENT ── -->
+    <article id="s1" class="entry">
+      <div class="entry-num display">01</div>
+      <div class="entry-body">
+        <p class="entry-label">Concept</p>
+        <h2 class="entry-title display">What is a Future Arrangement?</h2>
+        <p class="entry-subtitle">An <em>arrangement</em> is a plan that has already been decided — usually involving
+          another person or an external commitment.</p>
+
+        <div class="tabs">
+          <button class="tab active" onclick="switchTab(this,'a1','def')">Definition</button>
+          <button class="tab" onclick="switchTab(this,'a1','key')">Key Idea</button>
+          <button class="tab" onclick="switchTab(this,'a1','ex')">Examples</button>
+        </div>
+
+        <div id="a1-def" class="tab-panel active">
+          <div class="def-block">
+            The <strong>Present Continuous</strong> is used to talk about <em>future arrangements</em>. An arrangement
+            is
+            something that is done to <strong>prepare or plan</strong> for something in the future. It is also an
+            <strong>agreement between two people or groups</strong> about something that will happen.
+          </div>
+          <div class="def-block green-accent">
+            <strong>Formula:</strong> Subject + <em>am / is / are</em> + verb<em>-ing</em> + complement + <em>time
+              expression</em><br>
+            <span style="font-style:italic;color:var(--muted);font-size:.85rem">
+              "I <strong>am having</strong> a party <strong>tonight</strong>." &nbsp;·&nbsp;
+              "She <strong>is starting</strong> an English course <strong>next summer</strong>."
+            </span>
+          </div>
+          <div class="def-block warn-accent">
+            <strong>Important:</strong> The arrangement must already be <em>fixed or confirmed</em>. If you are just
+            thinking about something, use <em>going to</em> or <em>will</em> instead.
+          </div>
+        </div>
+
+        <div id="a1-key" class="tab-panel">
+          <div class="def-block dark-bg" style="text-align:center;padding:1.3rem">
+            <span
+              style="font-family:'JetBrains Mono',monospace;font-size:.62rem;color:rgba(255,255,255,.45);letter-spacing:.14em;text-transform:uppercase">The
+              key question to ask yourself</span><br>
+            <span
+              style="font-family:'Playfair Display',serif;font-size:1.3rem;color:#fff;font-weight:700;line-height:1.5">
+              "Have I already <span style="color:var(--green)">arranged</span> this<br>with someone else?"
+            </span>
+          </div>
+          <div class="def-block" style="margin-top:.8rem">
+            <strong>Yes → use Present Progressive for future</strong><br>
+            <span style="font-style:italic;color:var(--muted);font-size:.85rem">"I <em>am meeting</em> Ana tomorrow."
+              (We already agreed on a time and place.)</span>
+          </div>
+          <div class="def-block warn-accent">
+            <strong>No → use will or going to</strong><br>
+            <span style="font-style:italic;color:var(--muted);font-size:.85rem">"I think I <em>will call</em> her
+              later." (No specific arrangement yet.)</span>
+          </div>
+        </div>
+
+        <div id="a1-ex" class="tab-panel">
+          <ul class="ex-list">
+            <li><span class="ex-n">01</span>"I<strong>'m having</strong> a party tonight. (Some friends have already
+              been invited.)"</li>
+            <li><span class="ex-n">02</span>"Sue <strong>is starting</strong> an English course next summer. (She has
+              already registered.)"</li>
+            <li><span class="ex-n">03</span>"We <strong>are flying</strong> to Toronto next week. (Tickets are booked.)"
+            </li>
+            <li><span class="ex-n">04</span>"He <strong>is meeting</strong> the doctor on Friday. (Appointment
+              confirmed.)"</li>
+            <li><span class="ex-n">05</span>"They <strong>are arriving</strong> at 8 PM. (We already know their flight
+              time.)"</li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <!-- ── 02 TIME EXPRESSIONS ── -->
+    <article id="s2" class="entry">
+      <div class="entry-num display">02</div>
+      <div class="entry-body">
+        <p class="entry-label">Time Markers</p>
+        <h2 class="entry-title display">Future Time Expressions</h2>
+        <p class="entry-subtitle">These expressions signal that the Present Progressive is being used for a future plan,
+          not a current action.</p>
+
+        <div class="tabs">
+          <button class="tab active" onclick="switchTab(this,'t2','list')">Full List</button>
+          <button class="tab" onclick="switchTab(this,'t2','contrast')">Now vs Future</button>
+          <button class="tab" onclick="switchTab(this,'t2','ex')">Examples</button>
+        </div>
+
+        <div id="t2-list" class="tab-panel active">
+          <div class="def-block" style="margin-bottom:.8rem">
+            <strong>Common future time expressions used with Present Progressive:</strong>
+          </div>
+          <div class="time-chips">
+            <span class="time-chip">tonight</span>
+            <span class="time-chip">tomorrow</span>
+            <span class="time-chip">this weekend</span>
+            <span class="time-chip">next Monday</span>
+            <span class="time-chip">next Friday</span>
+            <span class="time-chip">next Saturday</span>
+            <span class="time-chip">next week</span>
+            <span class="time-chip">next weekend</span>
+            <span class="time-chip">next year</span>
+            <span class="time-chip">next summer</span>
+            <span class="time-chip">on Saturday</span>
+            <span class="time-chip">in the morning</span>
+          </div>
+          <div class="def-block warn-accent" style="margin-top:.8rem">
+            <strong>Key contrast:</strong> Without a future time expression, the same sentence describes what is
+            happening <em>right now</em>.<br>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:.78rem">
+              "She <strong>is cooking</strong>." → happening NOW<br>
+              "She <strong>is cooking</strong> dinner tomorrow." → future PLAN
+            </span>
+          </div>
+        </div>
+
+        <div id="t2-contrast" class="tab-panel">
+          <table class="mini-tbl">
+            <thead>
+              <tr>
+                <th>Sentence</th>
+                <th>Meaning</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="font-style:italic">"I am leaving."</td>
+                <td>Happening <strong>right now</strong></td>
+              </tr>
+              <tr>
+                <td style="font-style:italic">"I am leaving <strong>tonight</strong>."</td>
+                <td>Future <strong>arrangement</strong></td>
+              </tr>
+              <tr>
+                <td style="font-style:italic">"She is working."</td>
+                <td>Happening <strong>at this moment</strong></td>
+              </tr>
+              <tr>
+                <td style="font-style:italic">"She is working <strong>next week</strong>."</td>
+                <td>Future <strong>plan</strong></td>
+              </tr>
+              <tr>
+                <td style="font-style:italic">"They are flying."</td>
+                <td>In progress <strong>now</strong></td>
+              </tr>
+              <tr>
+                <td style="font-style:italic">"They are flying <strong>on Friday</strong>."</td>
+                <td>Booked <strong>arrangement</strong></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div id="t2-ex" class="tab-panel">
+          <ul class="ex-list">
+            <li><span class="ex-n">01</span>"I<strong>'m visiting</strong> my grandmother <strong>this
+                weekend</strong>."</li>
+            <li><span class="ex-n">02</span>"They <strong>are leaving</strong> for Spain <strong>next Monday</strong>."
+            </li>
+            <li><span class="ex-n">03</span>"He <strong>is arriving</strong> <strong>tomorrow morning</strong>."</li>
+            <li><span class="ex-n">04</span>"We <strong>are going out</strong> <strong>tonight</strong> — dinner is
+              booked."</li>
+            <li><span class="ex-n">05</span>"She <strong>is coming</strong> to the meeting <strong>next
+                Friday</strong>."</li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <!-- ── 03 KEY VERBS ── -->
+    <article id="s3" class="entry">
+      <div class="entry-num display">03</div>
+      <div class="entry-body">
+        <p class="entry-label">Vocabulary</p>
+        <h2 class="entry-title display">Verbs Commonly Used for Future Plans</h2>
+        <p class="entry-subtitle">A small set of verbs is especially natural when talking about pre-arranged future
+          events.</p>
+
+        <div class="tabs">
+          <button class="tab active" onclick="switchTab(this,'v3','grid')">Verb List</button>
+          <button class="tab" onclick="switchTab(this,'v3','ex')">In Sentences</button>
+        </div>
+
+        <div id="v3-grid" class="tab-panel active">
+          <div class="def-block green-accent" style="margin-bottom:.8rem">
+            These verbs commonly describe movement, meetings, or events that require prior planning or coordination with
+            others.
+          </div>
+          <div class="verb-grid">
+            <div class="verb-card">go <span>ir</span></div>
+            <div class="verb-card">come <span>venir</span></div>
+            <div class="verb-card">leave <span>salir / irse</span></div>
+            <div class="verb-card">arrive <span>llegar</span></div>
+            <div class="verb-card">fly <span>volar</span></div>
+            <div class="verb-card">have <span>tener (evento)</span></div>
+            <div class="verb-card">start <span>empezar</span></div>
+            <div class="verb-card">go out <span>salir</span></div>
+            <div class="verb-card">visit <span>visitar</span></div>
+            <div class="verb-card">meet <span>reunirse</span></div>
+            <div class="verb-card">stay <span>quedarse</span></div>
+            <div class="verb-card">see <span>ver / reunirse</span></div>
+          </div>
+        </div>
+
+        <div id="v3-ex" class="tab-panel">
+          <ul class="ex-list">
+            <li><span class="ex-n">01</span>"Jamie and his family <strong>are flying</strong> to Toronto next week."
+            </li>
+            <li><span class="ex-n">02</span>"I<strong>'m meeting</strong> my professor tomorrow at 10."</li>
+            <li><span class="ex-n">03</span>"She <strong>is leaving</strong> for Mexico City on Friday."</li>
+            <li><span class="ex-n">04</span>"We <strong>are staying</strong> at a hotel next weekend."</li>
+            <li><span class="ex-n">05</span>"They <strong>are coming</strong> to visit us next summer."</li>
+            <li><span class="ex-n">06</span>"He <strong>is starting</strong> a new job next Monday."</li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <!-- ── 04 STRUCTURES ── -->
+    <article id="s4" class="entry">
+      <div class="entry-num display">04</div>
+      <div class="entry-body">
+        <p class="entry-label">Grammar Structures</p>
+        <h2 class="entry-title display">Affirmative, Negative &amp; Questions</h2>
+        <p class="entry-subtitle">The same Present Progressive structures apply — the only difference is the <em>future
+            time expression</em> that anchors the sentence.</p>
+
+        <div class="tabs">
+          <button class="tab active" onclick="switchTab(this,'s4','aff')">Affirmative</button>
+          <button class="tab" onclick="switchTab(this,'s4','neg')">Negative</button>
+          <button class="tab" onclick="switchTab(this,'s4','q')">Questions</button>
+          <button class="tab" onclick="switchTab(this,'s4','all')">Full Summary</button>
+        </div>
+
+        <div id="s4-aff" class="tab-panel active">
+          <div class="def-block dark-bg" style="text-align:center;padding:1.3rem">
+            <span
+              style="font-family:'JetBrains Mono',monospace;font-size:.62rem;color:rgba(255,255,255,.45);letter-spacing:.14em;text-transform:uppercase">Affirmative
+              Formula</span><br>
+            <span style="font-family:'Playfair Display',serif;font-size:1.3rem;color:#fff;font-weight:700">
+              Subject + <span style="color:var(--green)">am/is/are</span> + verb<span
+                style="color:var(--green)">-ing</span> + complement + <span style="color:#ffd700">time expression</span>
+            </span>
+          </div>
+          <ul class="ex-list" style="margin-top:.8rem">
+            <li><span class="ex-n">01</span>"I<strong>'m staying</strong> with Susan <strong>this weekend</strong>."
+            </li>
+            <li><span class="ex-n">02</span>"Jamie and his family <strong>are flying</strong> to Toronto <strong>next
+                week</strong>."</li>
+            <li><span class="ex-n">03</span>"She <strong>is starting</strong> an English course <strong>next
+                summer</strong>."</li>
+          </ul>
+        </div>
+
+        <div id="s4-neg" class="tab-panel">
+          <div class="def-block dark-bg" style="text-align:center;padding:1.3rem">
+            <span
+              style="font-family:'JetBrains Mono',monospace;font-size:.62rem;color:rgba(255,255,255,.45);letter-spacing:.14em;text-transform:uppercase">Negative
+              Formula</span><br>
+            <span style="font-family:'Playfair Display',serif;font-size:1.3rem;color:#fff;font-weight:700">
+              Subject + <span style="color:#ffd700">am/is/are</span> + <span
+                style="color:var(--red);font-style:italic">not</span> + verb<span style="color:var(--green)">-ing</span>
+              + complement + <span style="color:#ffd700">time expression</span>
+            </span>
+          </div>
+          <ul class="ex-list" style="margin-top:.8rem">
+            <li><span class="ex-n">01</span>"She <strong>is not doing</strong> her homework after dinner." (plan
+              changed)</li>
+            <li><span class="ex-n">02</span>"Julie <strong>is not leaving</strong> Toronto tomorrow." (cancelled)</li>
+            <li><span class="ex-n">03</span>"We <strong>aren't meeting</strong> on Monday — we moved it to Wednesday."
+            </li>
+          </ul>
+          <div class="def-block warn-accent" style="margin-top:.8rem">
+            The negative often implies a <strong>change of plans</strong> or cancellation of something that was
+            arranged.
+          </div>
+        </div>
+
+        <div id="s4-q" class="tab-panel">
+          <div class="def-block dark-bg" style="text-align:center;padding:1.3rem">
+            <span
+              style="font-family:'JetBrains Mono',monospace;font-size:.62rem;color:rgba(255,255,255,.45);letter-spacing:.14em;text-transform:uppercase">Question
+              Formula</span><br>
+            <span style="font-family:'Playfair Display',serif;font-size:1.3rem;color:#fff;font-weight:700">
+              <span style="color:var(--green)">Am/Is/Are</span> + Subject + verb<span
+                style="color:var(--green)">-ing</span> + complement + <span style="color:#ffd700">time expression</span>
+              + ?
+            </span>
+          </div>
+          <ul class="ex-list" style="margin-top:.8rem">
+            <li><span class="ex-n">01</span>"<strong>Are</strong> Jamie and his family <strong>flying</strong> to
+              Toronto next week?"</li>
+            <li><span class="ex-n">02</span>"<strong>What are</strong> we <strong>having</strong> for dinner tonight?"
+            </li>
+            <li><span class="ex-n">03</span>"<strong>Is</strong> she <strong>coming</strong> to the party on Saturday?"
+            </li>
+            <li><span class="ex-n">04</span>"<strong>Where are</strong> you <strong>going</strong> next weekend?"</li>
+          </ul>
+        </div>
+
+        <div id="s4-all" class="tab-panel">
+          <table class="mini-tbl">
+            <thead>
+              <tr>
+                <th>Form</th>
+                <th>Structure</th>
+                <th>Example</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="t-green">✅ Affirmative</td>
+                <td>Subject + <em>is/are</em> + verb-ing + time</td>
+                <td style="font-style:italic;color:var(--muted)">She is leaving on Friday.</td>
+              </tr>
+              <tr>
+                <td class="t-red">❌ Negative</td>
+                <td>Subject + <em>isn't/aren't</em> + verb-ing + time</td>
+                <td style="font-style:italic;color:var(--muted)">She isn't leaving on Friday.</td>
+              </tr>
+              <tr>
+                <td class="t-blue">❓ Yes/No Q.</td>
+                <td><em>Is/Are</em> + subject + verb-ing + time?</td>
+                <td style="font-style:italic;color:var(--muted)">Is she leaving on Friday?</td>
+              </tr>
+              <tr>
+                <td class="t-blue">❓ Wh- Q.</td>
+                <td>Wh- + <em>is/are</em> + subject + verb-ing?</td>
+                <td style="font-style:italic;color:var(--muted)">When is she leaving?</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </article>
+
+    <!-- ── 05 VS GOING TO ── -->
+    <article id="s5" class="entry">
+      <div class="entry-num display">05</div>
+      <div class="entry-body">
+        <p class="entry-label">Comparison</p>
+        <h2 class="entry-title display">Present Progressive vs Going To</h2>
+        <p class="entry-subtitle">Both express future intentions — but there is a key difference in how
+          <em>confirmed</em> or <em>specific</em> the plan is.
+        </p>
+
+        <div class="tabs">
+          <button class="tab active" onclick="switchTab(this,'c5','diff')">Key Difference</button>
+          <button class="tab" onclick="switchTab(this,'c5','tbl')">Comparison Table</button>
+          <button class="tab" onclick="switchTab(this,'c5','mistakes')">Common Mistakes</button>
+        </div>
+
+        <div id="c5-diff" class="tab-panel active">
+          <div class="triple">
+            <div class="def-block" style="margin-bottom:0">
+              <span class="struct-pill green">Present Progressive</span><br>
+              <strong>Fixed arrangement</strong> — confirmed with another person or booked in advance.<br>
+              <span style="font-style:italic;color:var(--muted);font-size:.84rem">"I<strong>'m meeting</strong> Ana at
+                6." (She knows, we agreed.)</span>
+            </div>
+            <div class="def-block" style="margin-bottom:0">
+              <span class="struct-pill">Going to</span><br>
+              <strong>Intention or plan</strong> — decided but not necessarily arranged with others.<br>
+              <span style="font-style:italic;color:var(--muted);font-size:.84rem">"I<strong>'m going to call</strong>
+                her later." (My intention — not confirmed with her yet.)</span>
+            </div>
+          </div>
+        </div>
+
+        <div id="c5-tbl" class="tab-panel">
+          <table class="mini-tbl">
+            <thead>
+              <tr>
+                <th>Feature</th>
+                <th>Present Progressive</th>
+                <th>Going to</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Type of future</td>
+                <td>Fixed arrangement</td>
+                <td>Intention / plan</td>
+              </tr>
+              <tr>
+                <td>Other person involved?</td>
+                <td>Usually yes</td>
+                <td>Not necessarily</td>
+              </tr>
+              <tr>
+                <td>Level of certainty</td>
+                <td>Very high — already set</td>
+                <td>High — decided</td>
+              </tr>
+              <tr>
+                <td>Typical signal</td>
+                <td>tonight, next Monday…</td>
+                <td>soon, later, one day…</td>
+              </tr>
+              <tr>
+                <td>Example</td>
+                <td style="font-style:italic">"We <strong>are having</strong> dinner with the Smiths on Saturday."</td>
+                <td style="font-style:italic">"We<strong>'re going to have</strong> a party someday."</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div id="c5-mistakes" class="tab-panel">
+          <div class="def-block warn-accent" style="margin-bottom:.7rem">
+            <strong>Mistake 1 — Using Present Progressive for vague intentions:</strong><br>
+            <span class="wrong">I am visiting Paris one day.</span><br>
+            <span class="right">I<strong>'m going to visit</strong> Paris one day. (no specific arrangement)</span>
+          </div>
+          <div class="def-block warn-accent" style="margin-bottom:.7rem">
+            <strong>Mistake 2 — Using <em>will</em> for confirmed arrangements:</strong><br>
+            <span class="wrong">I will meet you at the airport tonight. (sounds like a decision made just
+              now)</span><br>
+            <span class="right">I<strong>'m meeting</strong> you at the airport tonight. (already arranged)</span>
+          </div>
+          <div class="def-block warn-accent">
+            <strong>Mistake 3 — Forgetting the time expression:</strong><br>
+            <span class="wrong">We are flying to Canada. (ambiguous — now or future?)</span><br>
+            <span class="right">We <strong>are flying</strong> to Canada <strong>next Thursday</strong>. (clear future
+              plan)</span>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ════ EXERCISES ════ -->
+    <section id="exercises" class="exercises-section">
+      <div class="section-hdr">
+        <h2 class="display">Practice Exercises</h2>
+        <p>10 exercises &middot; 3 activity types &middot; self-graded</p>
+      </div>
+
+      <div id="ex-tracker">
+        <span>Progress:</span>
+        <div style="flex:1;height:4px;background:var(--rule);border-radius:2px;overflow:hidden">
+          <div id="ex-prog-fill"
+            style="height:100%;background:var(--green);width:0%;transition:width .4s ease;border-radius:2px"></div>
+        </div>
+        <span id="ex-counter" style="color:var(--blue);font-weight:700">0 / 10</span>
+        <span id="ex-score-badge" style="color:var(--green);font-weight:700"></span>
+      </div>
+
+      <!-- § A: SPOT THE ERROR -->
+      <div class="ex-type-header">
+        <span class="ex-type-letter">A</span>
+        <div>
+          <p class="ex-type-title">Spot the Error</p>
+          <p class="ex-type-desc">Each sentence has one mistake related to Present Progressive for Future. Choose the
+            option that correctly identifies and fixes the error.</p>
+        </div>
+      </div>
+
+      <div class="ex-card" id="ex1">
+        <div class="ex-card-top"><span class="ex-num">01</span>
+          <p class="ex-instruction">One option identifies the real error and its fix.</p>
+        </div>
+        <p class="ex-sentence">"Jamie and his family are fly to Toronto next week."</p>
+        <div class="ex-opts-row" id="ex1-opts">
+          <button class="ex-opt"
+            onclick="gradeSpot(this,'ex1','fly → flying','In Present Progressive you need <strong>verb + -ing</strong>. \'fly\' must become <strong>\'flying\'</strong>.')">
+            fly → flying
+          </button>
+          <button class="ex-opt" onclick="gradeSpot(this,'ex1','__wrong__','')">are → is</button>
+          <button class="ex-opt" onclick="gradeSpot(this,'ex1','__wrong__','')">next week → last week</button>
+        </div>
+        <div class="ex-feedback" id="ex1-fb"></div>
+      </div>
+
+      <div class="ex-card" id="ex2">
+        <div class="ex-card-top"><span class="ex-num">02</span>
+          <p class="ex-instruction">One option identifies the real error and its fix.</p>
+        </div>
+        <p class="ex-sentence">"She is not do her homework after dinner tonight."</p>
+        <div class="ex-opts-row" id="ex2-opts">
+          <button class="ex-opt" onclick="gradeSpot(this,'ex2','__wrong__','')">is not → does not</button>
+          <button class="ex-opt"
+            onclick="gradeSpot(this,'ex2','do → doing','The negative of Present Progressive is <strong>is not + verb-ing</strong>. \'do\' must become <strong>\'doing\'</strong>.')">
+            do → doing
+          </button>
+          <button class="ex-opt" onclick="gradeSpot(this,'ex2','__wrong__','')">after dinner → before dinner</button>
+        </div>
+        <div class="ex-feedback" id="ex2-fb"></div>
+      </div>
+
+      <div class="ex-card" id="ex3">
+        <div class="ex-card-top"><span class="ex-num">03</span>
+          <p class="ex-instruction">One option identifies the real error and its fix.</p>
+        </div>
+        <p class="ex-sentence">"Are Jamie and his family flying to Toronto last week?"</p>
+        <div class="ex-opts-row" id="ex3-opts">
+          <button class="ex-opt" onclick="gradeSpot(this,'ex3','__wrong__','')">Are → Is</button>
+          <button class="ex-opt" onclick="gradeSpot(this,'ex3','__wrong__','')">flying → fly</button>
+          <button class="ex-opt"
+            onclick="gradeSpot(this,'ex3','last week → next week','The Present Progressive for future requires a <strong>future time expression</strong>. \'last week\' is past — it should be <strong>\'next week\'</strong>.')">
+            last week → next week
+          </button>
+        </div>
+        <div class="ex-feedback" id="ex3-fb"></div>
+      </div>
+
+      <!-- § B: WORD ORDER -->
+      <div class="ex-type-header" style="margin-top:2.5rem">
+        <span class="ex-type-letter" style="background:var(--green)">B</span>
+        <div>
+          <p class="ex-type-title">Word Order</p>
+          <p class="ex-type-desc">Click the word chips to build a correct Present Progressive for Future sentence. Click
+            a placed chip to return it to the bank.</p>
+        </div>
+      </div>
+
+      <div class="ex-card" id="ex4">
+        <div class="ex-card-top"><span class="ex-num">04</span>
+          <p class="ex-instruction">Build the sentence in the correct order:</p>
+        </div>
+        <div class="wo-target" id="ex4-target"><span class="wo-placeholder">Click words below to build the
+            sentence…</span></div>
+        <div class="wo-bank" id="ex4-bank"></div>
+        <div style="display:flex;gap:.5rem;margin-top:.8rem">
+          <button class="wo-btn-check" onclick="checkWordOrder('ex4')">Check ✓</button>
+          <button class="wo-btn-reset" onclick="resetWordOrder('ex4')">Reset ↺</button>
+        </div>
+        <div class="ex-feedback" id="ex4-fb"></div>
+      </div>
+
+      <div class="ex-card" id="ex5">
+        <div class="ex-card-top"><span class="ex-num">05</span>
+          <p class="ex-instruction">Build the sentence in the correct order:</p>
+        </div>
+        <div class="wo-target" id="ex5-target"><span class="wo-placeholder">Click words below to build the
+            sentence…</span></div>
+        <div class="wo-bank" id="ex5-bank"></div>
+        <div style="display:flex;gap:.5rem;margin-top:.8rem">
+          <button class="wo-btn-check" onclick="checkWordOrder('ex5')">Check ✓</button>
+          <button class="wo-btn-reset" onclick="resetWordOrder('ex5')">Reset ↺</button>
+        </div>
+        <div class="ex-feedback" id="ex5-fb"></div>
+      </div>
+
+      <div class="ex-card" id="ex6">
+        <div class="ex-card-top"><span class="ex-num">06</span>
+          <p class="ex-instruction">Build the sentence in the correct order:</p>
+        </div>
+        <div class="wo-target" id="ex6-target"><span class="wo-placeholder">Click words below to build the
+            sentence…</span></div>
+        <div class="wo-bank" id="ex6-bank"></div>
+        <div style="display:flex;gap:.5rem;margin-top:.8rem">
+          <button class="wo-btn-check" onclick="checkWordOrder('ex6')">Check ✓</button>
+          <button class="wo-btn-reset" onclick="resetWordOrder('ex6')">Reset ↺</button>
+        </div>
+        <div class="ex-feedback" id="ex6-fb"></div>
+      </div>
+
+      <!-- § C: CLASSIFY -->
+      <div class="ex-type-header" style="margin-top:2.5rem">
+        <span class="ex-type-letter" style="background:var(--blue-mid)">C</span>
+        <div>
+          <p class="ex-type-title">Classify</p>
+          <p class="ex-type-desc">Drag each card into the correct category. On mobile, tap to select then tap a column
+            to place it.</p>
+        </div>
+      </div>
+
+      <!-- C7: Arrangement vs Intention -->
+      <div class="ex-card" id="ex7">
+        <div class="ex-card-top"><span class="ex-num">07</span>
+          <p class="ex-instruction">Is each sentence an Arrangement (Present Progressive) or an Intention (going to)?
+          </p>
+        </div>
+        <div class="classify-wrap" id="ex7-wrap">
+          <div class="classify-col" id="ex7-arr" ondragover="event.preventDefault()"
+            ondrop="dropCard(event,'ex7-arr','ex7')">
+            <p class="classify-col-label">📅 Arrangement (Prog.)</p>
+            <div class="classify-drop-zone" id="ex7-arr-zone"></div>
+          </div>
+          <div class="classify-col" id="ex7-int" ondragover="event.preventDefault()"
+            ondrop="dropCard(event,'ex7-int','ex7')">
+            <p class="classify-col-label">💭 Intention (going to)</p>
+            <div class="classify-drop-zone" id="ex7-int-zone"></div>
+          </div>
+        </div>
+        <div class="classify-cards" id="ex7-cards"></div>
+        <div style="display:flex;gap:.5rem;margin-top:.8rem">
+          <button class="wo-btn-check" onclick="checkClassify('ex7')">Check ✓</button>
+          <button class="wo-btn-reset" onclick="resetClassify('ex7')">Reset ↺</button>
+        </div>
+        <div class="ex-feedback" id="ex7-fb"></div>
+      </div>
+
+      <!-- C8: Aff / Neg / Question -->
+      <div class="ex-card" id="ex8">
+        <div class="ex-card-top"><span class="ex-num">08</span>
+          <p class="ex-instruction">Classify each sentence: Affirmative, Negative, or Question?</p>
+        </div>
+        <div class="classify-wrap" id="ex8-wrap" style="grid-template-columns:1fr 1fr 1fr">
+          <div class="classify-col" id="ex8-aff" ondragover="event.preventDefault()"
+            ondrop="dropCard(event,'ex8-aff','ex8')">
+            <p class="classify-col-label">✅ Affirmative</p>
+            <div class="classify-drop-zone" id="ex8-aff-zone"></div>
+          </div>
+          <div class="classify-col" id="ex8-neg" ondragover="event.preventDefault()"
+            ondrop="dropCard(event,'ex8-neg','ex8')">
+            <p class="classify-col-label">❌ Negative</p>
+            <div class="classify-drop-zone" id="ex8-neg-zone"></div>
+          </div>
+          <div class="classify-col" id="ex8-q" ondragover="event.preventDefault()"
+            ondrop="dropCard(event,'ex8-q','ex8')">
+            <p class="classify-col-label">❓ Question</p>
+            <div class="classify-drop-zone" id="ex8-q-zone"></div>
+          </div>
+        </div>
+        <div class="classify-cards" id="ex8-cards"></div>
+        <div style="display:flex;gap:.5rem;margin-top:.8rem">
+          <button class="wo-btn-check" onclick="checkClassify('ex8')">Check ✓</button>
+          <button class="wo-btn-reset" onclick="resetClassify('ex8')">Reset ↺</button>
+        </div>
+        <div class="ex-feedback" id="ex8-fb"></div>
+      </div>
+
+      <!-- C9: future time expression or not -->
+      <div class="ex-card" id="ex9">
+        <div class="ex-card-top"><span class="ex-num">09</span>
+          <p class="ex-instruction">Does the sentence describe something happening NOW or a FUTURE plan?</p>
+        </div>
+        <div class="classify-wrap" id="ex9-wrap">
+          <div class="classify-col" id="ex9-now" ondragover="event.preventDefault()"
+            ondrop="dropCard(event,'ex9-now','ex9')">
+            <p class="classify-col-label">⚡ Happening NOW</p>
+            <div class="classify-drop-zone" id="ex9-now-zone"></div>
+          </div>
+          <div class="classify-col" id="ex9-fut" ondragover="event.preventDefault()"
+            ondrop="dropCard(event,'ex9-fut','ex9')">
+            <p class="classify-col-label">📅 Future PLAN</p>
+            <div class="classify-drop-zone" id="ex9-fut-zone"></div>
+          </div>
+        </div>
+        <div class="classify-cards" id="ex9-cards"></div>
+        <div style="display:flex;gap:.5rem;margin-top:.8rem">
+          <button class="wo-btn-check" onclick="checkClassify('ex9')">Check ✓</button>
+          <button class="wo-btn-reset" onclick="resetClassify('ex9')">Reset ↺</button>
+        </div>
+        <div class="ex-feedback" id="ex9-fb"></div>
+      </div>
+
+      <!-- C10: correct / incorrect -->
+      <div class="ex-card" id="ex10">
+        <div class="ex-card-top"><span class="ex-num">10</span>
+          <p class="ex-instruction">Is the sentence grammatically correct or incorrect?</p>
+        </div>
+        <div class="classify-wrap" id="ex10-wrap">
+          <div class="classify-col" id="ex10-ok" ondragover="event.preventDefault()"
+            ondrop="dropCard(event,'ex10-ok','ex10')">
+            <p class="classify-col-label">✅ Correct</p>
+            <div class="classify-drop-zone" id="ex10-ok-zone"></div>
+          </div>
+          <div class="classify-col" id="ex10-err" ondragover="event.preventDefault()"
+            ondrop="dropCard(event,'ex10-err','ex10')">
+            <p class="classify-col-label">❌ Incorrect</p>
+            <div class="classify-drop-zone" id="ex10-err-zone"></div>
+          </div>
+        </div>
+        <div class="classify-cards" id="ex10-cards"></div>
+        <div style="display:flex;gap:.5rem;margin-top:.8rem">
+          <button class="wo-btn-check" onclick="checkClassify('ex10')">Check ✓</button>
+          <button class="wo-btn-reset" onclick="resetClassify('ex10')">Reset ↺</button>
+        </div>
+        <div class="ex-feedback" id="ex10-fb"></div>
+      </div>
+
+      <!-- REVIEW PANEL -->
+      <div id="ex-review"
+        style="display:none;margin-top:2.5rem;background:var(--card);border:1px solid var(--blue-line);border-top:4px solid var(--blue)">
+        <div style="background:var(--blue);padding:1.4rem 1.8rem">
+          <p
+            style="font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--green);margin-bottom:.3rem">
+            — Exercises Complete</p>
+          <p class="display" style="font-size:1.6rem;font-weight:900;color:#fff" id="review-title">Results</p>
+        </div>
+        <div style="padding:1.8rem">
+          <p
+            style="font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--muted);margin-bottom:1.2rem;letter-spacing:.06em;text-transform:uppercase">
+            Answer Key</p>
+          <div id="review-list" style="display:flex;flex-direction:column;gap:.5rem"></div>
+          <button onclick="location.reload()"
+            style="margin-top:1.8rem;font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;padding:12px 32px;background:var(--blue);color:#fff;border:none;border-radius:3px;cursor:pointer;font-weight:700">Try
+            Again ↺</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════ QUIZ ════ -->
+    <section id="quiz" class="quiz-section" style="margin-top:3.5rem">
+      <div class="quiz-header">
+        <div>
+          <p class="quiz-eyebrow">— Interactive Practice</p>
+          <p class="quiz-title display">Self-Evaluation Quiz</p>
+          <p class="quiz-desc">Choose the correct answer. Ten questions. Immediate feedback.</p>
+        </div>
+      </div>
+      <div class="quiz-body">
+        <div class="quiz-left">
+          <div class="prog-wrap">
+            <div class="prog-label">
+              <span id="q-number">Question 1 of 10</span>
+              <span id="prog-pct">10%</span>
+            </div>
+            <div class="prog-track">
+              <div class="prog-fill" id="prog-fill" style="width:10%"></div>
+            </div>
+          </div>
+          <p id="q-sentence">Loading…</p>
+          <div id="options-container"></div>
+          <div id="q-feedback"></div>
+          <button id="next-button">Continue →</button>
+        </div>
+        <div class="quiz-right">
+          <p class="score-label-sm">Your Score</p>
+          <canvas id="progressChart" width="180" height="180"></canvas>
+          <span id="score-text">0 / 10</span>
+          <p class="score-label-sm">Correct Answers</p>
+        </div>
+      </div>
+    </section>
+
+  </div><!-- /main-wrap -->
+
+  <!-- ════ FOOTER ════ -->
+  <footer>
+    <p class="f-logo display">Universidad Tecnológica de Salamanca</p>
+    <p class="f-sub">CELE &mdash; Centro de Lenguas <span class="f-accent">&middot;</span> English Language Program
+      <span class="f-accent">&middot;</span> &copy; 2025
+    </p>
+  </footer>
+
+  <!-- ════ FONT BAR ════ -->
+  <div class="font-bar">
+    <span class="font-bar-label">Text size</span>
+    <div class="font-sep"></div>
+    <button class="font-btn" id="fb-sm" onclick="setSize('sm')" title="Small">A<sup
+        style="font-size:.55em">−</sup></button>
+    <button class="font-btn active-size" id="fb-md" onclick="setSize('md')" title="Normal">A</button>
+    <button class="font-btn" id="fb-lg" onclick="setSize('lg')" title="Large">A<sup
+        style="font-size:.55em">+</sup></button>
+  </div>
+
+  <!-- ════ SCRIPTS ════ -->
+  <script>
+    /* ── Font size ── */
+    (function () {
+      var sizes = { sm: 14, md: 16, lg: 19 };
+      var saved = localStorage.getItem('cele-font') || 'md';
+      function apply(key) {
+        document.documentElement.style.fontSize = sizes[key] + 'px';
+        localStorage.setItem('cele-font', key);
+        ['sm', 'md', 'lg'].forEach(function (k) {
+          var b = document.getElementById('fb-' + k);
+          if (b) b.classList.toggle('active-size', k === key);
+        });
+      }
+      window.setSize = apply;
+      apply(saved);
+    })();
+
+    /* ── Tab switch ── */
+    function switchTab(btn, prefix, id) {
+      btn.closest('.tabs').querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      btn.classList.add('active');
+      const scope = btn.closest('article') || btn.closest('section');
+      scope.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      document.getElementById(prefix + '-' + id).classList.add('active');
+    }
+
+    /* ── Scroll reveal ── */
+    const io = new IntersectionObserver(
+      entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('show'); }),
+      { threshold: 0.06 }
+    );
+    document.querySelectorAll('.entry').forEach(el => io.observe(el));
+
+    /* ══ EXERCISE ENGINE ══ */
+    const EX_TOTAL = 10;
+    let exDone = 0, exCorrect = 0;
+    const exResults = {};
+
+    function markExercise(id, correct, label, answer) {
+      if (exResults[id]) return;
+      exResults[id] = { correct, label, answer };
+      exDone++; if (correct) exCorrect++;
+      document.getElementById('ex-counter').textContent = exDone + ' / ' + EX_TOTAL;
+      document.getElementById('ex-score-badge').textContent = exDone > 0 ? '✓ ' + exCorrect : '';
+      document.getElementById('ex-prog-fill').style.width = (exDone / EX_TOTAL * 100) + '%';
+      if (exDone === EX_TOTAL) showReview();
+    }
+
+    function showReview() {
+      const pct = Math.round(exCorrect / EX_TOTAL * 100);
+      const msg = pct === 100 ? 'Perfect score!' : pct >= 70 ? 'Great work!' : pct >= 50 ? 'Good effort.' : 'Keep practising!';
+      document.getElementById('review-title').textContent = msg + ' — ' + exCorrect + ' / ' + EX_TOTAL + ' correct (' + pct + '%)';
+      const list = document.getElementById('review-list');
+      list.innerHTML = '';
+      Object.entries(exResults).forEach(([id, r]) => {
+        const num = id.replace('ex', '');
+        const row = document.createElement('div');
+        row.className = 'review-row ' + (r.correct ? 'rv-ok' : 'rv-err');
+        row.innerHTML = '<span class="review-num">' + num.padStart(2, '0') + '</span>'
+          + '<span class="review-icon">' + (r.correct ? '✓' : '✗') + '</span>'
+          + '<span class="review-text"><strong>' + r.label + '</strong> — '
+          + (r.correct ? 'Correct.' : 'Correct answer: <em>' + r.answer + '</em>') + '</span>';
+        list.appendChild(row);
+      });
+      const rev = document.getElementById('ex-review');
+      rev.style.display = 'block';
+      rev.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    /* ── § A: Spot the Error ── */
+    function gradeSpot(btn, exId, correctKey, explanation) {
+      if (exResults[exId]) return;
+      const isCorrect = correctKey !== '__wrong__';
+      const opts = btn.closest('.ex-opts-row').querySelectorAll('.ex-opt');
+      opts.forEach(b => b.disabled = true);
+      let correctExpl = '';
+      opts.forEach(b => {
+        const m = b.getAttribute('onclick').match(/gradeSpot\(this,'[^']+','([^']+)','([^']*)'\)/);
+        if (m && m[1] !== '__wrong__') { correctExpl = m[2]; b.classList.add('ex-correct'); }
+      });
+      const fb = document.getElementById(exId + '-fb');
+      if (isCorrect) {
+        btn.classList.remove('ex-correct'); btn.classList.add('ex-correct');
+        fb.className = 'ex-feedback ok';
+        fb.innerHTML = '✓ Correct! ' + explanation;
+      } else {
+        btn.classList.add('ex-wrong');
+        fb.className = 'ex-feedback err';
+        fb.innerHTML = '✗ Not quite. ' + correctExpl;
+      }
+      markExercise(exId, isCorrect, 'Spot the Error', correctKey);
+    }
+
+    function shuffleSpotOptions() {
+      ['ex1-opts', 'ex2-opts', 'ex3-opts'].forEach(rowId => {
+        const row = document.getElementById(rowId);
+        if (!row) return;
+        const btns = [...row.querySelectorAll('.ex-opt')];
+        btns.sort(() => Math.random() - .5);
+        btns.forEach(b => row.appendChild(b));
+      });
+    }
+
+    /* ── § B: Word Order ── */
+    const WO_DATA = {
+      ex4: {
+        words: ["I'm", 'staying', 'with', 'Susan', 'this', 'weekend'],
+        correct: "i'm staying with susan this weekend",
+        explanation: '<strong>Subject + am/is/are + verb-ing + complement + time expression.</strong> "I\'m staying with Susan this weekend." — a confirmed arrangement.'
+      },
+      ex5: {
+        words: ['Are', 'flying', 'to', 'next', 'week', 'they', 'Toronto'],
+        correct: 'are they flying to toronto next week',
+        explanation: '<strong>Are + subject + verb-ing + complement + time expression?</strong> "Are they flying to Toronto next week?"'
+      },
+      ex6: {
+        words: ['not', 'leaving', 'is', 'tomorrow', 'Julie', 'Toronto'],
+        correct: 'julie is not leaving toronto tomorrow',
+        explanation: '<strong>Subject + is + not + verb-ing + complement + time expression.</strong> "Julie is not leaving Toronto tomorrow." — a cancelled arrangement.'
+      }
+    };
+
+    const woState = {};
+
+    function initWordOrder(exId) {
+      const data = WO_DATA[exId];
+      const shuffled = [...data.words].sort(() => Math.random() - .5);
+      if (shuffled.join(' ').toLowerCase() === data.correct) shuffled.reverse();
+      woState[exId] = { placed: [], remaining: shuffled };
+      renderWO(exId);
+    }
+
+    function renderWO(exId) {
+      const state = woState[exId];
+      const target = document.getElementById(exId + '-target');
+      const bank = document.getElementById(exId + '-bank');
+      target.innerHTML = state.placed.length === 0
+        ? '<span class="wo-placeholder">Click words below to build the sentence…</span>' : '';
+      state.placed.forEach((w, i) => {
+        const chip = document.createElement('span');
+        chip.className = 'wo-chip wo-placed';
+        chip.textContent = w;
+        chip.onclick = () => { if (exResults[exId]) return; state.placed.splice(i, 1); state.remaining.push(w); renderWO(exId); };
+        target.appendChild(chip);
+      });
+      bank.innerHTML = '';
+      state.remaining.forEach((w, i) => {
+        const chip = document.createElement('span');
+        chip.className = 'wo-chip';
+        chip.textContent = w;
+        chip.onclick = () => { if (exResults[exId]) return; state.remaining.splice(i, 1); state.placed.push(w); renderWO(exId); };
+        bank.appendChild(chip);
+      });
+    }
+
+    function checkWordOrder(exId) {
+      if (exResults[exId]) return;
+      const state = woState[exId];
+      if (state.placed.length === 0) return;
+      const data = WO_DATA[exId];
+      const attempt = state.placed.join(' ').toLowerCase();
+      const isCorrect = attempt === data.correct;
+      const target = document.getElementById(exId + '-target');
+      target.classList.remove('wo-correct', 'wo-wrong');
+      target.classList.add(isCorrect ? 'wo-correct' : 'wo-wrong');
+      const fb = document.getElementById(exId + '-fb');
+      fb.className = 'ex-feedback ' + (isCorrect ? 'ok' : 'err');
+      fb.innerHTML = isCorrect ? '✓ Correct! ' + data.explanation : '✗ Not quite — try rearranging. ' + data.explanation;
+      markExercise(exId, isCorrect, 'Word Order', data.words.join(' '));
+    }
+
+    function resetWordOrder(exId) {
+      if (exResults[exId]) return;
+      const data = WO_DATA[exId];
+      woState[exId] = { placed: [], remaining: [...data.words].sort(() => Math.random() - .5) };
+      renderWO(exId);
+      document.getElementById(exId + '-target').classList.remove('wo-correct', 'wo-wrong');
+      const fb = document.getElementById(exId + '-fb');
+      fb.className = 'ex-feedback'; fb.style.display = 'none';
+    }
+
+    /* ── § C: Classify ── */
+    const CL_DATA = {
+      ex7: {
+        items: [
+          { text: "I'm meeting Ana tonight.", col: 'ex7-arr' },
+          { text: "I'm going to learn French.", col: 'ex7-int' },
+          { text: 'They are flying on Friday.', col: 'ex7-arr' },
+          { text: "She's going to read more.", col: 'ex7-int' },
+          { text: 'We are staying at a hotel.', col: 'ex7-arr' },
+          { text: "He's going to exercise.", col: 'ex7-int' },
+        ],
+        cols: ['ex7-arr', 'ex7-int'],
+        explanation: 'Arrangements: already fixed with others (meeting, flying, staying). Intentions: personal plans not confirmed with others (going to learn, read, exercise).'
+      },
+      ex8: {
+        items: [
+          { text: "She's leaving tomorrow.", col: 'ex8-aff' },
+          { text: "He isn't coming tonight.", col: 'ex8-neg' },
+          { text: 'Are they arriving Friday?', col: 'ex8-q' },
+          { text: 'We are flying next week.', col: 'ex8-aff' },
+          { text: "I'm not going on Saturday.", col: 'ex8-neg' },
+          { text: 'Is she visiting next month?', col: 'ex8-q' },
+        ],
+        cols: ['ex8-aff', 'ex8-neg', 'ex8-q'],
+        explanation: 'Affirmatives state the plan. Negatives use isn\'t/aren\'t + -ing. Questions invert is/are before the subject.'
+      },
+      ex9: {
+        items: [
+          { text: 'She is cooking.', col: 'ex9-now' },
+          { text: "I'm leaving tonight.", col: 'ex9-fut' },
+          { text: 'They are playing now.', col: 'ex9-now' },
+          { text: 'He is flying on Friday.', col: 'ex9-fut' },
+          { text: 'We are watching a film.', col: 'ex9-now' },
+          { text: "She's visiting next week.", col: 'ex9-fut' },
+        ],
+        cols: ['ex9-now', 'ex9-fut'],
+        explanation: 'Happening now: no future time expression. Future plan: includes tonight, on Friday, next week, etc.'
+      },
+      ex10: {
+        items: [
+          { text: "We're flying to Canada next month.", col: 'ex10-ok' },
+          { text: 'She is go to the party tonight.', col: 'ex10-err' },
+          { text: 'Are they arriving on Sunday?', col: 'ex10-ok' },
+          { text: "He isn't leave tomorrow.", col: 'ex10-err' },
+          { text: "I'm meeting him at 6.", col: 'ex10-ok' },
+          { text: 'Does she is coming tonight?', col: 'ex10-err' },
+        ],
+        cols: ['ex10-ok', 'ex10-err'],
+        explanation: 'Errors: <em>is go</em> → is going; <em>isn\'t leave</em> → isn\'t leaving; <em>Does she is</em> → Is she coming.'
+      }
+    };
+
+    const clState = {};
+    let selectedChip = null;
+
+    function initClassify(exId) {
+      clState[exId] = { placements: {} };
+      const data = CL_DATA[exId];
+      const cardsEl = document.getElementById(exId + '-cards');
+      cardsEl.innerHTML = '';
+      [...data.items].sort(() => Math.random() - .5).forEach(item => {
+        const chip = document.createElement('div');
+        chip.className = 'cl-chip';
+        chip.textContent = item.text;
+        chip.draggable = true;
+        chip.dataset.text = item.text;
+        chip.dataset.exid = exId;
+        chip.addEventListener('dragstart', e => { e.dataTransfer.setData('text', JSON.stringify({ text: item.text, exid: exId })); });
+        chip.addEventListener('click', () => handleChipClick(chip, exId));
+        cardsEl.appendChild(chip);
+      });
+    }
+
+    function handleChipClick(chip, exId) {
+      if (exResults[exId]) return;
+      if (chip.classList.contains('cl-placed')) {
+        clState[exId].placements[chip.dataset.text] = null;
+        chip.classList.remove('cl-placed');
+        document.getElementById(exId + '-cards').appendChild(chip);
+        selectedChip = null; return;
+      }
+      if (selectedChip === chip) { selectedChip = null; chip.style.outline = ''; return; }
+      if (selectedChip) { selectedChip.style.outline = ''; }
+      selectedChip = chip;
+      chip.style.outline = '2px solid var(--blue)';
+    }
+
+    function dropCard(event, colId, exId) {
+      event.preventDefault();
+      if (exResults[exId]) return;
+      document.getElementById(colId).classList.remove('drag-over');
+      let text, eid;
+      try { const d = JSON.parse(event.dataTransfer.getData('text')); text = d.text; eid = d.exid; } catch (e) { return; }
+      if (eid !== exId) return;
+      placeChipInCol(text, colId, exId);
+    }
+
+    function placeChipInCol(text, colId, exId) {
+      const zone = document.getElementById(colId + '-zone');
+      let chip = [...document.querySelectorAll('#' + exId + '-cards .cl-chip, #' + exId + '-wrap .cl-chip')]
+        .find(c => c.dataset.text === text);
+      if (!chip) return;
+      chip.style.outline = '';
+      chip.classList.add('cl-placed');
+      zone.appendChild(chip);
+      clState[exId].placements[text] = colId;
+      selectedChip = null;
+    }
+
+    document.addEventListener('click', e => {
+      if (!selectedChip) return;
+      const col = e.target.closest('.classify-col');
+      if (!col) return;
+      const exId = selectedChip.dataset.exid;
+      if (exResults[exId]) return;
+      selectedChip.style.outline = '';
+      placeChipInCol(selectedChip.dataset.text, col.id, exId);
+      selectedChip = null;
+    });
+
+    function checkClassify(exId) {
+      if (exResults[exId]) return;
+      const data = CL_DATA[exId];
+      const placements = clState[exId].placements;
+      if (!data.items.every(item => placements[item.text])) {
+        const fb = document.getElementById(exId + '-fb');
+        fb.className = 'ex-feedback info'; fb.textContent = 'Place all cards before checking.'; return;
+      }
+      let allCorrect = true;
+      data.items.forEach(item => {
+        const chip = [...document.querySelectorAll('#' + exId + '-wrap .cl-chip')]
+          .find(c => c.dataset.text === item.text);
+        const correct = placements[item.text] === item.col;
+        if (!correct) allCorrect = false;
+        if (chip) { chip.classList.remove('cl-correct', 'cl-wrong'); chip.classList.add(correct ? 'cl-correct' : 'cl-wrong'); }
+      });
+      data.cols.forEach(colId => {
+        const col = document.getElementById(colId);
+        const allRight = data.items.filter(i => i.col === colId).every(i => placements[i.text] === colId);
+        col.classList.remove('col-correct', 'col-wrong');
+        col.classList.add(allRight ? 'col-correct' : 'col-wrong');
+      });
+      const fb = document.getElementById(exId + '-fb');
+      fb.className = 'ex-feedback ' + (allCorrect ? 'ok' : 'err');
+      fb.innerHTML = allCorrect ? '✓ Perfect! ' + data.explanation : '✗ Some items are misplaced. ' + data.explanation;
+      markExercise(exId, allCorrect, 'Classify', data.items.map(i => i.text).join(' / '));
+    }
+
+    function resetClassify(exId) {
+      if (exResults[exId]) return;
+      CL_DATA[exId].cols.forEach(colId => {
+        document.getElementById(colId + '-zone').innerHTML = '';
+        document.getElementById(colId).classList.remove('col-correct', 'col-wrong');
+      });
+      clState[exId] = { placements: {} };
+      initClassify(exId);
+      const fb = document.getElementById(exId + '-fb');
+      fb.className = 'ex-feedback'; fb.style.display = 'none';
+    }
+
+    /* ── QUIZ ── */
+    const QUESTIONS = [
+      { q: 'She _________ an English course next summer. (already registered)', opts: ["is starting", "starts", "will starting"], correct: "is starting" },
+      { q: "Jamie's family _________ to Toronto next week. (tickets booked)", opts: ["are flying", "fly", "is flying"], correct: "are flying" },
+      { q: '_________ you meeting the director tomorrow?', opts: ['Are', 'Do', 'Is'], correct: 'Are' },
+      { q: 'Julie _________ Toronto tomorrow. (she cancelled)', opts: ["isn't leaving", "doesn't leave", "not leaving"], correct: "isn't leaving" },
+      { q: 'What _________ we _________ for dinner tonight?', opts: ['are / having', 'do / have', 'is / having'], correct: 'are / having' },
+      { q: '"I am going to visit Paris one day." — This is a _________, not an arrangement.', opts: ['intention', 'arrangement', 'question'], correct: 'intention' },
+      { q: 'The correct question form for "She is leaving tonight" is:', opts: ['Is she leaving tonight?', 'Does she leaving tonight?', 'She is leaving tonight?'], correct: 'Is she leaving tonight?' },
+      { q: 'Which sentence is a confirmed future arrangement?', opts: ["I'm flying to London on Friday.", "I'm going to learn Italian.", "I will maybe visit them."], correct: "I'm flying to London on Friday." },
+      { q: 'Which time expression is used with Present Progressive for future?', opts: ['next Monday', 'yesterday', 'last week'], correct: 'next Monday' },
+      { q: '"I am staying with Susan ___________." — Which word completes this arrangement?', opts: ['this weekend', 'last year', 'at the moment'], correct: 'this weekend' },
+    ];
+
+    let idx = 0, score = 0, chart = null;
+
+    function initChart() {
+      chart = new Chart(document.getElementById('progressChart').getContext('2d'), {
+        type: 'doughnut',
+        data: { labels: ['Correct', 'Remaining'], datasets: [{ data: [0, 10], backgroundColor: ['#00a859', '#e4e2de'], borderWidth: 0 }] },
+        options: { responsive: false, cutout: '78%', plugins: { legend: { display: false } } }
+      });
+    }
+
+    function loadQ() {
+      const q = QUESTIONS[idx];
+      const pct = Math.round((idx + 1) / QUESTIONS.length * 100);
+      document.getElementById('q-number').textContent = 'Question ' + (idx + 1) + ' of ' + QUESTIONS.length;
+      document.getElementById('prog-pct').textContent = pct + '%';
+      document.getElementById('prog-fill').style.width = pct + '%';
+      document.getElementById('q-sentence').textContent = q.q;
+      document.getElementById('options-container').innerHTML = '';
+      const fb = document.getElementById('q-feedback');
+      fb.style.display = 'none'; fb.className = '';
+      document.getElementById('next-button').style.display = 'none';
+      [...q.opts].sort(() => Math.random() - .5).forEach(opt => {
+        const b = document.createElement('button');
+        b.className = 'quiz-opt';
+        b.textContent = opt;
+        b.onclick = () => checkAns(opt);
+        document.getElementById('options-container').appendChild(b);
+      });
+    }
+
+    function checkAns(sel) {
+      const correct = QUESTIONS[idx].correct;
+      document.querySelectorAll('.quiz-opt').forEach(b => {
+        b.disabled = true;
+        if (b.textContent === correct) b.classList.add('correct');
+        if (b.textContent === sel && sel !== correct) b.classList.add('wrong');
+      });
+      const fb = document.getElementById('q-feedback');
+      fb.style.display = 'block';
+      if (sel === correct) { score++; fb.textContent = '✓  Correct. Well done.'; fb.className = 'ok'; }
+      else { fb.textContent = '✗  Incorrect. The correct answer is "' + correct + '".'; fb.className = 'err'; }
+      document.getElementById('score-text').textContent = score + ' / ' + QUESTIONS.length;
+      chart.data.datasets[0].data = [score, QUESTIONS.length - score];
+      chart.update();
+      document.getElementById('next-button').style.display = 'block';
+    }
+
+    document.getElementById('next-button').onclick = () => {
+      idx++;
+      if (idx < QUESTIONS.length) { loadQ(); return; }
+      const pct = Math.round(score / QUESTIONS.length * 100);
+      const msg = pct >= 80 ? 'Excellent work.' : pct >= 60 ? 'Good effort. Keep practising.' : "Keep studying — you're making progress.";
+      document.querySelector('.quiz-section').innerHTML =
+        '<div style="text-align:center;padding:3.5rem 2rem">'
+        + '<p style="font-family:\'JetBrains Mono\',monospace;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--green);margin-bottom:.9rem">— Session Complete</p>'
+        + '<h2 style="font-family:\'Playfair Display\',serif;font-size:2.2rem;font-weight:900;color:var(--blue);margin-bottom:.7rem">' + msg + '</h2>'
+        + '<p style="color:var(--muted);font-size:.95rem;margin-bottom:.4rem">You answered <strong style="color:var(--blue)">' + score + '</strong> of ' + QUESTIONS.length + ' questions correctly.</p>'
+        + '<p style="font-family:\'Playfair Display\',serif;font-size:2.5rem;font-weight:900;color:var(--green);margin:1rem 0 2rem">' + pct + '%</p>'
+        + '<button onclick="location.reload()" style="font-family:\'JetBrains Mono\',monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;padding:13px 36px;background:var(--blue);color:#fff;border:none;border-radius:3px;cursor:pointer;font-weight:700;">Retake Quiz</button>'
+        + '</div>';
+    };
+
+    window.onload = () => {
+      initChart();
+      loadQ();
+      shuffleSpotOptions();
+      ['ex4', 'ex5', 'ex6'].forEach(id => initWordOrder(id));
+      ['ex7', 'ex8', 'ex9', 'ex10'].forEach(id => initClassify(id));
+    };
+  </script>
+</body>
+
+</html>

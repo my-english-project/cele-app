@@ -643,6 +643,72 @@
         grid-column: 1
       }
     }
+
+    /* ── FONT SIZE BAR ── */
+    .font-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 200;
+      background: var(--blue-deep);
+      border-top: 2px solid var(--green);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: .6rem;
+      padding: .5rem 1rem;
+      box-shadow: 0 -2px 16px rgba(0, 0, 0, .22);
+    }
+
+    .font-bar-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .58rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .45);
+    }
+
+    .font-btn {
+      height: 28px;
+      min-width: 28px;
+      padding: 0 8px;
+      border-radius: 5px;
+      border: 1.5px solid rgba(255, 255, 255, .22);
+      background: rgba(255, 255, 255, .08);
+      color: #fff;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .78rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .14s, border-color .14s;
+      user-select: none;
+    }
+
+    .font-btn:hover {
+      background: rgba(255, 255, 255, .20);
+      border-color: rgba(255, 255, 255, .55)
+    }
+
+    .font-btn.active-size {
+      background: var(--green);
+      border-color: var(--green);
+      color: #fff
+    }
+
+    .font-sep {
+      width: 1px;
+      height: 18px;
+      background: rgba(255, 255, 255, .15)
+    }
+
+    /* push page content above the fixed bar */
+    body {
+      padding-bottom: 48px
+    }
   </style>
 </head>
 
@@ -651,14 +717,24 @@
   <!-- ════════ HEADER ════════ -->
   <header>
     <div class="header-inner">
-      <a href="index.html" class="logo-pill">
-        <img src="https://www.utsalamanca.edu.mx/assets/img/pagina-principal/logo-uts-2024.png" alt="CELE UTS"
-          onerror="this.parentElement.innerHTML='<span class=\'logo-fallback\'>CELE</span>'">
+      <a href="../index.html">
+        <div class="logo-pill">
+          <img src="../assets/images/logo-uts-2024.png" alt="UTS"
+            onerror="this.parentElement.innerHTML='<span class=\'logo-fallback\'>UTS</span>'">
+        </div>
       </a>
+
       <div class="header-center">
         <p class="eyebrow">CELE · English Language Program</p>
         <p class="h-title display">Irregular Verb Finder</p>
       </div>
+
+      <a href="../index.html">
+        <div class="logo-pill">
+          <img src="../assets/images/logo_cele.png" alt="CELE"
+            onerror="this.parentElement.innerHTML='<span class=\'logo-fallback\'>CELE</span>'">
+        </div>
+      </a>
     </div>
   </header>
 
@@ -666,8 +742,6 @@
   <nav class="breadcrumb-bar">
     <div class="breadcrumb-inner">
       <a href="../index.html">Home</a>
-      <span class="bc-sep"> | </span>
-      <a href="basic/basic2.html">Tools</a>
       <span class="bc-sep"> | </span>
       <span class="bc-current">Irregular Verb Finder</span>
     </div>
@@ -1032,6 +1106,36 @@
       });
     };
   </script>
+
+  <!-- ════ FONT SIZE BAR ════ -->
+  <div class="font-bar" id="font-bar">
+    <span class="font-bar-label">Text size</span>
+    <div class="font-sep"></div>
+    <button class="font-btn" id="fb-sm" onclick="setSize('sm')" title="Small text">A<sup
+        style="font-size:.55em">−</sup></button>
+    <button class="font-btn active-size" id="fb-md" onclick="setSize('md')" title="Normal text">A</button>
+    <button class="font-btn" id="fb-lg" onclick="setSize('lg')" title="Large text">A<sup
+        style="font-size:.55em">+</sup></button>
+  </div>
+
+  <script>
+    /* ── Font size bar ── */
+    (function () {
+      var sizes = { sm: 14, md: 16, lg: 19 };
+      var saved = localStorage.getItem('cele-font') || 'md';
+      function apply(key) {
+        document.documentElement.style.fontSize = sizes[key] + 'px';
+        localStorage.setItem('cele-font', key);
+        ['sm', 'md', 'lg'].forEach(function (k) {
+          var b = document.getElementById('fb-' + k);
+          if (b) b.classList.toggle('active-size', k === key);
+        });
+      }
+      window.setSize = apply;
+      apply(saved);
+    })();
+  </script>
+
 </body>
 
 </html>

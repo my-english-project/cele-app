@@ -1,0 +1,2840 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Present Progressive — CELE UTS English</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;700&display=swap"
+    rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+  <style>
+    /* ── TOKENS ── */
+    :root {
+      --blue: #004c8f;
+      --blue-mid: #00367a;
+      --blue-deep: #002a5e;
+      --green: #00a859;
+      --green-dark: #008a48;
+      --green-dim: rgba(0, 168, 89, .10);
+      --blue-dim: rgba(0, 76, 143, .07);
+      --blue-line: rgba(0, 76, 143, .15);
+      --green-line: rgba(0, 168, 89, .20);
+      --red: #c0392b;
+      --red-dim: rgba(192, 57, 43, .07);
+      --page: #f7f5f2;
+      --card: #ffffff;
+      --ink: #1a1a1f;
+      --body: #3d3d45;
+      --muted: #7a7a88;
+      --rule: #e4e2de;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
+
+    html {
+      scroll-behavior: smooth
+    }
+
+    body {
+      background: var(--page);
+      color: var(--body);
+      font-family: 'Lora', Georgia, serif;
+      min-height: 100vh
+    }
+
+    .display {
+      font-family: 'Playfair Display', Georgia, serif
+    }
+
+    .mono {
+      font-family: 'JetBrains Mono', monospace
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: var(--blue);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 20px rgba(0, 0, 0, .18)
+    }
+
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 clamp(1rem, 5vw, 3rem);
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between
+    }
+
+    .logo-pill {
+      background: rgba(255, 255, 255, .14);
+      border: 1.5px solid rgba(255, 255, 255, .28);
+      border-radius: 8px;
+      padding: 5px 14px;
+      backdrop-filter: blur(6px);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, .15), inset 0 1px 0 rgba(255, 255, 255, .18);
+      display: flex;
+      align-items: center;
+      text-decoration: none
+    }
+
+    .logo-pill img {
+      height: 38px;
+      width: auto
+    }
+
+    .logo-fallback {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: 1.3rem;
+      color: #fff;
+      letter-spacing: .04em
+    }
+
+    .header-center {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      pointer-events: none
+    }
+
+    .header-center .eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .58rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .55);
+      margin-bottom: 2px
+    }
+
+    .header-center .h-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: .01em
+    }
+
+    /* ── BREADCRUMB ── */
+    .breadcrumb-bar {
+      background: var(--blue-deep);
+      border-bottom: 1px solid rgba(255, 255, 255, .07)
+    }
+
+    .breadcrumb-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: .55rem clamp(1rem, 5vw, 3rem);
+      display: flex;
+      align-items: center;
+      gap: .35rem;
+      flex-wrap: wrap
+    }
+
+    .breadcrumb-inner a,
+    .breadcrumb-inner span {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .6rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: rgba(255, 255, 255, .45);
+      transition: color .15s
+    }
+
+    .breadcrumb-inner a:hover {
+      color: var(--green)
+    }
+
+    .breadcrumb-inner .bc-sep {
+      color: rgba(255, 255, 255, .2)
+    }
+
+    .breadcrumb-inner .bc-current {
+      color: rgba(255, 255, 255, .85)
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--blue);
+      background-image: repeating-linear-gradient(-55deg, rgba(255, 255, 255, .025) 0px, rgba(255, 255, 255, .025) 1px, transparent 1px, transparent 18px);
+      padding: clamp(3rem, 8vw, 5.5rem) clamp(1rem, 5vw, 3rem) clamp(2.5rem, 6vw, 4.5rem);
+      border-bottom: 4px solid var(--green)
+    }
+
+    .hero-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 2rem;
+      align-items: end
+    }
+
+    .hero-eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .65rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 10px
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 28px;
+      height: 1.5px;
+      background: var(--green)
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+      font-weight: 900;
+      line-height: 1.06;
+      color: #fff
+    }
+
+    .hero-title em {
+      color: var(--green);
+      font-style: italic
+    }
+
+    .hero-sub {
+      margin-top: 1.2rem;
+      max-width: 540px;
+      font-size: .93rem;
+      line-height: 1.8;
+      color: rgba(255, 255, 255, .65)
+    }
+
+    .hero-meta {
+      text-align: right;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .64rem;
+      color: rgba(255, 255, 255, .4);
+      letter-spacing: .07em;
+      line-height: 2.1;
+      border-left: 1px solid rgba(255, 255, 255, .12);
+      padding-left: 1.8rem
+    }
+
+    .hero-meta strong {
+      display: block;
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: var(--green);
+      letter-spacing: 0;
+      line-height: 1
+    }
+
+    /* ── QUICK NAV ── */
+    .quick-nav {
+      background: var(--blue-deep);
+      border-bottom: 1px solid rgba(255, 255, 255, .08)
+    }
+
+    .quick-nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: .9rem clamp(1rem, 5vw, 3rem);
+      display: flex;
+      gap: .5rem;
+      flex-wrap: wrap
+    }
+
+    .qn-chip {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .6rem;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .45);
+      text-decoration: none;
+      border: 1px solid rgba(255, 255, 255, .1);
+      border-radius: 3px;
+      padding: 4px 10px;
+      transition: color .15s, border-color .15s, background .15s
+    }
+
+    .qn-chip:hover {
+      color: var(--green);
+      border-color: var(--green-line);
+      background: rgba(0, 168, 89, .08)
+    }
+
+    /* ── MAIN ── */
+    .main-wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 clamp(1rem, 5vw, 3rem) 5rem
+    }
+
+    /* ── ENTRY ── */
+    .entry {
+      display: grid;
+      grid-template-columns: 72px 1fr;
+      gap: 0 2.2rem;
+      padding: 3.5rem 0;
+      border-bottom: 1px solid var(--rule);
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity .55s ease, transform .55s ease
+    }
+
+    .entry.show {
+      opacity: 1;
+      transform: none
+    }
+
+    .entry-num {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: 4.5rem;
+      line-height: 1;
+      color: rgba(0, 76, 143, .13);
+      text-align: right;
+      padding-top: 6px;
+      user-select: none
+    }
+
+    .entry-body {
+      min-width: 0
+    }
+
+    .entry-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .62rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: .45rem;
+      display: flex;
+      align-items: center;
+      gap: 8px
+    }
+
+    .entry-label::after {
+      content: '';
+      flex: 1;
+      max-width: 40px;
+      height: 1px;
+      background: var(--green-line)
+    }
+
+    .entry-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 900;
+      color: var(--blue);
+      line-height: 1.1;
+      margin-bottom: .8rem
+    }
+
+    .entry-subtitle {
+      font-size: .84rem;
+      color: var(--muted);
+      font-style: italic;
+      border-left: 2.5px solid var(--green);
+      padding-left: .75rem;
+      margin-bottom: 1.4rem
+    }
+
+    /* ── TABS ── */
+    .tabs {
+      display: flex;
+      gap: 0;
+      border-bottom: 1.5px solid var(--rule);
+      margin-bottom: 1.4rem
+    }
+
+    .tab {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .62rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: 8px 16px;
+      cursor: pointer;
+      color: var(--muted);
+      background: none;
+      border: none;
+      border-bottom: 2.5px solid transparent;
+      margin-bottom: -1.5px;
+      transition: color .15s, border-color .15s
+    }
+
+    .tab:hover {
+      color: var(--blue)
+    }
+
+    .tab.active {
+      color: var(--blue);
+      border-bottom-color: var(--blue)
+    }
+
+    .tab-panel {
+      display: none
+    }
+
+    .tab-panel.active {
+      display: block
+    }
+
+    /* ── CONTENT BLOCKS ── */
+    .def-block {
+      background: var(--card);
+      border: 1px solid var(--blue-line);
+      border-left: 3px solid var(--blue);
+      border-radius: 2px;
+      padding: .95rem 1.15rem;
+      margin-bottom: .8rem;
+      font-size: .87rem;
+      line-height: 1.72;
+      color: var(--body);
+      box-shadow: 0 1px 4px rgba(0, 76, 143, .05)
+    }
+
+    .def-block strong {
+      color: var(--blue)
+    }
+
+    .def-block em {
+      color: var(--green-dark);
+      font-weight: 600
+    }
+
+    .def-block.green-accent {
+      border-left-color: var(--green)
+    }
+
+    .def-block.warn-accent {
+      border-left-color: var(--red);
+      background: #fff8f7
+    }
+
+    .def-block.dark-bg {
+      background: var(--blue);
+      border-color: var(--blue);
+      color: #fff
+    }
+
+    .def-block.dark-bg strong {
+      color: var(--green)
+    }
+
+    .struct-pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .72rem;
+      color: var(--blue);
+      background: var(--blue-dim);
+      padding: 2px 7px;
+      border-radius: 3px;
+      display: inline-block;
+      margin-bottom: .4rem
+    }
+
+    .struct-pill.green {
+      color: var(--green-dark);
+      background: var(--green-dim)
+    }
+
+    .struct-pill.red {
+      color: var(--red);
+      background: var(--red-dim)
+    }
+
+    .wrong {
+      color: var(--red);
+      font-size: .82rem
+    }
+
+    .right {
+      color: var(--green-dark);
+      font-size: .82rem
+    }
+
+    .wrong::before {
+      content: "✗  "
+    }
+
+    .right::before {
+      content: "✓  "
+    }
+
+    .ex-list {
+      list-style: none
+    }
+
+    .ex-list li {
+      font-style: italic;
+      font-size: .87rem;
+      color: var(--muted);
+      padding: 6px 0;
+      border-bottom: 1px solid var(--rule);
+      line-height: 1.6
+    }
+
+    .ex-list li:last-child {
+      border-bottom: none
+    }
+
+    .ex-list li strong {
+      color: var(--blue);
+      font-style: normal;
+      font-weight: 700
+    }
+
+    .ex-n {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .6rem;
+      color: var(--green);
+      margin-right: 6px;
+      font-style: normal
+    }
+
+    .mini-tbl {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .82rem;
+      margin-top: .6rem
+    }
+
+    .mini-tbl thead th {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .6rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 400;
+      padding: 7px 10px;
+      border-bottom: 1.5px solid var(--rule);
+      text-align: left
+    }
+
+    .mini-tbl tbody td {
+      padding: 7px 10px;
+      border-bottom: 1px solid var(--rule);
+      color: var(--body)
+    }
+
+    .mini-tbl tbody tr:last-child td {
+      border-bottom: none
+    }
+
+    .mini-tbl tbody tr:hover td {
+      background: var(--blue-dim)
+    }
+
+    .t-blue {
+      color: var(--blue);
+      font-weight: 700;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .78rem
+    }
+
+    .t-green {
+      color: var(--green);
+      font-weight: 700;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .78rem
+    }
+
+    .t-red {
+      color: var(--red);
+      font-weight: 700;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .78rem
+    }
+
+    .comp-tbl {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .82rem;
+      margin-top: .6rem
+    }
+
+    .comp-tbl thead th {
+      padding: 9px 14px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .64rem;
+      letter-spacing: .08em
+    }
+
+    .comp-tbl thead .th-label {
+      text-align: left;
+      color: var(--muted);
+      font-weight: 400
+    }
+
+    .comp-tbl thead .th-a {
+      background: var(--blue);
+      color: #fff;
+      text-align: center
+    }
+
+    .comp-tbl thead .th-b {
+      background: var(--green);
+      color: #fff;
+      text-align: center
+    }
+
+    .comp-tbl thead .th-c {
+      background: var(--red);
+      color: #fff;
+      text-align: center
+    }
+
+    .comp-tbl tbody td {
+      padding: 8px 14px;
+      border-top: 1px solid var(--rule);
+      color: var(--body)
+    }
+
+    .comp-tbl tbody td:first-child {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .62rem;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--muted)
+    }
+
+    .comp-tbl tbody td:not(:first-child) {
+      text-align: center
+    }
+
+    .comp-tbl tbody tr:hover td {
+      background: var(--blue-dim)
+    }
+
+    .triple {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: .7rem
+    }
+
+    /* ── SPELLING RULES ── */
+    .rule-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      background: var(--card);
+      border: 1px solid var(--blue-line);
+      border-radius: 2px;
+      padding: .85rem 1rem;
+      margin-bottom: .6rem;
+      box-shadow: 0 1px 4px rgba(0, 76, 143, .05)
+    }
+
+    .rule-num-circle {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--blue);
+      color: #fff;
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0
+    }
+
+    .rule-content {
+      flex: 1
+    }
+
+    .rule-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .7rem;
+      font-weight: 700;
+      color: var(--blue);
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      margin-bottom: .3rem
+    }
+
+    .rule-body {
+      font-size: .84rem;
+      color: var(--body);
+      line-height: 1.6
+    }
+
+    .rule-eg {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .72rem;
+      color: var(--green-dark);
+      margin-top: .3rem
+    }
+
+    /* ── EXERCISES ── */
+    .exercises-section {
+      margin-top: 4rem;
+      padding-top: 3rem;
+      border-top: 2px solid var(--blue)
+    }
+
+    .section-hdr {
+      display: flex;
+      align-items: baseline;
+      gap: 1.4rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap
+    }
+
+    .section-hdr h2 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+      color: var(--blue)
+    }
+
+    .section-hdr p {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .6rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--muted)
+    }
+
+    #ex-tracker {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background: var(--card);
+      border: 1px solid var(--blue-line);
+      border-left: 3px solid var(--blue);
+      padding: .8rem 1.2rem;
+      margin-bottom: 2rem;
+      border-radius: 2px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .72rem;
+      color: var(--muted)
+    }
+
+    .ex-type-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1.2rem
+    }
+
+    .ex-type-letter {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--blue);
+      color: #fff;
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px
+    }
+
+    .ex-type-title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: 1.1rem;
+      color: var(--blue);
+      margin-bottom: .15rem
+    }
+
+    .ex-type-desc {
+      font-size: .8rem;
+      color: var(--muted);
+      line-height: 1.6
+    }
+
+    .ex-card {
+      background: var(--card);
+      border: 1px solid var(--blue-line);
+      border-radius: 2px;
+      padding: 1.4rem 1.6rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 1px 6px rgba(0, 76, 143, .05)
+    }
+
+    .ex-card-top {
+      display: flex;
+      align-items: baseline;
+      gap: .8rem;
+      margin-bottom: .8rem
+    }
+
+    .ex-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .68rem;
+      font-weight: 700;
+      color: var(--green);
+      background: var(--green-dim);
+      padding: 2px 7px;
+      border-radius: 2px;
+      flex-shrink: 0
+    }
+
+    .ex-instruction {
+      font-size: .83rem;
+      color: var(--muted);
+      line-height: 1.5
+    }
+
+    .ex-sentence {
+      font-family: 'Lora', Georgia, serif;
+      font-style: italic;
+      font-size: .96rem;
+      color: var(--ink);
+      background: var(--page);
+      padding: .7rem 1rem;
+      border-left: 3px solid var(--blue-line);
+      margin-bottom: 1rem;
+      line-height: 1.6
+    }
+
+    .ex-opts-row {
+      display: flex;
+      gap: .5rem;
+      flex-wrap: wrap
+    }
+
+    .ex-opt {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .74rem;
+      padding: 8px 14px;
+      background: var(--page);
+      border: 1.5px solid var(--rule);
+      border-radius: 3px;
+      cursor: pointer;
+      color: var(--body);
+      transition: background .14s, border-color .14s, color .14s
+    }
+
+    .ex-opt:hover:not(:disabled) {
+      background: var(--blue-dim);
+      border-color: rgba(0, 76, 143, .3);
+      color: var(--blue)
+    }
+
+    .ex-opt.ex-correct {
+      background: rgba(0, 168, 89, .1);
+      border-color: var(--green);
+      color: var(--green-dark);
+      font-weight: 700
+    }
+
+    .ex-opt.ex-wrong {
+      background: var(--red-dim);
+      border-color: var(--red);
+      color: var(--red)
+    }
+
+    .ex-opt:disabled {
+      cursor: default
+    }
+
+    .ex-feedback {
+      font-size: .82rem;
+      font-style: italic;
+      padding: 0;
+      margin-top: .7rem;
+      display: none;
+      line-height: 1.5
+    }
+
+    .ex-feedback.ok {
+      color: var(--green-dark);
+      display: block
+    }
+
+    .ex-feedback.err {
+      color: var(--red);
+      display: block
+    }
+
+    .ex-feedback.info {
+      color: var(--blue);
+      display: block
+    }
+
+    /* ── WORD ORDER ── */
+    .wo-target {
+      min-height: 44px;
+      border: 2px dashed var(--blue-line);
+      border-radius: 3px;
+      padding: .5rem .7rem;
+      margin-bottom: .6rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: .4rem;
+      align-items: center;
+      background: var(--blue-dim);
+      transition: border-color .15s
+    }
+
+    .wo-target.wo-correct {
+      border-color: var(--green);
+      border-style: solid;
+      background: rgba(0, 168, 89, .06)
+    }
+
+    .wo-target.wo-wrong {
+      border-color: var(--red);
+      border-style: solid;
+      background: var(--red-dim)
+    }
+
+    .wo-placeholder {
+      font-size: .75rem;
+      color: var(--muted);
+      font-style: italic;
+      font-family: 'Lora', serif
+    }
+
+    .wo-bank {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .4rem;
+      min-height: 36px
+    }
+
+    .wo-chip {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .74rem;
+      padding: 5px 11px;
+      background: var(--card);
+      border: 1.5px solid var(--blue-line);
+      border-radius: 3px;
+      cursor: pointer;
+      color: var(--blue);
+      transition: background .12s, transform .1s;
+      user-select: none
+    }
+
+    .wo-chip:hover {
+      background: var(--blue-dim);
+      transform: translateY(-1px)
+    }
+
+    .wo-chip.wo-placed {
+      background: var(--blue);
+      color: #fff;
+      border-color: var(--blue);
+      cursor: pointer
+    }
+
+    .wo-chip.wo-placed:hover {
+      background: var(--blue-mid)
+    }
+
+    .wo-btn-check,
+    .wo-btn-reset {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .68rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: 8px 18px;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      font-weight: 700
+    }
+
+    .wo-btn-check {
+      background: var(--blue);
+      color: #fff
+    }
+
+    .wo-btn-check:hover {
+      background: var(--blue-mid)
+    }
+
+    .wo-btn-reset {
+      background: var(--page);
+      color: var(--muted);
+      border: 1px solid var(--rule)
+    }
+
+    .wo-btn-reset:hover {
+      background: var(--rule)
+    }
+
+    /* ── CLASSIFY ── */
+    .classify-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: .8rem;
+      margin-bottom: .8rem
+    }
+
+    .classify-col {
+      border: 2px dashed var(--blue-line);
+      border-radius: 3px;
+      min-height: 80px;
+      padding: .6rem;
+      background: var(--blue-dim);
+      transition: border-color .15s, background .15s
+    }
+
+    .classify-col.drag-over {
+      border-color: var(--blue);
+      background: rgba(0, 76, 143, .12)
+    }
+
+    .classify-col.col-correct {
+      border-color: var(--green);
+      border-style: solid;
+      background: rgba(0, 168, 89, .07)
+    }
+
+    .classify-col.col-wrong {
+      border-color: var(--red);
+      border-style: solid;
+      background: var(--red-dim)
+    }
+
+    .classify-col-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .62rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: .5rem
+    }
+
+    .classify-drop-zone {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .35rem;
+      min-height: 32px
+    }
+
+    .classify-cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .4rem
+    }
+
+    .cl-chip {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .74rem;
+      padding: 5px 12px;
+      background: var(--card);
+      border: 1.5px solid var(--green-line);
+      border-radius: 3px;
+      cursor: grab;
+      color: var(--green-dark);
+      user-select: none;
+      transition: transform .1s, box-shadow .1s
+    }
+
+    .cl-chip:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, .1)
+    }
+
+    .cl-chip.cl-placed {
+      cursor: pointer;
+      opacity: .85
+    }
+
+    .cl-chip.cl-correct {
+      border-color: var(--green);
+      background: rgba(0, 168, 89, .1);
+      color: var(--green-dark)
+    }
+
+    .cl-chip.cl-wrong {
+      border-color: var(--red);
+      background: var(--red-dim);
+      color: var(--red)
+    }
+
+    /* ── REVIEW PANEL ── */
+    .review-row {
+      display: flex;
+      align-items: baseline;
+      gap: .8rem;
+      padding: .55rem .8rem;
+      border-radius: 2px;
+      font-size: .83rem
+    }
+
+    .review-row.rv-ok {
+      background: rgba(0, 168, 89, .07)
+    }
+
+    .review-row.rv-err {
+      background: var(--red-dim)
+    }
+
+    .review-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .65rem;
+      color: var(--muted);
+      flex-shrink: 0;
+      width: 28px
+    }
+
+    .review-icon {
+      flex-shrink: 0
+    }
+
+    .review-text {
+      flex: 1;
+      color: var(--body);
+      line-height: 1.5
+    }
+
+    /* ── QUIZ ── */
+    .quiz-section {
+      margin-top: 3.5rem;
+      background: var(--card);
+      border: 1px solid var(--blue-line);
+      border-top: 4px solid var(--blue);
+      box-shadow: 0 4px 24px rgba(0, 76, 143, .08)
+    }
+
+    .quiz-header {
+      background: var(--blue);
+      padding: 1.6rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap
+    }
+
+    .quiz-header .quiz-eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .6rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: .35rem
+    }
+
+    .quiz-header .quiz-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: #fff
+    }
+
+    .quiz-header .quiz-desc {
+      font-size: .8rem;
+      color: rgba(255, 255, 255, .55);
+      margin-top: .2rem
+    }
+
+    .quiz-body {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 0
+    }
+
+    .quiz-left {
+      padding: 2rem;
+      border-right: 1px solid var(--rule)
+    }
+
+    .quiz-right {
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .8rem
+    }
+
+    .prog-wrap {
+      margin-bottom: 1.6rem
+    }
+
+    .prog-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .6rem;
+      color: var(--muted);
+      letter-spacing: .07em;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 5px
+    }
+
+    .prog-track {
+      height: 3px;
+      background: var(--rule);
+      border-radius: 2px;
+      overflow: hidden
+    }
+
+    .prog-fill {
+      height: 100%;
+      background: var(--green);
+      border-radius: 2px;
+      transition: width .4s ease
+    }
+
+    #q-number {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .6rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: block;
+      margin-bottom: .5rem
+    }
+
+    #q-sentence {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.55;
+      margin-bottom: 1.5rem
+    }
+
+    .quiz-opt {
+      display: block;
+      width: 100%;
+      text-align: left;
+      padding: 11px 15px;
+      margin-bottom: .45rem;
+      background: var(--page);
+      border: 1.5px solid var(--rule);
+      border-radius: 3px;
+      cursor: pointer;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .8rem;
+      color: var(--body);
+      transition: background .14s, border-color .14s, color .14s
+    }
+
+    .quiz-opt:hover:not(:disabled) {
+      background: var(--blue-dim);
+      border-color: rgba(0, 76, 143, .3);
+      color: var(--blue)
+    }
+
+    .quiz-opt.correct {
+      background: rgba(0, 168, 89, .08);
+      border-color: var(--green);
+      color: var(--green-dark);
+      font-weight: 700
+    }
+
+    .quiz-opt.wrong {
+      background: var(--red-dim);
+      border-color: var(--red);
+      color: var(--red)
+    }
+
+    #q-feedback {
+      font-size: .82rem;
+      font-style: italic;
+      padding: 10px 14px;
+      border-radius: 3px;
+      margin-top: .9rem;
+      display: none
+    }
+
+    #q-feedback.ok {
+      background: rgba(0, 168, 89, .08);
+      color: var(--green-dark);
+      border: 1px solid var(--green-line)
+    }
+
+    #q-feedback.err {
+      background: var(--red-dim);
+      color: var(--red);
+      border: 1px solid rgba(192, 57, 43, .25)
+    }
+
+    #next-button {
+      margin-top: 1.1rem;
+      width: 100%;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .7rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      padding: 12px;
+      background: var(--blue);
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: background .15s;
+      display: none
+    }
+
+    #next-button:hover {
+      background: var(--blue-mid)
+    }
+
+    .score-label-sm {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .58rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--muted)
+    }
+
+    #score-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem;
+      font-weight: 900;
+      color: var(--blue)
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--blue);
+      border-top: 3px solid var(--green);
+      padding: 2.8rem clamp(1rem, 5vw, 3rem);
+      text-align: center
+    }
+
+    footer .f-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      font-weight: 900;
+      color: #fff;
+      margin-bottom: .3rem
+    }
+
+    footer .f-sub {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .6rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .4)
+    }
+
+    footer .f-accent {
+      color: var(--green)
+    }
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:700px) {
+      .hero-inner {
+        grid-template-columns: 1fr
+      }
+
+      .hero-meta {
+        display: none
+      }
+
+      .entry {
+        grid-template-columns: 1fr
+      }
+
+      .entry-num {
+        display: none
+      }
+
+      .quiz-body {
+        grid-template-columns: 1fr
+      }
+
+      .quiz-right {
+        border-top: 1px solid var(--rule)
+      }
+
+      .header-center {
+        display: none
+      }
+
+      .classify-wrap {
+        grid-template-columns: 1fr
+      }
+    }
+
+    /* ── FONT SIZE BAR ── */
+    .font-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 200;
+      background: var(--blue-deep);
+      border-top: 2px solid var(--green);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: .6rem;
+      padding: .5rem 1rem;
+      box-shadow: 0 -2px 16px rgba(0, 0, 0, .22);
+    }
+
+    .font-bar-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .58rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .45);
+    }
+
+    .font-btn {
+      height: 28px;
+      min-width: 28px;
+      padding: 0 8px;
+      border-radius: 5px;
+      border: 1.5px solid rgba(255, 255, 255, .22);
+      background: rgba(255, 255, 255, .08);
+      color: #fff;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .78rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .14s, border-color .14s;
+      user-select: none;
+    }
+
+    .font-btn:hover {
+      background: rgba(255, 255, 255, .20);
+      border-color: rgba(255, 255, 255, .55)
+    }
+
+    .font-btn.active-size {
+      background: var(--green);
+      border-color: var(--green);
+      color: #fff
+    }
+
+    .font-sep {
+      width: 1px;
+      height: 18px;
+      background: rgba(255, 255, 255, .15)
+    }
+
+    /* push page content above the fixed bar */
+    body {
+      padding-bottom: 48px
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ════ HEADER ════ -->
+  <header>
+    <div class="header-inner">
+      <a href="../index.html">
+        <div class="logo-pill">
+          <img src="../assets/images/logo-uts-2024.png" alt="UTS"
+            onerror="this.parentElement.innerHTML='<span class=\'logo-fallback\'>UTS</span>'">
+        </div>
+      </a>
+      <div class="header-center">
+        <p class="eyebrow">CELE &middot; English Language Program</p>
+        <p class="h-title display">Present Progressive</p>
+      </div>
+      <a href="../index.html">
+        <div class="logo-pill">
+          <img src="../assets/images/logo_cele.png" alt="CELE"
+            onerror="this.parentElement.innerHTML='<span class=\'logo-fallback\'>CELE</span>'">
+        </div>
+      </a>
+    </div>
+  </header>
+
+  <!-- ════ BREADCRUMB ════ -->
+  <nav class="breadcrumb-bar">
+    <div class="breadcrumb-inner">
+      <a href="../index.html">Home</a><span class="bc-sep"> | </span>
+      <a href="../index.html#basic">Basic</a><span class="bc-sep"> | </span>
+      <a href="basic3.html">Basic III</a><span class="bc-sep"> | </span>
+      <span class="bc-current">Present Progressive</span>
+    </div>
+  </nav>
+
+  <!-- ════ HERO ════ -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div>
+        <p class="hero-eyebrow">Grammar Module — Level A2–B1</p>
+        <h1 class="hero-title display">The <em>Present<br>Progressive</em></h1>
+        <p class="hero-sub">Also called Present Continuous. Used for actions happening right now, temporary situations,
+          and planned future arrangements. This guide covers structures, spelling rules, and key contrasts.</p>
+      </div>
+      <div class="hero-meta">
+        <strong>6</strong>Topics<br>
+        <strong>10</strong>Exercises<br>
+        <strong>10</strong>Quiz items<br>
+        ——<br>
+        Aff · Neg · Q<br>
+        Spelling Rules
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ QUICK NAV ════ -->
+  <nav class="quick-nav">
+    <div class="quick-nav-inner">
+      <a class="qn-chip" href="#s1">01 What is it?</a>
+      <a class="qn-chip" href="#s2">02 Affirmative</a>
+      <a class="qn-chip" href="#s3">03 Negative</a>
+      <a class="qn-chip" href="#s4">04 Questions</a>
+      <a class="qn-chip" href="#s5">05 Spelling Rules</a>
+      <a class="qn-chip" href="#s6">06 Stative Verbs</a>
+      <a class="qn-chip" href="#exercises">↓ Exercises</a>
+      <a class="qn-chip" href="#quiz">↓ Quiz</a>
+    </div>
+  </nav>
+
+  <!-- ════ MAIN ════ -->
+  <div class="main-wrap">
+
+    <!-- 01 WHAT IS IT -->
+    <article id="s1" class="entry">
+      <div class="entry-num display">01</div>
+      <div class="entry-body">
+        <p class="entry-label">Definition &amp; Use</p>
+        <h2 class="entry-title display">What is the Present Progressive?</h2>
+        <p class="entry-subtitle">Also called Present Continuous — describes actions <em>in progress</em> at the moment
+          of speaking, temporary situations, and future arrangements.</p>
+        <div class="tabs">
+          <button class="tab active" onclick="switchTab(this,'w1','def')">Definition</button>
+          <button class="tab" onclick="switchTab(this,'w1','uses')">Main Uses</button>
+          <button class="tab" onclick="switchTab(this,'w1','time')">Time Signals</button>
+          <button class="tab" onclick="switchTab(this,'w1','ex')">Examples</button>
+        </div>
+        <div id="w1-def" class="tab-panel active">
+          <div class="def-block">
+            The <strong>Present Progressive</strong> (also called Present Continuous) is formed with the verb <em>To
+              Be</em> in the present + the <em>-ing</em> form of the main verb. It expresses actions that are
+            <strong>happening at the time of speaking</strong>, temporary situations, and planned future events.
+          </div>
+          <div class="def-block warn-accent">
+            <strong>Key Idea:</strong> The action is <em>in progress right now</em> — it started before this moment and
+            has not finished yet. This is different from the Simple Present, which describes habits or permanent truths.
+          </div>
+          <div class="def-block green-accent">
+            <strong>Formula:</strong> Subject + <em>am / is / are</em> + verb<em>-ing</em><br>
+            <span style="font-style:italic;color:var(--muted);font-size:.85rem">"She <strong>is reading</strong> a book
+              right now." · "They <strong>are dancing</strong> in the street."</span>
+          </div>
+        </div>
+        <div id="w1-uses" class="tab-panel">
+          <div class="def-block" style="margin-bottom:.7rem">
+            <strong>Use 1 — Action happening right now:</strong><br>
+            <span style="font-style:italic;color:var(--muted);font-size:.86rem">"Shh! The baby <em>is sleeping</em>." ·
+              "I <em>am writing</em> an email."</span>
+          </div>
+          <div class="def-block" style="margin-bottom:.7rem">
+            <strong>Use 2 — Temporary situation (not permanent):</strong><br>
+            <span style="font-style:italic;color:var(--muted);font-size:.86rem">"She <em>is living</em> with her parents
+              this month." (not forever)</span>
+          </div>
+          <div class="def-block" style="margin-bottom:.7rem">
+            <strong>Use 3 — Planned future arrangement:</strong><br>
+            <span style="font-style:italic;color:var(--muted);font-size:.86rem">"We <em>are meeting</em> the director
+              tomorrow at 10."</span>
+          </div>
+          <div class="def-block green-accent">
+            <strong>Use 4 — Changing or developing situation:</strong><br>
+            <span style="font-style:italic;color:var(--muted);font-size:.86rem">"Prices <em>are rising</em> every
+              month." · "Her English <em>is improving</em> a lot."</span>
+          </div>
+        </div>
+        <div id="w1-time" class="tab-panel">
+          <table class="mini-tbl">
+            <thead>
+              <tr>
+                <th>Signal</th>
+                <th>Examples</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="t-blue">Right now</td>
+                <td>right now, at this moment, at the moment</td>
+              </tr>
+              <tr>
+                <td class="t-blue">Currently</td>
+                <td>currently, nowadays, these days</td>
+              </tr>
+              <tr>
+                <td class="t-blue">Today</td>
+                <td>today, this morning, this week</td>
+              </tr>
+              <tr>
+                <td class="t-blue">Look / Listen</td>
+                <td>Look! · Listen! · Watch out!</td>
+              </tr>
+              <tr>
+                <td class="t-blue">Still</td>
+                <td>still (ongoing action)</td>
+              </tr>
+              <tr>
+                <td class="t-green">Future use</td>
+                <td>tomorrow, next week, on Saturday (with plans)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div id="w1-ex" class="tab-panel">
+          <ul class="ex-list">
+            <li><span class="ex-n">01</span>"I <strong>am playing</strong> soccer right now."</li>
+            <li><span class="ex-n">02</span>"The bird <strong>is singing</strong> in the garden."</li>
+            <li><span class="ex-n">03</span>"We <strong>are dancing</strong> at the party."</li>
+            <li><span class="ex-n">04</span>"Look! It <strong>is raining</strong>!"</li>
+            <li><span class="ex-n">05</span>"She <strong>is studying</strong> for the exam this week."</li>
+            <li><span class="ex-n">06</span>"They <strong>are travelling</strong> to Mexico next Friday."</li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <!-- 02 AFFIRMATIVE -->
+    <article id="s2" class="entry">
+      <div class="entry-num display">02</div>
+      <div class="entry-body">
+        <p class="entry-label">Sentence Structure</p>
+        <h2 class="entry-title display">Affirmative Form</h2>
+        <p class="entry-subtitle">Subject + <em>am / is / are</em> + verb<em>-ing</em> — same rule for all persons.</p>
+        <div class="tabs">
+          <button class="tab active" onclick="switchTab(this,'af','formula')">Formula</button>
+          <button class="tab" onclick="switchTab(this,'af','conj')">Conjugation</button>
+          <button class="tab" onclick="switchTab(this,'af','ex')">Examples</button>
+        </div>
+        <div id="af-formula" class="tab-panel active">
+          <div class="def-block dark-bg" style="text-align:center;padding:1.3rem">
+            <span
+              style="font-family:'JetBrains Mono',monospace;font-size:.62rem;color:rgba(255,255,255,.45);letter-spacing:.14em;text-transform:uppercase">Affirmative
+              Formula</span><br>
+            <span style="font-family:'Playfair Display',serif;font-size:1.4rem;color:#fff;font-weight:700">
+              Subject + <span style="color:var(--green)">am / is / are</span> + verb<span
+                style="color:var(--green)">-ing</span>
+            </span>
+          </div>
+          <div class="def-block green-accent" style="margin-top:.8rem">
+            <strong>Contractions</strong> are very common in spoken English:<br>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:.8rem">I am → <strong>I'm</strong>
+              &nbsp;·&nbsp; She is → <strong>She's</strong> &nbsp;·&nbsp; They are → <strong>They're</strong></span>
+          </div>
+        </div>
+        <div id="af-conj" class="tab-panel">
+          <table class="mini-tbl">
+            <thead>
+              <tr>
+                <th>Subject</th>
+                <th>To Be</th>
+                <th>Example</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>I</td>
+                <td class="t-blue">am</td>
+                <td style="font-style:italic;color:var(--muted)">I am studying English.</td>
+              </tr>
+              <tr>
+                <td>He / She / It</td>
+                <td class="t-blue">is</td>
+                <td style="font-style:italic;color:var(--muted)">She is cooking dinner.</td>
+              </tr>
+              <tr>
+                <td>You</td>
+                <td class="t-green">are</td>
+                <td style="font-style:italic;color:var(--muted)">You are doing great.</td>
+              </tr>
+              <tr>
+                <td>We</td>
+                <td class="t-green">are</td>
+                <td style="font-style:italic;color:var(--muted)">We are working now.</td>
+              </tr>
+              <tr>
+                <td>They</td>
+                <td class="t-green">are</td>
+                <td style="font-style:italic;color:var(--muted)">They are playing outside.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div id="af-ex" class="tab-panel">
+          <ul class="ex-list">
+            <li><span class="ex-n">01</span>"I <strong>am having</strong> breakfast right now."</li>
+            <li><span class="ex-n">02</span>"She <strong>is reading</strong> a novel this week."</li>
+            <li><span class="ex-n">03</span>"The butterflies <strong>are flying</strong> high."</li>
+            <li><span class="ex-n">04</span>"We <strong>are looking</strong> for a shirt."</li>
+            <li><span class="ex-n">05</span>"It <strong>is raining</strong> in London."</li>
+            <li><span class="ex-n">06</span>"This man <strong>is drinking</strong> tea."</li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <!-- 03 NEGATIVE -->
+    <article id="s3" class="entry">
+      <div class="entry-num display">03</div>
+      <div class="entry-body">
+        <p class="entry-label">Sentence Structure</p>
+        <h2 class="entry-title display">Negative Form</h2>
+        <p class="entry-subtitle">Add <em>not</em> after am / is / are — contractions are common in everyday speech.</p>
+        <div class="tabs">
+          <button class="tab active" onclick="switchTab(this,'neg','formula')">Formula</button>
+          <button class="tab" onclick="switchTab(this,'neg','conj')">Conjugation</button>
+          <button class="tab" onclick="switchTab(this,'neg','rules')">Mistakes</button>
+          <button class="tab" onclick="switchTab(this,'neg','ex')">Examples</button>
+        </div>
+        <div id="neg-formula" class="tab-panel active">
+          <div class="def-block dark-bg" style="text-align:center;padding:1.3rem">
+            <span
+              style="font-family:'JetBrains Mono',monospace;font-size:.62rem;color:rgba(255,255,255,.45);letter-spacing:.14em;text-transform:uppercase">Negative
+              Formula</span><br>
+            <span style="font-family:'Playfair Display',serif;font-size:1.4rem;color:#fff;font-weight:700">
+              Subject + <span style="color:#ffd700">am / is / are</span> + <span
+                style="color:var(--red);font-style:italic">not</span> + verb<span style="color:var(--green)">-ing</span>
+            </span>
+          </div>
+          <div class="def-block warn-accent" style="margin-top:.8rem">
+            <strong>Two contractions are possible</strong> — both are correct:<br>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:.8rem">He <strong>isn't</strong> reading.
+              &nbsp;=&nbsp; He's <strong>not</strong> reading.</span><br>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:.8rem">They <strong>aren't</strong> dancing.
+              &nbsp;=&nbsp; They're <strong>not</strong> dancing.</span>
+          </div>
+        </div>
+        <div id="neg-conj" class="tab-panel">
+          <table class="mini-tbl">
+            <thead>
+              <tr>
+                <th>Subject</th>
+                <th>Full form</th>
+                <th>Contraction</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>I</td>
+                <td>am not reading</td>
+                <td class="t-red">'m not reading</td>
+              </tr>
+              <tr>
+                <td>He / She / It</td>
+                <td>is not reading</td>
+                <td class="t-red">isn't / 's not reading</td>
+              </tr>
+              <tr>
+                <td>You / We / They</td>
+                <td>are not reading</td>
+                <td class="t-red">aren't / 're not reading</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div id="neg-rules" class="tab-panel">
+          <div class="def-block warn-accent" style="margin-bottom:.7rem">
+            <strong>Mistake 1 — "not" in the wrong position:</strong><br>
+            <span class="wrong">She is reading not the book.</span><br>
+            <span class="right">She <strong>is not</strong> reading the book.</span>
+          </div>
+          <div class="def-block warn-accent" style="margin-bottom:.7rem">
+            <strong>Mistake 2 — Using "don't / doesn't" instead of "isn't / aren't":</strong><br>
+            <span class="wrong">He doesn't eating now.</span><br>
+            <span class="right">He <strong>isn't</strong> eating now.</span>
+          </div>
+          <div class="def-block warn-accent">
+            <strong>Mistake 3 — Forgetting -ing in negatives:</strong><br>
+            <span class="wrong">They aren't dance right now.</span><br>
+            <span class="right">They <strong>aren't dancing</strong> right now.</span>
+          </div>
+        </div>
+        <div id="neg-ex" class="tab-panel">
+          <ul class="ex-list">
+            <li><span class="ex-n">01</span>"I <strong>am not reading</strong> now." / "I<strong>'m not</strong> reading
+              now."</li>
+            <li><span class="ex-n">02</span>"He <strong>is not</strong> reading. / He<strong>'s not</strong> reading."
+            </li>
+            <li><span class="ex-n">03</span>"She <strong>isn't</strong> watching TV — she's studying."</li>
+            <li><span class="ex-n">04</span>"You <strong>are not</strong> running fast enough."</li>
+            <li><span class="ex-n">05</span>"We <strong>aren't</strong> looking for a hat."</li>
+            <li><span class="ex-n">06</span>"This man <strong>isn't</strong> drinking water."</li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <!-- 04 QUESTIONS -->
+    <article id="s4" class="entry">
+      <div class="entry-num display">04</div>
+      <div class="entry-body">
+        <p class="entry-label">Interrogative Form</p>
+        <h2 class="entry-title display">Question Form</h2>
+        <p class="entry-subtitle">Invert <em>am / is / are</em> and the subject — no auxiliary "do/does" needed.</p>
+        <div class="tabs">
+          <button class="tab active" onclick="switchTab(this,'q','yn')">Yes / No</button>
+          <button class="tab" onclick="switchTab(this,'q','wh')">Wh- Questions</button>
+          <button class="tab" onclick="switchTab(this,'q','answers')">Short Answers</button>
+          <button class="tab" onclick="switchTab(this,'q','mistakes')">Mistakes</button>
+        </div>
+        <div id="q-yn" class="tab-panel active">
+          <div class="def-block dark-bg" style="text-align:center;padding:1.3rem">
+            <span
+              style="font-family:'JetBrains Mono',monospace;font-size:.62rem;color:rgba(255,255,255,.45);letter-spacing:.14em;text-transform:uppercase">Yes/No
+              Formula</span><br>
+            <span style="font-family:'Playfair Display',serif;font-size:1.4rem;color:#fff;font-weight:700">
+              <span style="color:#ffd700">Am / Is / Are</span> + Subject + verb<span
+                style="color:var(--green)">-ing</span> + ?
+            </span>
+          </div>
+          <table class="mini-tbl" style="margin-top:.8rem">
+            <thead>
+              <tr>
+                <th>Question</th>
+                <th>Short Answer ✅</th>
+                <th>Short Answer ❌</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="font-style:italic">Am I doing this right?</td>
+                <td>Yes, you are.</td>
+                <td>No, you aren't.</td>
+              </tr>
+              <tr>
+                <td style="font-style:italic">Is she reading now?</td>
+                <td>Yes, she is.</td>
+                <td>No, she isn't.</td>
+              </tr>
+              <tr>
+                <td style="font-style:italic">Are they running?</td>
+                <td>Yes, they are.</td>
+                <td>No, they aren't.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div id="q-wh" class="tab-panel">
+          <div class="def-block dark-bg" style="text-align:center;padding:1.3rem">
+            <span
+              style="font-family:'JetBrains Mono',monospace;font-size:.62rem;color:rgba(255,255,255,.45);letter-spacing:.14em;text-transform:uppercase">Wh-
+              Formula</span><br>
+            <span style="font-family:'Playfair Display',serif;font-size:1.3rem;color:#fff;font-weight:700">
+              <span style="color:var(--green)">Wh-word</span> + <span style="color:#ffd700">am / is / are</span> +
+              Subject + verb<span style="color:var(--green)">-ing</span> + ?
+            </span>
+          </div>
+          <table class="mini-tbl" style="margin-top:.8rem">
+            <thead>
+              <tr>
+                <th>Question</th>
+                <th>Example Answer</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="font-style:italic">What are you doing?</td>
+                <td>I'm writing a report.</td>
+              </tr>
+              <tr>
+                <td style="font-style:italic">Where are they going?</td>
+                <td>They're going to the cinema.</td>
+              </tr>
+              <tr>
+                <td style="font-style:italic">Why is she crying?</td>
+                <td>Because she's watching a sad film.</td>
+              </tr>
+              <tr>
+                <td style="font-style:italic">Who is he talking to?</td>
+                <td>He's talking to the manager.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div id="q-answers" class="tab-panel">
+          <div class="def-block green-accent">
+            <strong>Rule:</strong> In short answers, repeat the auxiliary (am / is / are). <em>Never use a contraction
+              in a positive short answer.</em><br><br>
+            <span class="wrong">Is she working? — Yes, she's.</span><br>
+            <span class="right">Is she working? — Yes, she <strong>is</strong>.</span><br><br>
+            <span class="right">Is she working? — No, she <strong>isn't</strong>. ✓</span>
+          </div>
+        </div>
+        <div id="q-mistakes" class="tab-panel">
+          <div class="def-block warn-accent" style="margin-bottom:.7rem">
+            <strong>Mistake 1 — Using "do/does" to form questions:</strong><br>
+            <span class="wrong">Does she is reading?</span><br>
+            <span class="right"><strong>Is</strong> she reading?</span>
+          </div>
+          <div class="def-block warn-accent" style="margin-bottom:.7rem">
+            <strong>Mistake 2 — Wrong word order in Wh- questions:</strong><br>
+            <span class="wrong">What you are doing?</span><br>
+            <span class="right">What <strong>are you</strong> doing?</span>
+          </div>
+          <div class="def-block warn-accent">
+            <strong>Mistake 3 — Affirmative short answer with contraction:</strong><br>
+            <span class="wrong">Are they coming? — Yes, they're.</span><br>
+            <span class="right">Are they coming? — Yes, they <strong>are</strong>.</span>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 05 SPELLING RULES -->
+    <article id="s5" class="entry">
+      <div class="entry-num display">05</div>
+      <div class="entry-body">
+        <p class="entry-label">Orthography</p>
+        <h2 class="entry-title display">Spelling Rules for -ing</h2>
+        <p class="entry-subtitle">It is not always just adding "-ing" — six rules govern how the continuous form is
+          written.</p>
+        <div class="tabs">
+          <button class="tab active" onclick="switchTab(this,'sp','rules')">All Rules</button>
+          <button class="tab" onclick="switchTab(this,'sp','ref')">Quick Reference</button>
+        </div>
+        <div id="sp-rules" class="tab-panel active">
+          <div class="rule-row">
+            <div class="rule-num-circle">1</div>
+            <div class="rule-content">
+              <p class="rule-title">Standard → just add -ing</p>
+              <p class="rule-body">For most verbs ending in a consonant, simply add <strong>-ing</strong> to the base
+                form.</p>
+              <p class="rule-eg">do → doing &nbsp;·&nbsp; ask → asking &nbsp;·&nbsp; play → playing &nbsp;·&nbsp; read →
+                reading</p>
+            </div>
+          </div>
+          <div class="rule-row">
+            <div class="rule-num-circle">2</div>
+            <div class="rule-content">
+              <p class="rule-title">Silent -e → drop the -e, then add -ing</p>
+              <p class="rule-body">When the verb ends in a <strong>silent -e</strong>, remove it before adding
+                <em>-ing</em>.
+              </p>
+              <p class="rule-eg">make → making &nbsp;·&nbsp; take → taking &nbsp;·&nbsp; write → writing &nbsp;·&nbsp;
+                dance → dancing</p>
+            </div>
+          </div>
+          <div class="rule-row">
+            <div class="rule-num-circle">3</div>
+            <div class="rule-content">
+              <p class="rule-title">Short CVC verbs → double the consonant + -ing</p>
+              <p class="rule-body">For one-syllable verbs ending in <strong>Consonant-Vowel-Consonant</strong>, double
+                the final consonant before adding <em>-ing</em>.</p>
+              <p class="rule-eg">swim → swimming &nbsp;·&nbsp; run → running &nbsp;·&nbsp; sit → sitting &nbsp;·&nbsp;
+                hit → hitting</p>
+            </div>
+          </div>
+          <div class="rule-row">
+            <div class="rule-num-circle">4</div>
+            <div class="rule-content">
+              <p class="rule-title">Ends in -w, -x or -y → just add -ing</p>
+              <p class="rule-body">Verbs ending in <strong>-w</strong>, <strong>-x</strong>, or <strong>-y</strong>
+                never double the final letter.</p>
+              <p class="rule-eg">enjoy → enjoying &nbsp;·&nbsp; study → studying &nbsp;·&nbsp; fix → fixing
+                &nbsp;·&nbsp; show → showing</p>
+            </div>
+          </div>
+          <div class="rule-row">
+            <div class="rule-num-circle">5</div>
+            <div class="rule-content">
+              <p class="rule-title">Two-syllable CVC (stressed last syllable) → double + -ing</p>
+              <p class="rule-body">When a two-syllable verb ends in CVC and the <strong>last syllable is
+                  stressed</strong>, double the final consonant.</p>
+              <p class="rule-eg">commit → committing &nbsp;·&nbsp; begin → beginning &nbsp;·&nbsp; forget → forgetting
+              </p>
+            </div>
+          </div>
+          <div class="rule-row">
+            <div class="rule-num-circle" style="background:var(--green)">6</div>
+            <div class="rule-content">
+              <p class="rule-title">Two-syllable CVC (stress on 1st syllable) → just add -ing</p>
+              <p class="rule-body">When the <strong>first syllable is stressed</strong>, do NOT double the final
+                consonant.</p>
+              <p class="rule-eg">whis·per → whispering &nbsp;·&nbsp; lis·ten → listening &nbsp;·&nbsp; hap·pen →
+                happening</p>
+            </div>
+          </div>
+        </div>
+        <div id="sp-ref" class="tab-panel">
+          <table class="mini-tbl">
+            <thead>
+              <tr>
+                <th>Base Verb</th>
+                <th>Rule</th>
+                <th>-ing Form</th>
+                <th>Reason</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>ask</td>
+                <td>Rule 1</td>
+                <td class="t-green">asking</td>
+                <td>standard → +ing</td>
+              </tr>
+              <tr>
+                <td>make</td>
+                <td>Rule 2</td>
+                <td class="t-green">making</td>
+                <td>silent -e → drop e</td>
+              </tr>
+              <tr>
+                <td>run</td>
+                <td>Rule 3</td>
+                <td class="t-green">running</td>
+                <td>CVC, 1 syllable → double n</td>
+              </tr>
+              <tr>
+                <td>study</td>
+                <td>Rule 4</td>
+                <td class="t-green">studying</td>
+                <td>ends in -y → +ing</td>
+              </tr>
+              <tr>
+                <td>begin</td>
+                <td>Rule 5</td>
+                <td class="t-green">beginning</td>
+                <td>CVC, stress on 2nd → double n</td>
+              </tr>
+              <tr>
+                <td>whisper</td>
+                <td>Rule 6</td>
+                <td class="t-green">whispering</td>
+                <td>CVC, stress on 1st → +ing</td>
+              </tr>
+              <tr>
+                <td>die</td>
+                <td>Special</td>
+                <td class="t-green">dying</td>
+                <td>-ie → change to y</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </article>
+
+    <!-- 06 STATIVE VERBS -->
+    <article id="s6" class="entry">
+      <div class="entry-num display">06</div>
+      <div class="entry-body">
+        <p class="entry-label">Advanced Note</p>
+        <h2 class="entry-title display">Stative Verbs — Do Not Use -ing</h2>
+        <p class="entry-subtitle">Some verbs describe <em>states</em>, not actions — they are rarely used in the
+          progressive form.</p>
+        <div class="tabs">
+          <button class="tab active" onclick="switchTab(this,'sv','def')">What are they?</button>
+          <button class="tab" onclick="switchTab(this,'sv','list')">Common Statives</button>
+          <button class="tab" onclick="switchTab(this,'sv','both')">Dual Use</button>
+        </div>
+        <div id="sv-def" class="tab-panel active">
+          <div class="def-block warn-accent">
+            <strong>Stative verbs</strong> describe permanent states: feelings, thoughts, possession, senses. They do
+            not describe an action happening right now, so they are <em>not normally used in progressive tenses</em>.
+          </div>
+          <div class="def-block" style="margin-bottom:.7rem">
+            <span class="wrong">I am knowing the answer right now.</span><br>
+            <span class="right">I <strong>know</strong> the answer.</span>
+          </div>
+          <div class="def-block warn-accent">
+            <span class="wrong">She is loving chocolate.</span><br>
+            <span class="right">She <strong>loves</strong> chocolate.</span>
+          </div>
+        </div>
+        <div id="sv-list" class="tab-panel">
+          <div class="triple">
+            <div class="def-block" style="margin-bottom:0">
+              <strong style="color:var(--blue)">Feelings / Emotions</strong><br>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:.74rem;color:var(--muted)">love · hate ·
+                like · prefer · want · need · wish</span>
+            </div>
+            <div class="def-block" style="margin-bottom:0">
+              <strong style="color:var(--blue)">Thoughts / Mental states</strong><br>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:.74rem;color:var(--muted)">know · believe ·
+                think · understand · remember · forget</span>
+            </div>
+            <div class="def-block" style="margin-bottom:0">
+              <strong style="color:var(--blue)">Senses &amp; Possession</strong><br>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:.74rem;color:var(--muted)">see · hear ·
+                smell · taste · have · own · belong</span>
+            </div>
+          </div>
+        </div>
+        <div id="sv-both" class="tab-panel">
+          <div class="def-block green-accent">
+            <strong>Some verbs can be both stative AND dynamic</strong> — the meaning changes:<br><br>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:.78rem">
+              <strong>think:</strong> I <em>think</em> you're right. (opinion = stative)<br>
+              I <em>am thinking</em> about the problem. (mental process = dynamic)<br><br>
+              <strong>have:</strong> She <em>has</em> a car. (possession = stative)<br>
+              She <em>is having</em> lunch. (activity = dynamic)<br><br>
+              <strong>see:</strong> I <em>see</em> the problem. (understand = stative)<br>
+              I <em>am seeing</em> the doctor today. (appointment = dynamic)
+            </span>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ════ EXERCISES ════ -->
+    <section id="exercises" class="exercises-section">
+      <div class="section-hdr">
+        <h2 class="display">Practice Exercises</h2>
+        <p>10 exercises · 3 activity types · self-graded</p>
+      </div>
+
+      <div id="ex-tracker">
+        <span>Progress:</span>
+        <div style="flex:1;height:4px;background:var(--rule);border-radius:2px;overflow:hidden">
+          <div id="ex-prog-fill"
+            style="height:100%;background:var(--green);width:0%;transition:width .4s ease;border-radius:2px"></div>
+        </div>
+        <span id="ex-counter" style="color:var(--blue);font-weight:700">0 / 10</span>
+        <span id="ex-score-badge" style="color:var(--green);font-weight:700"></span>
+      </div>
+
+      <!-- § A: SPOT THE ERROR -->
+      <div class="ex-type-header">
+        <span class="ex-type-letter">A</span>
+        <div>
+          <p class="ex-type-title">Spot the Error</p>
+          <p class="ex-type-desc">Each sentence has exactly one mistake related to the Present Progressive. Choose the
+            option that correctly identifies and fixes the error.</p>
+        </div>
+      </div>
+
+      <div class="ex-card" id="ex1">
+        <div class="ex-card-top"><span class="ex-num">01</span>
+          <p class="ex-instruction">One option identifies the real error and its fix.</p>
+        </div>
+        <p class="ex-sentence">"She is not watching TV last night because she was tired."</p>
+        <div class="ex-opts-row" id="ex1-opts">
+          <button class="ex-opt"
+            onclick="gradeSpot(this,'ex1','last night → right now','The Present Progressive describes actions happening <strong>now</strong>, not in the past. &quot;Last night&quot; belongs to the Simple Past.')">
+            last night → right now
+          </button>
+          <button class="ex-opt" onclick="gradeSpot(this,'ex1','__wrong__','')">is not → does not</button>
+          <button class="ex-opt" onclick="gradeSpot(this,'ex1','__wrong__','')">watching → watch</button>
+        </div>
+        <div class="ex-feedback" id="ex1-fb"></div>
+      </div>
+
+      <div class="ex-card" id="ex2">
+        <div class="ex-card-top"><span class="ex-num">02</span>
+          <p class="ex-instruction">One option identifies the real error and its fix.</p>
+        </div>
+        <p class="ex-sentence">"What you are doing right now?"</p>
+        <div class="ex-opts-row" id="ex2-opts">
+          <button class="ex-opt" onclick="gradeSpot(this,'ex2','__wrong__','')">doing → do</button>
+          <button class="ex-opt"
+            onclick="gradeSpot(this,'ex2','What you are → What are you','In Wh- questions, the auxiliary <strong>must come before the subject</strong>: What <em>are you</em> doing?')">What
+            you are → What are you</button>
+          <button class="ex-opt" onclick="gradeSpot(this,'ex2','__wrong__','')">right now → at the moment</button>
+        </div>
+        <div class="ex-feedback" id="ex2-fb"></div>
+      </div>
+
+      <div class="ex-card" id="ex3">
+        <div class="ex-card-top"><span class="ex-num">03</span>
+          <p class="ex-instruction">One option identifies the real error and its fix.</p>
+        </div>
+        <p class="ex-sentence">"They are runeing in the park."</p>
+        <div class="ex-opts-row" id="ex3-opts">
+          <button class="ex-opt" onclick="gradeSpot(this,'ex3','__wrong__','')">are → is</button>
+          <button class="ex-opt" onclick="gradeSpot(this,'ex3','__wrong__','')">in → at</button>
+          <button class="ex-opt"
+            onclick="gradeSpot(this,'ex3','runeing → running','CVC rule: <strong>run</strong> ends in Consonant-Vowel-Consonant → double the final consonant before adding -ing: r-u-n → <strong>running</strong>.')">runeing
+            → running</button>
+        </div>
+        <div class="ex-feedback" id="ex3-fb"></div>
+      </div>
+
+      <!-- § B: WORD ORDER -->
+      <div class="ex-type-header" style="margin-top:2.5rem">
+        <span class="ex-type-letter" style="background:var(--green)">B</span>
+        <div>
+          <p class="ex-type-title">Word Order</p>
+          <p class="ex-type-desc">Click the word chips to place them in the correct order and build a grammatically
+            accurate Present Progressive sentence. Click a placed chip to return it.</p>
+        </div>
+      </div>
+
+      <div class="ex-card" id="ex4">
+        <div class="ex-card-top"><span class="ex-num">04</span>
+          <p class="ex-instruction">Build the sentence in the correct order:</p>
+        </div>
+        <div class="wo-target" id="ex4-target"><span class="wo-placeholder">Click words below to build the
+            sentence…</span></div>
+        <div class="wo-bank" id="ex4-bank"></div>
+        <div style="display:flex;gap:.5rem;margin-top:.8rem">
+          <button class="wo-btn-check" onclick="checkWordOrder('ex4')">Check ✓</button>
+          <button class="wo-btn-reset" onclick="resetWordOrder('ex4')">Reset ↺</button>
+        </div>
+        <div class="ex-feedback" id="ex4-fb"></div>
+      </div>
+
+      <div class="ex-card" id="ex5">
+        <div class="ex-card-top"><span class="ex-num">05</span>
+          <p class="ex-instruction">Build the sentence in the correct order:</p>
+        </div>
+        <div class="wo-target" id="ex5-target"><span class="wo-placeholder">Click words below to build the
+            sentence…</span></div>
+        <div class="wo-bank" id="ex5-bank"></div>
+        <div style="display:flex;gap:.5rem;margin-top:.8rem">
+          <button class="wo-btn-check" onclick="checkWordOrder('ex5')">Check ✓</button>
+          <button class="wo-btn-reset" onclick="resetWordOrder('ex5')">Reset ↺</button>
+        </div>
+        <div class="ex-feedback" id="ex5-fb"></div>
+      </div>
+
+      <div class="ex-card" id="ex6">
+        <div class="ex-card-top"><span class="ex-num">06</span>
+          <p class="ex-instruction">Build the sentence in the correct order:</p>
+        </div>
+        <div class="wo-target" id="ex6-target"><span class="wo-placeholder">Click words below to build the
+            sentence…</span></div>
+        <div class="wo-bank" id="ex6-bank"></div>
+        <div style="display:flex;gap:.5rem;margin-top:.8rem">
+          <button class="wo-btn-check" onclick="checkWordOrder('ex6')">Check ✓</button>
+          <button class="wo-btn-reset" onclick="resetWordOrder('ex6')">Reset ↺</button>
+        </div>
+        <div class="ex-feedback" id="ex6-fb"></div>
+      </div>
+
+      <!-- § C: CLASSIFY -->
+      <div class="ex-type-header" style="margin-top:2.5rem">
+        <span class="ex-type-letter" style="background:var(--blue-mid)">C</span>
+        <div>
+          <p class="ex-type-title">Classify</p>
+          <p class="ex-type-desc">Drag each card into the correct category. On mobile, tap a card to select it, then tap
+            the target column to place it.</p>
+        </div>
+      </div>
+
+      <!-- C7: -ing spelling rule -->
+      <div class="ex-card" id="ex7">
+        <div class="ex-card-top"><span class="ex-num">07</span>
+          <p class="ex-instruction">Apply the correct -ing spelling: Standard (+ing) or Special rule?</p>
+        </div>
+        <div class="classify-wrap" id="ex7-wrap">
+          <div class="classify-col" id="ex7-std" ondragover="event.preventDefault()"
+            ondrop="dropCard(event,'ex7-std','ex7')">
+            <p class="classify-col-label">📝 Standard (+ing)</p>
+            <div class="classify-drop-zone" id="ex7-std-zone"></div>
+          </div>
+          <div class="classify-col" id="ex7-spl" ondragover="event.preventDefault()"
+            ondrop="dropCard(event,'ex7-spl','ex7')">
+            <p class="classify-col-label">⚡ Special Rule</p>
+            <div class="classify-drop-zone" id="ex7-spl-zone"></div>
+          </div>
+        </div>
+        <div class="classify-cards" id="ex7-cards"></div>
+        <div style="display:flex;gap:.5rem;margin-top:.8rem">
+          <button class="wo-btn-check" onclick="checkClassify('ex7')">Check ✓</button>
+          <button class="wo-btn-reset" onclick="resetClassify('ex7')">Reset ↺</button>
+        </div>
+        <div class="ex-feedback" id="ex7-fb"></div>
+      </div>
+
+      <!-- C8: affirmative / negative / question -->
+      <div class="ex-card" id="ex8">
+        <div class="ex-card-top"><span class="ex-num">08</span>
+          <p class="ex-instruction">Classify each sentence: Affirmative, Negative, or Question?</p>
+        </div>
+        <div class="classify-wrap" id="ex8-wrap" style="grid-template-columns:1fr 1fr 1fr">
+          <div class="classify-col" id="ex8-aff" ondragover="event.preventDefault()"
+            ondrop="dropCard(event,'ex8-aff','ex8')">
+            <p class="classify-col-label">✅ Affirmative</p>
+            <div class="classify-drop-zone" id="ex8-aff-zone"></div>
+          </div>
+          <div class="classify-col" id="ex8-neg" ondragover="event.preventDefault()"
+            ondrop="dropCard(event,'ex8-neg','ex8')">
+            <p class="classify-col-label">❌ Negative</p>
+            <div class="classify-drop-zone" id="ex8-neg-zone"></div>
+          </div>
+          <div class="classify-col" id="ex8-q" ondragover="event.preventDefault()"
+            ondrop="dropCard(event,'ex8-q','ex8')">
+            <p class="classify-col-label">❓ Question</p>
+            <div class="classify-drop-zone" id="ex8-q-zone"></div>
+          </div>
+        </div>
+        <div class="classify-cards" id="ex8-cards"></div>
+        <div style="display:flex;gap:.5rem;margin-top:.8rem">
+          <button class="wo-btn-check" onclick="checkClassify('ex8')">Check ✓</button>
+          <button class="wo-btn-reset" onclick="resetClassify('ex8')">Reset ↺</button>
+        </div>
+        <div class="ex-feedback" id="ex8-fb"></div>
+      </div>
+
+      <!-- C9: Stative vs Dynamic -->
+      <div class="ex-card" id="ex9">
+        <div class="ex-card-top"><span class="ex-num">09</span>
+          <p class="ex-instruction">Is each verb Stative (no -ing) or Dynamic (can use -ing)?</p>
+        </div>
+        <div class="classify-wrap" id="ex9-wrap">
+          <div class="classify-col" id="ex9-stat" ondragover="event.preventDefault()"
+            ondrop="dropCard(event,'ex9-stat','ex9')">
+            <p class="classify-col-label">🧠 Stative (no -ing)</p>
+            <div class="classify-drop-zone" id="ex9-stat-zone"></div>
+          </div>
+          <div class="classify-col" id="ex9-dyn" ondragover="event.preventDefault()"
+            ondrop="dropCard(event,'ex9-dyn','ex9')">
+            <p class="classify-col-label">🏃 Dynamic (-ing OK)</p>
+            <div class="classify-drop-zone" id="ex9-dyn-zone"></div>
+          </div>
+        </div>
+        <div class="classify-cards" id="ex9-cards"></div>
+        <div style="display:flex;gap:.5rem;margin-top:.8rem">
+          <button class="wo-btn-check" onclick="checkClassify('ex9')">Check ✓</button>
+          <button class="wo-btn-reset" onclick="resetClassify('ex9')">Reset ↺</button>
+        </div>
+        <div class="ex-feedback" id="ex9-fb"></div>
+      </div>
+
+      <!-- C10: Correct vs Incorrect -->
+      <div class="ex-card" id="ex10">
+        <div class="ex-card-top"><span class="ex-num">10</span>
+          <p class="ex-instruction">Is the Present Progressive form used correctly or incorrectly?</p>
+        </div>
+        <div class="classify-wrap" id="ex10-wrap">
+          <div class="classify-col" id="ex10-ok" ondragover="event.preventDefault()"
+            ondrop="dropCard(event,'ex10-ok','ex10')">
+            <p class="classify-col-label">✅ Correct</p>
+            <div class="classify-drop-zone" id="ex10-ok-zone"></div>
+          </div>
+          <div class="classify-col" id="ex10-err" ondragover="event.preventDefault()"
+            ondrop="dropCard(event,'ex10-err','ex10')">
+            <p class="classify-col-label">❌ Incorrect</p>
+            <div class="classify-drop-zone" id="ex10-err-zone"></div>
+          </div>
+        </div>
+        <div class="classify-cards" id="ex10-cards"></div>
+        <div style="display:flex;gap:.5rem;margin-top:.8rem">
+          <button class="wo-btn-check" onclick="checkClassify('ex10')">Check ✓</button>
+          <button class="wo-btn-reset" onclick="resetClassify('ex10')">Reset ↺</button>
+        </div>
+        <div class="ex-feedback" id="ex10-fb"></div>
+      </div>
+
+      <!-- REVIEW -->
+      <div id="ex-review"
+        style="display:none;margin-top:2.5rem;background:var(--card);border:1px solid var(--blue-line);border-top:4px solid var(--blue)">
+        <div style="background:var(--blue);padding:1.4rem 1.8rem">
+          <p
+            style="font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--green);margin-bottom:.3rem">
+            — Exercises Complete</p>
+          <p class="display" style="font-size:1.6rem;font-weight:900;color:#fff" id="review-title">Results</p>
+        </div>
+        <div style="padding:1.8rem">
+          <p
+            style="font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--muted);margin-bottom:1.2rem;letter-spacing:.06em;text-transform:uppercase">
+            Answer Key</p>
+          <div id="review-list" style="display:flex;flex-direction:column;gap:.5rem"></div>
+          <button onclick="location.reload()"
+            style="margin-top:1.8rem;font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;padding:12px 32px;background:var(--blue);color:#fff;border:none;border-radius:3px;cursor:pointer;font-weight:700;">Try
+            Again ↺</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════ QUIZ ════ -->
+    <section id="quiz" class="quiz-section" style="margin-top:3.5rem">
+      <div class="quiz-header">
+        <div>
+          <p class="quiz-eyebrow">— Interactive Practice</p>
+          <p class="quiz-title display">Self-Evaluation Quiz</p>
+          <p class="quiz-desc">Choose the correct answer. Ten questions. Immediate feedback.</p>
+        </div>
+      </div>
+      <div class="quiz-body">
+        <div class="quiz-left">
+          <div class="prog-wrap">
+            <div class="prog-label">
+              <span id="q-number">Question 1 of 10</span>
+              <span id="prog-pct">10%</span>
+            </div>
+            <div class="prog-track">
+              <div class="prog-fill" id="prog-fill" style="width:10%"></div>
+            </div>
+          </div>
+          <p id="q-sentence">Loading…</p>
+          <div id="options-container"></div>
+          <div id="q-feedback"></div>
+          <button id="next-button">Continue →</button>
+        </div>
+        <div class="quiz-right">
+          <p class="score-label-sm">Your Score</p>
+          <canvas id="progressChart" width="180" height="180"></canvas>
+          <span id="score-text">0 / 10</span>
+          <p class="score-label-sm">Correct Answers</p>
+        </div>
+      </div>
+    </section>
+
+  </div><!-- /main-wrap -->
+
+  <!-- ════ FOOTER ════ -->
+  <footer>
+    <p class="f-logo display">Universidad Tecnológica de Salamanca</p>
+    <p class="f-sub">CELE &mdash; Centro de Lenguas <span class="f-accent">&middot;</span> English Language Program
+      <span class="f-accent">&middot;</span> &copy; 2025
+    </p>
+  </footer>
+
+  <!-- ════ SCRIPTS ════ -->
+  <script>
+    /* ── Tab switch ── */
+    function switchTab(btn, prefix, id) {
+      btn.closest('.tabs').querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      btn.classList.add('active');
+      const scope = btn.closest('article') || btn.closest('section');
+      scope.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      document.getElementById(prefix + '-' + id).classList.add('active');
+    }
+
+    /* ── Scroll reveal ── */
+    const io = new IntersectionObserver(
+      entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('show'); }),
+      { threshold: 0.06 }
+    );
+    document.querySelectorAll('.entry').forEach(el => io.observe(el));
+
+    /* ══ EXERCISE ENGINE ══ */
+    const EX_TOTAL = 10;
+    let exDone = 0, exCorrect = 0;
+    const exResults = {};
+
+    function markExercise(id, correct, label, answer) {
+      if (exResults[id]) return;
+      exResults[id] = { correct, label, answer };
+      exDone++; if (correct) exCorrect++;
+      document.getElementById('ex-counter').textContent = exDone + ' / ' + EX_TOTAL;
+      document.getElementById('ex-score-badge').textContent = exDone > 0 ? '✓ ' + exCorrect : '';
+      document.getElementById('ex-prog-fill').style.width = (exDone / EX_TOTAL * 100) + '%';
+      if (exDone === EX_TOTAL) showReview();
+    }
+
+    function showReview() {
+      const pct = Math.round(exCorrect / EX_TOTAL * 100);
+      const msg = pct === 100 ? 'Perfect score!' : pct >= 70 ? 'Great work!' : pct >= 50 ? 'Good effort.' : 'Keep practising!';
+      document.getElementById('review-title').textContent = msg + ' — ' + exCorrect + ' / ' + EX_TOTAL + ' correct (' + pct + '%)';
+      const list = document.getElementById('review-list');
+      list.innerHTML = '';
+      Object.entries(exResults).forEach(([id, r]) => {
+        const num = id.replace('ex', '');
+        const row = document.createElement('div');
+        row.className = 'review-row ' + (r.correct ? 'rv-ok' : 'rv-err');
+        row.innerHTML = '<span class="review-num">' + num.padStart(2, '0') + '</span>'
+          + '<span class="review-icon">' + (r.correct ? '✓' : '✗') + '</span>'
+          + '<span class="review-text"><strong>' + r.label + '</strong> — '
+          + (r.correct ? 'Correct.' : 'Correct answer: <em>' + r.answer + '</em>') + '</span>';
+        list.appendChild(row);
+      });
+      const rev = document.getElementById('ex-review');
+      rev.style.display = 'block';
+      rev.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    /* ── § A: Spot the Error ── */
+    function gradeSpot(btn, exId, correctKey, explanation) {
+      if (exResults[exId]) return;
+      const isCorrect = correctKey !== '__wrong__';
+      const opts = btn.closest('.ex-opts-row').querySelectorAll('.ex-opt');
+      opts.forEach(b => b.disabled = true);
+      let correctExpl = '';
+      opts.forEach(b => {
+        const m = b.getAttribute('onclick').match(/gradeSpot\(this,'[^']+','([^']+)','([^']*)'\)/);
+        if (m && m[1] !== '__wrong__') { correctExpl = m[2]; b.classList.add('ex-correct'); }
+      });
+      const fb = document.getElementById(exId + '-fb');
+      if (isCorrect) {
+        btn.classList.remove('ex-correct'); btn.classList.add('ex-correct');
+        fb.className = 'ex-feedback ok';
+        fb.innerHTML = '✓ Correct! ' + explanation;
+      } else {
+        btn.classList.add('ex-wrong');
+        fb.className = 'ex-feedback err';
+        fb.innerHTML = '✗ Not quite. ' + correctExpl;
+      }
+      markExercise(exId, isCorrect, 'Spot the Error', correctKey);
+    }
+
+    function shuffleSpotOptions() {
+      ['ex1-opts', 'ex2-opts', 'ex3-opts'].forEach(rowId => {
+        const row = document.getElementById(rowId);
+        if (!row) return;
+        const btns = [...row.querySelectorAll('.ex-opt')];
+        btns.sort(() => Math.random() - .5);
+        btns.forEach(b => row.appendChild(b));
+      });
+    }
+
+    /* ── § B: Word Order ── */
+    const WO_DATA = {
+      ex4: {
+        words: ['swimming', 'the', 'at', 'are', 'They', 'pool', 'right', 'now'],
+        correct: 'they are swimming at the pool right now',
+        explanation: '<strong>Subject + are + verb-ing + place + time</strong>. "Swimming" uses Rule 3 (CVC → double m).'
+      },
+      ex5: {
+        words: ['Is', 'moment', 'the', 'at', 'cooking', 'she', 'dinner'],
+        correct: 'is she cooking dinner at the moment',
+        explanation: '<strong>Is + subject + verb-ing + complement</strong> — auxiliary before subject in Yes/No questions.'
+      },
+      ex6: {
+        words: ["isn't", 'he', 'the', 'Why', 'listening', 'to', 'teacher'],
+        correct: "why isn't he listening to the teacher",
+        explanation: '<strong>Why + isn\'t + subject + verb-ing</strong>. "Listening" = standard -ing (Rule 1).'
+      }
+    };
+
+    const woState = {};
+
+    function initWordOrder(exId) {
+      const data = WO_DATA[exId];
+      const shuffled = [...data.words].sort(() => Math.random() - .5);
+      const correctNorm = data.correct.toLowerCase();
+      if (shuffled.join(' ').toLowerCase() === correctNorm) shuffled.reverse();
+      woState[exId] = { placed: [], remaining: shuffled };
+      renderWO(exId);
+    }
+
+    function renderWO(exId) {
+      const state = woState[exId];
+      const target = document.getElementById(exId + '-target');
+      const bank = document.getElementById(exId + '-bank');
+      target.innerHTML = state.placed.length === 0
+        ? '<span class="wo-placeholder">Click words below to build the sentence…</span>' : '';
+      state.placed.forEach((w, i) => {
+        const chip = document.createElement('span');
+        chip.className = 'wo-chip wo-placed';
+        chip.textContent = w;
+        chip.onclick = () => { if (exResults[exId]) return; state.placed.splice(i, 1); state.remaining.push(w); renderWO(exId); };
+        target.appendChild(chip);
+      });
+      bank.innerHTML = '';
+      state.remaining.forEach((w, i) => {
+        const chip = document.createElement('span');
+        chip.className = 'wo-chip';
+        chip.textContent = w;
+        chip.onclick = () => { if (exResults[exId]) return; state.remaining.splice(i, 1); state.placed.push(w); renderWO(exId); };
+        bank.appendChild(chip);
+      });
+    }
+
+    function checkWordOrder(exId) {
+      if (exResults[exId]) return;
+      const state = woState[exId];
+      if (state.placed.length === 0) return;
+      const data = WO_DATA[exId];
+      const attempt = state.placed.join(' ').toLowerCase();
+      const isCorrect = attempt === data.correct;
+      const target = document.getElementById(exId + '-target');
+      target.classList.remove('wo-correct', 'wo-wrong');
+      target.classList.add(isCorrect ? 'wo-correct' : 'wo-wrong');
+      const fb = document.getElementById(exId + '-fb');
+      fb.className = 'ex-feedback ' + (isCorrect ? 'ok' : 'err');
+      fb.innerHTML = isCorrect ? '✓ Correct! ' + data.explanation : '✗ Not quite — try rearranging. ' + data.explanation;
+      markExercise(exId, isCorrect, 'Word Order', data.words.join(' '));
+    }
+
+    function resetWordOrder(exId) {
+      if (exResults[exId]) return;
+      const data = WO_DATA[exId];
+      woState[exId] = { placed: [], remaining: [...data.words].sort(() => Math.random() - .5) };
+      renderWO(exId);
+      document.getElementById(exId + '-target').classList.remove('wo-correct', 'wo-wrong');
+      const fb = document.getElementById(exId + '-fb');
+      fb.className = 'ex-feedback'; fb.style.display = 'none';
+    }
+
+    /* ── § C: Classify ── */
+    const CL_DATA = {
+      ex7: {
+        items: [
+          { text: 'ask', col: 'ex7-std' },
+          { text: 'run', col: 'ex7-spl' },
+          { text: 'make', col: 'ex7-spl' },
+          { text: 'play', col: 'ex7-std' },
+          { text: 'swim', col: 'ex7-spl' },
+          { text: 'read', col: 'ex7-std' },
+        ],
+        cols: ['ex7-std', 'ex7-spl'],
+        explanation: 'Standard: <strong>ask→asking, play→playing, read→reading</strong>. Special: <strong>run→running</strong> (CVC double), <strong>make→making</strong> (drop -e), <strong>swim→swimming</strong> (CVC double).'
+      },
+      ex8: {
+        items: [
+          { text: 'She is singing.', col: 'ex8-aff' },
+          { text: "He isn't reading.", col: 'ex8-neg' },
+          { text: 'Are they dancing?', col: 'ex8-q' },
+          { text: 'I am writing.', col: 'ex8-aff' },
+          { text: "We aren't sleeping.", col: 'ex8-neg' },
+          { text: 'Is it raining?', col: 'ex8-q' },
+        ],
+        cols: ['ex8-aff', 'ex8-neg', 'ex8-q'],
+        explanation: 'Affirmatives state ongoing facts. Negatives use isn\'t/aren\'t. Questions invert Am/Is/Are with the subject.'
+      },
+      ex9: {
+        items: [
+          { text: 'know', col: 'ex9-stat' },
+          { text: 'run', col: 'ex9-dyn' },
+          { text: 'love', col: 'ex9-stat' },
+          { text: 'cook', col: 'ex9-dyn' },
+          { text: 'believe', col: 'ex9-stat' },
+          { text: 'write', col: 'ex9-dyn' },
+        ],
+        cols: ['ex9-stat', 'ex9-dyn'],
+        explanation: 'Stative (no -ing): <strong>know, love, believe</strong> — mental/emotional states. Dynamic (can use -ing): <strong>run, cook, write</strong> — physical actions.'
+      },
+      ex10: {
+        items: [
+          { text: 'She is dancing.', col: 'ex10-ok' },
+          { text: 'Does she is singing?', col: 'ex10-err' },
+          { text: "I'm not talking.", col: 'ex10-ok' },
+          { text: 'He is run fast.', col: 'ex10-err' },
+          { text: 'Are you listening?', col: 'ex10-ok' },
+          { text: 'They are know this.', col: 'ex10-err' },
+        ],
+        cols: ['ex10-ok', 'ex10-err'],
+        explanation: 'Errors: <em>Does she is</em> (use Is she…?), <em>is run</em> (needs -ing: is running), <em>are know</em> (know is stative, no -ing).'
+      }
+    };
+
+    const clState = {};
+    let selectedChip = null;
+
+    function initClassify(exId) {
+      clState[exId] = { placements: {} };
+      const data = CL_DATA[exId];
+      const cardsEl = document.getElementById(exId + '-cards');
+      cardsEl.innerHTML = '';
+      const shuffled = [...data.items].sort(() => Math.random() - .5);
+      shuffled.forEach(item => {
+        const chip = document.createElement('div');
+        chip.className = 'cl-chip';
+        chip.textContent = item.text;
+        chip.draggable = true;
+        chip.dataset.text = item.text;
+        chip.dataset.exid = exId;
+        chip.addEventListener('dragstart', e => { e.dataTransfer.setData('text', JSON.stringify({ text: item.text, exid: exId })); });
+        chip.addEventListener('click', () => handleChipClick(chip, exId));
+        cardsEl.appendChild(chip);
+      });
+    }
+
+    function handleChipClick(chip, exId) {
+      if (exResults[exId]) return;
+      if (chip.classList.contains('cl-placed')) {
+        clState[exId].placements[chip.dataset.text] = null;
+        chip.classList.remove('cl-placed');
+        document.getElementById(exId + '-cards').appendChild(chip);
+        selectedChip = null; return;
+      }
+      if (selectedChip === chip) { selectedChip = null; chip.style.outline = ''; return; }
+      selectedChip = chip;
+      chip.style.outline = '2px solid var(--blue)';
+    }
+
+    function dropCard(event, colId, exId) {
+      event.preventDefault();
+      if (exResults[exId]) return;
+      document.getElementById(colId).classList.remove('drag-over');
+      let text, eid;
+      try { const d = JSON.parse(event.dataTransfer.getData('text')); text = d.text; eid = d.exid; } catch (e) { return; }
+      if (eid !== exId) return;
+      placeChipInCol(text, colId, exId);
+    }
+
+    function placeChipInCol(text, colId, exId) {
+      const zone = document.getElementById(colId + '-zone');
+      const cardsEl = document.getElementById(exId + '-cards');
+      let chip = [...cardsEl.querySelectorAll('.cl-chip'), ...document.querySelectorAll('#' + exId + '-wrap .cl-chip')]
+        .find(c => c.dataset.text === text);
+      if (!chip) return;
+      chip.style.outline = '';
+      chip.classList.add('cl-placed');
+      zone.appendChild(chip);
+      clState[exId].placements[text] = colId;
+      selectedChip = null;
+    }
+
+    document.addEventListener('click', e => {
+      if (!selectedChip) return;
+      const col = e.target.closest('.classify-col');
+      if (!col) return;
+      const exId = selectedChip.dataset.exid;
+      if (exResults[exId]) return;
+      selectedChip.style.outline = '';
+      placeChipInCol(selectedChip.dataset.text, col.id, exId);
+      selectedChip = null;
+    });
+
+    function checkClassify(exId) {
+      if (exResults[exId]) return;
+      const data = CL_DATA[exId];
+      const placements = clState[exId].placements;
+      if (!data.items.every(item => placements[item.text])) {
+        const fb = document.getElementById(exId + '-fb');
+        fb.className = 'ex-feedback info'; fb.textContent = 'Place all cards before checking.'; return;
+      }
+      let allCorrect = true;
+      data.items.forEach(item => {
+        const chip = [...document.querySelectorAll('#' + exId + '-wrap .cl-chip')].find(c => c.dataset.text === item.text);
+        const correct = placements[item.text] === item.col;
+        if (!correct) allCorrect = false;
+        if (chip) { chip.classList.remove('cl-correct', 'cl-wrong'); chip.classList.add(correct ? 'cl-correct' : 'cl-wrong'); }
+      });
+      data.cols.forEach(colId => {
+        const col = document.getElementById(colId);
+        const allRight = data.items.filter(i => i.col === colId).every(i => placements[i.text] === colId);
+        col.classList.remove('col-correct', 'col-wrong');
+        col.classList.add(allRight ? 'col-correct' : 'col-wrong');
+      });
+      const fb = document.getElementById(exId + '-fb');
+      fb.className = 'ex-feedback ' + (allCorrect ? 'ok' : 'err');
+      fb.innerHTML = allCorrect ? '✓ Perfect! ' + data.explanation : '✗ Some items are in the wrong column. ' + data.explanation;
+      markExercise(exId, allCorrect, 'Classify', data.items.map(i => i.text + ' → ' + i.col.split('-').pop()).join(', '));
+    }
+
+    function resetClassify(exId) {
+      if (exResults[exId]) return;
+      CL_DATA[exId].cols.forEach(colId => {
+        document.getElementById(colId + '-zone').innerHTML = '';
+        document.getElementById(colId).classList.remove('col-correct', 'col-wrong');
+      });
+      clState[exId] = { placements: {} };
+      initClassify(exId);
+      const fb = document.getElementById(exId + '-fb');
+      fb.className = 'ex-feedback'; fb.style.display = 'none';
+    }
+
+    /* ── QUIZ ── */
+    const QUESTIONS = [
+      { q: 'She _________ dinner right now.', opts: ['is cooking', 'cooks', 'does cooking'], correct: 'is cooking' },
+      { q: 'Look! The children _________ in the garden.', opts: ['are playing', 'play', 'is playing'], correct: 'are playing' },
+      { q: '_________ you listening to me?', opts: ['Are', 'Do', 'Is'], correct: 'Are' },
+      { q: 'He _________ his homework at the moment.', opts: ["doesn't do", "isn't doing", 'not doing'], correct: "isn't doing" },
+      { q: 'What _________ right now?', opts: ['do you do', 'are you doing', 'you are doing'], correct: 'are you doing' },
+      { q: 'The correct -ing form of "swim" is:', opts: ['swiming', 'swimming', 'swimeing'], correct: 'swimming' },
+      { q: 'I _________ the answer. (state)', opts: ['am knowing', 'knows', 'know'], correct: 'know' },
+      { q: '_________ she coming to the party tomorrow?', opts: ['Does', 'Is', 'Are'], correct: 'Is' },
+      { q: 'They _________ TV — they\'re studying.', opts: ["aren't watching", "don't watching", "not watching"], correct: "aren't watching" },
+      { q: '"Make" in the -ing form is:', opts: ['makeing', 'making', 'macking'], correct: 'making' },
+    ];
+
+    let idx = 0, score = 0, chart = null;
+
+    function initChart() {
+      chart = new Chart(document.getElementById('progressChart').getContext('2d'), {
+        type: 'doughnut',
+        data: { labels: ['Correct', 'Remaining'], datasets: [{ data: [0, 10], backgroundColor: ['#00a859', '#e4e2de'], borderWidth: 0 }] },
+        options: { responsive: false, cutout: '78%', plugins: { legend: { display: false } } }
+      });
+    }
+
+    function loadQ() {
+      const q = QUESTIONS[idx];
+      const pct = Math.round((idx + 1) / QUESTIONS.length * 100);
+      document.getElementById('q-number').textContent = 'Question ' + (idx + 1) + ' of ' + QUESTIONS.length;
+      document.getElementById('prog-pct').textContent = pct + '%';
+      document.getElementById('prog-fill').style.width = pct + '%';
+      document.getElementById('q-sentence').textContent = q.q;
+      document.getElementById('options-container').innerHTML = '';
+      const fb = document.getElementById('q-feedback');
+      fb.style.display = 'none'; fb.className = '';
+      document.getElementById('next-button').style.display = 'none';
+      const shuffled = [...q.opts].sort(() => Math.random() - .5);
+      shuffled.forEach(opt => {
+        const b = document.createElement('button');
+        b.className = 'quiz-opt';
+        b.textContent = opt;
+        b.onclick = () => checkAns(opt);
+        document.getElementById('options-container').appendChild(b);
+      });
+    }
+
+    function checkAns(sel) {
+      const correct = QUESTIONS[idx].correct;
+      document.querySelectorAll('.quiz-opt').forEach(b => {
+        b.disabled = true;
+        if (b.textContent === correct) b.classList.add('correct');
+        if (b.textContent === sel && sel !== correct) b.classList.add('wrong');
+      });
+      const fb = document.getElementById('q-feedback');
+      fb.style.display = 'block';
+      if (sel === correct) { score++; fb.textContent = '✓  Correct. Well done.'; fb.className = 'ok'; }
+      else { fb.textContent = '✗  Incorrect. The correct answer is "' + correct + '".'; fb.className = 'err'; }
+      document.getElementById('score-text').textContent = score + ' / ' + QUESTIONS.length;
+      chart.data.datasets[0].data = [score, QUESTIONS.length - score];
+      chart.update();
+      document.getElementById('next-button').style.display = 'block';
+    }
+
+    document.getElementById('next-button').onclick = () => {
+      idx++;
+      if (idx < QUESTIONS.length) { loadQ(); return; }
+      const pct = Math.round(score / QUESTIONS.length * 100);
+      const msg = pct >= 80 ? 'Excellent work.' : pct >= 60 ? 'Good effort. Keep practising.' : "Keep studying — you're making progress.";
+      document.querySelector('.quiz-section').innerHTML =
+        '<div style="text-align:center;padding:3.5rem 2rem">'
+        + '<p style="font-family:\'JetBrains Mono\',monospace;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--green);margin-bottom:.9rem">— Session Complete</p>'
+        + '<h2 style="font-family:\'Playfair Display\',serif;font-size:2.2rem;font-weight:900;color:var(--blue);margin-bottom:.7rem">' + msg + '</h2>'
+        + '<p style="color:var(--muted);font-size:.95rem;margin-bottom:.4rem">You answered <strong style="color:var(--blue)">' + score + '</strong> of ' + QUESTIONS.length + ' questions correctly.</p>'
+        + '<p style="font-family:\'Playfair Display\',serif;font-size:2.5rem;font-weight:900;color:var(--green);margin:1rem 0 2rem">' + pct + '%</p>'
+        + '<button onclick="location.reload()" style="font-family:\'JetBrains Mono\',monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;padding:13px 36px;background:var(--blue);color:#fff;border:none;border-radius:3px;cursor:pointer;font-weight:700;" onmouseover="this.style.background=\'#00367a\'" onmouseout="this.style.background=\'#004c8f\'">Retake Quiz</button>'
+        + '</div>';
+    };
+
+    window.onload = () => {
+      initChart(); loadQ();
+      shuffleSpotOptions();
+      ['ex4', 'ex5', 'ex6'].forEach(id => initWordOrder(id));
+      ['ex7', 'ex8', 'ex9', 'ex10'].forEach(id => initClassify(id));
+    };
+
+
+  </script>
+
+  <!-- ════ FONT SIZE BAR ════ -->
+  <div class="font-bar" id="font-bar">
+    <span class="font-bar-label">Text size</span>
+    <div class="font-sep"></div>
+    <button class="font-btn" id="fb-sm" onclick="setSize('sm')" title="Small text">A<sup
+        style="font-size:.55em">−</sup></button>
+    <button class="font-btn active-size" id="fb-md" onclick="setSize('md')" title="Normal text">A</button>
+    <button class="font-btn" id="fb-lg" onclick="setSize('lg')" title="Large text">A<sup
+        style="font-size:.55em">+</sup></button>
+  </div>
+
+  <script>
+    /* ── Font size bar ── */
+    (function () {
+      var sizes = { sm: 14, md: 16, lg: 19 };
+      var saved = localStorage.getItem('cele-font') || 'md';
+      function apply(key) {
+        document.documentElement.style.fontSize = sizes[key] + 'px';
+        localStorage.setItem('cele-font', key);
+        ['sm', 'md', 'lg'].forEach(function (k) {
+          var b = document.getElementById('fb-' + k);
+          if (b) b.classList.toggle('active-size', k === key);
+        });
+      }
+      window.setSize = apply;
+      apply(saved);
+    })();
+  </script>
+</body>
+
+</html>

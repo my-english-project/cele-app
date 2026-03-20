@@ -1,85 +1,679 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Basic II &mdash; CELE UTS English</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;700&display=swap"
+    rel="stylesheet">
   <style>
-    :root{--blue:#004c8f;--blue-mid:#00367a;--blue-deep:#002a5e;--yellow:#f5c500;--green:#00a859;--green-dark:#008a48;--green-dim:rgba(0,168,89,.10);--blue-dim:rgba(0,76,143,.07);--blue-line:rgba(0,76,143,.15);--green-line:rgba(0,168,89,.20);--page:#f7f5f2;--card:#ffffff;--ink:#1a1a1f;--body:#3d3d45;--muted:#7a7a88;--rule:#e4e2de}
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    html{scroll-behavior:smooth}
-    body{background:var(--page);color:var(--body);font-family:'Lora',Georgia,serif;min-height:100vh}
-    .display{font-family:'Playfair Display',Georgia,serif}
-    .mono{font-family:'JetBrains Mono',monospace}
-    header{background:var(--blue);position:sticky;top:0;z-index:100;box-shadow:0 2px 20px rgba(0,0,0,.18)}
-    .header-inner{max-width:1200px;margin:0 auto;padding:0 clamp(1rem,5vw,3rem);height:68px;display:flex;align-items:center;justify-content:space-between;gap:1rem}
-    .logo-pill{background:rgba(255,255,255,.14);border:1.5px solid rgba(255,255,255,.28);border-radius:8px;padding:4px 12px;backdrop-filter:blur(6px);display:flex;align-items:center;text-decoration:none;flex-shrink:0}
-    .logo-pill img{height:40px;width:auto}
-    .logo-fallback{font-family:'Playfair Display',serif;font-weight:900;font-size:1.2rem;color:#fff}
-    .header-center{flex:1;text-align:center;pointer-events:none;padding:0 1rem}
-    .header-center .eyebrow{font-family:'JetBrains Mono',monospace;font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:2px}
-    .header-center .h-title{font-family:'Playfair Display',serif;font-size:1rem;font-weight:900;color:#fff}
-    .breadcrumb-bar{background:var(--blue-deep);border-bottom:1px solid rgba(255,255,255,.07)}
-    .breadcrumb-inner{max-width:1200px;margin:0 auto;padding:.55rem clamp(1rem,5vw,3rem);display:flex;align-items:center;gap:.35rem;flex-wrap:wrap}
-    .breadcrumb-inner a,.breadcrumb-inner span{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;color:rgba(255,255,255,.45);transition:color .15s}
-    .breadcrumb-inner a:hover{color:var(--yellow)}
-    .breadcrumb-inner .bc-sep{color:rgba(255,255,255,.2)}
-    .breadcrumb-inner .bc-current{color:rgba(255,255,255,.8)}
-    .hero{background:var(--blue);background-image:repeating-linear-gradient(-55deg,rgba(255,255,255,.025) 0px,rgba(255,255,255,.025) 1px,transparent 1px,transparent 18px);padding:clamp(2.5rem,7vw,5rem) clamp(1rem,5vw,3rem) clamp(2rem,5vw,4rem);border-bottom:4px solid var(--green)}
-    .hero-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:end}
-    .hero-eyebrow{font-family:'JetBrains Mono',monospace;font-size:.63rem;letter-spacing:.2em;text-transform:uppercase;color:var(--green);margin-bottom:1rem;display:flex;align-items:center;gap:10px}
-    .hero-eyebrow::before{content:'';display:block;width:28px;height:1.5px;background:var(--green)}
-    .hero-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,4.5vw,3.6rem);font-weight:900;line-height:1.06;color:#fff}
-    .hero-title em{color:var(--yellow);font-style:italic}
-    .hero-sub{margin-top:1rem;max-width:560px;font-size:.9rem;line-height:1.8;color:rgba(255,255,255,.62)}
-    .hero-meta{text-align:right;font-family:'JetBrains Mono',monospace;font-size:.62rem;color:rgba(255,255,255,.38);letter-spacing:.07em;line-height:2.1;border-left:1px solid rgba(255,255,255,.12);padding-left:1.6rem}
-    .hero-meta strong{display:block;font-family:'Playfair Display',serif;font-size:1.9rem;color:var(--yellow);letter-spacing:0;line-height:1}
-    .quick-nav{background:var(--blue-deep);border-bottom:1px solid rgba(255,255,255,.08)}
-    .quick-nav-inner{max-width:1200px;margin:0 auto;padding:.8rem clamp(1rem,5vw,3rem);display:flex;gap:.45rem;flex-wrap:wrap}
-    .qn-chip{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.09em;text-transform:uppercase;color:rgba(255,255,255,.42);text-decoration:none;border:1px solid rgba(255,255,255,.1);border-radius:3px;padding:4px 10px;transition:color .15s,border-color .15s,background .15s}
-    .qn-chip:hover{color:var(--yellow);border-color:rgba(245,197,0,.35);background:rgba(245,197,0,.07)}
-    .main-wrap{max-width:1200px;margin:0 auto;padding:0 clamp(1rem,5vw,3rem) 5rem}
-    .topics-section{padding:2.5rem 0}
-    .topics-section h2{font-family:'Playfair Display',serif;font-size:clamp(1.3rem,2.2vw,1.75rem);font-weight:900;color:var(--blue);margin-bottom:.4rem}
-    .level-descriptor{font-size:.85rem;color:var(--muted);font-style:italic;border-left:3px solid var(--green);padding-left:.75rem;margin-bottom:2rem;line-height:1.65}
-    .topics-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:.85rem}
-    .topic-card{background:var(--card);border:1px solid var(--blue-line);border-left:4px solid var(--blue);border-radius:2px;padding:1.1rem 1.3rem;text-decoration:none;color:var(--body);display:flex;align-items:center;gap:1rem;box-shadow:0 1px 5px rgba(0,76,143,.05);transition:box-shadow .18s,transform .15s,border-left-color .15s}
-    .topic-card:hover{box-shadow:0 4px 16px rgba(0,76,143,.12);transform:translateX(3px);border-left-color:var(--green)}
-    .topic-card.coming-soon{opacity:.52;pointer-events:none}
-    .topic-icon{width:38px;height:38px;border-radius:50%;background:var(--blue-dim);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
-    .topic-info{flex:1;min-width:0}
-    .topic-name{font-family:'Playfair Display',serif;font-size:.95rem;font-weight:700;color:var(--blue);margin-bottom:.15rem}
-    .topic-tag{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
-    .topic-tag.available{color:var(--green-dark)}
-    .topic-tag.soon{color:var(--yellow)}
-    .topic-arrow{font-size:.7rem;color:var(--muted);font-family:'JetBrains Mono',monospace;flex-shrink:0}
-    footer{background:var(--blue);border-top:3px solid var(--green);padding:2.5rem clamp(1rem,5vw,3rem);text-align:center;margin-top:3rem}
-    .f-logo{font-family:'Playfair Display',serif;font-size:1rem;font-weight:900;color:#fff;margin-bottom:.25rem}
-    .f-sub{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.38)}
-    .f-accent{color:var(--yellow)}
-    @media(max-width:700px){.hero-inner{grid-template-columns:1fr}.hero-meta{display:none}.header-center{display:none}.topics-grid{grid-template-columns:1fr}}
-</style>
+    :root {
+      --blue: #004c8f;
+      --blue-mid: #00367a;
+      --blue-deep: #002a5e;
+      --yellow: #f5c500;
+      --green: #00a859;
+      --green-dark: #008a48;
+      --green-dim: rgba(0, 168, 89, .10);
+      --blue-dim: rgba(0, 76, 143, .07);
+      --blue-line: rgba(0, 76, 143, .15);
+      --green-line: rgba(0, 168, 89, .20);
+      --page: #f7f5f2;
+      --card: #ffffff;
+      --ink: #1a1a1f;
+      --body: #3d3d45;
+      --muted: #7a7a88;
+      --rule: #e4e2de
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
+
+    html {
+      scroll-behavior: smooth
+    }
+
+    body {
+      background: var(--page);
+      color: var(--body);
+      font-family: 'Lora', Georgia, serif;
+      min-height: 100vh
+    }
+
+    .display {
+      font-family: 'Playfair Display', Georgia, serif
+    }
+
+    .mono {
+      font-family: 'JetBrains Mono', monospace
+    }
+
+    header {
+      background: var(--blue);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 20px rgba(0, 0, 0, .18)
+    }
+
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 clamp(1rem, 5vw, 3rem);
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem
+    }
+
+    .logo-pill {
+      background: rgba(255, 255, 255, .14);
+      border: 1.5px solid rgba(255, 255, 255, .28);
+      border-radius: 8px;
+      padding: 4px 12px;
+      backdrop-filter: blur(6px);
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      flex-shrink: 0
+    }
+
+    .logo-pill img {
+      height: 40px;
+      width: auto
+    }
+
+    .logo-fallback {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: 1.2rem;
+      color: #fff
+    }
+
+    .header-center {
+      flex: 1;
+      text-align: center;
+      pointer-events: none;
+      padding: 0 1rem
+    }
+
+    .header-center .eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .55rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .5);
+      margin-bottom: 2px
+    }
+
+    .header-center .h-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 900;
+      color: #fff
+    }
+
+    .breadcrumb-bar {
+      background: var(--blue-deep);
+      border-bottom: 1px solid rgba(255, 255, 255, .07)
+    }
+
+    .breadcrumb-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: .55rem clamp(1rem, 5vw, 3rem);
+      display: flex;
+      align-items: center;
+      gap: .35rem;
+      flex-wrap: wrap
+    }
+
+    .breadcrumb-inner a,
+    .breadcrumb-inner span {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .6rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: rgba(255, 255, 255, .45);
+      transition: color .15s
+    }
+
+    .breadcrumb-inner a:hover {
+      color: var(--yellow)
+    }
+
+    .breadcrumb-inner .bc-sep {
+      color: rgba(255, 255, 255, .2)
+    }
+
+    .breadcrumb-inner .bc-current {
+      color: rgba(255, 255, 255, .8)
+    }
+
+    .hero {
+      background: var(--blue);
+      background-image: repeating-linear-gradient(-55deg, rgba(255, 255, 255, .025) 0px, rgba(255, 255, 255, .025) 1px, transparent 1px, transparent 18px);
+      padding: clamp(2.5rem, 7vw, 5rem) clamp(1rem, 5vw, 3rem) clamp(2rem, 5vw, 4rem);
+      border-bottom: 4px solid var(--green)
+    }
+
+    .hero-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 2rem;
+      align-items: end
+    }
+
+    .hero-eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .63rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 10px
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 28px;
+      height: 1.5px;
+      background: var(--green)
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4.5vw, 3.6rem);
+      font-weight: 900;
+      line-height: 1.06;
+      color: #fff
+    }
+
+    .hero-title em {
+      color: var(--yellow);
+      font-style: italic
+    }
+
+    .hero-sub {
+      margin-top: 1rem;
+      max-width: 560px;
+      font-size: .9rem;
+      line-height: 1.8;
+      color: rgba(255, 255, 255, .62)
+    }
+
+    .hero-meta {
+      text-align: right;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .62rem;
+      color: rgba(255, 255, 255, .38);
+      letter-spacing: .07em;
+      line-height: 2.1;
+      border-left: 1px solid rgba(255, 255, 255, .12);
+      padding-left: 1.6rem
+    }
+
+    .hero-meta strong {
+      display: block;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.9rem;
+      color: var(--yellow);
+      letter-spacing: 0;
+      line-height: 1
+    }
+
+    .quick-nav {
+      background: var(--blue-deep);
+      border-bottom: 1px solid rgba(255, 255, 255, .08)
+    }
+
+    .quick-nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: .8rem clamp(1rem, 5vw, 3rem);
+      display: flex;
+      gap: .45rem;
+      flex-wrap: wrap
+    }
+
+    .qn-chip {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .58rem;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .42);
+      text-decoration: none;
+      border: 1px solid rgba(255, 255, 255, .1);
+      border-radius: 3px;
+      padding: 4px 10px;
+      transition: color .15s, border-color .15s, background .15s
+    }
+
+    .qn-chip:hover {
+      color: var(--yellow);
+      border-color: rgba(245, 197, 0, .35);
+      background: rgba(245, 197, 0, .07)
+    }
+
+    .main-wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 clamp(1rem, 5vw, 3rem) 5rem
+    }
+
+    .topics-section {
+      padding: 2.5rem 0
+    }
+
+    .topics-section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.3rem, 2.2vw, 1.75rem);
+      font-weight: 900;
+      color: var(--blue);
+      margin-bottom: .4rem
+    }
+
+    .level-descriptor {
+      font-size: .85rem;
+      color: var(--muted);
+      font-style: italic;
+      border-left: 3px solid var(--green);
+      padding-left: .75rem;
+      margin-bottom: 2rem;
+      line-height: 1.65
+    }
+
+    .topics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: .85rem
+    }
+
+    .topic-card {
+      background: var(--card);
+      border: 1px solid var(--blue-line);
+      border-left: 4px solid var(--blue);
+      border-radius: 2px;
+      padding: 1.1rem 1.3rem;
+      text-decoration: none;
+      color: var(--body);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      box-shadow: 0 1px 5px rgba(0, 76, 143, .05);
+      transition: box-shadow .18s, transform .15s, border-left-color .15s
+    }
+
+    .topic-card:hover {
+      box-shadow: 0 4px 16px rgba(0, 76, 143, .12);
+      transform: translateX(3px);
+      border-left-color: var(--green)
+    }
+
+    .topic-card.coming-soon {
+      opacity: .52;
+      pointer-events: none
+    }
+
+    .topic-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--blue-dim);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0
+    }
+
+    .topic-info {
+      flex: 1;
+      min-width: 0
+    }
+
+    .topic-name {
+      font-family: 'Playfair Display', serif;
+      font-size: .95rem;
+      font-weight: 700;
+      color: var(--blue);
+      margin-bottom: .15rem
+    }
+
+    .topic-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .58rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--muted)
+    }
+
+    .topic-tag.available {
+      color: var(--green-dark)
+    }
+
+    .topic-tag.soon {
+      color: var(--yellow)
+    }
+
+    .topic-arrow {
+      font-size: .7rem;
+      color: var(--muted);
+      font-family: 'JetBrains Mono', monospace;
+      flex-shrink: 0
+    }
+
+    footer {
+      background: var(--blue);
+      border-top: 3px solid var(--green);
+      padding: 2.5rem clamp(1rem, 5vw, 3rem);
+      text-align: center;
+      margin-top: 3rem
+    }
+
+    .f-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 900;
+      color: #fff;
+      margin-bottom: .25rem
+    }
+
+    .f-sub {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .58rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .38)
+    }
+
+    .f-accent {
+      color: var(--yellow)
+    }
+
+    @media(max-width:700px) {
+      .hero-inner {
+        grid-template-columns: 1fr
+      }
+
+      .hero-meta {
+        display: none
+      }
+
+      .header-center {
+        display: none
+      }
+
+      .topics-grid {
+        grid-template-columns: 1fr
+      }
+    }
+
+    /* ── FONT SIZE BAR ── */
+    .font-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 200;
+      background: var(--blue-deep);
+      border-top: 2px solid var(--green);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: .6rem;
+      padding: .5rem 1rem;
+      box-shadow: 0 -2px 16px rgba(0, 0, 0, .22);
+    }
+
+    .font-bar-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .58rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .45);
+    }
+
+    .font-btn {
+      height: 28px;
+      min-width: 28px;
+      padding: 0 8px;
+      border-radius: 5px;
+      border: 1.5px solid rgba(255, 255, 255, .22);
+      background: rgba(255, 255, 255, .08);
+      color: #fff;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .78rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .14s, border-color .14s;
+      user-select: none;
+    }
+
+    .font-btn:hover {
+      background: rgba(255, 255, 255, .20);
+      border-color: rgba(255, 255, 255, .55)
+    }
+
+    .font-btn.active-size {
+      background: var(--green);
+      border-color: var(--green);
+      color: #fff
+    }
+
+    .font-sep {
+      width: 1px;
+      height: 18px;
+      background: rgba(255, 255, 255, .15)
+    }
+
+    /* push page content above the fixed bar */
+    body {
+      padding-bottom: 48px
+    }
+  </style>
 </head>
+
 <body>
-<header><div class="header-inner"><a href="../index.html" class="logo-pill"><img src="data:image/png;base64,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" alt="CELE" onerror="this.parentElement.innerHTML='&lt;span class=&quot;logo-fallback&quot;&gt;CELE&lt;/span&gt;'"></a><div class="header-center"><p class="eyebrow">CELE &middot; English Language Program</p><p class="h-title display">Basic II</p></div></div></header>
-<nav class="breadcrumb-bar"><div class="breadcrumb-inner"><a href="../index.html">Home</a><span class="bc-sep"> | </span><a href="../index.html#basic">Basic</a><span class="bc-sep"> | </span><span class="bc-current">Basic II</span></div></nav>
-<section class="hero"><div class="hero-inner"><div><p class="hero-eyebrow">Level A1 &middot; Basic Grade</p><h1 class="hero-title display">Basic <em>II</em></h1><p class="hero-sub">Expanding everyday English: routines, descriptions, simple past tense, and basic modal verbs.</p></div><div class="hero-meta"><strong>A1</strong>CEFR Level<br>&#8212;<br>14 Topics<br>Basic Grade</div></div></section>
-<nav class="quick-nav"><div class="quick-nav-inner"><a class="qn-chip" href="#">01. S. Present</a><a class="qn-chip" href="#">02. There is/are</a><a class="qn-chip" href="#">03. Was/Were</a><a class="qn-chip" href="#">04. Simple Past</a><a class="qn-chip" href="#">05. Can/Can't</a></div></nav>
-<div class="main-wrap"><section class="topics-section"><h2 class="display">Basic II &mdash; Grammar Contents</h2><p class="level-descriptor">The student handles routine tasks, describes the immediate environment with simple structures, adverbs of frequency, and begins using the Simple Past tense.</p><div class="topics-grid"><a class="topic-card coming-soon" href="#"><div class="topic-icon">🔄</div><div class="topic-info"><p class="topic-name display">Simple Present Review: Routines</p><p class="topic-tag soon">Coming soon</p></div><span class="topic-arrow mono">&mdash;</span></a>
-<a class="topic-card coming-soon" href="#"><div class="topic-icon">📍</div><div class="topic-info"><p class="topic-name display">Prepositions of Place</p><p class="topic-tag soon">Coming soon</p></div><span class="topic-arrow mono">&mdash;</span></a>
-<a class="topic-card coming-soon" href="#"><div class="topic-icon">🏘️</div><div class="topic-info"><p class="topic-name display">There is / There are</p><p class="topic-tag soon">Coming soon</p></div><span class="topic-arrow mono">&mdash;</span></a>
-<a class="topic-card coming-soon" href="#"><div class="topic-icon">👆</div><div class="topic-info"><p class="topic-name display">This / That / These / Those</p><p class="topic-tag soon">Coming soon</p></div><span class="topic-arrow mono">&mdash;</span></a>
-<a class="topic-card coming-soon" href="#"><div class="topic-icon">❓</div><div class="topic-info"><p class="topic-name display">Do / Does: Affirmative, Negative, Questions</p><p class="topic-tag soon">Coming soon</p></div><span class="topic-arrow mono">&mdash;</span></a>
-<a class="topic-card coming-soon" href="#"><div class="topic-icon">🤲</div><div class="topic-info"><p class="topic-name display">Have / Has</p><p class="topic-tag soon">Coming soon</p></div><span class="topic-arrow mono">&mdash;</span></a>
-<a class="topic-card coming-soon" href="#"><div class="topic-icon">📊</div><div class="topic-info"><p class="topic-name display">Adverbs of Frequency</p><p class="topic-tag soon">Coming soon</p></div><span class="topic-arrow mono">&mdash;</span></a>
-<a class="topic-card coming-soon" href="#"><div class="topic-icon">🔢</div><div class="topic-info"><p class="topic-name display">How much / How many / Some / Any</p><p class="topic-tag soon">Coming soon</p></div><span class="topic-arrow mono">&mdash;</span></a>
-<a class="topic-card coming-soon" href="#"><div class="topic-icon">📦</div><div class="topic-info"><p class="topic-name display">Prepositions: in, on, under, next to</p><p class="topic-tag soon">Coming soon</p></div><span class="topic-arrow mono">&mdash;</span></a>
-<a class="topic-card coming-soon" href="#"><div class="topic-icon">⏮️</div><div class="topic-info"><p class="topic-name display">Was / Were</p><p class="topic-tag soon">Coming soon</p></div><span class="topic-arrow mono">&mdash;</span></a>
-<a class="topic-card" href="simple_past.html"><div class="topic-icon">📜</div><div class="topic-info"><p class="topic-name display">Simple Past (Regular and Irregular Verbs)</p><p class="topic-tag available">Available</p></div><span class="topic-arrow mono">&#8594;</span></a>
-<a class="topic-card coming-soon" href="#"><div class="topic-icon">💪</div><div class="topic-info"><p class="topic-name display">Can / Can't</p><p class="topic-tag soon">Coming soon</p></div><span class="topic-arrow mono">&mdash;</span></a>
-<a class="topic-card coming-soon" href="#"><div class="topic-icon">❤️</div><div class="topic-info"><p class="topic-name display">Want, Like, Would Like, Love, Hate</p><p class="topic-tag soon">Coming soon</p></div><span class="topic-arrow mono">&mdash;</span></a>
-<a class="topic-card coming-soon" href="#"><div class="topic-icon">🔤</div><div class="topic-info"><p class="topic-name display">Object Pronouns and Adverbs</p><p class="topic-tag soon">Coming soon</p></div><span class="topic-arrow mono">&mdash;</span></a>
-</div></section></div>
-<footer><p class="f-logo display">CELE &mdash; Centro de Lenguas UTS</p><p class="f-sub">Universidad Tecnol&oacute;gica de Salamanca <span class="f-accent">&middot;</span> English Language Program <span class="f-accent">&middot;</span> &copy; 2025</p></footer>
-</body></html>
+
+  <header>
+    <div class="header-inner">
+      <div class="logo-pill">
+        <img src="../assets/images/logo-uts-2024.png" alt="UTS"
+          onerror="this.parentElement.innerHTML='<span class=\'logo-fallback\'>UTS</span>'">
+      </div>
+
+      <div class="header-center">
+        <p class="eyebrow">CELE &middot; English Language Program</p>
+        <p class="h-title display">Basic II</p>
+      </div>
+
+      <div class="logo-pill">
+        <img src="../assets/images/logo_cele.png" alt="UTS"
+          onerror="this.parentElement.innerHTML='<span class=\'logo-fallback\'>UTS</span>'">
+      </div>
+    </div>
+  </header>
+
+  <nav class="breadcrumb-bar">
+    <div class="breadcrumb-inner"><a href="../index.html">Home</a><span class="bc-sep"> | </span><a
+        href="../index.html#basic">Basic</a><span class="bc-sep"> | </span><span class="bc-current">Basic II</span>
+    </div>
+  </nav>
+  <section class="hero">
+    <div class="hero-inner">
+      <div>
+        <p class="hero-eyebrow">Level A1 &middot; Basic Grade</p>
+        <h1 class="hero-title display">Basic <em>II</em></h1>
+        <p class="hero-sub">Expanding everyday English: routines, descriptions, simple past tense, and basic modal
+          verbs.</p>
+      </div>
+      <div class="hero-meta"><strong>A1</strong>CEFR Level<br>&#8212;<br>14 Topics<br>Basic Grade</div>
+    </div>
+  </section>
+  <nav class="quick-nav">
+    <div class="quick-nav-inner"><a class="qn-chip" href="#">01. S. Present</a><a class="qn-chip" href="#">02. There
+        is/are</a><a class="qn-chip" href="#">03. Was/Were</a><a class="qn-chip" href="#">04. Simple Past</a><a
+        class="qn-chip" href="#">05. Can/Can't</a></div>
+  </nav>
+  <div class="main-wrap">
+    <section class="topics-section">
+      <h2 class="display">Basic II &mdash; Grammar Contents</h2>
+      <p class="level-descriptor">The student handles routine tasks, describes the immediate environment with simple
+        structures, adverbs of frequency, and begins using the Simple Past tense.</p>
+      <div class="topics-grid"><a class="topic-card coming-soon" href="#">
+          <div class="topic-icon">🔄</div>
+          <div class="topic-info">
+            <p class="topic-name display">Simple Present Review: Routines</p>
+            <p class="topic-tag soon">Coming soon</p>
+          </div><span class="topic-arrow mono">&mdash;</span>
+        </a>
+        <a class="topic-card coming-soon" href="#">
+          <div class="topic-icon">📍</div>
+          <div class="topic-info">
+            <p class="topic-name display">Prepositions of Place</p>
+            <p class="topic-tag soon">Coming soon</p>
+          </div><span class="topic-arrow mono">&mdash;</span>
+        </a>
+        <a class="topic-card coming-soon" href="#">
+          <div class="topic-icon">🏘️</div>
+          <div class="topic-info">
+            <p class="topic-name display">There is / There are</p>
+            <p class="topic-tag soon">Coming soon</p>
+          </div><span class="topic-arrow mono">&mdash;</span>
+        </a>
+        <a class="topic-card coming-soon" href="#">
+          <div class="topic-icon">👆</div>
+          <div class="topic-info">
+            <p class="topic-name display">This / That / These / Those</p>
+            <p class="topic-tag soon">Coming soon</p>
+          </div><span class="topic-arrow mono">&mdash;</span>
+        </a>
+        <a class="topic-card coming-soon" href="#">
+          <div class="topic-icon">❓</div>
+          <div class="topic-info">
+            <p class="topic-name display">Do / Does: Affirmative, Negative, Questions</p>
+            <p class="topic-tag soon">Coming soon</p>
+          </div><span class="topic-arrow mono">&mdash;</span>
+        </a>
+        <a class="topic-card coming-soon" href="#">
+          <div class="topic-icon">🤲</div>
+          <div class="topic-info">
+            <p class="topic-name display">Have / Has</p>
+            <p class="topic-tag soon">Coming soon</p>
+          </div><span class="topic-arrow mono">&mdash;</span>
+        </a>
+        <a class="topic-card coming-soon" href="#">
+          <div class="topic-icon">📊</div>
+          <div class="topic-info">
+            <p class="topic-name display">Adverbs of Frequency</p>
+            <p class="topic-tag soon">Coming soon</p>
+          </div><span class="topic-arrow mono">&mdash;</span>
+        </a>
+        <a class="topic-card coming-soon" href="#">
+          <div class="topic-icon">🔢</div>
+          <div class="topic-info">
+            <p class="topic-name display">How much / How many / Some / Any</p>
+            <p class="topic-tag soon">Coming soon</p>
+          </div><span class="topic-arrow mono">&mdash;</span>
+        </a>
+        <a class="topic-card coming-soon" href="#">
+          <div class="topic-icon">📦</div>
+          <div class="topic-info">
+            <p class="topic-name display">Prepositions: in, on, under, next to</p>
+            <p class="topic-tag soon">Coming soon</p>
+          </div><span class="topic-arrow mono">&mdash;</span>
+        </a>
+        <a class="topic-card coming-soon" href="#">
+          <div class="topic-icon">⏮️</div>
+          <div class="topic-info">
+            <p class="topic-name display">Was / Were</p>
+            <p class="topic-tag soon">Coming soon</p>
+          </div><span class="topic-arrow mono">&mdash;</span>
+        </a>
+        <a class="topic-card" href="simple_past.html">
+          <div class="topic-icon">📜</div>
+          <div class="topic-info">
+            <p class="topic-name display">Simple Past (Regular and Irregular Verbs)</p>
+            <p class="topic-tag available">Available</p>
+          </div><span class="topic-arrow mono">&#8594;</span>
+        </a>
+        <a class="topic-card coming-soon" href="#">
+          <div class="topic-icon">💪</div>
+          <div class="topic-info">
+            <p class="topic-name display">Can / Can't</p>
+            <p class="topic-tag soon">Coming soon</p>
+          </div><span class="topic-arrow mono">&mdash;</span>
+        </a>
+        <a class="topic-card coming-soon" href="#">
+          <div class="topic-icon">❤️</div>
+          <div class="topic-info">
+            <p class="topic-name display">Want, Like, Would Like, Love, Hate</p>
+            <p class="topic-tag soon">Coming soon</p>
+          </div><span class="topic-arrow mono">&mdash;</span>
+        </a>
+        <a class="topic-card coming-soon" href="#">
+          <div class="topic-icon">🔤</div>
+          <div class="topic-info">
+            <p class="topic-name display">Object Pronouns and Adverbs</p>
+            <p class="topic-tag soon">Coming soon</p>
+          </div><span class="topic-arrow mono">&mdash;</span>
+        </a>
+      </div>
+    </section>
+  </div>
+  <footer>
+    <p class="f-logo display">CELE &mdash; Centro de Lenguas UTS</p>
+    <p class="f-sub">Universidad Tecnol&oacute;gica de Salamanca <span class="f-accent">&middot;</span> English Language
+      Program <span class="f-accent">&middot;</span> &copy; 2025</p>
+  </footer>
+
+  <!-- ════ FONT SIZE BAR ════ -->
+  <div class="font-bar" id="font-bar">
+    <span class="font-bar-label">Text size</span>
+    <div class="font-sep"></div>
+    <button class="font-btn" id="fb-sm" onclick="setSize('sm')" title="Small text">A<sup
+        style="font-size:.55em">−</sup></button>
+    <button class="font-btn active-size" id="fb-md" onclick="setSize('md')" title="Normal text">A</button>
+    <button class="font-btn" id="fb-lg" onclick="setSize('lg')" title="Large text">A<sup
+        style="font-size:.55em">+</sup></button>
+  </div>
+
+  <script>
+    /* ── Font size bar ── */
+    (function () {
+      var sizes = { sm: 14, md: 16, lg: 19 };
+      var saved = localStorage.getItem('cele-font') || 'md';
+      function apply(key) {
+        document.documentElement.style.fontSize = sizes[key] + 'px';
+        localStorage.setItem('cele-font', key);
+        ['sm', 'md', 'lg'].forEach(function (k) {
+          var b = document.getElementById('fb-' + k);
+          if (b) b.classList.toggle('active-size', k === key);
+        });
+      }
+      window.setSize = apply;
+      apply(saved);
+    })();
+  </script>
+
+</body>
+
+</html>
