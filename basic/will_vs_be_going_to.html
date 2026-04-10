@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Will vs Be Going To — CELE UTS English</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+  <style>
+    :root {
+      --blue:#004c8f; --blue-mid:#00367a; --blue-deep:#002a5e;
+      --green:#00a859; --green-dark:#008a48;
+      --green-dim:rgba(0,168,89,.10); --blue-dim:rgba(0,76,143,.07);
+      --blue-line:rgba(0,76,143,.15); --green-line:rgba(0,168,89,.20);
+      --red:#c0392b; --red-dim:rgba(192,57,43,.07);
+      --gold:#c97d00; --gold-dim:rgba(201,125,0,.08);
+      --page:#f7f5f2; --card:#ffffff; --ink:#1a1a1f;
+      --body:#3d3d45; --muted:#7a7a88; --rule:#e4e2de;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{background:var(--page);color:var(--body);font-family:'Lora',Georgia,serif;min-height:100vh;padding-bottom:48px}
+    .display{font-family:'Playfair Display',Georgia,serif}
+
+    /* HEADER */
+    header{background:var(--blue);position:sticky;top:0;z-index:100;box-shadow:0 2px 20px rgba(0,0,0,.18)}
+    .header-inner{max-width:1200px;margin:0 auto;padding:0 clamp(1rem,5vw,3rem);height:64px;display:flex;align-items:center;justify-content:space-between}
+    .logo-pill{background:rgba(255,255,255,.14);border:1.5px solid rgba(255,255,255,.28);border-radius:8px;padding:5px 14px;backdrop-filter:blur(6px);display:flex;align-items:center;text-decoration:none}
+    .logo-pill img{height:38px;width:auto}
+    .logo-fallback{font-family:'Playfair Display',serif;font-weight:900;font-size:1.3rem;color:#fff}
+    .header-center{position:absolute;left:50%;transform:translateX(-50%);text-align:center;pointer-events:none}
+    .header-center .eyebrow{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:2px}
+    .header-center .h-title{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:900;color:#fff}
+
+    /* BREADCRUMB */
+    .breadcrumb-bar{background:var(--blue-deep);border-bottom:1px solid rgba(255,255,255,.07)}
+    .breadcrumb-inner{max-width:1200px;margin:0 auto;padding:.55rem clamp(1rem,5vw,3rem);display:flex;align-items:center;gap:.35rem;flex-wrap:wrap}
+    .breadcrumb-inner a,.breadcrumb-inner span{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;color:rgba(255,255,255,.45);transition:color .15s}
+    .breadcrumb-inner a:hover{color:var(--green)}
+    .breadcrumb-inner .bc-sep{color:rgba(255,255,255,.2)}
+    .breadcrumb-inner .bc-current{color:rgba(255,255,255,.85)}
+
+    /* HERO */
+    .hero{background:var(--blue);background-image:repeating-linear-gradient(-55deg,rgba(255,255,255,.025) 0px,rgba(255,255,255,.025) 1px,transparent 1px,transparent 18px);padding:clamp(3rem,8vw,5.5rem) clamp(1rem,5vw,3rem) clamp(2.5rem,6vw,4.5rem);border-bottom:4px solid var(--green)}
+    .hero-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:end}
+    .hero-eyebrow{font-family:'JetBrains Mono',monospace;font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--green);margin-bottom:1.1rem;display:flex;align-items:center;gap:10px}
+    .hero-eyebrow::before{content:'';display:block;width:28px;height:1.5px;background:var(--green)}
+    .hero-title{font-family:'Playfair Display',serif;font-size:clamp(2.4rem,5.5vw,4.2rem);font-weight:900;line-height:1.06;color:#fff}
+    .hero-title em{color:var(--green);font-style:italic}
+    .hero-sub{margin-top:1.2rem;max-width:540px;font-size:.93rem;line-height:1.8;color:rgba(255,255,255,.65)}
+    .hero-meta{text-align:right;font-family:'JetBrains Mono',monospace;font-size:.64rem;color:rgba(255,255,255,.4);letter-spacing:.07em;line-height:2.1;border-left:1px solid rgba(255,255,255,.12);padding-left:1.8rem}
+    .hero-meta strong{display:block;font-family:'Playfair Display',serif;font-size:2rem;color:var(--green);line-height:1}
+
+    /* QUICK NAV */
+    .quick-nav{background:var(--blue-deep);border-bottom:1px solid rgba(255,255,255,.08)}
+    .quick-nav-inner{max-width:1200px;margin:0 auto;padding:.9rem clamp(1rem,5vw,3rem);display:flex;gap:.5rem;flex-wrap:wrap}
+    .qn-chip{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.09em;text-transform:uppercase;color:rgba(255,255,255,.45);text-decoration:none;border:1px solid rgba(255,255,255,.1);border-radius:3px;padding:4px 10px;transition:color .15s,border-color .15s,background .15s}
+    .qn-chip:hover{color:var(--green);border-color:var(--green-line);background:rgba(0,168,89,.08)}
+
+    /* MAIN */
+    .main-wrap{max-width:1200px;margin:0 auto;padding:0 clamp(1rem,5vw,3rem) 5rem}
+
+    /* ENTRY */
+    .entry{display:grid;grid-template-columns:72px 1fr;gap:0 2.2rem;padding:3.5rem 0;border-bottom:1px solid var(--rule);opacity:0;transform:translateY(16px);transition:opacity .55s ease,transform .55s ease}
+    .entry.show{opacity:1;transform:none}
+    .entry-num{font-family:'Playfair Display',serif;font-weight:900;font-size:4.5rem;line-height:1;color:rgba(0,76,143,.13);text-align:right;padding-top:6px;user-select:none}
+    .entry-body{min-width:0}
+    .entry-label{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--green);margin-bottom:.45rem;display:flex;align-items:center;gap:8px}
+    .entry-label::after{content:'';flex:1;max-width:40px;height:1px;background:var(--green-line)}
+    .entry-title{font-family:'Playfair Display',serif;font-size:clamp(1.5rem,3vw,2rem);font-weight:900;color:var(--blue);line-height:1.1;margin-bottom:.8rem}
+    .entry-subtitle{font-size:.84rem;color:var(--muted);font-style:italic;border-left:2.5px solid var(--green);padding-left:.75rem;margin-bottom:1.4rem}
+
+    /* TABS */
+    .tabs{display:flex;gap:0;border-bottom:1.5px solid var(--rule);margin-bottom:1.4rem;flex-wrap:wrap}
+    .tab{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;padding:8px 16px;cursor:pointer;color:var(--muted);background:none;border:none;border-bottom:2.5px solid transparent;margin-bottom:-1.5px;transition:color .15s,border-color .15s}
+    .tab:hover{color:var(--blue)}
+    .tab.active{color:var(--blue);border-bottom-color:var(--blue)}
+    .tab-panel{display:none}
+    .tab-panel.active{display:block}
+
+    /* BLOCKS */
+    .def-block{background:var(--card);border:1px solid var(--blue-line);border-left:3px solid var(--blue);border-radius:2px;padding:.95rem 1.15rem;margin-bottom:.8rem;font-size:.87rem;line-height:1.72;color:var(--body);box-shadow:0 1px 4px rgba(0,76,143,.05)}
+    .def-block strong{color:var(--blue)}
+    .def-block em{color:var(--green-dark);font-weight:600}
+    .def-block.green-accent{border-left-color:var(--green)}
+    .def-block.warn-accent{border-left-color:var(--red);background:#fff8f7}
+    .def-block.gold-accent{border-left-color:var(--gold);background:var(--gold-dim)}
+    .def-block.gold-accent strong{color:var(--gold)}
+    .def-block.dark-bg{background:var(--blue);border-color:var(--blue);color:#fff}
+    .def-block.dark-bg strong{color:var(--green)}
+
+    .wrong{color:var(--red);font-size:.82rem}
+    .right{color:var(--green-dark);font-size:.82rem}
+    .wrong::before{content:"✗  "}
+    .right::before{content:"✓  "}
+
+    .ex-list{list-style:none}
+    .ex-list li{font-style:italic;font-size:.87rem;color:var(--muted);padding:6px 0;border-bottom:1px solid var(--rule);line-height:1.6}
+    .ex-list li:last-child{border-bottom:none}
+    .ex-list li strong{color:var(--blue);font-style:normal;font-weight:700}
+    .ex-n{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--green);margin-right:6px;font-style:normal}
+    .tag{font-family:'JetBrains Mono',monospace;font-size:.58rem;font-style:normal;font-weight:700;padding:1px 6px;border-radius:2px;margin-left:4px}
+    .tag-will{background:var(--blue-dim);color:var(--blue)}
+    .tag-gtt{background:var(--green-dim);color:var(--green-dark)}
+    .tag-both{background:var(--gold-dim);color:var(--gold)}
+
+    /* SPLIT COMPARISON CARD */
+    .split-card{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--rule);border-radius:3px;overflow:hidden;margin-bottom:.8rem;box-shadow:0 1px 6px rgba(0,76,143,.05)}
+    .split-card .sc-col{padding:.9rem 1rem;font-size:.85rem;line-height:1.7}
+    .split-card .sc-col+.sc-col{border-left:1px solid var(--rule)}
+    .sc-hdr{font-family:'JetBrains Mono',monospace;font-size:.64rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:.55rem;padding-bottom:.45rem;border-bottom:2px solid}
+    .sc-hdr.will{color:var(--blue);border-color:var(--blue)}
+    .sc-hdr.gtt{color:var(--green-dark);border-color:var(--green)}
+    .sc-col.will-col{background:rgba(0,76,143,.03)}
+    .sc-col.gtt-col{background:rgba(0,168,89,.03)}
+    .sc-col p{font-style:italic;color:var(--muted);font-size:.84rem;margin-top:.3rem}
+    .sc-col p strong{color:var(--blue);font-style:normal}
+    .sc-col.gtt-col p strong{color:var(--green-dark)}
+
+    /* USE GRID */
+    .use-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:.75rem;margin-top:.5rem}
+    .use-card{background:var(--card);border:1px solid var(--blue-line);border-radius:2px;padding:.9rem 1rem;box-shadow:0 1px 4px rgba(0,76,143,.05)}
+    .use-card.will-card{border-top:3px solid var(--blue)}
+    .use-card.gtt-card{border-top:3px solid var(--green)}
+    .use-card.both-card{border-top:3px solid var(--gold)}
+    .use-card-badge{font-family:'JetBrains Mono',monospace;font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.4rem}
+    .use-card-badge.will{color:var(--blue)}
+    .use-card-badge.gtt{color:var(--green-dark)}
+    .use-card-badge.both{color:var(--gold)}
+    .use-card-title{font-family:'Playfair Display',serif;font-weight:900;font-size:1rem;color:var(--blue);margin-bottom:.35rem;line-height:1.2}
+    .use-card.gtt-card .use-card-title{color:var(--green-dark)}
+    .use-card.both-card .use-card-title{color:var(--gold)}
+    .use-card-body{font-size:.82rem;color:var(--body);line-height:1.6;margin-bottom:.5rem}
+    .use-card-eg{font-size:.79rem;font-style:italic;color:var(--muted);line-height:1.5;padding-left:.7rem;border-left:2px solid var(--rule)}
+
+    /* MINI TABLE */
+    .mini-tbl{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:.6rem}
+    .mini-tbl thead th{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:400;padding:7px 10px;border-bottom:1.5px solid var(--rule);text-align:left}
+    .mini-tbl tbody td{padding:7px 10px;border-bottom:1px solid var(--rule);color:var(--body);vertical-align:top}
+    .mini-tbl tbody tr:last-child td{border-bottom:none}
+    .mini-tbl tbody tr:hover td{background:var(--blue-dim)}
+    .t-blue{color:var(--blue);font-weight:700;font-family:'JetBrains Mono',monospace;font-size:.78rem}
+    .t-green{color:var(--green-dark);font-weight:700;font-family:'JetBrains Mono',monospace;font-size:.78rem}
+    .t-gold{color:var(--gold);font-weight:700;font-family:'JetBrains Mono',monospace;font-size:.78rem}
+
+    /* EXERCISES */
+    .exercises-section{margin-top:4rem;padding-top:3rem;border-top:2px solid var(--blue)}
+    .section-hdr{display:flex;align-items:baseline;gap:1.4rem;margin-bottom:2rem;flex-wrap:wrap}
+    .section-hdr h2{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(1.4rem,2.5vw,1.9rem);color:var(--blue)}
+    .section-hdr p{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+    #ex-tracker{display:flex;align-items:center;gap:1rem;background:var(--card);border:1px solid var(--blue-line);border-left:3px solid var(--blue);padding:.8rem 1.2rem;margin-bottom:2rem;border-radius:2px;font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--muted)}
+    .ex-type-header{display:flex;align-items:flex-start;gap:1rem;margin-bottom:1.2rem}
+    .ex-type-letter{width:36px;height:36px;border-radius:50%;background:var(--blue);color:#fff;font-family:'Playfair Display',serif;font-weight:900;font-size:1rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+    .ex-type-title{font-family:'Playfair Display',serif;font-weight:900;font-size:1.1rem;color:var(--blue);margin-bottom:.15rem}
+    .ex-type-desc{font-size:.8rem;color:var(--muted);line-height:1.6}
+    .ex-card{background:var(--card);border:1px solid var(--blue-line);border-radius:2px;padding:1.4rem 1.6rem;margin-bottom:1rem;box-shadow:0 1px 6px rgba(0,76,143,.05)}
+    .ex-card-top{display:flex;align-items:baseline;gap:.8rem;margin-bottom:.8rem}
+    .ex-num{font-family:'JetBrains Mono',monospace;font-size:.68rem;font-weight:700;color:var(--green);background:var(--green-dim);padding:2px 7px;border-radius:2px;flex-shrink:0}
+    .ex-instruction{font-size:.83rem;color:var(--muted);line-height:1.5}
+    .ex-sentence{font-family:'Lora',Georgia,serif;font-style:italic;font-size:.96rem;color:var(--ink);background:var(--page);padding:.7rem 1rem;border-left:3px solid var(--blue-line);margin-bottom:1rem;line-height:1.6}
+    .ex-context{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--muted);background:rgba(0,76,143,.04);border:1px solid var(--blue-line);border-radius:2px;padding:.45rem .8rem;margin-bottom:.7rem}
+    .ex-opts-row{display:flex;gap:.5rem;flex-wrap:wrap}
+    .ex-opt{font-family:'JetBrains Mono',monospace;font-size:.74rem;padding:8px 14px;background:var(--page);border:1.5px solid var(--rule);border-radius:3px;cursor:pointer;color:var(--body);transition:background .14s,border-color .14s,color .14s}
+    .ex-opt:hover:not(:disabled){background:var(--blue-dim);border-color:rgba(0,76,143,.3);color:var(--blue)}
+    .ex-opt.ex-correct{background:rgba(0,168,89,.1);border-color:var(--green);color:var(--green-dark);font-weight:700}
+    .ex-opt.ex-wrong{background:var(--red-dim);border-color:var(--red);color:var(--red)}
+    .ex-opt:disabled{cursor:default}
+    .ex-feedback{font-size:.82rem;font-style:italic;padding:0;margin-top:.7rem;display:none;line-height:1.5}
+    .ex-feedback.ok{color:var(--green-dark);display:block}
+    .ex-feedback.err{color:var(--red);display:block}
+
+    /* QUIZ */
+    .quiz-section{margin-top:3.5rem;background:var(--card);border:1px solid var(--blue-line);border-top:4px solid var(--blue);box-shadow:0 4px 24px rgba(0,76,143,.08)}
+    .quiz-header{background:var(--blue);padding:1.6rem 2rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+    .quiz-header .quiz-eyebrow{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--green);margin-bottom:.35rem}
+    .quiz-header .quiz-title{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:900;color:#fff}
+    .quiz-header .quiz-desc{font-size:.8rem;color:rgba(255,255,255,.55);margin-top:.2rem}
+    .quiz-body{display:grid;grid-template-columns:1fr 220px}
+    .quiz-left{padding:2rem;border-right:1px solid var(--rule)}
+    .quiz-right{padding:2rem;display:flex;flex-direction:column;align-items:center;gap:.8rem}
+    .prog-wrap{margin-bottom:1.6rem}
+    .prog-label{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--muted);letter-spacing:.07em;display:flex;justify-content:space-between;margin-bottom:5px}
+    .prog-track{height:3px;background:var(--rule);border-radius:2px;overflow:hidden}
+    .prog-fill{height:100%;background:var(--green);border-radius:2px;transition:width .4s ease}
+    #q-number{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:.5rem}
+    #q-sentence{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;color:var(--ink);line-height:1.55;margin-bottom:1.5rem}
+    .quiz-opt{display:block;width:100%;text-align:left;padding:11px 15px;margin-bottom:.45rem;background:var(--page);border:1.5px solid var(--rule);border-radius:3px;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--body);transition:background .14s,border-color .14s,color .14s}
+    .quiz-opt:hover:not(:disabled){background:var(--blue-dim);border-color:rgba(0,76,143,.3);color:var(--blue)}
+    .quiz-opt.correct{background:rgba(0,168,89,.08);border-color:var(--green);color:var(--green-dark);font-weight:700}
+    .quiz-opt.wrong{background:var(--red-dim);border-color:var(--red);color:var(--red)}
+    #q-feedback{font-size:.82rem;font-style:italic;padding:10px 14px;border-radius:3px;margin-top:.9rem;display:none}
+    #q-feedback.ok{background:rgba(0,168,89,.08);color:var(--green-dark);border:1px solid var(--green-line)}
+    #q-feedback.err{background:var(--red-dim);color:var(--red);border:1px solid rgba(192,57,43,.25)}
+    #next-button{margin-top:1.1rem;width:100%;font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;padding:12px;background:var(--blue);color:#fff;border:none;border-radius:3px;cursor:pointer;font-weight:700;transition:background .15s;display:none}
+    #next-button:hover{background:var(--blue-mid)}
+    .score-label-sm{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+    #score-text{font-family:'Playfair Display',serif;font-size:2.4rem;font-weight:900;color:var(--blue)}
+
+    /* FOOTER */
+    footer{background:var(--blue);border-top:3px solid var(--green);padding:2.8rem clamp(1rem,5vw,3rem);text-align:center}
+    footer .f-logo{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:900;color:#fff;margin-bottom:.3rem}
+    footer .f-sub{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.4)}
+    footer .f-accent{color:var(--green)}
+
+    @media(max-width:700px){
+      .hero-inner,.split-card{grid-template-columns:1fr}
+      .hero-meta{display:none}
+      .entry{grid-template-columns:1fr}
+      .entry-num{display:none}
+      .quiz-body{grid-template-columns:1fr}
+      .quiz-right{border-top:1px solid var(--rule)}
+      .header-center{display:none}
+      .split-card .sc-col+.sc-col{border-left:none;border-top:1px solid var(--rule)}
+    }
+
+    /* FONT BAR */
+    .font-bar{position:fixed;bottom:0;left:0;right:0;z-index:200;background:var(--blue-deep);border-top:2px solid var(--green);display:flex;align-items:center;justify-content:center;gap:.6rem;padding:.5rem 1rem;box-shadow:0 -2px 16px rgba(0,0,0,.22)}
+    .font-bar-label{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.45)}
+    .font-btn{height:28px;min-width:28px;padding:0 8px;border-radius:5px;border:1.5px solid rgba(255,255,255,.22);background:rgba(255,255,255,.08);color:rgba(255,255,255,.8);font-family:'JetBrains Mono',monospace;font-size:.75rem;font-weight:700;cursor:pointer;transition:background .14s}
+    .font-btn:hover{background:rgba(255,255,255,.18)}
+    .font-btn.active-size{background:var(--green);border-color:var(--green);color:#fff}
+    .font-sep{width:1px;height:18px;background:rgba(255,255,255,.18)}
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <a href="../index.html">
+      <div class="logo-pill">
+        <img src="../assets/images/logo-uts-2024.png" alt="UTS" onerror="this.parentElement.innerHTML='<span class=\'logo-fallback\'>UTS</span>'">
+      </div>
+    </a>
+    <div class="header-center">
+      <p class="eyebrow">CELE &middot; English Language Program</p>
+      <p class="h-title display">Will vs Be Going To</p>
+    </div>
+    <a href="../index.html">
+      <div class="logo-pill">
+        <img src="../assets/images/logo_cele.png" alt="CELE" onerror="this.parentElement.innerHTML='<span class=\'logo-fallback\'>CELE</span>'">
+      </div>
+    </a>
+  </div>
+</header>
+
+<!-- BREADCRUMB -->
+<nav class="breadcrumb-bar">
+  <div class="breadcrumb-inner">
+    <a href="../index.html">Home</a><span class="bc-sep"> | </span>
+    <a href="../index.html#basic">Basic</a><span class="bc-sep"> | </span>
+    <a href="basic3.html">Basic III</a><span class="bc-sep"> | </span>
+    <span class="bc-current">Will vs Be Going To</span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <p class="hero-eyebrow">Comparison Module — Level A2–B1</p>
+      <h1 class="hero-title display"><em>Will</em> vs<br>Be Going To</h1>
+      <p class="hero-sub">Both forms talk about the future — but they are not always interchangeable. This guide focuses on <em>when to choose one over the other</em>, where they overlap, and the key situations where only one is correct.</p>
+    </div>
+    <div class="hero-meta">
+      <strong>4</strong>Sections<br>
+      <strong>8</strong>Exercises<br>
+      <strong>10</strong>Quiz items<br>
+      ——<br>
+      Use · Compare<br>
+      Context · Choice
+    </div>
+  </div>
+</section>
+
+<!-- QUICK NAV -->
+<nav class="quick-nav">
+  <div class="quick-nav-inner">
+    <a class="qn-chip" href="#s1">01 The Key Difference</a>
+    <a class="qn-chip" href="#s2">02 Only Will</a>
+    <a class="qn-chip" href="#s3">03 Only Going To</a>
+    <a class="qn-chip" href="#s4">04 When Both Work</a>
+    <a class="qn-chip" href="#s5">05 Present Continuous</a>
+    <a class="qn-chip" href="#exercises">↓ Exercises</a>
+    <a class="qn-chip" href="#quiz">↓ Quiz</a>
+  </div>
+</nav>
+
+<div class="main-wrap">
+
+  <!-- 01 THE KEY DIFFERENCE -->
+  <article id="s1" class="entry">
+    <div class="entry-num display">01</div>
+    <div class="entry-body">
+      <p class="entry-label">Core Idea</p>
+      <h2 class="entry-title display">The Key Difference</h2>
+      <p class="entry-subtitle">Both refer to the future — but <em>Will</em> is typically spontaneous or general, while <em>Be Going To</em> has a connection to the present: a prior decision or visible evidence.</p>
+
+      <div class="tabs">
+        <button class="tab active" onclick="switchTab(this,'k1','overview')">At a Glance</button>
+        <button class="tab" onclick="switchTab(this,'k1','native')">Native Speaker Tip</button>
+      </div>
+
+      <div id="k1-overview" class="tab-panel active">
+        <div class="split-card">
+          <div class="sc-col will-col">
+            <div class="sc-hdr will">Will</div>
+            <p>Decision made <strong>at the moment of speaking</strong> — not planned before.</p>
+            <p style="margin-top:.5rem">General prediction based on <strong>personal opinion</strong>, not on something you can see right now.</p>
+            <p style="margin-top:.5rem">Offers, promises, threats.</p>
+          </div>
+          <div class="sc-col gtt-col">
+            <div class="sc-hdr gtt">Be Going To</div>
+            <p>Decision or intention <strong>already made</strong> before the moment of speaking.</p>
+            <p style="margin-top:.5rem">Prediction based on <strong>present evidence</strong> — something you can see or feel right now.</p>
+            <p style="margin-top:.5rem">Something that is <strong>about to happen</strong> any second.</p>
+          </div>
+        </div>
+        <div class="def-block gold-accent">
+          <strong>The bottom line:</strong> Ask yourself — <em>did I just decide this, or did I decide it before?</em> If you decided it just now → <strong>Will</strong>. If you decided it earlier → <strong>Be Going To</strong>.
+        </div>
+      </div>
+
+      <div id="k1-native" class="tab-panel">
+        <div class="def-block">
+          Both forms are so common in everyday English that native speakers mix them regularly. Even if you misuse them, a native speaker will understand you without any problem.
+        </div>
+        <div class="def-block green-accent">
+          <strong>That said</strong>, there are specific situations where only one is correct — and those are the cases worth learning. The rest of this guide focuses on exactly those situations.
+        </div>
+        <div class="def-block warn-accent">
+          <strong>Watch out for predictions:</strong> Both <em>will</em> and <em>be going to</em> can express predictions — this is the area of greatest overlap. The real difference shows up with <em>decisions</em> (spontaneous vs prior) and <em>evidence-based</em> predictions.
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- 02 ONLY WILL -->
+  <article id="s2" class="entry">
+    <div class="entry-num display">02</div>
+    <div class="entry-body">
+      <p class="entry-label">Will Only</p>
+      <h2 class="entry-title display">When Only Will Works</h2>
+      <p class="entry-subtitle">Three situations where <em>Be Going To</em> cannot replace <em>Will</em>.</p>
+
+      <div class="tabs">
+        <button class="tab active" onclick="switchTab(this,'w2','cards')">The Three Cases</button>
+        <button class="tab" onclick="switchTab(this,'w2','ex')">Examples</button>
+      </div>
+
+      <div id="w2-cards" class="tab-panel active">
+        <div class="use-grid">
+          <div class="use-card will-card">
+            <div class="use-card-badge will">Will only — Case 1</div>
+            <div class="use-card-title">Rapid / Spontaneous Decision</div>
+            <div class="use-card-body">You decide to do something <em>at that exact moment</em>, not before. There was no prior plan.</div>
+            <div class="use-card-eg">"The phone is ringing." → "I<strong>'ll</strong> get it!"<br>"I<strong>'ll</strong> buy one for you too." <span style="font-style:normal;font-size:.75rem">(just decided)</span></div>
+          </div>
+          <div class="use-card will-card">
+            <div class="use-card-badge will">Will only — Case 2</div>
+            <div class="use-card-title">Offers, Promises &amp; Threats</div>
+            <div class="use-card-body">When you offer help, make a promise, or issue a warning in response to the situation.</div>
+            <div class="use-card-eg">"I<strong>'ll</strong> give you a discount if you buy now."<br>"I promise I <strong>will</strong> behave next time."<br>"I<strong>'ll</strong> take you to the movies if you'd like."</div>
+          </div>
+          <div class="use-card will-card">
+            <div class="use-card-badge will">Will only — Case 3</div>
+            <div class="use-card-title">Refusal (Won't)</div>
+            <div class="use-card-body">When someone or something refuses or is unwilling to do something — <em>won't</em> expresses this.</div>
+            <div class="use-card-eg">"I told him to take out the trash but he <strong>won't</strong> do it."<br>"My car <strong>won't</strong> start."</div>
+          </div>
+        </div>
+      </div>
+
+      <div id="w2-ex" class="tab-panel">
+        <ul class="ex-list">
+          <li><span class="ex-n">01</span>"I<strong>'ll</strong> buy one for you too." <span class="tag tag-will">will only</span> <span style="font-style:normal;font-size:.78rem;color:var(--muted)">— spontaneous decision at that moment</span></li>
+          <li><span class="ex-n">02</span>"I think I<strong>'ll</strong> try one of those." <span class="tag tag-will">will only</span> <span style="font-style:normal;font-size:.78rem;color:var(--muted)">— just decided</span></li>
+          <li><span class="ex-n">03</span>"I<strong>'ll</strong> give you a discount if you buy it now." <span class="tag tag-will">will only</span> <span style="font-style:normal;font-size:.78rem;color:var(--muted)">— offer</span></li>
+          <li><span class="ex-n">04</span>"I promise I <strong>will</strong> behave next time." <span class="tag tag-will">will only</span> <span style="font-style:normal;font-size:.78rem;color:var(--muted)">— promise</span></li>
+          <li><span class="ex-n">05</span>"My kids <strong>won't</strong> listen to anything I say." <span class="tag tag-will">will only</span> <span style="font-style:normal;font-size:.78rem;color:var(--muted)">— refusal</span></li>
+          <li><span class="ex-n">06</span>"I told him to clean his room but he <strong>won't</strong> do it." <span class="tag tag-will">will only</span> <span style="font-style:normal;font-size:.78rem;color:var(--muted)">— refusal</span></li>
+        </ul>
+      </div>
+    </div>
+  </article>
+
+  <!-- 03 ONLY GOING TO -->
+  <article id="s3" class="entry">
+    <div class="entry-num display">03</div>
+    <div class="entry-body">
+      <p class="entry-label">Be Going To Only</p>
+      <h2 class="entry-title display">When Only Going To Works</h2>
+      <p class="entry-subtitle">Three situations where <em>Will</em> cannot replace <em>Be Going To</em>.</p>
+
+      <div class="tabs">
+        <button class="tab active" onclick="switchTab(this,'g3','cards')">The Three Cases</button>
+        <button class="tab" onclick="switchTab(this,'g3','ex')">Examples</button>
+      </div>
+
+      <div id="g3-cards" class="tab-panel active">
+        <div class="use-grid">
+          <div class="use-card gtt-card">
+            <div class="use-card-badge gtt">Going To only — Case 1</div>
+            <div class="use-card-title">Prior Plan or Intention</div>
+            <div class="use-card-body">The decision was made <em>before the moment of speaking</em>. The plan already exists.</div>
+            <div class="use-card-eg">"Are you busy this evening?" → "Yes, I'm <strong>going to</strong> the movies." <span style="font-style:normal;font-size:.75rem">(planned earlier)</span><br>"I'm <strong>going to</strong> accept the job offer." <span style="font-style:normal;font-size:.75rem">(already decided)</span></div>
+          </div>
+          <div class="use-card gtt-card">
+            <div class="use-card-badge gtt">Going To only — Case 2</div>
+            <div class="use-card-title">Evidence-Based Prediction</div>
+            <div class="use-card-body">Something is clearly about to happen based on what you can <em>see, hear, or feel right now</em>.</div>
+            <div class="use-card-eg">"I think it is <strong>going to</strong> rain — I just felt a drop."<br>"I don't feel well. I think I'm <strong>going to</strong> throw up."</div>
+          </div>
+          <div class="use-card gtt-card">
+            <div class="use-card-badge gtt">Going To only — Case 3</div>
+            <div class="use-card-title">Imminent Action</div>
+            <div class="use-card-body">Something is about to happen <em>any second</em> — the action is already in motion.</div>
+            <div class="use-card-eg">"Get back! The bomb is <strong>going to</strong> explode!"<br>"Watch out — you're <strong>going to</strong> fall!"</div>
+          </div>
+        </div>
+      </div>
+
+      <div id="g3-ex" class="tab-panel">
+        <ul class="ex-list">
+          <li><span class="ex-n">01</span>"They're <strong>going to</strong> retire to the beach — they've already bought a little beach house." <span class="tag tag-gtt">going to only</span></li>
+          <li><span class="ex-n">02</span>"I'm <strong>going to</strong> accept the job offer." <span class="tag tag-gtt">going to only</span> <span style="font-style:normal;font-size:.78rem;color:var(--muted)">— already decided</span></li>
+          <li><span class="ex-n">03</span>"I think it is <strong>going to</strong> rain — I just felt a drop." <span class="tag tag-gtt">going to only</span> <span style="font-style:normal;font-size:.78rem;color:var(--muted)">— present evidence</span></li>
+          <li><span class="ex-n">04</span>"I don't feel well. I think I'm <strong>going to</strong> throw up." <span class="tag tag-gtt">going to only</span> <span style="font-style:normal;font-size:.78rem;color:var(--muted)">— body sensation = evidence</span></li>
+          <li><span class="ex-n">05</span>"Get back! The bomb is <strong>going to</strong> explode!" <span class="tag tag-gtt">going to only</span> <span style="font-style:normal;font-size:.78rem;color:var(--muted)">— imminent</span></li>
+          <li><span class="ex-n">06</span>"Watch out — you're <strong>going to</strong> drop that!" <span class="tag tag-gtt">going to only</span> <span style="font-style:normal;font-size:.78rem;color:var(--muted)">— imminent, visible evidence</span></li>
+        </ul>
+      </div>
+    </div>
+  </article>
+
+  <!-- 04 WHEN BOTH WORK -->
+  <article id="s4" class="entry">
+    <div class="entry-num display">04</div>
+    <div class="entry-body">
+      <p class="entry-label">Overlap</p>
+      <h2 class="entry-title display">When Both Work</h2>
+      <p class="entry-subtitle">For general predictions and open-ended future scenarios, <em>will</em> and <em>be going to</em> are interchangeable — the meaning is the same.</p>
+
+      <div class="tabs">
+        <button class="tab active" onclick="switchTab(this,'b4','overlap')">The Overlap</button>
+        <button class="tab" onclick="switchTab(this,'b4','ex')">Side by Side</button>
+        <button class="tab" onclick="switchTab(this,'b4','cheatsheet')">Quick Cheat Sheet</button>
+      </div>
+
+      <div id="b4-overlap" class="tab-panel active">
+        <div class="def-block gold-accent">
+          <strong>General predictions</strong> (opinions about the future, not tied to present evidence) work equally well with both forms:
+        </div>
+        <div class="split-card">
+          <div class="sc-col will-col">
+            <div class="sc-hdr will">Will</div>
+            <p>"The weather report says it <strong>will</strong> rain tomorrow." ✓</p>
+            <p style="margin-top:.5rem">"My team <strong>will</strong> not win the league this season." ✓</p>
+            <p style="margin-top:.5rem">"I think it <strong>will</strong> be a great party." ✓</p>
+          </div>
+          <div class="sc-col gtt-col">
+            <div class="sc-hdr gtt">Be Going To</div>
+            <p>"The weather report says it <strong>is going to</strong> rain tomorrow." ✓</p>
+            <p style="margin-top:.5rem">"My team <strong>is not going to</strong> win the league." ✓</p>
+            <p style="margin-top:.5rem">"I think it <strong>is going to</strong> be a great party." ✓</p>
+          </div>
+        </div>
+        <div class="def-block" style="margin-top:.8rem">
+          <strong>Open-ended future (no prior plan):</strong> If you have not made any plans yet, both forms are possible. The difference is minimal.<br>
+          <span style="font-style:italic;color:var(--muted);font-size:.86rem">"I <strong>will</strong> probably watch TV." = "I'm probably <strong>going to</strong> watch TV." ✓</span>
+        </div>
+      </div>
+
+      <div id="b4-ex" class="tab-panel">
+        <ul class="ex-list">
+          <li><span class="ex-n">✓</span>"It <strong>will</strong> rain tomorrow." = "It <strong>is going to</strong> rain tomorrow." <span class="tag tag-both">both OK</span></li>
+          <li><span class="ex-n">✓</span>"I think you <strong>will</strong> find it interesting." = "I think you<strong>'re going to</strong> find it interesting." <span class="tag tag-both">both OK</span></li>
+          <li><span class="ex-n">✓</span>"I<strong>'ll</strong> probably watch TV." = "I'm probably <strong>going to</strong> watch TV." <span class="tag tag-both">both OK — no prior plan</span></li>
+          <li><span class="ex-n">✓</span>"She <strong>will</strong> be a great teacher." = "She<strong>'s going to</strong> be a great teacher." <span class="tag tag-both">both OK — general opinion</span></li>
+        </ul>
+      </div>
+
+      <div id="b4-cheatsheet" class="tab-panel">
+        <table class="mini-tbl">
+          <thead>
+            <tr><th>Situation</th><th style="color:var(--blue)">Will ✓</th><th style="color:var(--green-dark)">Going To ✓</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Spontaneous decision</td><td class="t-blue">✓ Only Will</td><td style="color:var(--muted)">✗</td></tr>
+            <tr><td>Prior plan / intention</td><td style="color:var(--muted)">✗</td><td class="t-green">✓ Only Going To</td></tr>
+            <tr><td>Evidence-based prediction</td><td style="color:var(--muted)">✗ (no evidence)</td><td class="t-green">✓ Only Going To</td></tr>
+            <tr><td>Imminent action</td><td style="color:var(--muted)">✗</td><td class="t-green">✓ Only Going To</td></tr>
+            <tr><td>Offer / promise / threat</td><td class="t-blue">✓ Only Will</td><td style="color:var(--muted)">✗</td></tr>
+            <tr><td>Refusal (won't)</td><td class="t-blue">✓ Only Will</td><td style="color:var(--muted)">✗</td></tr>
+            <tr><td>General prediction (opinion)</td><td class="t-blue">✓</td><td class="t-green">✓</td></tr>
+            <tr><td>Open future (no plan yet)</td><td class="t-blue">✓</td><td class="t-green">✓</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </article>
+
+  <!-- 05 PRESENT CONTINUOUS -->
+  <article id="s5" class="entry">
+    <div class="entry-num display">05</div>
+    <div class="entry-body">
+      <p class="entry-label">Third Option</p>
+      <h2 class="entry-title display">Present Continuous for the Future</h2>
+      <p class="entry-subtitle">There is a third way to talk about the future: the <em>Present Continuous</em> — used for fixed, confirmed arrangements with another person.</p>
+
+      <div class="tabs">
+        <button class="tab active" onclick="switchTab(this,'pc','when')">When to Use It</button>
+        <button class="tab" onclick="switchTab(this,'pc','ex')">Examples</button>
+        <button class="tab" onclick="switchTab(this,'pc','careful')">Watch Out</button>
+      </div>
+
+      <div id="pc-when" class="tab-panel active">
+        <div class="def-block">
+          The Present Continuous is used for <em>arrangements</em> — events that are <strong>confirmed with another person</strong> and where some preparation has already happened. More than one person knows about the event.
+        </div>
+        <div class="split-card">
+          <div class="sc-col will-col">
+            <div class="sc-hdr will">Going To (intention)</div>
+            <p>"I<strong>'m going to</strong> call Jim." <span style="font-style:normal;font-size:.78rem;color:var(--muted)"><br>→ my own plan, not confirmed with Jim yet</span></p>
+          </div>
+          <div class="sc-col gtt-col">
+            <div class="sc-hdr gtt">Present Continuous (arrangement)</div>
+            <p>"I<strong>'m meeting</strong> Jim at the airport." <span style="font-style:normal;font-size:.78rem;color:var(--muted)"><br>→ Jim and I have discussed this — it's confirmed</span></p>
+          </div>
+        </div>
+        <div class="def-block green-accent" style="margin-top:.4rem">
+          <strong>Key signal:</strong> If the other person is <em>already aware</em> of the arrangement — use Present Continuous. If it's just your own intention or plan → use <em>Be Going To</em>.
+        </div>
+      </div>
+
+      <div id="pc-ex" class="tab-panel">
+        <ul class="ex-list">
+          <li><span class="ex-n">01</span>"I<strong>'m meeting</strong> Jim at the airport." <span style="font-style:normal;font-size:.78rem;color:var(--muted)">— Jim and I have discussed this</span></li>
+          <li><span class="ex-n">02</span>"I<strong>'m leaving</strong> tomorrow." <span style="font-style:normal;font-size:.78rem;color:var(--muted)">— ticket already bought, confirmed</span></li>
+          <li><span class="ex-n">03</span>"We<strong>'re having</strong> a staff meeting next Monday." <span style="font-style:normal;font-size:.78rem;color:var(--muted)">— all staff have been told</span></li>
+          <li><span class="ex-n">04</span>"My brother <strong>is playing</strong> football with his friends tonight." <span style="font-style:normal;font-size:.78rem;color:var(--muted)">— arranged with his friends</span></li>
+          <li><span class="ex-n">05</span>"<strong>Are</strong> you <strong>having</strong> a party for your birthday?" <span style="font-style:normal;font-size:.78rem;color:var(--muted)">— asking about a confirmed arrangement</span></li>
+          <li><span class="ex-n">06</span>"They <strong>aren't leaving</strong> until the end of next year." <span style="font-style:normal;font-size:.78rem;color:var(--muted)">— confirmed, fixed arrangement</span></li>
+        </ul>
+      </div>
+
+      <div id="pc-careful" class="tab-panel">
+        <div class="def-block warn-accent">
+          <strong>Simple Present ≠ Present Continuous for the future.</strong> The Simple Present is used when a future event is part of a <em>timetable or programme</em>.
+        </div>
+        <div class="split-card">
+          <div class="sc-col gtt-col">
+            <div class="sc-hdr gtt">Present Continuous</div>
+            <p>"We<strong>'re having</strong> a staff meeting next Monday." <span style="font-style:normal;font-size:.78rem;color:var(--muted)"><br>→ just that once, arranged between the team</span></p>
+          </div>
+          <div class="sc-col will-col">
+            <div class="sc-hdr will">Simple Present</div>
+            <p>"We <strong>have</strong> a staff meeting every Monday." <span style="font-style:normal;font-size:.78rem;color:var(--muted)"><br>→ scheduled routine, part of a regular timetable</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- EXERCISES -->
+  <section class="exercises-section" id="exercises">
+    <div class="section-hdr">
+      <h2 class="display">Exercises</h2>
+      <p>Choose the right form — context is everything</p>
+    </div>
+    <div id="ex-tracker"><span>Progress:</span><span id="tracker-text">0 / 8 completed</span></div>
+
+    <div style="margin-bottom:2.5rem">
+      <div class="ex-type-header">
+        <div class="ex-type-letter">A</div>
+        <div>
+          <p class="ex-type-title display">Will or Be Going To?</p>
+          <p class="ex-type-desc">Read the context, then choose the most natural option. Think about <em>why</em> each answer is correct.</p>
+        </div>
+      </div>
+
+      <div class="ex-card" id="mc1">
+        <div class="ex-card-top"><span class="ex-num">01</span><span class="ex-instruction">Choose the correct form.</span></div>
+        <p class="ex-context">📱 Your phone rings while your hands are full. Your friend offers to help.</p>
+        <p class="ex-sentence">"Don't worry, __________ answer it for you."</p>
+        <div class="ex-opts-row">
+          <button class="ex-opt" onclick="checkMC('mc1',this,'I\'ll')">I'll</button>
+          <button class="ex-opt" onclick="checkMC('mc1',this,'I\'m going to')">I'm going to</button>
+          <button class="ex-opt" onclick="checkMC('mc1',this,'I\'m')">I'm</button>
+        </div>
+        <p class="ex-feedback" id="mc1-fb"></p>
+      </div>
+
+      <div class="ex-card" id="mc2">
+        <div class="ex-card-top"><span class="ex-num">02</span><span class="ex-instruction">Choose the correct form.</span></div>
+        <p class="ex-context">🗓️ You planned last week to visit your grandmother this Saturday.</p>
+        <p class="ex-sentence">"I __________ visit my grandmother this Saturday."</p>
+        <div class="ex-opts-row">
+          <button class="ex-opt" onclick="checkMC('mc2',this,'\'m going to')">I'm going to</button>
+          <button class="ex-opt" onclick="checkMC('mc2',this,'\'ll')">I'll</button>
+          <button class="ex-opt" onclick="checkMC('mc2',this,'will going to')">will going to</button>
+        </div>
+        <p class="ex-feedback" id="mc2-fb"></p>
+      </div>
+
+      <div class="ex-card" id="mc3">
+        <div class="ex-card-top"><span class="ex-num">03</span><span class="ex-instruction">Choose the correct form.</span></div>
+        <p class="ex-context">🌩️ You look outside and see very dark clouds and lightning.</p>
+        <p class="ex-sentence">"Look at those clouds — it __________ rain."</p>
+        <div class="ex-opts-row">
+          <button class="ex-opt" onclick="checkMC('mc3',this,'is going to')">is going to</button>
+          <button class="ex-opt" onclick="checkMC('mc3',this,'will')">will</button>
+          <button class="ex-opt" onclick="checkMC('mc3',this,'is')">is</button>
+        </div>
+        <p class="ex-feedback" id="mc3-fb"></p>
+      </div>
+
+      <div class="ex-card" id="mc4">
+        <div class="ex-card-top"><span class="ex-num">04</span><span class="ex-instruction">Choose the correct form.</span></div>
+        <p class="ex-context">💬 You are at a restaurant, reading the menu for the first time.</p>
+        <p class="ex-sentence">"Hmm... I think __________ have the pasta."</p>
+        <div class="ex-opts-row">
+          <button class="ex-opt" onclick="checkMC('mc4',this,'I\'ll')">I'll</button>
+          <button class="ex-opt" onclick="checkMC('mc4',this,'I\'m going to')">I'm going to</button>
+          <button class="ex-opt" onclick="checkMC('mc4',this,'I am going to will')">I am going to will</button>
+        </div>
+        <p class="ex-feedback" id="mc4-fb"></p>
+      </div>
+
+      <div class="ex-card" id="mc5">
+        <div class="ex-card-top"><span class="ex-num">05</span><span class="ex-instruction">Choose the correct form.</span></div>
+        <p class="ex-context">😤 You ask your son to tidy his room. He refuses every time.</p>
+        <p class="ex-sentence">"I told him to tidy his room but he __________ do it."</p>
+        <div class="ex-opts-row">
+          <button class="ex-opt" onclick="checkMC('mc5',this,'won\'t')">won't</button>
+          <button class="ex-opt" onclick="checkMC('mc5',this,'isn\'t going to')">isn't going to</button>
+          <button class="ex-opt" onclick="checkMC('mc5',this,'doesn\'t will')">doesn't will</button>
+        </div>
+        <p class="ex-feedback" id="mc5-fb"></p>
+      </div>
+
+      <div class="ex-card" id="mc6">
+        <div class="ex-card-top"><span class="ex-num">06</span><span class="ex-instruction">Choose the correct form.</span></div>
+        <p class="ex-context">📅 Your colleague asks what you are doing on Friday evening. You have tickets to a concert you bought two weeks ago.</p>
+        <p class="ex-sentence">"I __________ go to a concert."</p>
+        <div class="ex-opts-row">
+          <button class="ex-opt" onclick="checkMC('mc6',this,'\'m going to')">I'm going to</button>
+          <button class="ex-opt" onclick="checkMC('mc6',this,'\'ll')">I'll</button>
+          <button class="ex-opt" onclick="checkMC('mc6',this,'go to will')">go to will</button>
+        </div>
+        <p class="ex-feedback" id="mc6-fb"></p>
+      </div>
+
+      <div class="ex-card" id="mc7">
+        <div class="ex-card-top"><span class="ex-num">07</span><span class="ex-instruction">Choose the correct form.</span></div>
+        <p class="ex-context">🤝 Your friend looks exhausted after moving boxes all day. You want to help.</p>
+        <p class="ex-sentence">"You look tired. __________ finish unloading the truck for you."</p>
+        <div class="ex-opts-row">
+          <button class="ex-opt" onclick="checkMC('mc7',this,'I\'ll')">I'll</button>
+          <button class="ex-opt" onclick="checkMC('mc7',this,'I\'m going to')">I'm going to</button>
+          <button class="ex-opt" onclick="checkMC('mc7',this,'I am')">I am</button>
+        </div>
+        <p class="ex-feedback" id="mc7-fb"></p>
+      </div>
+
+      <div class="ex-card" id="mc8">
+        <div class="ex-card-top"><span class="ex-num">08</span><span class="ex-instruction">Which sentence is NOT correct in context?</span></div>
+        <p class="ex-context">🌤️ Someone asks about tomorrow's weather. The forecast shows sun.</p>
+        <div class="ex-opts-row">
+          <button class="ex-opt" onclick="checkMC('mc8',this,'It will be sunny tomorrow.')">It will be sunny tomorrow.</button>
+          <button class="ex-opt" onclick="checkMC('mc8',this,'It is going to be sunny tomorrow.')">It is going to be sunny tomorrow.</button>
+          <button class="ex-opt" onclick="checkMC('mc8',this,'It won\'t be going sunny tomorrow.')">It won't be going sunny tomorrow.</button>
+        </div>
+        <p class="ex-feedback" id="mc8-fb"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz" class="quiz-section">
+    <div class="quiz-header">
+      <div>
+        <p class="quiz-eyebrow">— Knowledge Check</p>
+        <h2 class="quiz-title display">Quiz: Will vs Be Going To</h2>
+        <p class="quiz-desc">10 context-based questions · Choose the correct form</p>
+      </div>
+    </div>
+    <div class="quiz-body">
+      <div class="quiz-left">
+        <div class="prog-wrap">
+          <div class="prog-label"><span id="q-number">Question 1 of 10</span><span id="prog-pct">10%</span></div>
+          <div class="prog-track"><div class="prog-fill" id="prog-fill" style="width:10%"></div></div>
+        </div>
+        <p id="q-sentence"></p>
+        <div id="options-container"></div>
+        <div id="q-feedback"></div>
+        <button id="next-button">Next Question →</button>
+      </div>
+      <div class="quiz-right">
+        <p class="score-label-sm">Score</p>
+        <p id="score-text">0 / 10</p>
+        <canvas id="progressChart" width="140" height="140"></canvas>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /main-wrap -->
+
+<footer>
+  <p class="f-logo">CELE <span class="f-accent">·</span> UTS</p>
+  <p class="f-sub">English Language Program &mdash; Will vs Be Going To</p>
+</footer>
+
+<script>
+  /* Scroll reveal */
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('show'); obs.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.entry').forEach(el => obs.observe(el));
+
+  /* Tabs */
+  function switchTab(btn, prefix, id) {
+    btn.closest('.tabs').querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    const scope = btn.closest('.entry-body') || btn.closest('.entry');
+    scope.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.getElementById(prefix + '-' + id).classList.add('active');
+  }
+
+  /* Exercise tracker */
+  const exResults = {};
+  function markExercise(id, correct) {
+    if (exResults[id] !== undefined) return;
+    exResults[id] = correct;
+    document.getElementById('tracker-text').textContent = Object.keys(exResults).length + ' / 8 completed';
+  }
+
+  /* Multiple choice */
+  const MC_CORRECT = {
+    mc1: "I'll",
+    mc2: "I'm going to",
+    mc3: 'is going to',
+    mc4: "I'll",
+    mc5: "won't",
+    mc6: "I'm going to",
+    mc7: "I'll",
+    mc8: "It won't be going sunny tomorrow."
+  };
+  const MC_EXPLAIN = {
+    mc1: 'Spontaneous offer made at that moment → Will. "I\'m going to" implies a prior plan, which does not fit here.',
+    mc2: 'The decision was made last week (prior plan) → Be Going To. "I\'ll" would suggest you just decided now.',
+    mc3: 'Dark clouds are present evidence you can see right now → Going To only. "Will" does not use visible evidence.',
+    mc4: 'You are deciding at this moment, reading the menu for the first time → Will (spontaneous decision).',
+    mc5: 'Won\'t expresses refusal — someone is unwilling to do something. This is a Will-only use.',
+    mc6: 'Tickets bought two weeks ago = prior plan already made → Be Going To. "I\'ll" would mean you just decided.',
+    mc7: 'Spontaneous offer in response to the situation → Will. "I\'m going to" implies you planned this in advance.',
+    mc8: '"Won\'t be going sunny" is grammatically incorrect. Both "will be sunny" and "is going to be sunny" are correct for weather forecasts.'
+  };
+  function checkMC(id, btn, chosen) {
+    if (exResults[id] !== undefined) return;
+    const correct = MC_CORRECT[id];
+    document.querySelectorAll('#' + id + ' .ex-opt').forEach(b => {
+      b.disabled = true;
+      if (b.textContent === correct) b.classList.add('ex-correct');
+      if (b === btn && chosen !== correct) b.classList.add('ex-wrong');
+    });
+    const fb = document.getElementById(id + '-fb');
+    const ok = chosen === correct;
+    fb.className = 'ex-feedback ' + (ok ? 'ok' : 'err');
+    fb.textContent = (ok ? '✓ Correct! ' : '✗ Incorrect. The answer is "' + correct + '". ') + MC_EXPLAIN[id];
+    markExercise(id, ok);
+  }
+
+  /* Quiz */
+  const QUESTIONS = [
+    { q: 'You just spilled coffee. A friend nearby says: "__________ get some napkins!"', opts: ["I'll", "I'm going to", "I going to"], correct: "I'll", exp: 'Spontaneous decision at the moment → Will.' },
+    { q: '"Look — he\'s on the edge of the ladder!" → "He __________ fall!"', opts: ['is going to', 'will', 'goes to'], correct: 'is going to', exp: 'Visible, imminent danger right now → Going To (evidence-based).' },
+    { q: 'You bought concert tickets a month ago. Tonight someone asks your plans: "I __________ see a concert."', opts: ["'m going to", "'ll", "going to will"], correct: "'m going to", exp: 'Prior plan, decided before the conversation → Be Going To.' },
+    { q: '"The weather forecast says it __________ snow tomorrow."', opts: ['will / is going to (both OK)', 'only will', 'only is going to'], correct: 'will / is going to (both OK)', exp: 'General prediction (forecast, opinion) → Both forms are correct here.' },
+    { q: 'Your colleague refuses every request. "She __________ respond to any emails."', opts: ["won't", "isn't going to", "doesn't will"], correct: "won't", exp: 'Refusal / unwillingness is expressed with won\'t — a Will-only use.' },
+    { q: '"I promise I __________ be late again."', opts: ["won't", "am not going to", "both are correct"], correct: "both are correct", exp: 'Promises work with both will and be going to — both are natural here.' },
+    { q: '"I\'m meeting Sara at 7." → This means:', opts: ['A confirmed arrangement with Sara', 'A spontaneous decision', 'A general prediction'], correct: 'A confirmed arrangement with Sara', exp: 'Present Continuous for the future signals a confirmed, mutual arrangement.' },
+    { q: 'You see someone running toward a glass door. → "Watch out — you __________ hit the door!"', opts: ["'re going to", "'ll", "will going to"], correct: "'re going to", exp: 'Imminent action with visible evidence → Going To only.' },
+    { q: '"Are you busy tonight?" — You have no plans. Best answer:', opts: ["I'll probably watch TV / I'm probably going to watch TV", "I will be going to watch TV", "I go to watch TV"], correct: "I'll probably watch TV / I'm probably going to watch TV", exp: 'No prior plan = open future. Both Will and Going To are correct.' },
+    { q: '"I __________ give you a discount if you buy today." (shopkeeper\'s spontaneous offer)', opts: ["'ll", "'m going to", "will going"], correct: "'ll", exp: 'Spontaneous offer → Will. "Going to" implies the shopkeeper planned this offer beforehand.' },
+  ];
+
+  let idx = 0, score = 0, chart = null;
+  function initChart() {
+    chart = new Chart(document.getElementById('progressChart').getContext('2d'), {
+      type: 'doughnut',
+      data: { labels: ['Correct','Remaining'], datasets: [{ data: [0,10], backgroundColor: ['#00a859','#e4e2de'], borderWidth: 0 }] },
+      options: { responsive: false, cutout: '78%', plugins: { legend: { display: false } } }
+    });
+  }
+  function loadQ() {
+    const q = QUESTIONS[idx];
+    const pct = Math.round((idx+1)/QUESTIONS.length*100);
+    document.getElementById('q-number').textContent = 'Question '+(idx+1)+' of '+QUESTIONS.length;
+    document.getElementById('prog-pct').textContent = pct+'%';
+    document.getElementById('prog-fill').style.width = pct+'%';
+    document.getElementById('q-sentence').textContent = q.q;
+    document.getElementById('options-container').innerHTML = '';
+    const fb = document.getElementById('q-feedback');
+    fb.style.display = 'none'; fb.className = '';
+    document.getElementById('next-button').style.display = 'none';
+    [...q.opts].sort(() => Math.random()-.5).forEach(opt => {
+      const b = document.createElement('button');
+      b.className = 'quiz-opt'; b.textContent = opt;
+      b.onclick = () => checkAns(opt);
+      document.getElementById('options-container').appendChild(b);
+    });
+  }
+  function checkAns(sel) {
+    const q = QUESTIONS[idx];
+    document.querySelectorAll('.quiz-opt').forEach(b => {
+      b.disabled = true;
+      if (b.textContent === q.correct) b.classList.add('correct');
+      if (b.textContent === sel && sel !== q.correct) b.classList.add('wrong');
+    });
+    const fb = document.getElementById('q-feedback');
+    fb.style.display = 'block';
+    if (sel === q.correct) { score++; fb.textContent = '✓  Correct. ' + q.exp; fb.className = 'ok'; }
+    else { fb.textContent = '✗  Incorrect. Correct: "'+q.correct+'". '+q.exp; fb.className = 'err'; }
+    document.getElementById('score-text').textContent = score+' / '+QUESTIONS.length;
+    chart.data.datasets[0].data = [score, QUESTIONS.length-score];
+    chart.update();
+    document.getElementById('next-button').style.display = 'block';
+  }
+  document.getElementById('next-button').onclick = () => {
+    idx++;
+    if (idx < QUESTIONS.length) { loadQ(); return; }
+    const pct = Math.round(score/QUESTIONS.length*100);
+    const msg = pct>=80 ? 'Excellent work.' : pct>=60 ? 'Good effort. Keep practising.' : "Keep studying — you're making progress.";
+    document.querySelector('.quiz-section').innerHTML =
+      '<div style="text-align:center;padding:3.5rem 2rem">'
+      +'<p style="font-family:\'JetBrains Mono\',monospace;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--green);margin-bottom:.9rem">— Session Complete</p>'
+      +'<h2 style="font-family:\'Playfair Display\',serif;font-size:2.2rem;font-weight:900;color:var(--blue);margin-bottom:.7rem">'+msg+'</h2>'
+      +'<p style="color:var(--muted);font-size:.95rem;margin-bottom:.4rem">You answered <strong style="color:var(--blue)">'+score+'</strong> of '+QUESTIONS.length+' questions correctly.</p>'
+      +'<p style="font-family:\'Playfair Display\',serif;font-size:2.5rem;font-weight:900;color:var(--green);margin:1rem 0 2rem">'+pct+'%</p>'
+      +'<button onclick="location.reload()" style="font-family:\'JetBrains Mono\',monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;padding:13px 36px;background:var(--blue);color:#fff;border:none;border-radius:3px;cursor:pointer;font-weight:700" onmouseover="this.style.background=\'#00367a\'" onmouseout="this.style.background=\'#004c8f\'">Retake Quiz</button>'
+      +'</div>';
+  };
+  window.onload = () => { initChart(); loadQ(); };
+</script>
+
+<!-- FONT SIZE BAR -->
+<div class="font-bar">
+  <span class="font-bar-label">Text size</span>
+  <div class="font-sep"></div>
+  <button class="font-btn" id="fb-sm" onclick="setSize('sm')">A<sup style="font-size:.55em">−</sup></button>
+  <button class="font-btn active-size" id="fb-md" onclick="setSize('md')">A</button>
+  <button class="font-btn" id="fb-lg" onclick="setSize('lg')">A<sup style="font-size:.55em">+</sup></button>
+</div>
+<script>
+  (function(){
+    var s={sm:14,md:16,lg:19}, saved=localStorage.getItem('cele-font')||'md';
+    function apply(k){ document.documentElement.style.fontSize=s[k]+'px'; localStorage.setItem('cele-font',k);
+      ['sm','md','lg'].forEach(function(n){ var b=document.getElementById('fb-'+n); if(b) b.classList.toggle('active-size',n===k); }); }
+    window.setSize=apply; apply(saved);
+  })();
+</script>
+</body>
+</html>

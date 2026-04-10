@@ -1,0 +1,2148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>Past Time Expressions — Exercise Sets · CELE UTS</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --blue: #004c8f;
+      --blue-mid: #00367a;
+      --blue-deep: #002a5e;
+      --green: #00a859;
+      --green-dark: #008a48;
+      --green-dim: rgba(0, 168, 89, .10);
+      --blue-dim: rgba(0, 76, 143, .07);
+      --blue-line: rgba(0, 76, 143, .15);
+      --green-line: rgba(0, 168, 89, .20);
+      --red: #c0392b;
+      --red-dim: rgba(192, 57, 43, .07);
+      --page: #f7f5f2;
+      --card: #fff;
+      --ink: #1a1a1f;
+      --body: #3d3d45;
+      --muted: #7a7a88;
+      --rule: #e4e2de
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
+
+    html {
+      scroll-behavior: smooth
+    }
+
+    body {
+      background: var(--page);
+      color: var(--body);
+      font-family: 'Lora', Georgia, serif;
+      min-height: 100vh;
+      padding-bottom: 54px
+    }
+
+    .dp {
+      font-family: 'Playfair Display', Georgia, serif
+    }
+
+    .mn {
+      font-family: 'JetBrains Mono', monospace
+    }
+
+    /* HEADER */
+    header {
+      background: var(--blue);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 20px rgba(0, 0, 0, .18)
+    }
+
+    .hi {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 clamp(.8rem, 4vw, 2rem);
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between
+    }
+
+    .lp {
+      background: rgba(255, 255, 255, .14);
+      border: 1.5px solid rgba(255, 255, 255, .28);
+      border-radius: 8px;
+      padding: 4px 10px;
+      backdrop-filter: blur(6px);
+      display: flex;
+      align-items: center;
+      text-decoration: none
+    }
+
+    .lp img {
+      height: 34px;
+      width: auto
+    }
+
+    .lf {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: 1.1rem;
+      color: #fff
+    }
+
+    .hc {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      pointer-events: none
+    }
+
+    .hc .ey {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .52rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .5);
+      margin-bottom: 1px
+    }
+
+    .hc .ht {
+      font-family: 'Playfair Display', serif;
+      font-size: .95rem;
+      font-weight: 900;
+      color: #fff
+    }
+
+    /* HERO */
+    .hero {
+      background: var(--blue);
+      background-image: repeating-linear-gradient(-55deg, rgba(255, 255, 255, .025) 0, rgba(255, 255, 255, .025) 1px, transparent 1px, transparent 18px);
+      padding: clamp(1.8rem, 5vw, 3.5rem) clamp(.8rem, 4vw, 2rem) clamp(1.4rem, 4vw, 2.8rem);
+      border-bottom: 4px solid var(--green)
+    }
+
+    .hero-i {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1.5rem;
+      align-items: end
+    }
+
+    .he {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .6rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: .8rem;
+      display: flex;
+      align-items: center;
+      gap: 8px
+    }
+
+    .he::before {
+      content: '';
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: var(--green)
+    }
+
+    .ht2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 5vw, 3.2rem);
+      font-weight: 900;
+      line-height: 1.06;
+      color: #fff
+    }
+
+    .ht2 em {
+      color: var(--green);
+      font-style: italic
+    }
+
+    .hs {
+      margin-top: .8rem;
+      font-size: .87rem;
+      line-height: 1.8;
+      color: rgba(255, 255, 255, .62);
+      max-width: 480px
+    }
+
+    .hm {
+      text-align: right;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .6rem;
+      color: rgba(255, 255, 255, .38);
+      letter-spacing: .07em;
+      line-height: 2.1;
+      border-left: 1px solid rgba(255, 255, 255, .12);
+      padding-left: 1.4rem
+    }
+
+    .hm strong {
+      display: block;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.7rem;
+      color: var(--green);
+      line-height: 1
+    }
+
+    /* WRAP */
+    .mw {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 clamp(.8rem, 4vw, 2rem) 2rem
+    }
+
+    /* LOBBY */
+    #lobby {
+      padding: 2rem 0
+    }
+
+    .li {
+      text-align: center;
+      margin-bottom: 1.8rem
+    }
+
+    .li h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.25rem, 3vw, 1.75rem);
+      font-weight: 900;
+      color: var(--blue);
+      margin-bottom: .45rem
+    }
+
+    .li p {
+      font-size: .87rem;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 520px;
+      margin: 0 auto
+    }
+
+    .sg {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem
+    }
+
+    .sc {
+      background: var(--card);
+      border: 1px solid var(--blue-line);
+      border-radius: 4px;
+      border-top: 4px solid var(--blue);
+      padding: 1.3rem 1.4rem 4.5rem;
+      cursor: pointer;
+      transition: box-shadow .2s, transform .18s;
+      box-shadow: 0 2px 8px rgba(0, 76, 143, .06);
+      position: relative
+    }
+
+    .sc:hover {
+      box-shadow: 0 6px 22px rgba(0, 76, 143, .14);
+      transform: translateY(-3px)
+    }
+
+    .sr {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.6rem;
+      font-weight: 900;
+      line-height: 1;
+      color: rgba(0, 76, 143, .1);
+      margin-bottom: .45rem
+    }
+
+    .sb {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .56rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      border-radius: 2px;
+      display: inline-block;
+      margin-bottom: .5rem;
+      color: #fff
+    }
+
+    .sn {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 900;
+      color: var(--blue);
+      margin-bottom: .3rem
+    }
+
+    .sd {
+      font-size: .8rem;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: .8rem
+    }
+
+    .sm {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .6rem;
+      color: var(--muted)
+    }
+
+    .stbtn {
+      position: absolute;
+      bottom: 1.3rem;
+      right: 1.3rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .62rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: 7px 14px;
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      font-weight: 700
+    }
+
+    /* EX AREA */
+    #exa {
+      display: none;
+      padding-top: 1.4rem
+    }
+
+    .eah {
+      display: flex;
+      align-items: center;
+      gap: .7rem;
+      margin-bottom: 1.3rem;
+      flex-wrap: wrap
+    }
+
+    .bbtn {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .6rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: 6px 13px;
+      border: 1.5px solid var(--blue-line);
+      background: var(--card);
+      color: var(--muted);
+      border-radius: 3px;
+      cursor: pointer;
+      transition: all .15s;
+      flex-shrink: 0
+    }
+
+    .bbtn:hover {
+      color: var(--blue);
+      border-color: var(--blue)
+    }
+
+    .abg {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .56rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 2px;
+      color: #fff
+    }
+
+    .at {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+      font-weight: 900;
+      color: var(--blue)
+    }
+
+    /* TRACKER */
+    .trk {
+      display: flex;
+      align-items: center;
+      gap: .7rem;
+      background: var(--card);
+      border: 1px solid var(--blue-line);
+      border-left: 3px solid var(--blue);
+      padding: .65rem 1rem;
+      margin-bottom: 1.4rem;
+      border-radius: 2px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .66rem;
+      color: var(--muted)
+    }
+
+    .tb {
+      flex: 1;
+      height: 5px;
+      background: var(--rule);
+      border-radius: 3px;
+      overflow: hidden;
+      min-width: 60px
+    }
+
+    .tf {
+      height: 100%;
+      background: var(--green);
+      border-radius: 3px;
+      transition: width .4s ease;
+      width: 0%
+    }
+
+    .tc {
+      color: var(--blue);
+      font-weight: 700;
+      white-space: nowrap
+    }
+
+    .ts {
+      color: var(--green);
+      font-weight: 700;
+      white-space: nowrap
+    }
+
+    /* THEORY */
+    .thc {
+      background: var(--blue-deep);
+      border-radius: 4px;
+      padding: 1.3rem 1.5rem;
+      margin-bottom: 1.5rem
+    }
+
+    .the {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .54rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: .45rem
+    }
+
+    .tht {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      font-weight: 900;
+      color: #fff;
+      margin-bottom: .55rem
+    }
+
+    .thb {
+      font-size: .84rem;
+      line-height: 1.75;
+      color: rgba(255, 255, 255, .72)
+    }
+
+    .thb strong {
+      color: var(--green)
+    }
+
+    .thtbl {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .78rem;
+      margin-top: .75rem
+    }
+
+    .thtbl th {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .54rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .45);
+      padding: 5px 7px;
+      border-bottom: 1px solid rgba(255, 255, 255, .12);
+      text-align: left;
+      font-weight: 400
+    }
+
+    .thtbl td {
+      padding: 5px 7px;
+      border-bottom: 1px solid rgba(255, 255, 255, .08);
+      color: rgba(255, 255, 255, .72)
+    }
+
+    .thtbl tr:last-child td {
+      border-bottom: none
+    }
+
+    .thg {
+      color: var(--green);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .76rem;
+      font-weight: 700
+    }
+
+    /* EX CARD */
+    .ec {
+      background: var(--card);
+      border: 1px solid var(--blue-line);
+      border-radius: 3px;
+      padding: 1.2rem 1.3rem;
+      margin-bottom: .9rem;
+      box-shadow: 0 1px 6px rgba(0, 76, 143, .05)
+    }
+
+    .etop {
+      display: flex;
+      align-items: baseline;
+      gap: .65rem;
+      margin-bottom: .65rem
+    }
+
+    .enum {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .64rem;
+      font-weight: 700;
+      color: var(--green);
+      background: var(--green-dim);
+      padding: 2px 7px;
+      border-radius: 2px;
+      flex-shrink: 0
+    }
+
+    .etag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .54rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--muted)
+    }
+
+    .einstr {
+      font-size: .82rem;
+      color: var(--muted);
+      line-height: 1.5;
+      margin-bottom: .7rem
+    }
+
+    .esent {
+      font-style: italic;
+      font-size: .92rem;
+      color: var(--ink);
+      background: var(--page);
+      padding: .6rem .9rem;
+      border-left: 3px solid var(--blue-line);
+      margin-bottom: .85rem;
+      line-height: 1.6;
+      border-radius: 1px
+    }
+
+    .ehint {
+      font-size: .76rem;
+      color: var(--muted);
+      font-style: italic;
+      margin-bottom: .55rem
+    }
+
+    /* OPTIONS */
+    .ocol {
+      display: flex;
+      flex-direction: column;
+      gap: .4rem
+    }
+
+    .mopt {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .78rem;
+      padding: 10px 14px;
+      background: var(--page);
+      border: 1.5px solid var(--rule);
+      border-radius: 3px;
+      cursor: pointer;
+      color: var(--body);
+      transition: background .13s, border-color .13s, color .13s;
+      text-align: left;
+      width: 100%
+    }
+
+    .mopt:hover:not([disabled]) {
+      background: var(--blue-dim);
+      border-color: rgba(0, 76, 143, .3);
+      color: var(--blue)
+    }
+
+    .mopt.ok {
+      background: rgba(0, 168, 89, .1);
+      border-color: var(--green);
+      color: var(--green-dark);
+      font-weight: 700
+    }
+
+    .mopt.err {
+      background: var(--red-dim);
+      border-color: var(--red);
+      color: var(--red)
+    }
+
+    .mopt[disabled] {
+      cursor: default
+    }
+
+    /* TF */
+    .tfrow {
+      display: flex;
+      gap: .55rem
+    }
+
+    .tfbtn {
+      flex: 1;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .82rem;
+      font-weight: 700;
+      padding: 12px;
+      border: 1.5px solid var(--rule);
+      border-radius: 3px;
+      background: var(--page);
+      color: var(--body);
+      cursor: pointer;
+      transition: all .13s
+    }
+
+    .tfbtn:hover:not([disabled]) {
+      border-color: var(--blue);
+      color: var(--blue);
+      background: var(--blue-dim)
+    }
+
+    .tfbtn.ok {
+      background: rgba(0, 168, 89, .1);
+      border-color: var(--green);
+      color: var(--green-dark)
+    }
+
+    .tfbtn.err {
+      background: var(--red-dim);
+      border-color: var(--red);
+      color: var(--red)
+    }
+
+    .tfbtn[disabled] {
+      cursor: default
+    }
+
+    /* FILL */
+    .frow {
+      display: flex;
+      align-items: center;
+      gap: .55rem;
+      flex-wrap: wrap
+    }
+
+    .fin {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .84rem;
+      padding: 9px 12px;
+      border: 1.5px solid var(--rule);
+      border-radius: 3px;
+      background: var(--page);
+      color: var(--ink);
+      flex: 1;
+      min-width: 160px;
+      max-width: 340px;
+      outline: none;
+      transition: border-color .15s
+    }
+
+    .fin:focus {
+      border-color: var(--blue)
+    }
+
+    .fin.ok {
+      border-color: var(--green);
+      background: rgba(0, 168, 89, .07);
+      color: var(--green-dark)
+    }
+
+    .fin.err {
+      border-color: var(--red);
+      background: var(--red-dim);
+      color: var(--red)
+    }
+
+    .fin.rw {
+      max-width: 100%;
+      width: 100%;
+      flex: none;
+      display: block;
+      margin-bottom: .55rem
+    }
+
+    /* WORD ORDER */
+    .wod {
+      min-height: 46px;
+      border: 2px dashed var(--blue-line);
+      border-radius: 3px;
+      padding: .48rem .65rem;
+      margin-bottom: .55rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: .38rem;
+      align-items: center;
+      background: var(--blue-dim);
+      transition: border-color .15s
+    }
+
+    .wod.ok {
+      border-color: var(--green);
+      border-style: solid;
+      background: rgba(0, 168, 89, .06)
+    }
+
+    .wod.err {
+      border-color: var(--red);
+      border-style: solid;
+      background: var(--red-dim)
+    }
+
+    .woph {
+      font-size: .73rem;
+      color: var(--muted);
+      font-style: italic;
+      font-family: 'Lora', serif
+    }
+
+    .wob {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .38rem;
+      margin-bottom: .65rem;
+      min-height: 34px
+    }
+
+    .woc {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .74rem;
+      padding: 5px 10px;
+      background: var(--card);
+      border: 1.5px solid var(--blue-line);
+      border-radius: 3px;
+      cursor: pointer;
+      color: var(--blue);
+      transition: background .12s, transform .1s;
+      user-select: none;
+      -webkit-user-select: none
+    }
+
+    .woc:hover {
+      background: var(--blue-dim);
+      transform: translateY(-1px)
+    }
+
+    .woc.pl {
+      background: var(--blue);
+      color: #fff;
+      border-color: var(--blue)
+    }
+
+    .woc.pl:hover {
+      background: var(--blue-mid)
+    }
+
+    /* CLASSIFY */
+    .clcols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: .65rem;
+      margin-bottom: .65rem
+    }
+
+    .clcol {
+      border: 2px dashed var(--blue-line);
+      border-radius: 3px;
+      min-height: 68px;
+      padding: .5rem;
+      background: var(--blue-dim)
+    }
+
+    .clcol.drag-over {
+      border-color: var(--blue);
+      background: rgba(0, 76, 143, .12)
+    }
+
+    .clcol.ok {
+      border-color: var(--green);
+      border-style: solid;
+      background: rgba(0, 168, 89, .07)
+    }
+
+    .clcol.err {
+      border-color: var(--red);
+      border-style: solid;
+      background: var(--red-dim)
+    }
+
+    .cllbl {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .57rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: .38rem
+    }
+
+    .clzone {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .3rem;
+      min-height: 26px
+    }
+
+    .clpool {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .35rem;
+      margin-bottom: .65rem
+    }
+
+    .clch {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .72rem;
+      padding: 5px 10px;
+      background: var(--card);
+      border: 1.5px solid var(--green-line);
+      border-radius: 3px;
+      cursor: grab;
+      color: var(--green-dark);
+      user-select: none;
+      -webkit-user-select: none;
+      transition: transform .1s
+    }
+
+    .clch:hover {
+      transform: translateY(-1px)
+    }
+
+    .clch.ok {
+      border-color: var(--green);
+      background: rgba(0, 168, 89, .1)
+    }
+
+    .clch.err {
+      border-color: var(--red);
+      background: var(--red-dim);
+      color: var(--red)
+    }
+
+    /* BUTTONS */
+    .acts {
+      display: flex;
+      gap: .45rem;
+      flex-wrap: wrap;
+      margin-top: .75rem
+    }
+
+    .ckbtn {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .66rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: 9px 20px;
+      background: var(--blue);
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: background .15s
+    }
+
+    .ckbtn:hover {
+      background: var(--blue-mid)
+    }
+
+    .rsbtn {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .66rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: 9px 14px;
+      background: var(--page);
+      color: var(--muted);
+      border: 1px solid var(--rule);
+      border-radius: 3px;
+      cursor: pointer;
+      transition: all .15s
+    }
+
+    .rsbtn:hover {
+      background: var(--rule)
+    }
+
+    /* FEEDBACK - only on error */
+    .fb {
+      font-size: .82rem;
+      font-style: italic;
+      margin-top: .6rem;
+      padding: .52rem .8rem;
+      border-radius: 3px;
+      display: none;
+      line-height: 1.5
+    }
+
+    .fb.e {
+      color: var(--red);
+      background: var(--red-dim);
+      border: 1px solid rgba(192, 57, 43, .22);
+      display: block
+    }
+
+    .fb.i {
+      color: var(--blue);
+      background: var(--blue-dim);
+      border: 1px solid var(--blue-line);
+      display: block
+    }
+
+    /* RESULTS */
+    .res {
+      background: var(--card);
+      border: 1px solid var(--blue-line);
+      border-top: 4px solid var(--blue);
+      border-radius: 2px;
+      margin-top: 2rem;
+      overflow: hidden;
+      display: none
+    }
+
+    .rh {
+      background: var(--blue);
+      padding: 1.3rem 1.5rem
+    }
+
+    .re {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .56rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: .28rem
+    }
+
+    .rt {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.45rem;
+      font-weight: 900;
+      color: #fff
+    }
+
+    .rb {
+      padding: 1.4rem 1.5rem
+    }
+
+    .srow {
+      display: flex;
+      align-items: center;
+      gap: 1.4rem;
+      margin-bottom: 1.4rem;
+      flex-wrap: wrap
+    }
+
+    .sring {
+      width: 86px;
+      height: 86px;
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      border: 3px solid var(--green)
+    }
+
+    .spct {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.55rem;
+      font-weight: 900;
+      line-height: 1;
+      color: var(--green)
+    }
+
+    .slbl {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .52rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 2px
+    }
+
+    .si h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--blue);
+      margin-bottom: .2rem
+    }
+
+    .si p {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .7rem;
+      color: var(--muted)
+    }
+
+    .rl {
+      display: flex;
+      flex-direction: column;
+      gap: .35rem;
+      margin-bottom: 1.3rem
+    }
+
+    .rv {
+      display: flex;
+      align-items: flex-start;
+      gap: .6rem;
+      padding: .45rem .65rem;
+      border-radius: 2px;
+      font-size: .81rem;
+      line-height: 1.5
+    }
+
+    .rv.o {
+      background: rgba(0, 168, 89, .07)
+    }
+
+    .rv.e {
+      background: var(--red-dim)
+    }
+
+    .rvn {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .6rem;
+      color: var(--muted);
+      width: 20px;
+      flex-shrink: 0;
+      padding-top: 1px
+    }
+
+    .rvi {
+      flex-shrink: 0
+    }
+
+    .rvt {
+      flex: 1;
+      color: var(--body)
+    }
+
+    .rvt em {
+      color: var(--green-dark);
+      font-style: italic
+    }
+
+    .rac {
+      display: flex;
+      gap: .55rem;
+      flex-wrap: wrap
+    }
+
+    .again {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .68rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      padding: 11px 22px;
+      background: var(--blue);
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      font-weight: 700
+    }
+
+    .again:hover {
+      background: var(--blue-mid)
+    }
+
+    .osets {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .68rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      padding: 11px 18px;
+      background: var(--page);
+      color: var(--blue);
+      border: 1.5px solid var(--blue-line);
+      border-radius: 3px;
+      cursor: pointer;
+      font-weight: 700
+    }
+
+    .osets:hover {
+      background: var(--blue-dim);
+      border-color: var(--blue)
+    }
+
+    /* FONT BAR */
+    .fnb {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 200;
+      background: var(--blue-deep);
+      border-top: 2px solid var(--green);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: .5rem;
+      padding: .42rem 1rem;
+      box-shadow: 0 -2px 16px rgba(0, 0, 0, .22)
+    }
+
+    .fnl {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .53rem;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .38)
+    }
+
+    .fb2 {
+      height: 26px;
+      min-width: 26px;
+      padding: 0 7px;
+      border-radius: 5px;
+      border: 1.5px solid rgba(255, 255, 255, .2);
+      background: rgba(255, 255, 255, .08);
+      color: #fff;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .74rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .13s
+    }
+
+    .fb2:hover {
+      background: rgba(255, 255, 255, .2)
+    }
+
+    .fb2.on {
+      background: var(--green);
+      border-color: var(--green)
+    }
+
+    .fsp {
+      width: 1px;
+      height: 16px;
+      background: rgba(255, 255, 255, .13)
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--blue);
+      border-top: 3px solid var(--green);
+      padding: 2rem clamp(.8rem, 4vw, 2rem);
+      text-align: center;
+      margin-top: 2rem
+    }
+
+    .flo {
+      font-family: 'Playfair Display', serif;
+      font-size: .98rem;
+      font-weight: 900;
+      color: #fff;
+      margin-bottom: .22rem
+    }
+
+    .fsu {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .56rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .36)
+    }
+
+    .fac {
+      color: var(--green)
+    }
+
+    @media(max-width:580px) {
+      .hero-i {
+        grid-template-columns: 1fr
+      }
+
+      .hm {
+        display: none
+      }
+
+      .hc {
+        display: none
+      }
+
+      .clcols {
+        grid-template-columns: 1fr
+      }
+
+      .sg {
+        grid-template-columns: 1fr
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="hi">
+      <a href="../index.html" class="lp">
+        <img src="../assets/images/logo-uts-2024.png" alt="UTS" onerror="this.innerHTML='<span class=lf>UTS</span>'">
+      </a>
+      <div class="hc">
+        <p class="ey">CELE &middot; English Language Program</p>
+        <p class="ht dp">Past Time Expressions</p>
+      </div>
+      <a href="../index.html" class="lp">
+        <img src="../assets/images/logo_cele.png" alt="CELE" onerror="this.innerHTML='<span class=lf>CELE</span>'">
+      </a>
+    </div>
+  </header>
+  <section class="hero">
+    <div class="hero-i">
+      <div>
+        <p class="he">Exercise Sets &mdash; Level A2&ndash;B1</p>
+        <h1 class="ht2 dp">Past Time<br><em>Expressions</em></h1>
+        <p class="hs">Three independent exercise sets with different activity types. Choose any set to begin. Feedback
+          only appears on incorrect answers.</p>
+      </div>
+      <div class="hm"><strong>3</strong>Sets<br><strong>30</strong>Questions<br>&mdash;&mdash;<br>M.C. &middot;
+        Fill-in<br>W.Order &middot; Classify</div>
+    </div>
+  </section>
+  <div class="mw">
+    <div id="lobby">
+      <div class="li">
+        <h2 class="dp">Choose Your Exercise Set</h2>
+        <p>Each set covers all Past Time Expressions with a different activity style. You can do them in any order.</p>
+      </div>
+      <div class="sg" id="sg"></div>
+    </div>
+    <div id="exa">
+      <div class="eah">
+        <button class="bbtn" id="bbtn">&larr; Sets</button>
+        <span class="abg" id="abg"></span>
+        <span class="at dp" id="at"></span>
+      </div>
+      <div class="trk"><span>Progress</span>
+        <div class="tb">
+          <div class="tf" id="trkf"></div>
+        </div><span class="tc" id="trkc">0 / 10</span><span class="ts" id="trks"></span>
+      </div>
+      <div id="thslot"></div>
+      <div id="qc"></div>
+      <div class="res" id="res">
+        <div class="rh">
+          <p class="re">&mdash; Set Complete</p>
+          <p class="rt dp" id="rtitle"></p>
+        </div>
+        <div class="rb">
+          <div class="srow">
+            <div class="sring" id="sring"><span class="spct" id="spct">0%</span><span class="slbl">Score</span></div>
+            <div class="si">
+              <h3 id="smsg"></h3>
+              <p id="sfrac"></p>
+            </div>
+          </div>
+          <p
+            style="font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.7rem">
+            Answer Review</p>
+          <div class="rl" id="rl"></div>
+          <div class="rac"><button class="again" id="again">&circlearrowleft; Try Again</button><button class="osets"
+              id="osets">&rightleftarrows; Other Sets</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <p class="flo dp">Universidad Tecnol&oacute;gica de Salamanca</p>
+    <p class="fsu">CELE &mdash; Centro de Lenguas <span class="fac">&middot;</span> English Language Program <span
+        class="fac">&middot;</span> &copy; 2025</p>
+  </footer>
+  <div class="fnb">
+    <span class="fnl">Text</span>
+    <div class="fsp"></div>
+    <button class="fb2" id="fsm">A<sup style="font-size:.55em">-</sup></button>
+    <button class="fb2 on" id="fmd">A</button>
+    <button class="fb2" id="flg">A<sup style="font-size:.55em">+</sup></button>
+  </div>
+  <script>
+    /* ====================== FONT SIZE ====================== */
+    var FSZ = { sm: 13, md: 16, lg: 19 };
+    function applyFS(k) {
+      document.documentElement.style.fontSize = FSZ[k] + 'px';
+      localStorage.setItem('cf', k);
+      ['sm', 'md', 'lg'].forEach(function (x) {
+        document.getElementById('f' + x).classList.toggle('on', x === k);
+      });
+    }
+    document.getElementById('fsm').onclick = function () { applyFS('sm'); };
+    document.getElementById('fmd').onclick = function () { applyFS('md'); };
+    document.getElementById('flg').onclick = function () { applyFS('lg'); };
+    applyFS(localStorage.getItem('cf') || 'md');
+
+    /* ====================== DATA ====================== */
+    var DATA = {
+      A: {
+        label: 'Set I \u00b7 Multiple Choice',
+        name: 'Identify & Select',
+        color: '#004c8f',
+        desc: 'Choose the correct past time expression, spot errors in sentences, and decide True or False on grammar rules.',
+        theory: {
+          title: 'Past Time Expressions \u2014 Quick Recap',
+          tableRows: [
+            ['yesterday', 'day before today', 'Simple Past'],
+            ['last night/week/year', 'most recently completed period', 'Simple Past'],
+            ['two days ago', 'counting back from now', 'Simple Past'],
+            ['the other day', 'vague recent past', 'Simple Past'],
+            ['before / earlier', 'before=needs anchor; earlier=standalone', 'Simple Past'],
+            ['once / formerly', 'past state no longer true', 'Simple Past'],
+            ['recently / lately', 'recently=S.P./P.P.; lately=Pres.Perf.', 'Mixed']
+          ]
+        },
+        questions: [
+          {
+            id: 'a01', type: 'mc', label: 'Multiple Choice',
+            instr: 'Choose the correct time expression to complete the sentence.',
+            sent: 'She called me ___ and we talked for an hour.',
+            opts: ['yesterday', 'last', 'the other day', 'ago'],
+            correct: 'yesterday',
+            fb: '<strong>Yesterday</strong> is the correct adverb for the day before today. It uses Simple Past and needs no preposition.'
+          },
+          {
+            id: 'a02', type: 'mc', label: 'Multiple Choice',
+            instr: 'Choose the correct time expression.',
+            sent: "I haven't seen him since we met ___ at a conference.",
+            opts: ['the other day', 'last year', 'yesterday morning', 'two weeks'],
+            correct: 'the other day',
+            fb: '"<strong>The other day</strong>" expresses a vague, recent time without a specific date, natural in conversation.'
+          },
+          {
+            id: 'a03', type: 'spot', label: 'Spot the Error',
+            instr: 'One option correctly identifies the error. Which is it?',
+            sent: '"He left for Paris yesterday night."',
+            opts: ['"yesterday night" should be "last night"', '"left for" should be "left to"', '"He" should be "Him"'],
+            correct: '"yesterday night" should be "last night"',
+            fb: 'We never say <em>yesterday night</em>. The fixed expression is <strong>last night</strong>. Other combos are fine: yesterday morning, yesterday evening.'
+          },
+          {
+            id: 'a04', type: 'mc', label: 'Multiple Choice',
+            instr: 'Choose the correct time expression.',
+            sent: 'They used to live in Guadalajara. They ___ moved to Salamanca.',
+            opts: ['lately', 'formerly', 'the other', 'yesterday'],
+            correct: 'formerly',
+            fb: '<strong>Formerly</strong> describes a completed past state that is no longer true. It is the formal counterpart of "once".'
+          },
+          {
+            id: 'a05', type: 'tf', label: 'True / False',
+            instr: 'True or False?',
+            sent: '"She has been working very hard lately." \u2014 This is grammatically correct.',
+            correct: 'True',
+            fb: '<strong>Lately</strong> pairs with Present Perfect or Present Perfect Continuous for a repeated or ongoing situation near the present.'
+          },
+          {
+            id: 'a06', type: 'mc', label: 'Multiple Choice',
+            instr: 'Choose the correct time expression.',
+            sent: 'The market ___ occupied the whole plaza, but now it has moved.',
+            opts: ['once', 'recently', 'yesterday', 'later'],
+            correct: 'once',
+            fb: '"<strong>Once</strong>" (= at one time) describes a past state that is no longer true. "Formerly" would also work in a formal register.'
+          },
+          {
+            id: 'a07', type: 'spot', label: 'Spot the Error',
+            instr: 'One option correctly identifies the error. Which is it?',
+            sent: '"She bought this dress on last Saturday."',
+            opts: ['"on last Saturday" \u2192 remove "on", say "last Saturday"', '"bought" should be "buyed"', '"this" should be "that"'],
+            correct: '"on last Saturday" \u2192 remove "on", say "last Saturday"',
+            fb: 'With <strong>last + day/week/month/year</strong> we NEVER use a preposition. Correct: "She bought this dress <strong>last Saturday</strong>."'
+          },
+          {
+            id: 'a08', type: 'mc', label: 'Multiple Choice',
+            instr: 'Choose the most natural time expression.',
+            sent: 'I saw an amazing film ___ \u2014 you should watch it.',
+            opts: ['lately', 'recently', 'formerly', 'the day before'],
+            correct: 'recently',
+            fb: '<strong>Recently</strong> works with both Simple Past and Present Perfect. <em>Lately</em> implies repetition or ongoing state, which does not fit a single viewing.'
+          },
+          {
+            id: 'a09', type: 'tf', label: 'True / False',
+            instr: 'True or False?',
+            sent: '"He finished the project two days before." (used WITHOUT any reference point) \u2014 This is correct.',
+            correct: 'False',
+            fb: '<strong>Before</strong> requires a reference anchor: "two days <strong>before the deadline</strong>". Without one, use <strong>two days ago</strong>.'
+          },
+          {
+            id: 'a10', type: 'mc', label: 'Multiple Choice',
+            instr: 'Choose the correct time expression.',
+            sent: '___ I used to play the guitar, but I stopped after university.',
+            opts: ['Once', 'Before', 'Earlier', 'Lately'],
+            correct: 'Once',
+            fb: '"<strong>Once</strong>" (= at one time) introduces a past habit that no longer exists. <em>Formerly</em> would be more formal in writing.'
+          }
+        ]
+      },
+      B: {
+        label: 'Set II \u00b7 Fill-in & Classify',
+        name: 'Complete & Sort',
+        color: '#00a859',
+        desc: 'Type the missing past time expression, and drag-and-drop expressions into their correct grammar category.',
+        theory: {
+          title: 'Choosing the Right Expression',
+          html: '<strong>1. Specific day or period?</strong><br><span style="opacity:.8">&rarr; yesterday / last Monday / in 2010 / on Friday</span><br><br><strong>2. Counting back from NOW? (time + ago)</strong><br><span style="opacity:.8"><span style="color:#00a859">&#10003; three days ago</span> &nbsp; <span style="color:#c0392b">&#10007; ago three days</span></span><br><br><strong>3. Ongoing / repeated near the present?</strong><br><span style="opacity:.8">&rarr; <strong>lately</strong> (Pres.Perf.) &middot; <strong>recently</strong> (S.P. or P.P.)</span><br><br><strong>4. Past state no longer true?</strong><br><span style="opacity:.8">&rarr; <strong>once / formerly</strong> (she once was a teacher)</span>'
+        },
+        questions: [
+          {
+            id: 'b01', type: 'fill', label: 'Fill in',
+            instr: 'Type the missing past time expression.',
+            sent: 'I saw him ___ \u2014 it was about two weeks ago.',
+            hint: '(vague recent past, conversational)',
+            correct: ['the other day', 'the other evening', 'the other night'],
+            fb: '<strong>The other day</strong> is the natural expression for a vague recent past event in conversation.'
+          },
+          {
+            id: 'b02', type: 'fill', label: 'Fill in',
+            instr: 'Type the correct word (one word only).',
+            sent: 'She graduated three years ___.',
+            hint: '(counting back from now)',
+            correct: ['ago'],
+            fb: '<strong>Ago</strong> always follows the time period: "three years <strong>ago</strong>". It never comes before.'
+          },
+          {
+            id: 'b03', type: 'fill', label: 'Fill in',
+            instr: 'Complete with the most appropriate expression.',
+            sent: "I haven't been sleeping well ___.",
+            hint: '(repeated/ongoing, used with Pres. Perfect)',
+            correct: ['lately', 'recently'],
+            fb: '<strong>Lately</strong> is the best answer \u2014 repeated/ongoing near the present, used with Present Perfect. <em>Recently</em> is also accepted.'
+          },
+          {
+            id: 'b04', type: 'fill', label: 'Fill in',
+            instr: 'Type only the missing preposition (one word).',
+            sent: 'He was born ___ 1998.',
+            hint: '(large time period: year)',
+            correct: ['in'],
+            fb: 'We use <strong>in</strong> for large time periods: years, months, seasons, decades.'
+          },
+          {
+            id: 'b05', type: 'fill', label: 'Fill in',
+            instr: 'Complete the sentence with the correct time expression.',
+            sent: 'I met her ___ morning \u2014 she looked tired.',
+            hint: '(morning of the day before today)',
+            correct: ['yesterday'],
+            fb: '"<strong>Yesterday</strong> morning" is correct. We can say yesterday morning/afternoon/evening \u2014 but NOT yesterday night (use "last night").'
+          },
+          {
+            id: 'b06', type: 'cl', label: 'Classify',
+            instr: 'Drag each expression into the correct tense category.',
+            cats: ['Simple Past only', 'Present Perfect / P.P.C.'],
+            items: [
+              { text: 'three days ago', cat: 'Simple Past only' },
+              { text: 'lately', cat: 'Present Perfect / P.P.C.' },
+              { text: 'last week', cat: 'Simple Past only' },
+              { text: 'yesterday', cat: 'Simple Past only' },
+              { text: 'recently', cat: 'Present Perfect / P.P.C.' },
+              { text: 'in 1990', cat: 'Simple Past only' }
+            ],
+            fb: '<strong>Simple Past only:</strong> three days ago, last week, yesterday, in 1990. <strong>Present Perfect:</strong> lately, recently \u2014 they connect to the present moment.'
+          },
+          {
+            id: 'b07', type: 'fill', label: 'Fill in',
+            instr: 'Type only the missing preposition (one word).',
+            sent: 'They got married ___ a Friday.',
+            hint: '(specific day)',
+            correct: ['on'],
+            fb: 'We use <strong>on</strong> for specific days and dates: "on a Friday", "on 5 March", "on Monday".'
+          },
+          {
+            id: 'b08', type: 'cl', label: 'Classify',
+            instr: 'Is the time expression used correctly or incorrectly?',
+            cats: ['\u2705 Correct use', '\u274c Incorrect use'],
+            items: [
+              { text: 'She left yesterday night.', cat: '\u274c Incorrect use' },
+              { text: 'I saw him three days ago.', cat: '\u2705 Correct use' },
+              { text: 'On last Tuesday I worked late.', cat: '\u274c Incorrect use' },
+              { text: 'I met her last Monday.', cat: '\u2705 Correct use' },
+              { text: 'He called me before an hour.', cat: '\u274c Incorrect use' },
+              { text: 'We arrived two hours ago.', cat: '\u2705 Correct use' }
+            ],
+            fb: 'Incorrect: <em>yesterday night</em> &rarr; last night &bull; <em>On last Tuesday</em> &rarr; last Tuesday (no prep.) &bull; <em>before an hour</em> &rarr; an hour ago.'
+          },
+          {
+            id: 'b09', type: 'fill', label: 'Fill in',
+            instr: 'Complete with the correct expression (one or two words).',
+            sent: "He ___ worked as a teacher, but now he's a director.",
+            hint: '(past role no longer true)',
+            correct: ['formerly', 'once'],
+            fb: '<strong>Formerly</strong> (formal) or <strong>once</strong> (conversational) both describe a changed past role.'
+          },
+          {
+            id: 'b10', type: 'fill', label: 'Fill in',
+            instr: 'Complete the sentence (one word).',
+            sent: 'Can you finish ___ \u2014 before the client arrives?',
+            hint: '(sooner than now, standalone adverb)',
+            correct: ['earlier'],
+            fb: '<strong>Earlier</strong> is a standalone adverb meaning "before this moment". <em>Before</em> would need an explicit reference point.'
+          }
+        ]
+      },
+      C: {
+        label: 'Set III \u00b7 Word Order & Rewrite',
+        name: 'Build & Apply',
+        color: '#c0392b',
+        desc: 'Arrange word chips to reconstruct sentences, and rewrite sentences correcting the time expression.',
+        theory: {
+          title: 'Position Rules for Past Time Expressions',
+          html: 'Past time expressions go at the <strong>beginning</strong> or <strong>end</strong> of a sentence.<br><br><span style="opacity:.8">&#10003; <strong>Yesterday</strong>, she called her mum.<br>&#10003; She called her mum <strong>yesterday</strong>.<br>&#10003; <strong>Three years ago</strong> he moved here.</span><br><br><strong>Fixed rule for <span style="color:#00a859">ago</span></strong> &mdash; always AFTER the time period:<br><span style="opacity:.8">&#10003; two weeks ago &nbsp; &#10007; ago two weeks</span><br><br><strong>Fixed rule for <span style="color:#00a859">last</span></strong> &mdash; NO article, NO preposition:<br><span style="opacity:.8">&#10003; last week &nbsp; &#10007; the last week &nbsp; &#10007; on last week</span>'
+        },
+        questions: [
+          {
+            id: 'c01', type: 'wo', label: 'Word Order',
+            instr: 'Arrange the word chips to build a correct sentence.',
+            words: ['She', 'started', 'the', 'course', 'last', 'summer'],
+            correct: 'she started the course last summer',
+            fb: '"Last + period" needs no preposition and goes at the end or beginning.'
+          },
+          {
+            id: 'c02', type: 'wo', label: 'Word Order',
+            instr: 'Arrange the word chips to build a correct sentence.',
+            words: ['moved', 'We', 'here', 'three', 'years', 'ago'],
+            correct: 'we moved here three years ago',
+            fb: 'The time expression "three years ago" follows the verb complement.'
+          },
+          {
+            id: 'c03', type: 'wo', label: 'Word Order',
+            instr: 'Arrange the word chips to build a correct sentence.',
+            words: ['met', 'I', 'her', 'the', 'other', 'day'],
+            correct: 'i met her the other day',
+            fb: '"The other day" typically comes at the end of the sentence.'
+          },
+          {
+            id: 'c04', type: 'wo', label: 'Word Order',
+            instr: 'Arrange the word chips to build a correct sentence.',
+            words: ['was', 'Previously', 'a', 'he', 'director'],
+            correct: 'previously he was a director',
+            fb: 'Adverbs like <em>previously</em> and <em>formerly</em> often start formal sentences.'
+          },
+          {
+            id: 'c05', type: 'rw', label: 'Rewrite',
+            instr: 'Fix the time expression. Type the corrected full sentence.',
+            sent: '"I saw this film ago two months."',
+            hint: 'Hint: the time period comes BEFORE ago.',
+            correct: ['i saw this film two months ago'],
+            fb: '"I saw this film two months ago." \u2014 The time period always comes BEFORE <em>ago</em>.'
+          },
+          {
+            id: 'c06', type: 'wo', label: 'Word Order',
+            instr: 'Arrange the word chips to build a correct sentence.',
+            words: ['Last', 'night', 'she', 'sleep', "couldn't"],
+            correct: "last night she couldn't sleep",
+            fb: '"Last night" at the beginning for emphasis \u2014 no preposition needed.'
+          },
+          {
+            id: 'c07', type: 'rw', label: 'Rewrite',
+            instr: 'Fix only the time expression. Type the corrected full sentence.',
+            sent: '"He arrived on last Monday."',
+            hint: 'Hint: no preposition before "last".',
+            correct: ['he arrived last monday'],
+            fb: '"He arrived last Monday." \u2014 Never use "on" before <em>last</em>.'
+          },
+          {
+            id: 'c08', type: 'wo', label: 'Word Order',
+            instr: 'Arrange the word chips to build a correct sentence.',
+            words: ['you', "didn't", 'Why', 'me', 'call', 'earlier'],
+            correct: "why didn't you call me earlier",
+            fb: '<em>Earlier</em> is a standalone adverb at the end of the question.'
+          },
+          {
+            id: 'c09', type: 'rw', label: 'Rewrite',
+            instr: 'Rewrite using Present Perfect and replacing "yesterday" with "recently".',
+            sent: '"She published an article yesterday."',
+            hint: 'Hint: "She has recently published..." or "She has published... recently"',
+            correct: ['she has recently published an article', 'she has published an article recently'],
+            fb: '"She has recently published an article." \u2014 With <em>recently</em>, Present Perfect connects the event to now.'
+          },
+          {
+            id: 'c10', type: 'wo', label: 'Word Order',
+            instr: 'Arrange the word chips to build a correct sentence.',
+            words: ['was', 'The', 'town', 'once', 'a', 'busy', 'port'],
+            correct: 'the town was once a busy port',
+            fb: '<em>Once</em> (at one time) sits after the auxiliary verb to describe a past state.'
+          }
+        ]
+      }
+    };
+
+    /* ====================== STATE ====================== */
+    var curSet = null;
+    var answers = {};
+    var woSt = {};
+    var clSt = {};
+    var selCh = null;
+
+    function totalQ() { return curSet ? DATA[curSet].questions.length : 10; }
+    function doneQ() { return Object.keys(answers).length; }
+    function corrQ() { return Object.values(answers).filter(function (a) { return a.ok; }).length; }
+    function findQ(id) {
+      if (!curSet) return null;
+      for (var i = 0; i < DATA[curSet].questions.length; i++) {
+        if (DATA[curSet].questions[i].id === id) return DATA[curSet].questions[i];
+      }
+      return null;
+    }
+
+    /* ====================== NAV ====================== */
+    document.getElementById('bbtn').onclick = goLobby;
+    document.getElementById('again').onclick = function () { startSet(curSet); };
+    document.getElementById('osets').onclick = goLobby;
+
+    function goLobby() {
+      document.getElementById('lobby').style.display = 'block';
+      document.getElementById('exa').style.display = 'none';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function startSet(key) {
+      curSet = key;
+      answers = {};
+      woSt = {};
+      clSt = {};
+      selCh = null;
+      var set = DATA[key];
+      document.getElementById('abg').textContent = set.label;
+      document.getElementById('abg').style.background = set.color;
+      document.getElementById('at').textContent = set.name;
+      buildTheory(set);
+      updateTracker();
+      buildQuestions();
+      document.getElementById('res').style.display = 'none';
+      document.getElementById('lobby').style.display = 'none';
+      document.getElementById('exa').style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    /* ====================== TRACKER ====================== */
+    function updateTracker() {
+      var t = totalQ(), d = doneQ(), c = corrQ();
+      document.getElementById('trkf').style.width = (t ? Math.round(d / t * 100) : 0) + '%';
+      document.getElementById('trkc').textContent = d + ' / ' + t;
+      document.getElementById('trks').textContent = d > 0 ? '\u2713 ' + c : '';
+    }
+
+    /* ====================== THEORY ====================== */
+    function buildTheory(set) {
+      var slot = document.getElementById('thslot');
+      slot.innerHTML = '';
+      if (!set.theory) return;
+      var th = set.theory;
+      var div = document.createElement('div');
+      div.className = 'thc';
+      var ey = document.createElement('p');
+      ey.className = 'the';
+      ey.textContent = '\u2014 Grammar Reference';
+      div.appendChild(ey);
+      if (th.title) {
+        var ti = document.createElement('p');
+        ti.className = 'tht dp';
+        ti.textContent = th.title;
+        div.appendChild(ti);
+      }
+      var body = document.createElement('div');
+      body.className = 'thb';
+      if (th.tableRows) {
+        var tbl = '<table class="thtbl"><tr><th>Expression</th><th>Use</th><th>Tense</th></tr>';
+        th.tableRows.forEach(function (r) {
+          tbl += '<tr><td class="thg">' + r[0] + '</td><td>' + r[1] + '</td><td>' + r[2] + '</td></tr>';
+        });
+        tbl += '</table>';
+        body.innerHTML = tbl;
+      } else if (th.html) {
+        body.innerHTML = th.html;
+      }
+      div.appendChild(body);
+      slot.appendChild(div);
+    }
+
+    /* ====================== BUILD QUESTIONS ====================== */
+    function buildQuestions() {
+      var c = document.getElementById('qc');
+      c.innerHTML = '';
+      DATA[curSet].questions.forEach(function (q, i) {
+        c.appendChild(makeCard(q, i + 1));
+      });
+    }
+
+    function makeCard(q, num) {
+      var card = document.createElement('div');
+      card.className = 'ec';
+      card.id = 'card-' + q.id;
+
+      var top = document.createElement('div');
+      top.className = 'etop';
+      var n = document.createElement('span');
+      n.className = 'enum';
+      n.textContent = (num < 10 ? '0' : '') + num;
+      var t = document.createElement('span');
+      t.className = 'etag';
+      t.textContent = q.label;
+      top.appendChild(n); top.appendChild(t);
+      card.appendChild(top);
+
+      var ins = document.createElement('p');
+      ins.className = 'einstr';
+      ins.textContent = q.instr;
+      card.appendChild(ins);
+
+      if (q.type === 'mc' || q.type === 'spot') {
+        addSent(card, q.sent);
+        var opts = document.createElement('div');
+        opts.className = 'ocol';
+        opts.id = 'opts-' + q.id;
+        q.opts.forEach(function (opt) {
+          var b = document.createElement('button');
+          b.className = 'mopt';
+          b.textContent = opt;
+          b.addEventListener('click', makeMCHandler(q.id, opt));
+          opts.appendChild(b);
+        });
+        card.appendChild(opts);
+      }
+
+      else if (q.type === 'tf') {
+        addSent(card, q.sent);
+        var row = document.createElement('div');
+        row.className = 'tfrow';
+        row.id = 'tf-' + q.id;
+        ['True', 'False'].forEach(function (v) {
+          var b = document.createElement('button');
+          b.className = 'tfbtn';
+          b.textContent = v === 'True' ? '\u2713 True' : '\u2717 False';
+          b.addEventListener('click', makeTFHandler(q.id, v));
+          row.appendChild(b);
+        });
+        card.appendChild(row);
+      }
+
+      else if (q.type === 'fill' || q.type === 'rw') {
+        addSent(card, q.sent);
+        if (q.hint) {
+          var h = document.createElement('p');
+          h.className = 'ehint';
+          h.textContent = q.hint;
+          card.appendChild(h);
+        }
+        var inp = document.createElement('input');
+        inp.type = 'text';
+        inp.id = 'inp-' + q.id;
+        inp.autocomplete = 'off';
+        inp.spellcheck = false;
+        if (q.type === 'rw') {
+          inp.className = 'fin rw';
+          inp.placeholder = 'Type the corrected sentence\u2026';
+        } else {
+          inp.className = 'fin';
+          inp.placeholder = 'Type here\u2026';
+          var fr = document.createElement('div');
+          fr.className = 'frow';
+          fr.appendChild(inp);
+          var cb = document.createElement('button');
+          cb.className = 'ckbtn';
+          cb.textContent = 'Check \u2713';
+          cb.addEventListener('click', makeFillHandler(q.id));
+          fr.appendChild(cb);
+          inp.addEventListener('keydown', makeFillKeyHandler(q.id));
+          card.appendChild(fr);
+        }
+        if (q.type === 'rw') {
+          inp.addEventListener('keydown', makeFillKeyHandler(q.id));
+          var rwb = document.createElement('button');
+          rwb.className = 'ckbtn';
+          rwb.style.marginTop = '.5rem';
+          rwb.textContent = 'Check \u2713';
+          rwb.addEventListener('click', makeFillHandler(q.id));
+          card.appendChild(inp);
+          card.appendChild(rwb);
+        }
+      }
+
+      else if (q.type === 'wo') {
+        var sh = q.words.slice().sort(function () { return Math.random() - .5; });
+        var nc = q.correct.toLowerCase().replace(/[?!.]/g, '').trim();
+        if (sh.map(function (w) { return w.toLowerCase(); }).join(' ') === nc) sh.reverse();
+        woSt[q.id] = { placed: [], remaining: sh };
+
+        var dr = document.createElement('div');
+        dr.className = 'wod'; dr.id = 'wod-' + q.id;
+        dr.innerHTML = '<span class="woph">Tap words below to build the sentence\u2026</span>';
+        card.appendChild(dr);
+
+        var bk = document.createElement('div');
+        bk.className = 'wob'; bk.id = 'wob-' + q.id;
+        card.appendChild(bk);
+
+        card.appendChild(makeActionsWO(q.id));
+        setTimeout(makeRenderWOFn(q.id), 0);
+      }
+
+      else if (q.type === 'cl') {
+        clSt[q.id] = {};
+        var cc = document.createElement('div');
+        cc.className = 'clcols'; cc.id = 'clcols-' + q.id;
+        q.cats.forEach(function (cat) {
+          var col = document.createElement('div');
+          col.className = 'clcol';
+          col.id = 'clcol-' + q.id + '-' + ck(cat);
+          var lb = document.createElement('p'); lb.className = 'cllbl'; lb.textContent = cat;
+          var zn = document.createElement('div'); zn.className = 'clzone'; zn.id = 'clzn-' + q.id + '-' + ck(cat);
+          col.appendChild(lb); col.appendChild(zn);
+          col.addEventListener('dragover', function (e) { e.preventDefault(); col.classList.add('drag-over'); });
+          col.addEventListener('dragleave', function () { col.classList.remove('drag-over'); });
+          col.addEventListener('drop', makeDropHandler(q.id, cat));
+          col.addEventListener('click', makeColTapHandler(q.id, cat));
+          cc.appendChild(col);
+        });
+        card.appendChild(cc);
+
+        var pl = document.createElement('div');
+        pl.className = 'clpool'; pl.id = 'clpool-' + q.id;
+        q.items.slice().sort(function () { return Math.random() - .5; }).forEach(function (item) {
+          pl.appendChild(makeChip(q.id, item.text, item.cat));
+        });
+        card.appendChild(pl);
+        card.appendChild(makeActionsCL(q.id));
+      }
+
+      var fb = document.createElement('div');
+      fb.className = 'fb'; fb.id = 'fb-' + q.id;
+      card.appendChild(fb);
+      return card;
+    }
+
+    /* helpers */
+    function addSent(parent, text) {
+      var p = document.createElement('p'); p.className = 'esent'; p.textContent = text; parent.appendChild(p);
+    }
+    function ck(s) { return s.replace(/[^a-z0-9]/gi, 'Z'); }
+
+    /* handler factories — closures capture the id */
+    function makeMCHandler(id, opt) {
+      return function () { gradeMC(id, opt); };
+    }
+    function makeTFHandler(id, val) {
+      return function () { gradeTF(id, val); };
+    }
+    function makeFillHandler(id) {
+      return function () { gradeFill(id); };
+    }
+    function makeFillKeyHandler(id) {
+      return function (e) { if (e.key === 'Enter') gradeFill(id); };
+    }
+    function makeRenderWOFn(id) {
+      return function () { renderWO(id); };
+    }
+    function makeDropHandler(qid, cat) {
+      return function (e) {
+        e.preventDefault();
+        document.getElementById('clcol-' + qid + '-' + ck(cat)).classList.remove('drag-over');
+        try {
+          var d = JSON.parse(e.dataTransfer.getData('application/json'));
+          if (d.qid === qid) placeChip(qid, d.text, cat);
+        } catch (x) { }
+      };
+    }
+    function makeColTapHandler(qid, cat) {
+      return function () { onColTap(qid, cat); };
+    }
+    function makeActionsWO(id) {
+      var w = document.createElement('div'); w.className = 'acts';
+      var c = document.createElement('button'); c.className = 'ckbtn'; c.textContent = 'Check \u2713';
+      c.addEventListener('click', function () { gradeWO(id); });
+      var r = document.createElement('button'); r.className = 'rsbtn'; r.textContent = 'Reset \u21ba';
+      r.addEventListener('click', function () { resetWO(id); });
+      w.appendChild(c); w.appendChild(r);
+      return w;
+    }
+    function makeActionsCL(id) {
+      var w = document.createElement('div'); w.className = 'acts';
+      var c = document.createElement('button'); c.className = 'ckbtn'; c.textContent = 'Check \u2713';
+      c.addEventListener('click', function () { gradeCL(id); });
+      var r = document.createElement('button'); r.className = 'rsbtn'; r.textContent = 'Reset \u21ba';
+      r.addEventListener('click', function () { resetCL(id); });
+      w.appendChild(c); w.appendChild(r);
+      return w;
+    }
+
+    /* ====================== RECORD ====================== */
+    function record(id, ok, userAns, corrAns) {
+      if (answers[id]) return;
+      answers[id] = { ok: ok, userAns: userAns, corrAns: corrAns };
+      updateTracker();
+      if (doneQ() === totalQ()) setTimeout(showResults, 700);
+    }
+
+    /* Feedback: show only on error */
+    function showFB(id, ok, html) {
+      var fb = document.getElementById('fb-' + id);
+      if (!fb) return;
+      if (ok) {
+        fb.className = 'fb';
+      } else {
+        fb.className = 'fb e';
+        fb.innerHTML = '\u2717&nbsp; ' + html;
+      }
+    }
+
+    /* ====================== GRADE MC/SPOT ====================== */
+    function gradeMC(id, sel) {
+      if (answers[id]) return;
+      var q = findQ(id);
+      if (!q) return;
+      var ok = (sel === q.correct);
+      document.getElementById('opts-' + id).querySelectorAll('.mopt').forEach(function (b) {
+        b.disabled = true;
+        if (b.textContent.trim() === q.correct) b.classList.add('ok');
+        else if (b.textContent.trim() === sel && !ok) b.classList.add('err');
+      });
+      showFB(id, ok, q.fb);
+      record(id, ok, sel, q.correct);
+    }
+
+    /* ====================== GRADE TF ====================== */
+    function gradeTF(id, sel) {
+      if (answers[id]) return;
+      var q = findQ(id);
+      if (!q) return;
+      var ok = (sel === q.correct);
+      document.getElementById('tf-' + id).querySelectorAll('.tfbtn').forEach(function (b) {
+        b.disabled = true;
+        var v = b.textContent.indexOf('True') >= 0 ? 'True' : 'False';
+        if (v === q.correct) b.classList.add('ok');
+        else if (v === sel && !ok) b.classList.add('err');
+      });
+      showFB(id, ok, q.fb);
+      record(id, ok, sel, q.correct);
+    }
+
+    /* ====================== GRADE FILL/RW ====================== */
+    function gradeFill(id) {
+      if (answers[id]) return;
+      var q = findQ(id);
+      var inp = document.getElementById('inp-' + id);
+      if (!q || !inp || !inp.value.trim()) return;
+      var val = inp.value.trim().toLowerCase().replace(/[.!?]$/, '');
+      var ok = q.correct.some(function (c) {
+        return val === c.toLowerCase().replace(/[.!?]$/, '').trim();
+      });
+      inp.disabled = true;
+      inp.classList.add(ok ? 'ok' : 'err');
+      showFB(id, ok, q.fb);
+      record(id, ok, inp.value.trim(), q.correct[0]);
+    }
+
+    /* ====================== GRADE WO ====================== */
+    function renderWO(id) {
+      var s = woSt[id];
+      var dr = document.getElementById('wod-' + id);
+      var bk = document.getElementById('wob-' + id);
+      if (!s || !dr || !bk) return;
+      dr.innerHTML = '';
+      if (s.placed.length === 0) {
+        var ph = document.createElement('span'); ph.className = 'woph';
+        ph.textContent = 'Tap words below to build the sentence\u2026';
+        dr.appendChild(ph);
+      }
+      s.placed.forEach(function (w, i) {
+        var ch = document.createElement('span'); ch.className = 'woc pl'; ch.textContent = w;
+        ch.addEventListener('click', makeWOPlacedClick(id, i, w));
+        dr.appendChild(ch);
+      });
+      bk.innerHTML = '';
+      s.remaining.forEach(function (w, i) {
+        var ch = document.createElement('span'); ch.className = 'woc'; ch.textContent = w;
+        ch.addEventListener('click', makeWOBankClick(id, i, w));
+        bk.appendChild(ch);
+      });
+    }
+    function makeWOPlacedClick(id, i, w) {
+      return function () {
+        if (answers[id]) return;
+        woSt[id].placed.splice(i, 1);
+        woSt[id].remaining.push(w);
+        renderWO(id);
+      };
+    }
+    function makeWOBankClick(id, i, w) {
+      return function () {
+        if (answers[id]) return;
+        woSt[id].remaining.splice(i, 1);
+        woSt[id].placed.push(w);
+        renderWO(id);
+      };
+    }
+    function gradeWO(id) {
+      if (answers[id]) return;
+      var s = woSt[id]; var q = findQ(id);
+      if (!s || !q || s.placed.length === 0) return;
+      var att = s.placed.join(' ').toLowerCase().replace(/[?!.]/g, '').trim();
+      var ok = att === q.correct.toLowerCase().replace(/[?!.]/g, '').trim();
+      var dr = document.getElementById('wod-' + id);
+      dr.classList.remove('ok', 'err'); dr.classList.add(ok ? 'ok' : 'err');
+      showFB(id, ok, q.fb);
+      record(id, ok, s.placed.join(' '), q.correct);
+    }
+    function resetWO(id) {
+      if (answers[id]) return;
+      var q = findQ(id);
+      woSt[id] = { placed: [], remaining: q.words.slice().sort(function () { return Math.random() - .5; }) };
+      renderWO(id);
+      var dr = document.getElementById('wod-' + id);
+      dr.classList.remove('ok', 'err');
+      document.getElementById('fb-' + id).className = 'fb';
+    }
+
+    /* ====================== GRADE CL ====================== */
+    function makeChip(qid, text, cat) {
+      var ch = document.createElement('div');
+      ch.className = 'clch';
+      ch.id = 'clch-' + qid + '-' + ck(text);
+      ch.textContent = text;
+      ch.draggable = true;
+      ch.dataset.text = text; ch.dataset.cat = cat; ch.dataset.qid = qid;
+      ch.addEventListener('dragstart', function (e) {
+        e.dataTransfer.setData('application/json', JSON.stringify({ qid: qid, text: text, cat: cat }));
+      });
+      ch.addEventListener('click', makeChipTap(ch, qid));
+      return ch;
+    }
+    function makeChipTap(chip, qid) {
+      return function () {
+        if (answers[qid]) return;
+        if (chip.closest('.clzone')) {
+          delete clSt[qid][chip.dataset.text];
+          document.getElementById('clpool-' + qid).appendChild(chip);
+          if (selCh === chip) selCh = null;
+          return;
+        }
+        if (selCh === chip) { selCh = null; chip.style.outline = ''; return; }
+        if (selCh) selCh.style.outline = '';
+        selCh = chip; chip.style.outline = '2.5px solid var(--blue)';
+      };
+    }
+    function onColTap(qid, cat) {
+      if (!selCh || selCh.dataset.qid !== qid || answers[qid]) return;
+      selCh.style.outline = '';
+      placeChip(qid, selCh.dataset.text, cat);
+      selCh = null;
+    }
+    function placeChip(qid, text, cat) {
+      var ch = document.getElementById('clch-' + qid + '-' + ck(text));
+      var zone = document.getElementById('clzn-' + qid + '-' + ck(cat));
+      if (!ch || !zone) return;
+      clSt[qid][text] = cat;
+      zone.appendChild(ch);
+    }
+    function gradeCL(qid) {
+      if (answers[qid]) return;
+      var q = findQ(qid); var pl = clSt[qid] || {};
+      if (q.items.length > Object.keys(pl).length) {
+        var fb0 = document.getElementById('fb-' + qid);
+        fb0.className = 'fb i'; fb0.innerHTML = '\u2139 Place all cards before checking.';
+        return;
+      }
+      var allOk = true;
+      q.items.forEach(function (item) {
+        var ch = document.getElementById('clch-' + qid + '-' + ck(item.text));
+        var ok = pl[item.text] === item.cat;
+        if (!ok) allOk = false;
+        if (ch) { ch.classList.remove('ok', 'err'); ch.classList.add(ok ? 'ok' : 'err'); }
+      });
+      q.cats.forEach(function (cat) {
+        var col = document.getElementById('clcol-' + qid + '-' + ck(cat));
+        if (!col) return;
+        var ar = q.items.filter(function (i) { return i.cat === cat; }).every(function (i) { return pl[i.text] === cat; });
+        col.classList.remove('ok', 'err'); col.classList.add(ar ? 'ok' : 'err');
+      });
+      showFB(qid, allOk, q.fb);
+      record(qid, allOk, 'classified', q.items.map(function (i) { return i.text + '>' + i.cat; }).join(';'));
+    }
+    function resetCL(qid) {
+      if (answers[qid]) return;
+      var q = findQ(qid); var pool = document.getElementById('clpool-' + qid);
+      clSt[qid] = {};
+      q.items.forEach(function (item) {
+        var ch = document.getElementById('clch-' + qid + '-' + ck(item.text));
+        if (ch) { ch.classList.remove('ok', 'err'); pool.appendChild(ch); }
+      });
+      q.cats.forEach(function (cat) {
+        var col = document.getElementById('clcol-' + qid + '-' + ck(cat));
+        if (col) col.classList.remove('ok', 'err');
+      });
+      document.getElementById('fb-' + qid).className = 'fb';
+    }
+
+    /* ====================== RESULTS ====================== */
+    function showResults() {
+      var t = totalQ(), c = corrQ();
+      var p = Math.round(c / t * 100);
+      var msg = p >= 90 ? 'Excellent! Outstanding performance.' : p >= 70 ? 'Great work! Almost perfect.' : p >= 50 ? 'Good effort \u2014 review the theory.' : 'Keep studying \u2014 progress takes practice!';
+      var col = p >= 70 ? 'var(--green)' : p >= 50 ? 'var(--blue)' : 'var(--red)';
+      var bg = p >= 70 ? 'rgba(0,168,89,.12)' : p >= 50 ? 'var(--blue-dim)' : 'var(--red-dim)';
+      document.getElementById('rtitle').textContent = msg;
+      var ring = document.getElementById('sring');
+      ring.style.borderColor = col; ring.style.background = bg;
+      document.getElementById('spct').textContent = p + '%';
+      document.getElementById('spct').style.color = col;
+      document.getElementById('smsg').textContent = c + ' correct answer' + (c !== 1 ? 's' : '');
+      document.getElementById('sfrac').textContent = c + ' of ' + t + ' questions';
+      var rl = document.getElementById('rl');
+      rl.innerHTML = '';
+      DATA[curSet].questions.forEach(function (q, i) {
+        var a = answers[q.id];
+        var rv = document.createElement('div');
+        rv.className = 'rv ' + (a && a.ok ? 'o' : 'e');
+        rv.innerHTML = '<span class="rvn">' + (i < 9 ? '0' : '') + (i + 1) + '</span>' +
+          '<span class="rvi">' + (a && a.ok ? '\u2713' : '\u2717') + '</span>' +
+          '<span class="rvt">' + (a && a.ok ? 'Correct.' : 'Correct answer: <em>' + (a ? a.corrAns : '\u2014') + '</em>') + '</span>';
+        rl.appendChild(rv);
+      });
+      var panel = document.getElementById('res');
+      panel.style.display = 'block';
+      setTimeout(function () { panel.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 200);
+    }
+
+    /* ====================== LOBBY ====================== */
+    (function buildLobby() {
+      var grid = document.getElementById('sg');
+      var keys = ['A', 'B', 'C'], nums = ['I', 'II', 'III'];
+      keys.forEach(function (key, idx) {
+        var s = DATA[key];
+        var card = document.createElement('div');
+        card.className = 'sc';
+        card.style.borderTopColor = s.color;
+        card.innerHTML =
+          '<div class="sr dp">' + nums[idx] + '</div>' +
+          '<span class="sb" style="background:' + s.color + '">' + s.label + '</span>' +
+          '<p class="sn dp">' + s.name + '</p>' +
+          '<p class="sd">' + s.desc + '</p>' +
+          '<p class="sm">&#128221; 10 questions</p>';
+        var btn = document.createElement('button');
+        btn.className = 'stbtn';
+        btn.style.background = s.color;
+        btn.textContent = 'Start \u2192';
+        btn.addEventListener('click', (function (k) { return function (e) { e.stopPropagation(); startSet(k); }; })(key));
+        card.appendChild(btn);
+        card.addEventListener('click', (function (k) { return function () { startSet(k); }; })(key));
+        grid.appendChild(card);
+      });
+    }());
+  </script>
+</body>
+
+</html>
