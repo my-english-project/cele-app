@@ -75,10 +75,19 @@
       justify-content: center;
     }
 
+    .controls-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+    }
+
     .select-wrap {
       position: relative;
-      flex: 1 1 220px;
-      max-width: 380px;
+      flex: 1 1 100%;
+      max-width: 420px;
     }
 
     select {
@@ -127,9 +136,9 @@
       background: var(--ink);
       color: var(--bg);
       border: none;
-      border-radius: 6px;
-      width: 38px;
-      height: 38px;
+      border-radius: 8px;
+      width: 44px;
+      height: 44px;
       font-size: 1.3rem;
       cursor: pointer;
       display: flex;
@@ -148,12 +157,117 @@
       transform: scale(0.92);
     }
 
+    .btn-sm {
+      width: 34px;
+      height: 34px;
+      font-size: 1rem;
+    }
+
     .size-display {
       font-size: 0.85rem;
       color: var(--accent);
       font-weight: 400;
       min-width: 36px;
       text-align: center;
+    }
+
+    /* ── TTS Controls ────────────────────── */
+    .tts-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .tts-playback {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-tts-play {
+      background: var(--accent) !important;
+      color: #fff !important;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      font-size: 1.4rem;
+    }
+
+    .btn-tts-play:hover {
+      background: #933812 !important;
+    }
+
+    .btn-tts-stop {
+      background: var(--muted) !important;
+      color: #fff !important;
+    }
+
+    .btn-tts-stop:hover {
+      background: #5a4e3a !important;
+    }
+
+    .speed-wrap {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .speed-wrap .speed-label {
+      font-size: 0.72rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .speed-display {
+      font-size: 0.85rem;
+      color: var(--accent);
+      font-weight: 600;
+      min-width: 42px;
+      text-align: center;
+    }
+
+    .tts-separator {
+      width: 1.5px;
+      height: 24px;
+      background: var(--border);
+      margin: 0 4px;
+    }
+
+    .tts-status {
+      font-size: 0.78rem;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+      min-width: 60px;
+      text-align: center;
+    }
+
+    .tts-status.speaking {
+      color: var(--accent);
+      animation: pulse 1.2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.4;
+      }
+    }
+
+    /* ── Word highlight ──────────────────── */
+    .word-highlight {
+      background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+      border-radius: 4px;
+      padding: 2px 3px;
+      margin: 0 -3px;
+      transition: background 0.15s ease;
     }
 
     main {
@@ -235,27 +349,192 @@
       font-size: 0.95rem;
     }
 
+    /* ── Tablet ────────────────────────── */
+    @media (max-width: 768px) {
+      .controls {
+        padding: 12px 16px;
+        gap: 8px;
+      }
+
+      .select-wrap {
+        flex: 1 1 100%;
+        max-width: 100%;
+      }
+
+      .controls-row {
+        justify-content: center;
+      }
+
+      .tts-separator {
+        display: none;
+      }
+    }
+
+    /* ── Mobile ────────────────────────── */
     @media (max-width: 480px) {
       :root {
-        --fs: 20px;
+        --fs: 19px;
       }
 
       header {
-        padding: 14px 16px 10px;
+        padding: 12px 16px 10px;
+      }
+
+      header h1 {
+        font-size: 1.3rem;
       }
 
       .controls {
-        padding: 12px 16px;
-        gap: 10px;
+        padding: 10px 12px;
+        gap: 8px;
+        flex-direction: column;
+      }
+
+      .select-wrap {
+        flex: 1 1 100%;
+        max-width: 100%;
+      }
+
+      select {
+        font-size: 1rem;
+        padding: 12px 40px 12px 14px;
+      }
+
+      .controls-row {
+        width: 100%;
+        justify-content: center;
+        gap: 8px;
+      }
+
+      .font-controls {
+        gap: 4px;
+      }
+
+      .font-controls span {
+        font-size: 0.7rem;
+      }
+
+      .tts-separator {
+        display: none;
+      }
+
+      .tts-bar {
+        width: 100%;
+        justify-content: center;
+        gap: 8px;
+        padding: 6px 0;
+        border-top: 1px solid var(--border);
+        margin-top: 2px;
+      }
+
+      .btn-tts-play {
+        width: 52px;
+        height: 52px;
+        font-size: 1.5rem;
+      }
+
+      .speed-display {
+        font-size: 0.9rem;
+        min-width: 44px;
+      }
+
+      .tts-status {
+        width: 100%;
+        text-align: center;
+        font-size: 0.8rem;
       }
 
       main {
-        padding: 20px 12px 40px;
+        padding: 16px 10px 40px;
       }
 
       .card {
-        padding: 20px 18px;
+        padding: 18px 16px;
+        border-radius: 8px;
       }
+
+      .topic-title {
+        font-size: 1.1rem;
+        margin-bottom: 16px;
+        padding-bottom: 12px;
+      }
+
+      .exam-text {
+        line-height: 1.85;
+      }
+    }
+
+    /* ── Very small phones ─────────────── */
+    @media (max-width: 360px) {
+      :root {
+        --fs: 17px;
+      }
+
+      header h1 {
+        font-size: 1.15rem;
+      }
+
+      .controls {
+        padding: 8px 10px;
+      }
+
+      .card {
+        padding: 14px 12px;
+      }
+    }
+
+    /* ── Active TTS word highlight ───────────── */
+    .tts-active {
+      background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+      border-radius: 4px;
+      padding: 2px 4px;
+    }
+
+    .word-hint {
+      margin: 12px 0 18px;
+      padding: 10px 14px;
+      border: 1.5px dashed var(--accent-light);
+      background: #fff4ef;
+      border-radius: 8px;
+      font-size: .85rem;
+    }
+
+    /* ── Tip banner ───────────────────────── */
+    .word-tip {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 18px;
+      padding: 10px 14px;
+      background: linear-gradient(135deg, rgba(181, 69, 27, 0.06) 0%, rgba(181, 69, 27, 0.02) 100%);
+      border: 1px solid rgba(181, 69, 27, 0.15);
+      border-radius: 8px;
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.4;
+      animation: fadeIn 0.4s ease;
+    }
+
+    .word-tip-icon {
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+
+    .word-tip-dismiss {
+      margin-left: auto;
+      background: none;
+      border: none;
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 1.1rem;
+      padding: 0 2px;
+      opacity: 0.6;
+      transition: opacity 0.15s;
+      flex-shrink: 0;
+    }
+
+    .word-tip-dismiss:hover {
+      opacity: 1;
     }
   </style>
 </head>
@@ -295,11 +574,31 @@
       <span class="select-arrow">▾</span>
     </div>
 
-    <div class="font-controls">
-      <span>Size</span>
-      <button class="btn" onclick="changeFont(-2)" aria-label="Decrease font size">−</button>
-      <span class="size-display" id="sizeDisplay">22</span>
-      <button class="btn" onclick="changeFont(2)" aria-label="Increase font size">+</button>
+    <div class="controls-row">
+      <div class="font-controls">
+        <span>Size</span>
+        <button class="btn btn-sm" onclick="changeFont(-2)" aria-label="Decrease font size">−</button>
+        <span class="size-display" id="sizeDisplay">22</span>
+        <button class="btn btn-sm" onclick="changeFont(2)" aria-label="Increase font size">+</button>
+      </div>
+
+      <div class="tts-separator"></div>
+
+      <div class="tts-bar">
+        <div class="tts-playback">
+          <button class="btn btn-tts-play" id="btnPlay" onclick="toggleSpeech()" aria-label="Read aloud"
+            title="Read aloud">▶</button>
+          <button class="btn btn-tts-stop" id="btnStop" onclick="stopSpeech()" aria-label="Stop reading"
+            title="Stop">■</button>
+        </div>
+        <div class="speed-wrap">
+          <span class="speed-label">Speed</span>
+          <button class="btn btn-sm" onclick="changeSpeed(-0.25)" aria-label="Decrease speed">−</button>
+          <span class="speed-display" id="speedDisplay">0.85×</span>
+          <button class="btn btn-sm" onclick="changeSpeed(0.25)" aria-label="Increase speed">+</button>
+        </div>
+        <span class="tts-status" id="ttsStatus"></span>
+      </div>
     </div>
   </div>
 
@@ -399,20 +698,45 @@
 
     let fontSize = 22;
     const MIN = 14, MAX = 48;
+    let speechRate = 0.85;
+    const SPEED_MIN = 0.25, SPEED_MAX = 2;
+    let currentUtterance = null;
+    let isSpeaking = false;
+    let isPaused = false;
+    let currentText = '';
+    let speechGeneration = 0; // prevents stale callbacks
+    let tipDismissed = false;
 
     function showText() {
+      stopSpeech();
       const name = document.getElementById('studentSelect').value;
       const card = document.getElementById('card');
       if (!name) {
         card.innerHTML = `<div class="placeholder"><div class="placeholder-icon">📖</div><h2>Ready to read?</h2><p>Select a student's name above to display their exam text.</p></div>`;
+        currentText = '';
         return;
       }
       const entry = data[name];
+      currentText = entry.text;
+      const tipHTML = tipDismissed ? '' : `
+        <div class="word-tip" id="wordTip">
+          <span class="word-tip-icon">💡</span>
+          <span>Tap or double click any word to hear its pronunciation individually.</span>
+          <button class="word-tip-dismiss" onclick="dismissTip()" aria-label="Dismiss tip">✕</button>
+        </div>`;
       card.innerHTML = `
       <div class="topic-label">Topic</div>
       <div class="topic-title">${entry.topic}</div>
+      
       <p class="exam-text" id="examText" style="font-size:${fontSize}px">${entry.text}</p>
+      ${tipHTML}
     `;
+    }
+
+    function dismissTip() {
+      tipDismissed = true;
+      const tip = document.getElementById('wordTip');
+      if (tip) tip.style.display = 'none';
     }
 
     function changeFont(delta) {
@@ -422,6 +746,215 @@
       const t = document.getElementById('examText');
       if (t) t.style.fontSize = fontSize + 'px';
     }
+
+    /* ── Text-to-Speech ────────────────────── */
+
+    function getEnglishVoice() {
+      const voices = speechSynthesis.getVoices();
+      // Prefer high-quality English voices
+      const preferred = voices.find(v => v.lang.startsWith('en') && v.name.includes('Samantha'));
+      if (preferred) return preferred;
+      // Prefer non-local (network) voices for better quality
+      const networkEn = voices.find(v => v.lang.startsWith('en') && !v.localService);
+      if (networkEn) return networkEn;
+      return voices.find(v => v.lang.startsWith('en')) || null;
+    }
+
+    function wrapWordsInSpans(text) {
+      const words = text.split(/\s+/);
+      return words.map((w, i) => `<span class="tts-word" data-index="${i}">${w}</span>`).join(' ');
+    }
+
+    function highlightWord(index) {
+      document.querySelectorAll('.tts-word.word-highlight').forEach(el => {
+        el.classList.remove('word-highlight');
+      });
+      const target = document.querySelector(`.tts-word[data-index="${index}"]`);
+      if (target) {
+        target.classList.add('word-highlight');
+        target.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    }
+
+    function clearHighlights() {
+      document.querySelectorAll('.tts-word.word-highlight').forEach(el => {
+        el.classList.remove('word-highlight');
+      });
+    }
+
+    function updateTTSUI(state) {
+      const btnPlay = document.getElementById('btnPlay');
+      const status = document.getElementById('ttsStatus');
+
+      switch (state) {
+        case 'playing':
+          btnPlay.textContent = '⏸';
+          btnPlay.title = 'Pause';
+          status.textContent = '🔊 Reading…';
+          status.classList.add('speaking');
+          break;
+        case 'paused':
+          btnPlay.textContent = '▶';
+          btnPlay.title = 'Resume';
+          status.textContent = '⏸ Paused';
+          status.classList.remove('speaking');
+          break;
+        case 'idle':
+        default:
+          btnPlay.textContent = '▶';
+          btnPlay.title = 'Read aloud';
+          status.textContent = '';
+          status.classList.remove('speaking');
+          break;
+      }
+    }
+
+    function toggleSpeech() {
+      if (!currentText) return;
+
+      if (isSpeaking && !isPaused) {
+        speechSynthesis.pause();
+        isPaused = true;
+        updateTTSUI('paused');
+        return;
+      }
+
+      if (isPaused) {
+        speechSynthesis.resume();
+        isPaused = false;
+        updateTTSUI('playing');
+        return;
+      }
+
+      startSpeech();
+    }
+
+    function startSpeech() {
+      // Increment generation so any old callbacks become no-ops
+      const gen = ++speechGeneration;
+
+      // Cancel without triggering our own cleanup logic
+      speechSynthesis.cancel();
+
+      const examEl = document.getElementById('examText');
+      if (!examEl || !currentText) return;
+
+      // Wrap each word in a <span> for highlighting
+      examEl.innerHTML = wrapWordsInSpans(currentText);
+      examEl.style.fontSize = fontSize + 'px';
+
+      const utterance = new SpeechSynthesisUtterance(currentText);
+      utterance.lang = 'en-US';
+      utterance.rate = speechRate;
+      utterance.pitch = 1;
+
+      const voice = getEnglishVoice();
+      if (voice) utterance.voice = voice;
+
+      const words = currentText.split(/\s+/);
+
+      utterance.onboundary = function (e) {
+        if (gen !== speechGeneration) return; // stale
+        if (e.name === 'word') {
+          const charIndex = e.charIndex;
+          let cumulative = 0;
+          for (let i = 0; i < words.length; i++) {
+            if (cumulative >= charIndex) {
+              highlightWord(i);
+              break;
+            }
+            cumulative += words[i].length + 1;
+          }
+        }
+      };
+
+      utterance.onend = function () {
+        if (gen !== speechGeneration) return; // stale — ignore
+        isSpeaking = false;
+        isPaused = false;
+        clearHighlights();
+        if (examEl) examEl.textContent = currentText;
+        updateTTSUI('idle');
+      };
+
+      utterance.onerror = function (e) {
+        if (gen !== speechGeneration) return; // stale — ignore
+        // 'interrupted' and 'canceled' are expected when restarting
+        if (e.error === 'interrupted' || e.error === 'canceled') return;
+        isSpeaking = false;
+        isPaused = false;
+        clearHighlights();
+        updateTTSUI('idle');
+      };
+
+      currentUtterance = utterance;
+      isSpeaking = true;
+      isPaused = false;
+      updateTTSUI('playing');
+
+      // Small delay to let cancel() complete before speaking again
+      setTimeout(() => {
+        if (gen !== speechGeneration) return;
+        speechSynthesis.speak(utterance);
+      }, 50);
+    }
+
+    function stopSpeech() {
+      speechGeneration++; // invalidate any pending callbacks
+      speechSynthesis.cancel();
+      isSpeaking = false;
+      isPaused = false;
+      clearHighlights();
+      updateTTSUI('idle');
+
+      const examEl = document.getElementById('examText');
+      if (examEl && currentText) {
+        examEl.textContent = currentText;
+        examEl.style.fontSize = fontSize + 'px';
+      }
+    }
+
+    function changeSpeed(delta) {
+      speechRate = Math.min(SPEED_MAX, Math.max(SPEED_MIN, +(speechRate + delta).toFixed(2)));
+      document.getElementById('speedDisplay').textContent = speechRate + '×';
+
+      // Restart with new speed if currently speaking
+      if (isSpeaking && !isPaused) {
+        startSpeech();
+      }
+    }
+
+    // Ensure voices are loaded (some browsers load them async)
+    if (speechSynthesis.onvoiceschanged !== undefined) {
+      speechSynthesis.onvoiceschanged = () => { /* voices ready */ };
+    }
+
+    // SINGLE WORD – select a word to hear pronunciation
+    document.addEventListener('mouseup', () => {
+      const sel = window.getSelection();
+      const word = sel.toString().trim();
+      if (!word || word.includes(' ') || word.length < 2) return;
+
+      const range = sel.getRangeAt(0);
+      const span = document.createElement('span');
+      span.className = 'tts-active';
+      span.textContent = word;
+
+      range.deleteContents();
+      range.insertNode(span);
+      sel.removeAllRanges();
+
+      speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(word);
+      u.lang = 'en-US';
+      u.rate = Math.max(0.6, speechRate - 0.1);
+      const voice = getEnglishVoice();
+      if (voice) u.voice = voice;
+
+      u.onend = () => span.replaceWith(word);
+      speechSynthesis.speak(u);
+    });
+
   </script>
 </body>
 
