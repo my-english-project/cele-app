@@ -920,6 +920,74 @@
       speechSynthesis.speak(u);
     });
 
+    // MOBILE TAP – tap a word to hear its pronunciation
+    document.addEventListener('touchend', (e) => {
+      if (isSpeaking) return;
+      if (e.changedTouches.length !== 1) return;
+
+      const touch = e.changedTouches[0];
+      const examEl = document.getElementById('examText');
+      if (!examEl) return;
+
+      const target = document.elementFromPoint(touch.clientX, touch.clientY);
+      if (!target || !examEl.contains(target)) return;
+
+      let range;
+      if (document.caretRangeFromPoint) {
+        range = document.caretRangeFromPoint(touch.clientX, touch.clientY);
+      } else if (document.caretPositionFromPoint) {
+        const pos = document.caretPositionFromPoint(touch.clientX, touch.clientY);
+        if (pos) {
+          range = document.createRange();
+          range.setStart(pos.offsetNode, pos.offset);
+          range.setEnd(pos.offsetNode, pos.offset);
+        }
+      }
+      if (!range || !range.startContainer || range.startContainer.nodeType !== 3) return;
+
+      const textNode = range.startContainer;
+      const offset = range.startOffset;
+      const fullText = textNode.textContent;
+
+      let start = offset, end = offset;
+      while (start > 0 && /\S/.test(fullText[start - 1])) start--;
+      while (end < fullText.length && /\S/.test(fullText[end])) end++;
+
+      const word = fullText.slice(start, end).replace(/[.,;:!?"'()]/g, '');
+      if (!word || word.length < 2) return;
+
+      const before = fullText.slice(0, start);
+      const after = fullText.slice(end);
+      const wordRaw = fullText.slice(start, end);
+
+      const span = document.createElement('span');
+      span.className = 'tts-active';
+      span.textContent = wordRaw;
+
+      const parent = textNode.parentNode;
+      const beforeNode = document.createTextNode(before);
+      const afterNode = document.createTextNode(after);
+      parent.replaceChild(afterNode, textNode);
+      parent.insertBefore(span, afterNode);
+      parent.insertBefore(beforeNode, span);
+
+      speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(word);
+      u.lang = 'en-US';
+      u.rate = Math.max(0.6, speechRate - 0.1);
+      const voice = getEnglishVoice();
+      if (voice) u.voice = voice;
+
+      u.onend = () => {
+        parent.replaceChild(document.createTextNode(before + wordRaw + after), beforeNode);
+        if (span.parentNode) span.remove();
+        if (afterNode.parentNode) afterNode.remove();
+      };
+      u.onerror = u.onend;
+
+      speechSynthesis.speak(u);
+    });
+
   </script>
 </body>
 
