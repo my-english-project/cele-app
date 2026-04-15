@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Oral Exam 3 — ITEA 8A</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;1,8..60,300&display=swap"
+    rel="stylesheet">
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #f5f0e8;
+      --surface: #fffdf8;
+      --ink: #1a1208;
+      --accent: #b5451b;
+      --accent-light: #e8c4b3;
+      --muted: #7a6a52;
+      --border: #d6cdb8;
+      --fs: 22px;
+    }
+
+    body {
+      font-family: 'Source Serif 4', Georgia, serif;
+      background: var(--bg);
+      color: var(--ink);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background: var(--ink);
+      color: var(--bg);
+      padding: 18px 24px 14px;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
+    }
+
+    header h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(1.3rem, 4vw, 2rem);
+      letter-spacing: 0.04em;
+      color: var(--accent-light);
+      line-height: 1.1;
+    }
+
+    header p {
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 3px;
+    }
+
+    .controls {
+      background: var(--surface);
+      border-bottom: 2px solid var(--border);
+      padding: 14px 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .select-wrap {
+      position: relative;
+      flex: 1 1 220px;
+      max-width: 380px;
+    }
+
+    select {
+      width: 100%;
+      appearance: none;
+      background: var(--bg);
+      border: 2px solid var(--border);
+      border-radius: 6px;
+      font-family: 'Source Serif 4', serif;
+      font-size: 1rem;
+      color: var(--ink);
+      padding: 10px 40px 10px 14px;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+
+    select:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    .select-arrow {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
+      color: var(--accent);
+      font-size: 1.1rem;
+    }
+
+    .font-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .font-controls span {
+      font-size: 0.78rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .btn {
+      background: var(--ink);
+      color: var(--bg);
+      border: none;
+      border-radius: 6px;
+      width: 38px;
+      height: 38px;
+      font-size: 1.3rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.15s, transform 0.1s;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .btn:hover {
+      background: var(--accent);
+    }
+
+    .btn:active {
+      transform: scale(0.92);
+    }
+
+    .size-display {
+      font-size: 0.85rem;
+      color: var(--accent);
+      font-weight: 400;
+      min-width: 36px;
+      text-align: center;
+    }
+
+    main {
+      flex: 1;
+      padding: 32px 20px 60px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      max-width: 720px;
+      width: 100%;
+      padding: clamp(24px, 5vw, 48px);
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.07);
+      animation: fadeIn 0.35s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .topic-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .topic-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(1.2rem, 3.5vw, 1.7rem);
+      color: var(--accent);
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1.5px solid var(--border);
+      line-height: 1.3;
+    }
+
+    .exam-text {
+      font-size: var(--fs);
+      line-height: 1.75;
+      color: var(--ink);
+      transition: font-size 0.2s ease;
+      overflow-wrap: break-word;
+    }
+
+    .placeholder {
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    .placeholder-icon {
+      font-size: 3rem;
+      margin-bottom: 16px;
+      opacity: 0.4;
+    }
+
+    .placeholder h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .placeholder p {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 480px) {
+      :root {
+        --fs: 20px;
+      }
+
+      header {
+        padding: 14px 16px 10px;
+      }
+
+      .controls {
+        padding: 12px 16px;
+        gap: 10px;
+      }
+
+      main {
+        padding: 20px 12px 40px;
+      }
+
+      .card {
+        padding: 20px 18px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>Oral Exam 3</h1>
+    <p>ITEA — Group 8A</p>
+  </header>
+
+  <div class="controls">
+    <div class="select-wrap">
+      <select id="studentSelect" onchange="showText()">
+        <option value="">— Select a student —</option>
+        <option value="Carolina">Carolina</option>
+        <option value="César">César</option>
+        <option value="Chava">Chava</option>
+        <option value="Daniel">Daniel</option>
+        <option value="Ema">Ema</option>
+        <option value="Fernanda">Fernanda</option>
+        <option value="Gloria">Gloria</option>
+        <option value="Joseph">Joseph</option>
+        <option value="Karen">Karen</option>
+        <option value="Leonardo">Leonardo</option>
+        <option value="Monserrat">Monserrat</option>
+        <option value="Neptalí">Neptalí</option>
+        <option value="Paulina">Paulina</option>
+      </select>
+      <span class="select-arrow">▾</span>
+    </div>
+
+    <div class="font-controls">
+      <span>Size</span>
+      <button class="btn" onclick="changeFont(-2)" aria-label="Decrease font size">−</button>
+      <span class="size-display" id="sizeDisplay">22</span>
+      <button class="btn" onclick="changeFont(2)" aria-label="Increase font size">+</button>
+    </div>
+  </div>
+
+  <main>
+    <div class="card" id="card">
+      <div class="placeholder">
+        <div class="placeholder-icon">📖</div>
+        <h2>Ready to read?</h2>
+        <p>Select a student's name above to display their exam text.</p>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const data = {
+      "Carolina": {
+        topic: "1. Smartphones",
+        text: "Smartphones have changed the way people communicate every day. We can send messages, make video calls, and share photos in seconds. They also help us study, work, and find information quickly. Many people now use their phones as cameras, maps, and even wallets."
+      },
+      "Gloria": {
+        topic: "2. The Internet",
+        text: "The internet allows people to learn almost anything from home. Students can take online classes and watch educational videos. Teachers can share materials easily with their students. The internet also helps people stay connected with friends and family, even when they live far away in different countries."
+      },
+      "César": {
+        topic: "3. Electric Cars",
+        text: "Electric cars are becoming more popular around the world. They help reduce air pollution and use less fossil fuel. Many people like them because they are quiet and cheaper to use over time. Governments and companies are building more charging stations to support this technology."
+      },
+      "Neptalí": {
+        topic: "4. Artificial Intelligence",
+        text: "Artificial intelligence helps computers do tasks that usually need human thinking. It can help translate languages, organize photos, or suggest music and movies. Many apps use artificial intelligence to improve user experience. This technology is growing fast and is becoming part of everyday life."
+      },
+      "Fernanda": {
+        topic: "5. Online Shopping",
+        text: "Online shopping has changed the way people buy products. Shoppers can compare prices, read reviews, and order items from home. Packages arrive quickly at their doors. Small businesses can now sell their products to people in many countries without needing a physical store."
+      },
+      "Leonardo": {
+        topic: "6. Video Calls",
+        text: "Video calls have become very important for work and education. People can attend meetings, classes, or family events without traveling. This saves time and money. During recent years, many workers and students learned to use video platforms as a normal part of their daily routines."
+      },
+      "Ema": {
+        topic: "7. Smart Home Devices",
+        text: "Smart home devices help people control their houses more easily. Lights, music, and temperature can be controlled with voice commands or a phone. These devices can save energy and improve comfort. Many families enjoy using technology to make their homes safer and more efficient."
+      },
+      "Karen": {
+        topic: "8. Medical Technology",
+        text: "Medical technology has helped doctors treat patients more effectively. New machines can detect illnesses earlier and more accurately. Doctors can also use digital records to track patient history. These advances improve healthcare and help people live longer and healthier lives around the world."
+      },
+      "Monserrat": {
+        topic: "8. Medical Technology",
+        text: "Medical technology has helped doctors treat patients more effectively. New machines can detect illnesses earlier and more accurately. Doctors can also use digital records to track patient history. These advances improve healthcare and help people live longer and healthier lives around the world."
+      },
+      "Joseph": {
+        topic: "9. Social Media Platforms",
+        text: "Social media platforms allow people to share ideas and experiences online. Users can post photos, videos, and messages. Businesses use social media to advertise their products. While it has benefits, people also need to use it responsibly and balance online life with real-world interactions."
+      },
+      "Daniel": {
+        topic: "9. Social Media Platforms",
+        text: "Social media platforms allow people to share ideas and experiences online. Users can post photos, videos, and messages. Businesses use social media to advertise their products. While it has benefits, people also need to use it responsibly and balance online life with real-world interactions."
+      },
+      "Paulina": {
+        topic: "10. Renewable Energy",
+        text: "Renewable energy technology is helping create a cleaner future. Solar panels and wind turbines produce electricity without pollution. Many countries are investing in these technologies to protect the environment. Using clean energy helps reduce climate change and supports a more sustainable planet for future generations."
+      },
+      "Chava": {
+        topic: "10. Renewable Energy",
+        text: "Renewable energy technology is helping create a cleaner future. Solar panels and wind turbines produce electricity without pollution. Many countries are investing in these technologies to protect the environment. Using clean energy helps reduce climate change and supports a more sustainable planet for future generations."
+      }
+    };
+
+    let fontSize = 22;
+    const MIN = 14, MAX = 48;
+
+    function showText() {
+      const name = document.getElementById('studentSelect').value;
+      const card = document.getElementById('card');
+      if (!name) {
+        card.innerHTML = `<div class="placeholder"><div class="placeholder-icon">📖</div><h2>Ready to read?</h2><p>Select a student's name above to display their exam text.</p></div>`;
+        return;
+      }
+      const entry = data[name];
+      card.innerHTML = `
+      <div class="topic-label">Topic</div>
+      <div class="topic-title">${entry.topic}</div>
+      <p class="exam-text" id="examText" style="font-size:${fontSize}px">${entry.text}</p>
+    `;
+    }
+
+    function changeFont(delta) {
+      fontSize = Math.min(MAX, Math.max(MIN, fontSize + delta));
+      document.documentElement.style.setProperty('--fs', fontSize + 'px');
+      document.getElementById('sizeDisplay').textContent = fontSize;
+      const t = document.getElementById('examText');
+      if (t) t.style.fontSize = fontSize + 'px';
+    }
+  </script>
+</body>
+
+</html>
