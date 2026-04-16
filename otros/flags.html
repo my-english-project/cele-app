@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Generador de Banderas - Versión Pro</title>
+  <style>
+    /* Estilos de la Interfaz */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #2c3e50;
+      margin: 0;
+      padding: 20px;
+      color: white;
+    }
+
+    .header {
+      background: #34495e;
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 30px;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .btn-print {
+      padding: 12px 30px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      background: #27ae60;
+      color: white;
+      border: none;
+      border-radius: 50px;
+      transition: background 0.3s;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-print:hover {
+      background: #2ecc71;
+    }
+
+    /* Contenedor de la Tabla */
+    .page-container {
+      background: white;
+      width: 215.9mm;
+      /* Tamaño Carta Ancho */
+      margin: auto;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      /* Elimina espacio entre celdas */
+      table-layout: fixed;
+      border-spacing: 0;
+    }
+
+    td {
+      padding: 0;
+      /* Elimina margen interno */
+      margin: 0;
+      border: 0.5pt solid white;
+      /* Líneas de la tabla en blanco */
+      height: 12mm;
+      /* Altura de celda */
+      overflow: hidden;
+      background-color: #eee;
+    }
+
+    .flag-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      /* La bandera llena la celda aunque se recorte */
+      display: block;
+    }
+
+    /* Configuración de Impresión */
+    @media print {
+      body {
+        background: white;
+        padding: 0;
+      }
+
+      .header {
+        display: none;
+      }
+
+      .page-container {
+        box-shadow: none;
+        margin: 0;
+        width: 100%;
+      }
+
+      @page {
+        size: letter;
+        margin: 5mm;
+        /* Margen estrecho */
+      }
+
+      td {
+        border: 0.2pt solid white !important;
+        /* Asegura líneas blancas al imprimir */
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="header">
+    <h1>Diseñador de Planillas de Banderas</h1>
+    <p>24 columnas • 4 filas por país • Bordes blancos • Ajuste de cobertura total</p>
+    <button class="btn-print" onclick="window.print()">
+      🖨️ Preparar para Impresión (Tamaño Carta)
+    </button>
+  </div>
+
+  <div class="page-container">
+    <table>
+      <tbody id="gridBody"></tbody>
+    </table>
+  </div>
+
+  <script>
+    const paises = [
+      "Italia", "Canadá", "Brasil", "USA", "Inglaterra",
+      "México", "Emiratos Árabes", "Japón", "Alemania", "Rumania",
+      "España", "Korea del Sur", "China", "Francia", "Irlanda", "Colombia", "Egipto"
+    ];
+
+    const flagUrls = {
+      "Italia": "https://flagcdn.com/it.svg",
+      "Canadá": "https://flagcdn.com/ca.svg",
+      "Brasil": "https://flagcdn.com/br.svg",
+      "USA": "https://flagcdn.com/us.svg",
+      "Inglaterra": "https://flagcdn.com/gb-eng.svg",
+      "México": "https://flagcdn.com/mx.svg",
+      "Emiratos Árabes": "https://flagcdn.com/ae.svg",
+      "Japón": "https://flagcdn.com/jp.svg",
+      "Alemania": "https://flagcdn.com/de.svg",
+      "Rumania": "https://flagcdn.com/ro.svg",
+      "España": "https://flagcdn.com/es.svg",
+      "Korea del Sur": "https://flagcdn.com/kr.svg",
+      "China": "https://flagcdn.com/cn.svg",
+      "Francia": "https://flagcdn.com/fr.svg",
+      "Irlanda": "https://flagcdn.com/ie.svg",
+      "Colombia": "https://flagcdn.com/co.svg",
+      "Egipto": "https://flagcdn.com/eg.svg"
+    };
+
+    const gridBody = document.getElementById('gridBody');
+    const columnas = 10;
+    const filasPorPais = 5;
+
+    paises.forEach(pais => {
+      for (let f = 0; f < filasPorPais; f++) {
+        const tr = document.createElement('tr');
+        for (let c = 0; c < columnas; c++) {
+          const td = document.createElement('td');
+          const img = document.createElement('img');
+          img.src = flagUrls[pais];
+          img.className = 'flag-img';
+          td.appendChild(img);
+          tr.appendChild(td);
+        }
+        gridBody.appendChild(tr);
+      }
+    });
+  </script>
+</body>
+
+</html>
