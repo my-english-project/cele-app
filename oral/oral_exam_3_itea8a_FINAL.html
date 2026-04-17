@@ -717,7 +717,7 @@
     function getEnglishVoice() {
       const voices = speechSynthesis.getVoices();
       // Prefer high-quality English voices
-      const preferred = voices.find(v => v.lang.startsWith('en') && v.name.includes('Samantha'));
+      const preferred = voices.find(v => v.lang.startsWith('en') && v.name.includes('Daniel'));
       if (preferred) return preferred;
       // Prefer non-local (network) voices for better quality
       const networkEn = voices.find(v => v.lang.startsWith('en') && !v.localService);
