@@ -1,0 +1,1798 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Some and Any — CELE UTS English</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;700&display=swap"
+    rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+  <style>
+    :root {
+      --blue: #004c8f;
+      --blue-mid: #00367a;
+      --blue-deep: #002a5e;
+      --green: #00a859;
+      --green-dark: #008a48;
+      --green-dim: rgba(0, 168, 89, .10);
+      --blue-dim: rgba(0, 76, 143, .07);
+      --blue-line: rgba(0, 76, 143, .15);
+      --green-line: rgba(0, 168, 89, .20);
+      --red: #c0392b;
+      --red-dim: rgba(192, 57, 43, .07);
+      --page: #f7f5f2;
+      --card: #ffffff;
+      --ink: #1a1a1f;
+      --body: #3d3d45;
+      --muted: #7a7a88;
+      --rule: #e4e2de
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
+
+    html {
+      scroll-behavior: smooth
+    }
+
+    body {
+      background: var(--page);
+      color: var(--body);
+      font-family: 'Lora', Georgia, serif;
+      min-height: 100vh;
+      padding-bottom: 48px
+    }
+
+    .display {
+      font-family: 'Playfair Display', Georgia, serif
+    }
+
+    /* HEADER */
+    header {
+      background: var(--blue);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 20px rgba(0, 0, 0, .18)
+    }
+
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 clamp(1rem, 5vw, 3rem);
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between
+    }
+
+    .logo-pill {
+      background: rgba(255, 255, 255, .14);
+      border: 1.5px solid rgba(255, 255, 255, .28);
+      border-radius: 8px;
+      padding: 5px 14px;
+      backdrop-filter: blur(6px);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, .15), inset 0 1px 0 rgba(255, 255, 255, .18);
+      display: flex;
+      align-items: center;
+      text-decoration: none
+    }
+
+    .logo-pill img {
+      height: 38px;
+      width: auto
+    }
+
+    .logo-fallback {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: 1.3rem;
+      color: #fff;
+      letter-spacing: .04em
+    }
+
+    .header-center {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      pointer-events: none
+    }
+
+    .header-center .eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .58rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .55);
+      margin-bottom: 2px
+    }
+
+    .header-center .h-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: .01em
+    }
+
+    /* BREADCRUMB */
+    .breadcrumb-bar {
+      background: var(--blue-deep);
+      border-bottom: 1px solid rgba(255, 255, 255, .07)
+    }
+
+    .breadcrumb-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: .55rem clamp(1rem, 5vw, 3rem);
+      display: flex;
+      align-items: center;
+      gap: .35rem;
+      flex-wrap: wrap
+    }
+
+    .breadcrumb-inner a,
+    .breadcrumb-inner span {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .6rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: rgba(255, 255, 255, .45);
+      transition: color .15s
+    }
+
+    .breadcrumb-inner a:hover {
+      color: var(--green)
+    }
+
+    .breadcrumb-inner .bc-sep {
+      color: rgba(255, 255, 255, .2)
+    }
+
+    .breadcrumb-inner .bc-current {
+      color: rgba(255, 255, 255, .85)
+    }
+
+    /* HERO */
+    .hero {
+      background: var(--blue);
+      background-image: repeating-linear-gradient(-55deg, rgba(255, 255, 255, .025) 0px, rgba(255, 255, 255, .025) 1px, transparent 1px, transparent 18px);
+      padding: clamp(3rem, 8vw, 5.5rem) clamp(1rem, 5vw, 3rem) clamp(2.5rem, 6vw, 4.5rem);
+      border-bottom: 4px solid var(--green)
+    }
+
+    .hero-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 2rem;
+      align-items: end
+    }
+
+    .hero-eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .65rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 10px
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 28px;
+      height: 1.5px;
+      background: var(--green)
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+      font-weight: 900;
+      line-height: 1.06;
+      color: #fff
+    }
+
+    .hero-title em {
+      color: var(--green);
+      font-style: italic
+    }
+
+    .hero-sub {
+      margin-top: 1.2rem;
+      max-width: 540px;
+      font-size: .93rem;
+      line-height: 1.8;
+      color: rgba(255, 255, 255, .65)
+    }
+
+    .hero-meta {
+      text-align: right;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .64rem;
+      color: rgba(255, 255, 255, .4);
+      letter-spacing: .07em;
+      line-height: 2.1;
+      border-left: 1px solid rgba(255, 255, 255, .12);
+      padding-left: 1.8rem
+    }
+
+    .hero-meta strong {
+      display: block;
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: var(--green);
+      letter-spacing: 0;
+      line-height: 1
+    }
+
+    /* QUICK NAV */
+    .quick-nav {
+      background: var(--blue-deep);
+      border-bottom: 1px solid rgba(255, 255, 255, .08)
+    }
+
+    .quick-nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: .9rem clamp(1rem, 5vw, 3rem);
+      display: flex;
+      gap: .5rem;
+      flex-wrap: wrap
+    }
+
+    .qn-chip {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .6rem;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .45);
+      text-decoration: none;
+      border: 1px solid rgba(255, 255, 255, .1);
+      border-radius: 3px;
+      padding: 4px 10px;
+      transition: color .15s, border-color .15s, background .15s
+    }
+
+    .qn-chip:hover {
+      color: var(--green);
+      border-color: var(--green-line);
+      background: rgba(0, 168, 89, .08)
+    }
+
+    /* MAIN */
+    .main-wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 clamp(1rem, 5vw, 3rem) 5rem
+    }
+
+    /* ENTRY */
+    .entry {
+      display: grid;
+      grid-template-columns: 72px 1fr;
+      gap: 0 2.2rem;
+      padding: 3.5rem 0;
+      border-bottom: 1px solid var(--rule);
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity .55s ease, transform .55s ease
+    }
+
+    .entry.show {
+      opacity: 1;
+      transform: none
+    }
+
+    .entry-num {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: 4.5rem;
+      line-height: 1;
+      color: rgba(0, 76, 143, .13);
+      text-align: right;
+      padding-top: 6px;
+      user-select: none
+    }
+
+    .entry-body {
+      min-width: 0
+    }
+
+    .entry-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .62rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: .45rem;
+      display: flex;
+      align-items: center;
+      gap: 8px
+    }
+
+    .entry-label::after {
+      content: '';
+      flex: 1;
+      max-width: 40px;
+      height: 1px;
+      background: var(--green-line)
+    }
+
+    .entry-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 900;
+      color: var(--blue);
+      line-height: 1.1;
+      margin-bottom: .8rem
+    }
+
+    .entry-subtitle {
+      font-size: .84rem;
+      color: var(--muted);
+      font-style: italic;
+      border-left: 2.5px solid var(--green);
+      padding-left: .75rem;
+      margin-bottom: 1.4rem
+    }
+
+    /* TABS */
+    .tabs {
+      display: flex;
+      gap: 0;
+      border-bottom: 1.5px solid var(--rule);
+      margin-bottom: 1.4rem;
+      flex-wrap: wrap
+    }
+
+    .tab {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .62rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: 8px 16px;
+      cursor: pointer;
+      color: var(--muted);
+      background: none;
+      border: none;
+      border-bottom: 2.5px solid transparent;
+      margin-bottom: -1.5px;
+      transition: color .15s, border-color .15s
+    }
+
+    .tab:hover {
+      color: var(--blue)
+    }
+
+    .tab.active {
+      color: var(--blue);
+      border-bottom-color: var(--blue)
+    }
+
+    .tab-panel {
+      display: none
+    }
+
+    .tab-panel.active {
+      display: block
+    }
+
+    /* BLOCKS */
+    .def-block {
+      background: var(--card);
+      border: 1px solid var(--blue-line);
+      border-left: 3px solid var(--blue);
+      border-radius: 2px;
+      padding: .95rem 1.15rem;
+      margin-bottom: .8rem;
+      font-size: .87rem;
+      line-height: 1.72;
+      color: var(--body);
+      box-shadow: 0 1px 4px rgba(0, 76, 143, .05)
+    }
+
+    .def-block strong {
+      color: var(--blue)
+    }
+
+    .def-block em {
+      color: var(--green-dark);
+      font-weight: 600
+    }
+
+    .def-block.green-accent {
+      border-left-color: var(--green)
+    }
+
+    .def-block.warn-accent {
+      border-left-color: var(--red);
+      background: #fff8f7
+    }
+
+    .def-block.dark-bg {
+      background: var(--blue);
+      border-color: var(--blue);
+      color: #fff
+    }
+
+    .def-block.dark-bg strong {
+      color: var(--green)
+    }
+
+    /* SPLIT CARD */
+    .split-card {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border: 1px solid var(--rule);
+      border-radius: 3px;
+      overflow: hidden;
+      margin-bottom: .8rem;
+      box-shadow: 0 1px 6px rgba(0, 76, 143, .05)
+    }
+
+    .sc-col {
+      padding: .9rem 1rem;
+      font-size: .85rem;
+      line-height: 1.7
+    }
+
+    .sc-col+.sc-col {
+      border-left: 1px solid var(--rule)
+    }
+
+    .sc-hdr {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .64rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      margin-bottom: .55rem;
+      padding-bottom: .45rem;
+      border-bottom: 2px solid
+    }
+
+    .sc-hdr.some {
+      color: var(--blue);
+      border-color: var(--blue)
+    }
+
+    .sc-hdr.any {
+      color: var(--green-dark);
+      border-color: var(--green)
+    }
+
+    .sc-col.some-col {
+      background: rgba(0, 76, 143, .03)
+    }
+
+    .sc-col.any-col {
+      background: rgba(0, 168, 89, .03)
+    }
+
+    .sc-col p {
+      font-style: italic;
+      color: var(--muted);
+      font-size: .84rem;
+      margin-top: .3rem
+    }
+
+    .sc-col p strong {
+      color: var(--blue);
+      font-style: normal
+    }
+
+    .sc-col.any-col p strong {
+      color: var(--green-dark)
+    }
+
+    .ex-list {
+      list-style: none
+    }
+
+    .ex-list li {
+      font-style: italic;
+      font-size: .87rem;
+      color: var(--muted);
+      padding: 6px 0;
+      border-bottom: 1px solid var(--rule);
+      line-height: 1.6
+    }
+
+    .ex-list li:last-child {
+      border-bottom: none
+    }
+
+    .ex-list li strong {
+      color: var(--blue);
+      font-style: normal;
+      font-weight: 700
+    }
+
+    .ex-list.any-list li strong {
+      color: var(--green-dark)
+    }
+
+    .ex-n {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .6rem;
+      color: var(--green);
+      margin-right: 6px;
+      font-style: normal
+    }
+
+    .mini-tbl {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .82rem;
+      margin-top: .6rem
+    }
+
+    .mini-tbl thead th {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .6rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 400;
+      padding: 7px 10px;
+      border-bottom: 1.5px solid var(--rule);
+      text-align: left
+    }
+
+    .mini-tbl tbody td {
+      padding: 7px 10px;
+      border-bottom: 1px solid var(--rule);
+      color: var(--body);
+      vertical-align: top
+    }
+
+    .mini-tbl tbody tr:last-child td {
+      border-bottom: none
+    }
+
+    .mini-tbl tbody tr:hover td {
+      background: var(--blue-dim)
+    }
+
+    .t-blue {
+      color: var(--blue);
+      font-weight: 700;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .78rem
+    }
+
+    .t-green {
+      color: var(--green-dark);
+      font-weight: 700;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .78rem
+    }
+
+    /* EXERCISES */
+    .exercises-section {
+      margin-top: 4rem;
+      padding-top: 3rem;
+      border-top: 2px solid var(--blue)
+    }
+
+    .section-hdr {
+      display: flex;
+      align-items: baseline;
+      gap: 1.4rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap
+    }
+
+    .section-hdr h2 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+      color: var(--blue)
+    }
+
+    .section-hdr p {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .6rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--muted)
+    }
+
+    #ex-tracker {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background: var(--card);
+      border: 1px solid var(--blue-line);
+      border-left: 3px solid var(--blue);
+      padding: .8rem 1.2rem;
+      margin-bottom: 2rem;
+      border-radius: 2px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .72rem;
+      color: var(--muted)
+    }
+
+    .ex-type-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1.2rem
+    }
+
+    .ex-type-letter {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--blue);
+      color: #fff;
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px
+    }
+
+    .ex-type-title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: 1.1rem;
+      color: var(--blue);
+      margin-bottom: .15rem
+    }
+
+    .ex-type-desc {
+      font-size: .8rem;
+      color: var(--muted);
+      line-height: 1.6
+    }
+
+    .ex-card {
+      background: var(--card);
+      border: 1px solid var(--blue-line);
+      border-radius: 2px;
+      padding: 1.4rem 1.6rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 1px 6px rgba(0, 76, 143, .05)
+    }
+
+    .ex-card-top {
+      display: flex;
+      align-items: baseline;
+      gap: .8rem;
+      margin-bottom: .8rem
+    }
+
+    .ex-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .68rem;
+      font-weight: 700;
+      color: var(--green);
+      background: var(--green-dim);
+      padding: 2px 7px;
+      border-radius: 2px;
+      flex-shrink: 0
+    }
+
+    .ex-instruction {
+      font-size: .83rem;
+      color: var(--muted);
+      line-height: 1.5
+    }
+
+    .ex-sentence {
+      font-family: 'Lora', Georgia, serif;
+      font-style: italic;
+      font-size: .96rem;
+      color: var(--ink);
+      background: var(--page);
+      padding: .7rem 1rem;
+      border-left: 3px solid var(--blue-line);
+      margin-bottom: 1rem;
+      line-height: 1.6
+    }
+
+    .ex-opts-row {
+      display: flex;
+      gap: .5rem;
+      flex-wrap: wrap
+    }
+
+    .ex-opt {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .74rem;
+      padding: 8px 14px;
+      background: var(--page);
+      border: 1.5px solid var(--rule);
+      border-radius: 3px;
+      cursor: pointer;
+      color: var(--body);
+      transition: background .14s, border-color .14s, color .14s
+    }
+
+    .ex-opt:hover:not(:disabled) {
+      background: var(--blue-dim);
+      border-color: rgba(0, 76, 143, .3);
+      color: var(--blue)
+    }
+
+    .ex-opt.ex-correct {
+      background: rgba(0, 168, 89, .1);
+      border-color: var(--green);
+      color: var(--green-dark);
+      font-weight: 700
+    }
+
+    .ex-opt.ex-wrong {
+      background: var(--red-dim);
+      border-color: var(--red);
+      color: var(--red)
+    }
+
+    .ex-opt:disabled {
+      cursor: default
+    }
+
+    .ex-feedback {
+      font-size: .82rem;
+      font-style: italic;
+      padding: 0;
+      margin-top: .7rem;
+      display: none;
+      line-height: 1.5
+    }
+
+    .ex-feedback.ok {
+      color: var(--green-dark);
+      display: block
+    }
+
+    .ex-feedback.err {
+      color: var(--red);
+      display: block
+    }
+
+    /* FILL-IN */
+    .fill-row {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      margin-bottom: .6rem;
+      flex-wrap: wrap;
+      font-size: .88rem;
+      color: var(--body);
+      line-height: 1.6
+    }
+
+    .fill-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .62rem;
+      color: var(--green);
+      background: var(--green-dim);
+      padding: 1px 6px;
+      border-radius: 2px;
+      flex-shrink: 0
+    }
+
+    .fill-in {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .82rem;
+      border: none;
+      border-bottom: 2px solid var(--blue-line);
+      background: transparent;
+      color: var(--ink);
+      padding: 2px 6px;
+      width: 80px;
+      outline: none;
+      transition: border-color .15s
+    }
+
+    .fill-in:focus {
+      border-bottom-color: var(--blue)
+    }
+
+    .fill-in.fi-correct {
+      border-bottom-color: var(--green);
+      color: var(--green-dark);
+      font-weight: 700
+    }
+
+    .fill-in.fi-wrong {
+      border-bottom-color: var(--red);
+      color: var(--red)
+    }
+
+    .fill-in.fi-shown {
+      border-bottom-color: var(--muted);
+      color: var(--muted);
+      font-style: italic
+    }
+
+    .fill-check-btn {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .68rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: 9px 20px;
+      background: var(--blue);
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      font-weight: 700;
+      margin-top: .8rem
+    }
+
+    .fill-check-btn:hover {
+      background: var(--blue-mid)
+    }
+
+    .fill-show-btn {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .68rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: 9px 20px;
+      background: var(--page);
+      color: var(--muted);
+      border: 1px solid var(--rule);
+      border-radius: 3px;
+      cursor: pointer;
+      font-weight: 700;
+      margin-top: .8rem
+    }
+
+    .fill-show-btn:hover {
+      background: var(--rule)
+    }
+
+    /* QUIZ */
+    .quiz-section {
+      margin-top: 3.5rem;
+      background: var(--card);
+      border: 1px solid var(--blue-line);
+      border-top: 4px solid var(--blue);
+      box-shadow: 0 4px 24px rgba(0, 76, 143, .08)
+    }
+
+    .quiz-header {
+      background: var(--blue);
+      padding: 1.6rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap
+    }
+
+    .quiz-header .quiz-eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .6rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: .35rem
+    }
+
+    .quiz-header .quiz-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: #fff
+    }
+
+    .quiz-header .quiz-desc {
+      font-size: .8rem;
+      color: rgba(255, 255, 255, .55);
+      margin-top: .2rem
+    }
+
+    .quiz-body {
+      display: grid;
+      grid-template-columns: 1fr 220px
+    }
+
+    .quiz-left {
+      padding: 2rem;
+      border-right: 1px solid var(--rule)
+    }
+
+    .quiz-right {
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .8rem
+    }
+
+    .prog-wrap {
+      margin-bottom: 1.6rem
+    }
+
+    .prog-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .6rem;
+      color: var(--muted);
+      letter-spacing: .07em;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 5px
+    }
+
+    .prog-track {
+      height: 3px;
+      background: var(--rule);
+      border-radius: 2px;
+      overflow: hidden
+    }
+
+    .prog-fill {
+      height: 100%;
+      background: var(--green);
+      border-radius: 2px;
+      transition: width .4s ease
+    }
+
+    #q-number {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .6rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: block;
+      margin-bottom: .5rem
+    }
+
+    #q-sentence {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.55;
+      margin-bottom: 1.5rem
+    }
+
+    .quiz-opt {
+      display: block;
+      width: 100%;
+      text-align: left;
+      padding: 11px 15px;
+      margin-bottom: .45rem;
+      background: var(--page);
+      border: 1.5px solid var(--rule);
+      border-radius: 3px;
+      cursor: pointer;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .8rem;
+      color: var(--body);
+      transition: background .14s, border-color .14s, color .14s
+    }
+
+    .quiz-opt:hover:not(:disabled) {
+      background: var(--blue-dim);
+      border-color: rgba(0, 76, 143, .3);
+      color: var(--blue)
+    }
+
+    .quiz-opt.correct {
+      background: rgba(0, 168, 89, .08);
+      border-color: var(--green);
+      color: var(--green-dark);
+      font-weight: 700
+    }
+
+    .quiz-opt.wrong {
+      background: var(--red-dim);
+      border-color: var(--red);
+      color: var(--red)
+    }
+
+    #q-feedback {
+      font-size: .82rem;
+      font-style: italic;
+      padding: 10px 14px;
+      border-radius: 3px;
+      margin-top: .9rem;
+      display: none
+    }
+
+    #q-feedback.ok {
+      background: rgba(0, 168, 89, .08);
+      color: var(--green-dark);
+      border: 1px solid var(--green-line)
+    }
+
+    #q-feedback.err {
+      background: var(--red-dim);
+      color: var(--red);
+      border: 1px solid rgba(192, 57, 43, .25)
+    }
+
+    #next-button {
+      margin-top: 1.1rem;
+      width: 100%;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .7rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      padding: 12px;
+      background: var(--blue);
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: background .15s;
+      display: none
+    }
+
+    #next-button:hover {
+      background: var(--blue-mid)
+    }
+
+    .score-label-sm {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .58rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--muted)
+    }
+
+    #score-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem;
+      font-weight: 900;
+      color: var(--blue)
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--blue);
+      border-top: 3px solid var(--green);
+      padding: 2.8rem clamp(1rem, 5vw, 3rem);
+      text-align: center
+    }
+
+    footer .f-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      font-weight: 900;
+      color: #fff;
+      margin-bottom: .3rem
+    }
+
+    footer .f-sub {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .6rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .4)
+    }
+
+    footer .f-accent {
+      color: var(--green)
+    }
+
+    /* RESPONSIVE */
+    @media(max-width:700px) {
+
+      .hero-inner,
+      .split-card,
+      .quiz-body {
+        grid-template-columns: 1fr
+      }
+
+      .hero-meta {
+        display: none
+      }
+
+      .entry {
+        grid-template-columns: 1fr
+      }
+
+      .entry-num {
+        display: none
+      }
+
+      .quiz-right {
+        border-top: 1px solid var(--rule)
+      }
+
+      .header-center {
+        display: none
+      }
+
+      .sc-col+.sc-col {
+        border-left: none;
+        border-top: 1px solid var(--rule)
+      }
+    }
+
+    /* FONT BAR */
+    .font-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 200;
+      background: var(--blue-deep);
+      border-top: 2px solid var(--green);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: .6rem;
+      padding: .5rem 1rem;
+      box-shadow: 0 -2px 16px rgba(0, 0, 0, .22)
+    }
+
+    .font-bar-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .58rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .45)
+    }
+
+    .font-btn {
+      height: 28px;
+      min-width: 28px;
+      padding: 0 8px;
+      border-radius: 5px;
+      border: 1.5px solid rgba(255, 255, 255, .22);
+      background: rgba(255, 255, 255, .08);
+      color: rgba(255, 255, 255, .8);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .75rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background .14s
+    }
+
+    .font-btn:hover {
+      background: rgba(255, 255, 255, .18)
+    }
+
+    .font-btn.active-size {
+      background: var(--green);
+      border-color: var(--green);
+      color: #fff
+    }
+
+    .font-sep {
+      width: 1px;
+      height: 18px;
+      background: rgba(255, 255, 255, .18)
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-inner">
+      <a href="../index.html">
+        <div class="logo-pill"><img src="../assets/images/logo-uts-2024.png" alt="UTS"
+            onerror="this.parentElement.innerHTML='<span class=\'logo-fallback\'>UTS</span>'"></div>
+      </a>
+      <div class="header-center">
+        <p class="eyebrow">CELE &middot; English Language Program</p>
+        <p class="h-title display">Some and Any</p>
+      </div>
+      <a href="../index.html">
+        <div class="logo-pill"><img src="../assets/images/logo_cele.png" alt="CELE"
+            onerror="this.parentElement.innerHTML='<span class=\'logo-fallback\'>CELE</span>'"></div>
+      </a>
+    </div>
+  </header>
+
+  <!-- BREADCRUMB -->
+  <nav class="breadcrumb-bar">
+    <div class="breadcrumb-inner">
+      <a href="../index.html">Home</a><span class="bc-sep"> | </span>
+      <a href="../index.html#basic">Basic</a><span class="bc-sep"> | </span>
+      <span class="bc-current">Some and Any</span>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div>
+        <p class="hero-eyebrow">Grammar Module — Level A1–A2</p>
+        <h1 class="hero-title display"><em>Some</em> and<br>Any</h1>
+        <p class="hero-sub">Two of the most essential determiners in English. Learn when to use <em>some</em> — in
+          affirmatives, offers and requests — and when to use <em>any</em> — in negatives and neutral questions.</p>
+      </div>
+      <div class="hero-meta">
+        <strong>4</strong>Topics<br>
+        <strong>3</strong>Uses each<br>
+        <strong>10</strong>Quiz items<br>
+        ——<br>
+        Affirmative<br>
+        Negative · Q<br>
+        Offers · Requests
+      </div>
+    </div>
+  </section>
+
+  <!-- QUICK NAV -->
+  <nav class="quick-nav">
+    <div class="quick-nav-inner">
+      <a class="qn-chip" href="#s1">01 Some</a>
+      <a class="qn-chip" href="#s2">02 Some — Offers &amp; Requests</a>
+      <a class="qn-chip" href="#s3">03 Any</a>
+      <a class="qn-chip" href="#s4">04 Side by Side</a>
+      <a class="qn-chip" href="#exercises">↓ Exercises</a>
+      <a class="qn-chip" href="#quiz">↓ Quiz</a>
+    </div>
+  </nav>
+
+  <div class="main-wrap">
+
+    <!-- 01 SOME -->
+    <article id="s1" class="entry">
+      <div class="entry-num display">01</div>
+      <div class="entry-body">
+        <p class="entry-label">Affirmative Sentences</p>
+        <h2 class="entry-title display">Some</h2>
+        <p class="entry-subtitle">We use <em>SOME</em> in <em>affirmative sentences</em> and when we want to
+          <em>offer</em> or <em>ask for</em> something.</p>
+        <div class="tabs">
+          <button class="tab active" onclick="switchTab(this,'s1','when')">When to Use</button>
+          <button class="tab" onclick="switchTab(this,'s1','ex')">Examples</button>
+        </div>
+        <div id="s1-when" class="tab-panel active">
+          <div class="def-block dark-bg" style="text-align:center;padding:1.3rem">
+            <span
+              style="font-family:'JetBrains Mono',monospace;font-size:.62rem;color:rgba(255,255,255,.45);letter-spacing:.14em;text-transform:uppercase">Primary
+              Use</span><br>
+            <span style="font-family:'Playfair Display',serif;font-size:1.3rem;color:#fff;font-weight:700"><span
+                style="color:var(--green)">Some</span> → affirmative sentences</span>
+          </div>
+          <div class="def-block" style="margin-top:.8rem">
+            Use <strong>some</strong> when you are making a <em>positive statement</em> about an unspecified quantity of
+            something — whether countable or uncountable.
+          </div>
+          <div class="def-block green-accent">
+            Also used in <strong>offers and requests</strong>, even if the sentence has question form. See Topic 02 for
+            details.
+          </div>
+        </div>
+        <div id="s1-ex" class="tab-panel">
+          <ul class="ex-list">
+            <li><span class="ex-n">01</span>"There are <strong>some</strong> new people in my English class."</li>
+            <li><span class="ex-n">02</span>"I bought <strong>some</strong> new shoes."</li>
+            <li><span class="ex-n">03</span>"There is <strong>some</strong> milk in the fridge."</li>
+            <li><span class="ex-n">04</span>"I took <strong>some</strong> money out of the bank."</li>
+            <li><span class="ex-n">05</span>"Peter has bought <strong>some</strong> new books."</li>
+            <li><span class="ex-n">06</span>"She always takes <strong>some</strong> sugar with her coffee."</li>
+            <li><span class="ex-n">07</span>"Here is <strong>some</strong> food for the cat."</li>
+            <li><span class="ex-n">08</span>"I have <strong>some</strong> magazines for you."</li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <!-- 02 SOME FOR OFFERS AND REQUESTS -->
+    <article id="s2" class="entry">
+      <div class="entry-num display">02</div>
+      <div class="entry-body">
+        <p class="entry-label">Special Uses of Some</p>
+        <h2 class="entry-title display">Some — Offers &amp; Requests</h2>
+        <p class="entry-subtitle">Even in question form, we use <em>some</em> (not <em>any</em>) when we are
+          <em>offering</em> something to someone or <em>politely asking</em> for something.</p>
+        <div class="tabs">
+          <button class="tab active" onclick="switchTab(this,'s2','offers')">Offers</button>
+          <button class="tab" onclick="switchTab(this,'s2','requests')">Requests</button>
+          <button class="tab" onclick="switchTab(this,'s2','why')">Why Some?</button>
+        </div>
+        <div id="s2-offers" class="tab-panel active">
+          <div class="def-block green-accent">
+            When <strong>offering</strong> something, the speaker expects the answer to be <em>yes</em> — that's why
+            <em>some</em> is used, not <em>any</em>.
+          </div>
+          <ul class="ex-list">
+            <li><span class="ex-n">01</span>"Would you like <strong>some</strong> wine?"</li>
+            <li><span class="ex-n">02</span>"Do you want <strong>some</strong> soup?"</li>
+            <li><span class="ex-n">03</span>"Have <strong>some</strong> cake… it's delicious!"</li>
+            <li><span class="ex-n">04</span>"You look thirsty. Have <strong>some</strong> water."</li>
+            <li><span class="ex-n">05</span>"I've got a lot of apples. Do you want <strong>some</strong>?"</li>
+            <li><span class="ex-n">06</span>"If you're hungry, eat <strong>some</strong> chips."</li>
+          </ul>
+        </div>
+        <div id="s2-requests" class="tab-panel">
+          <div class="def-block">
+            When <strong>asking for</strong> something politely, the speaker also expects a positive response — so
+            <em>some</em> is used.
+          </div>
+          <ul class="ex-list">
+            <li><span class="ex-n">01</span>"Can I borrow <strong>some</strong> money?"</li>
+            <li><span class="ex-n">02</span>"Could you give me <strong>some</strong> books to read on vacation?"</li>
+            <li><span class="ex-n">03</span>"Can I have <strong>some</strong> more coffee?"</li>
+            <li><span class="ex-n">04</span>"Could you give me <strong>some</strong> help with this?"</li>
+            <li><span class="ex-n">05</span>"Would you please give me <strong>some</strong> apples?"</li>
+          </ul>
+        </div>
+        <div id="s2-why" class="tab-panel">
+          <div class="def-block warn-accent">
+            <strong>Why use some and not any in questions?</strong>
+          </div>
+          <div class="def-block">
+            <strong>Any</strong> in questions is <em>neutral</em> — the speaker does not expect a particular answer.<br>
+            <span style="font-style:italic;color:var(--muted);font-size:.86rem">"Do you have <strong>any</strong>
+              brothers or sisters?" (genuinely don't know)</span>
+          </div>
+          <div class="def-block green-accent">
+            <strong>Some</strong> in questions signals an <em>expectation of yes</em> — an offer or a polite
+            request.<br>
+            <span style="font-style:italic;color:var(--muted);font-size:.86rem">"Would you like <strong>some</strong>
+              wine?" (offering — expecting acceptance)</span>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 03 ANY -->
+    <article id="s3" class="entry">
+      <div class="entry-num display">03</div>
+      <div class="entry-body">
+        <p class="entry-label">Negatives &amp; Neutral Questions</p>
+        <h2 class="entry-title display">Any</h2>
+        <p class="entry-subtitle">We use <em>ANY</em> with <em>negative sentences</em> and with <em>questions that are
+            neither offers nor requests</em>.</p>
+        <div class="tabs">
+          <button class="tab active" onclick="switchTab(this,'a3','when')">When to Use</button>
+          <button class="tab" onclick="switchTab(this,'a3','neg')">In Negatives</button>
+          <button class="tab" onclick="switchTab(this,'a3','q')">In Questions</button>
+        </div>
+        <div id="a3-when" class="tab-panel active">
+          <div class="def-block dark-bg" style="text-align:center;padding:1.3rem">
+            <span
+              style="font-family:'JetBrains Mono',monospace;font-size:.62rem;color:rgba(255,255,255,.45);letter-spacing:.14em;text-transform:uppercase">Primary
+              Use</span><br>
+            <span style="font-family:'Playfair Display',serif;font-size:1.3rem;color:#fff;font-weight:700"><span
+                style="color:var(--green)">Any</span> → negatives + neutral questions</span>
+          </div>
+          <div class="def-block" style="margin-top:.8rem">
+            <strong>Negatives:</strong> When combined with <em>not</em> (or other negative words), <em>any</em> means
+            <em>none at all</em>.<br>
+            <span style="font-style:italic;color:var(--muted);font-size:.86rem">"There <strong>isn't any</strong> beer
+              in the fridge." (= there is no beer)</span>
+          </div>
+          <div class="def-block green-accent">
+            <strong>Neutral questions:</strong> When genuinely asking whether something exists or is available — no
+            expectation of yes or no.<br>
+            <span style="font-style:italic;color:var(--muted);font-size:.86rem">"Do you have <strong>any</strong>
+              children?" (genuine question, no assumption)</span>
+          </div>
+        </div>
+        <div id="a3-neg" class="tab-panel">
+          <ul class="ex-list any-list">
+            <li><span class="ex-n">01</span>"There isn't <strong>any</strong> beer in the fridge."</li>
+            <li><span class="ex-n">02</span>"There aren't <strong>any</strong> good films on TV."</li>
+            <li><span class="ex-n">03</span>"I don't have <strong>any</strong> free time."</li>
+            <li><span class="ex-n">04</span>"Jane doesn't have <strong>any</strong> friends."</li>
+            <li><span class="ex-n">05</span>"I don't want <strong>any</strong> presents for my birthday."</li>
+            <li><span class="ex-n">06</span>"There aren't <strong>any</strong> apples left."</li>
+            <li><span class="ex-n">07</span>"There aren't <strong>any</strong> folders in my bag."</li>
+            <li><span class="ex-n">08</span>"Pam does not have <strong>any</strong> pencils on her desk."</li>
+          </ul>
+        </div>
+        <div id="a3-q" class="tab-panel">
+          <ul class="ex-list any-list">
+            <li><span class="ex-n">01</span>"Are there <strong>any</strong> good restaurants near here?"</li>
+            <li><span class="ex-n">02</span>"Do you have <strong>any</strong> children?"</li>
+            <li><span class="ex-n">03</span>"Have you got <strong>any</strong> brothers or sisters?"</li>
+            <li><span class="ex-n">04</span>"Have you got <strong>any</strong> questions?"</li>
+            <li><span class="ex-n">05</span>"Did they have <strong>any</strong> news for you?"</li>
+            <li><span class="ex-n">06</span>"Could you check if there are <strong>any</strong> calls on the answering
+              machine?"</li>
+            <li><span class="ex-n">07</span>"Is there <strong>any</strong> lemonade left?"</li>
+            <li><span class="ex-n">08</span>"Have you got <strong>any</strong> tomatoes?"</li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <!-- 04 SIDE BY SIDE -->
+    <article id="s4" class="entry">
+      <div class="entry-num display">04</div>
+      <div class="entry-body">
+        <p class="entry-label">Comparison</p>
+        <h2 class="entry-title display">Some vs Any — Side by Side</h2>
+        <p class="entry-subtitle">Seeing both words contrasted in equivalent sentences makes the choice clearer at a
+          glance.</p>
+        <div class="tabs">
+          <button class="tab active" onclick="switchTab(this,'c4','contrast')">Quick Contrast</button>
+          <button class="tab" onclick="switchTab(this,'c4','table')">Summary Table</button>
+          <button class="tab" onclick="switchTab(this,'c4','mixed')">Mixed Sentences</button>
+        </div>
+        <div id="c4-contrast" class="tab-panel active">
+          <div class="split-card">
+            <div class="sc-col some-col">
+              <div class="sc-hdr some">Some ✓</div>
+              <p>"Sue went to the cinema with <strong>some</strong> of her friends."</p>
+              <p style="margin-top:.5rem">"Here is <strong>some</strong> food for the cat."</p>
+              <p style="margin-top:.5rem">"Would you like <strong>some</strong> wine?" (offer)</p>
+              <p style="margin-top:.5rem">"Can I borrow <strong>some</strong> money?" (request)</p>
+            </div>
+            <div class="sc-col any-col">
+              <div class="sc-hdr any">Any ✓</div>
+              <p>"Jane doesn't have <strong>any</strong> friends."</p>
+              <p style="margin-top:.5rem">"There isn't <strong>any</strong> food left."</p>
+              <p style="margin-top:.5rem">"Are there <strong>any</strong> restaurants nearby?" (neutral)</p>
+              <p style="margin-top:.5rem">"Do you have <strong>any</strong> money on you?" (neutral)</p>
+            </div>
+          </div>
+        </div>
+        <div id="c4-table" class="tab-panel">
+          <table class="mini-tbl">
+            <thead>
+              <tr>
+                <th>Sentence Type</th>
+                <th style="color:var(--blue)">Some</th>
+                <th style="color:var(--green-dark)">Any</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Affirmative statement</td>
+                <td class="t-blue">✓ Always</td>
+                <td style="color:var(--muted)">✗</td>
+              </tr>
+              <tr>
+                <td>Negative statement</td>
+                <td style="color:var(--muted)">✗</td>
+                <td class="t-green">✓ Always</td>
+              </tr>
+              <tr>
+                <td>Offer (question form)</td>
+                <td class="t-blue">✓ (expect yes)</td>
+                <td style="color:var(--muted)">✗</td>
+              </tr>
+              <tr>
+                <td>Polite request (question form)</td>
+                <td class="t-blue">✓ (expect yes)</td>
+                <td style="color:var(--muted)">✗</td>
+              </tr>
+              <tr>
+                <td>Neutral question (no expectation)</td>
+                <td style="color:var(--muted)">✗</td>
+                <td class="t-green">✓ Always</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="def-block warn-accent" style="margin-top:.8rem">
+            <strong>The golden rule:</strong> If you expect the answer to be "yes" → <em>Some</em>. If the answer could
+            be either yes or no (neutral) or you are denying → <em>Any</em>.
+          </div>
+        </div>
+        <div id="c4-mixed" class="tab-panel">
+          <ul class="ex-list">
+            <li><span class="ex-n">01</span>"We need <strong>some</strong> bananas." — "You can't buy
+              <strong>any</strong> posters in this shop."</li>
+            <li><span class="ex-n">02</span>"I have <strong>some</strong> magazines for you." — "There aren't
+              <strong>any</strong> folders in my bag."</li>
+            <li><span class="ex-n">03</span>"There are <strong>some</strong> apples on the table." — "There aren't
+              <strong>any</strong> apples left."</li>
+            <li><span class="ex-n">04</span>"I'm hungry — I'll have <strong>some</strong> sandwiches." — "They didn't
+              sing <strong>any</strong> songs."</li>
+            <li><span class="ex-n">05</span>"I have seen <strong>some</strong> nice postcards here." — "Pam does not
+              have <strong>any</strong> pencils on her desk."</li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <!-- EXERCISES -->
+    <section class="exercises-section" id="exercises">
+      <div class="section-hdr">
+        <h2 class="display">Exercises</h2>
+        <p>Practice &amp; Application</p>
+      </div>
+      <div id="ex-tracker"><span>Progress:</span><span id="tracker-text">0 / 5 completed</span></div>
+
+      <!-- TYPE A: Multiple Choice -->
+      <div style="margin-bottom:2.5rem">
+        <div class="ex-type-header">
+          <div class="ex-type-letter">A</div>
+          <div>
+            <p class="ex-type-title display">Some or Any?</p>
+            <p class="ex-type-desc">Choose the correct word based on the sentence type and context.</p>
+          </div>
+        </div>
+        <div class="ex-card" id="mc1">
+          <div class="ex-card-top"><span class="ex-num">01</span><span class="ex-instruction">Choose the correct
+              word.</span></div>
+          <p class="ex-sentence">There isn't __________ beer in the fridge.</p>
+          <div class="ex-opts-row">
+            <button class="ex-opt" onclick="checkMC('mc1',this,'any')">any</button>
+            <button class="ex-opt" onclick="checkMC('mc1',this,'some')">some</button>
+          </div>
+          <p class="ex-feedback" id="mc1-fb"></p>
+        </div>
+        <div class="ex-card" id="mc2">
+          <div class="ex-card-top"><span class="ex-num">02</span><span class="ex-instruction">Choose the correct
+              word.</span></div>
+          <p class="ex-sentence">You look thirsty. Have __________ water.</p>
+          <div class="ex-opts-row">
+            <button class="ex-opt" onclick="checkMC('mc2',this,'some')">some</button>
+            <button class="ex-opt" onclick="checkMC('mc2',this,'any')">any</button>
+          </div>
+          <p class="ex-feedback" id="mc2-fb"></p>
+        </div>
+        <div class="ex-card" id="mc3">
+          <div class="ex-card-top"><span class="ex-num">03</span><span class="ex-instruction">Choose the correct
+              word.</span></div>
+          <p class="ex-sentence">Have you got __________ brothers or sisters?</p>
+          <div class="ex-opts-row">
+            <button class="ex-opt" onclick="checkMC('mc3',this,'any')">any</button>
+            <button class="ex-opt" onclick="checkMC('mc3',this,'some')">some</button>
+          </div>
+          <p class="ex-feedback" id="mc3-fb"></p>
+        </div>
+        <div class="ex-card" id="mc4">
+          <div class="ex-card-top"><span class="ex-num">04</span><span class="ex-instruction">Choose the correct
+              word.</span></div>
+          <p class="ex-sentence">Would you like __________ wine? (offering at dinner)</p>
+          <div class="ex-opts-row">
+            <button class="ex-opt" onclick="checkMC('mc4',this,'some')">some</button>
+            <button class="ex-opt" onclick="checkMC('mc4',this,'any')">any</button>
+          </div>
+          <p class="ex-feedback" id="mc4-fb"></p>
+        </div>
+      </div>
+
+      <!-- TYPE B: Fill-in -->
+      <div style="margin-bottom:2.5rem">
+        <div class="ex-type-header">
+          <div class="ex-type-letter">B</div>
+          <div>
+            <p class="ex-type-title display">Fill in the Gap</p>
+            <p class="ex-type-desc">Type <em>some</em> or <em>any</em> to complete each sentence correctly.</p>
+          </div>
+        </div>
+        <div class="ex-card">
+          <div class="ex-card-top"><span class="ex-num">05</span><span class="ex-instruction">Write <em>some</em> or
+              <em>any</em> in each gap.</span></div>
+          <div id="fill-group-a">
+            <div class="fill-row"><span class="fill-num">1</span>Have you got <input class="fill-in" data-answer="any"
+                placeholder="…"> tomatoes?</div>
+            <div class="fill-row"><span class="fill-num">2</span>There are <input class="fill-in" data-answer="some"
+                placeholder="…"> exercise books on the floor.</div>
+            <div class="fill-row"><span class="fill-num">3</span>Did you get the ketchup? No, they didn't have <input
+                class="fill-in" data-answer="any" placeholder="…">.</div>
+            <div class="fill-row"><span class="fill-num">4</span>You should eat <input class="fill-in"
+                data-answer="some" placeholder="…"> fresh fruit.</div>
+            <div class="fill-row"><span class="fill-num">5</span>Here are <input class="fill-in" data-answer="some"
+                placeholder="…"> cornflakes, but there isn't <input class="fill-in" data-answer="any" placeholder="…">
+              milk.</div>
+            <div class="fill-row"><span class="fill-num">6</span>We had to wait for <input class="fill-in"
+                data-answer="some" placeholder="…"> minutes.</div>
+            <div class="fill-row"><span class="fill-num">7</span>Is there <input class="fill-in" data-answer="any"
+                placeholder="…"> lemonade left?</div>
+            <div class="fill-row"><span class="fill-num">8</span>There is no butter. Let's go and get <input
+                class="fill-in" data-answer="some" placeholder="…">.</div>
+            <div class="fill-row"><span class="fill-num">9</span>They didn't sing <input class="fill-in"
+                data-answer="any" placeholder="…"> songs.</div>
+            <div class="fill-row"><span class="fill-num">10</span>I'm looking for <input class="fill-in"
+                data-answer="some" placeholder="…"> good music.</div>
+          </div>
+          <div style="display:flex;gap:.5rem;margin-top:.8rem">
+            <button class="fill-check-btn" onclick="checkFill('fill-group-a','mc5')">Check Answers</button>
+            <button class="fill-show-btn" onclick="showFill('fill-group-a','mc5')">Show Answers</button>
+          </div>
+          <p class="ex-feedback" id="mc5-fb"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUIZ -->
+    <section id="quiz" class="quiz-section">
+      <div class="quiz-header">
+        <div>
+          <p class="quiz-eyebrow">— Knowledge Check</p>
+          <h2 class="quiz-title display">Quiz: Some and Any</h2>
+          <p class="quiz-desc">10 questions · Choose some or any based on context</p>
+        </div>
+      </div>
+      <div class="quiz-body">
+        <div class="quiz-left">
+          <div class="prog-wrap">
+            <div class="prog-label"><span id="q-number">Question 1 of 10</span><span id="prog-pct">10%</span></div>
+            <div class="prog-track">
+              <div class="prog-fill" id="prog-fill" style="width:10%"></div>
+            </div>
+          </div>
+          <p id="q-sentence"></p>
+          <div id="options-container"></div>
+          <div id="q-feedback"></div>
+          <button id="next-button">Next Question →</button>
+        </div>
+        <div class="quiz-right">
+          <p class="score-label-sm">Score</p>
+          <p id="score-text">0 / 10</p>
+          <canvas id="progressChart" width="140" height="140"></canvas>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <p class="f-logo">CELE <span class="f-accent">·</span> UTS</p>
+    <p class="f-sub">English Language Program &mdash; Some and Any</p>
+  </footer>
+
+  <script>
+    /* Scroll reveal */
+    const obs = new IntersectionObserver(e => e.forEach(x => { if (x.isIntersecting) { x.target.classList.add('show'); obs.unobserve(x.target); } }), { threshold: 0.1 });
+    document.querySelectorAll('.entry').forEach(el => obs.observe(el));
+
+    /* Tabs */
+    function switchTab(btn, prefix, id) {
+      btn.closest('.tabs').querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      btn.classList.add('active');
+      const scope = btn.closest('.entry-body') || btn.closest('.entry');
+      scope.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      document.getElementById(prefix + '-' + id).classList.add('active');
+    }
+
+    /* Exercise tracker */
+    const exResults = {};
+    function markExercise(id, correct) {
+      if (exResults[id] !== undefined) return;
+      exResults[id] = correct;
+      document.getElementById('tracker-text').textContent = Object.keys(exResults).length + ' / 5 completed';
+    }
+
+    /* Multiple Choice */
+    const MC_CORRECT = { mc1: 'any', mc2: 'some', mc3: 'any', mc4: 'some' };
+    const MC_EXPLAIN = {
+      mc1: '"Any" is used in negative sentences. "There isn\'t" makes this a negative → any.',
+      mc2: '"Some" is used in offers and polite invitations — the speaker expects the person to accept.',
+      mc3: '"Any" is used in neutral questions where the speaker has no expectation of a particular answer.',
+      mc4: '"Some" is used when offering something — the speaker expects the answer to be yes.'
+    };
+    function checkMC(id, btn, chosen) {
+      if (exResults[id] !== undefined) return;
+      const correct = MC_CORRECT[id];
+      document.querySelectorAll('#' + id + ' .ex-opt').forEach(b => {
+        b.disabled = true;
+        if (b.textContent === correct) b.classList.add('ex-correct');
+        if (b === btn && chosen !== correct) b.classList.add('ex-wrong');
+      });
+      const fb = document.getElementById(id + '-fb');
+      const ok = chosen === correct;
+      fb.className = 'ex-feedback ' + (ok ? 'ok' : 'err');
+      fb.textContent = (ok ? '✓ Correct! ' : '✗ Incorrect. The answer is "' + correct + '". ') + MC_EXPLAIN[id];
+      markExercise(id, ok);
+    }
+
+    /* Fill-in */
+    function normalize(s) { return s.trim().toLowerCase(); }
+    function checkFill(groupId, trackId) {
+      if (exResults[trackId] !== undefined) return;
+      const inputs = document.querySelectorAll('#' + groupId + ' .fill-in');
+      let correct = 0;
+      inputs.forEach(inp => {
+        const ans = normalize(inp.dataset.answer);
+        const val = normalize(inp.value);
+        inp.classList.remove('fi-correct', 'fi-wrong');
+        if (val === ans) { inp.classList.add('fi-correct'); correct++; }
+        else { inp.classList.add('fi-wrong'); }
+      });
+      const fb = document.getElementById(trackId + '-fb');
+      const ok = correct === inputs.length;
+      fb.className = 'ex-feedback ' + (ok ? 'ok' : 'err');
+      fb.textContent = ok ? '✓ All correct! Great job.' : correct + ' of ' + inputs.length + ' correct. Review the highlighted gaps.';
+      markExercise(trackId, ok);
+    }
+    function showFill(groupId, trackId) {
+      const inputs = document.querySelectorAll('#' + groupId + ' .fill-in');
+      inputs.forEach(inp => { inp.value = inp.dataset.answer; inp.classList.remove('fi-correct', 'fi-wrong'); inp.classList.add('fi-shown'); });
+      const fb = document.getElementById(trackId + '-fb');
+      fb.className = 'ex-feedback'; fb.style.display = 'block';
+      fb.style.color = 'var(--blue)';
+      fb.textContent = 'Answers shown. Review each sentence to understand why some or any is used.';
+      markExercise(trackId, false);
+    }
+
+    /* Quiz */
+    const QUESTIONS = [
+      { q: '"There are __________ new people in my English class."', opts: ['some', 'any'], correct: 'some', exp: '"Some" in affirmative statements.' },
+      { q: '"There aren\'t __________ good films on TV."', opts: ['any', 'some'], correct: 'any', exp: '"Any" with negative sentences.' },
+      { q: '"Would you like __________ coffee?" (offering)', opts: ['some', 'any'], correct: 'some', exp: '"Some" in offers — speaker expects acceptance.' },
+      { q: '"Do you have __________ children?" (neutral question)', opts: ['any', 'some'], correct: 'any', exp: '"Any" in neutral questions — no expectation.' },
+      { q: '"Can I borrow __________ money?" (polite request)', opts: ['some', 'any'], correct: 'some', exp: '"Some" in polite requests — speaker expects yes.' },
+      { q: '"I don\'t have __________ free time."', opts: ['any', 'some'], correct: 'any', exp: '"Any" with negative statements.' },
+      { q: '"I took __________ money out of the bank."', opts: ['some', 'any'], correct: 'some', exp: '"Some" in affirmative statements — positive, definite quantity.' },
+      { q: '"Have you got __________ questions?" (teacher asking the class)', opts: ['any', 'some'], correct: 'any', exp: '"Any" in a neutral question — teacher doesn\'t know if there are questions.' },
+      { q: '"I\'m hungry — I\'ll have __________ sandwiches."', opts: ['some', 'any'], correct: 'some', exp: '"Some" in affirmative statements.' },
+      { q: '"They didn\'t sing __________ songs."', opts: ['any', 'some'], correct: 'any', exp: '"Any" in negative statements — "didn\'t" makes it negative.' },
+    ];
+    let idx = 0, score = 0, chart = null;
+    function initChart() {
+      chart = new Chart(document.getElementById('progressChart').getContext('2d'), {
+        type: 'doughnut', data: { labels: ['Correct', 'Remaining'], datasets: [{ data: [0, 10], backgroundColor: ['#00a859', '#e4e2de'], borderWidth: 0 }] },
+        options: { responsive: false, cutout: '78%', plugins: { legend: { display: false } } }
+      });
+    }
+    function loadQ() {
+      const q = QUESTIONS[idx];
+      const pct = Math.round((idx + 1) / QUESTIONS.length * 100);
+      document.getElementById('q-number').textContent = 'Question ' + (idx + 1) + ' of ' + QUESTIONS.length;
+      document.getElementById('prog-pct').textContent = pct + '%';
+      document.getElementById('prog-fill').style.width = pct + '%';
+      document.getElementById('q-sentence').textContent = q.q;
+      document.getElementById('options-container').innerHTML = '';
+      const fb = document.getElementById('q-feedback'); fb.style.display = 'none'; fb.className = '';
+      document.getElementById('next-button').style.display = 'none';
+      [...q.opts].sort(() => Math.random() - .5).forEach(opt => {
+        const b = document.createElement('button'); b.className = 'quiz-opt'; b.textContent = opt;
+        b.onclick = () => checkAns(opt);
+        document.getElementById('options-container').appendChild(b);
+      });
+    }
+    function checkAns(sel) {
+      const q = QUESTIONS[idx];
+      document.querySelectorAll('.quiz-opt').forEach(b => {
+        b.disabled = true;
+        if (b.textContent === q.correct) b.classList.add('correct');
+        if (b.textContent === sel && sel !== q.correct) b.classList.add('wrong');
+      });
+      const fb = document.getElementById('q-feedback'); fb.style.display = 'block';
+      if (sel === q.correct) { score++; fb.textContent = '✓  Correct. ' + q.exp; fb.className = 'ok'; }
+      else { fb.textContent = '✗  Incorrect. The answer is "' + q.correct + '". ' + q.exp; fb.className = 'err'; }
+      document.getElementById('score-text').textContent = score + ' / ' + QUESTIONS.length;
+      chart.data.datasets[0].data = [score, QUESTIONS.length - score]; chart.update();
+      document.getElementById('next-button').style.display = 'block';
+    }
+    document.getElementById('next-button').onclick = () => {
+      idx++;
+      if (idx < QUESTIONS.length) { loadQ(); return; }
+      const pct = Math.round(score / QUESTIONS.length * 100);
+      const msg = pct >= 80 ? 'Excellent work.' : pct >= 60 ? 'Good effort. Keep practising.' : "Keep studying — you're making progress.";
+      document.querySelector('.quiz-section').innerHTML = '<div style="text-align:center;padding:3.5rem 2rem"><p style="font-family:\'JetBrains Mono\',monospace;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--green);margin-bottom:.9rem">— Session Complete</p><h2 style="font-family:\'Playfair Display\',serif;font-size:2.2rem;font-weight:900;color:var(--blue);margin-bottom:.7rem">' + msg + '</h2><p style="color:var(--muted);font-size:.95rem;margin-bottom:.4rem">You answered <strong style="color:var(--blue)">' + score + '</strong> of ' + QUESTIONS.length + ' questions correctly.</p><p style="font-family:\'Playfair Display\',serif;font-size:2.5rem;font-weight:900;color:var(--green);margin:1rem 0 2rem">' + pct + '%</p><button onclick="location.reload()" style="font-family:\'JetBrains Mono\',monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;padding:13px 36px;background:var(--blue);color:#fff;border:none;border-radius:3px;cursor:pointer;font-weight:700" onmouseover="this.style.background=\'#00367a\'" onmouseout="this.style.background=\'#004c8f\'">Retake Quiz</button></div>';
+    };
+    window.onload = () => { initChart(); loadQ(); };
+  </script>
+
+  <div class="font-bar">
+    <span class="font-bar-label">Text size</span>
+    <div class="font-sep"></div>
+    <button class="font-btn" id="fb-sm" onclick="setSize('sm')">A<sup style="font-size:.55em">−</sup></button>
+    <button class="font-btn active-size" id="fb-md" onclick="setSize('md')">A</button>
+    <button class="font-btn" id="fb-lg" onclick="setSize('lg')">A<sup style="font-size:.55em">+</sup></button>
+  </div>
+  <script>
+    (function () {
+      var s = { sm: 14, md: 16, lg: 19 }, saved = localStorage.getItem('cele-font') || 'md';
+      function apply(k) {
+        document.documentElement.style.fontSize = s[k] + 'px'; localStorage.setItem('cele-font', k);
+        ['sm', 'md', 'lg'].forEach(function (n) { var b = document.getElementById('fb-' + n); if (b) b.classList.toggle('active-size', n === k); })
+      }
+      window.setSize = apply; apply(saved);
+    })();
+  </script>
+</body>
+
+</html>
