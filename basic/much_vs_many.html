@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Much vs. Many — CELE UTS English</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;700&display=swap"
+    rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+  <style>
+    /* ── TOKENS ── */
+    :root {
+      --blue: #004c8f;
+      --blue-mid: #00367a;
+      --blue-deep: #002a5e;
+      --green: #00a859;
+      --green-dark: #008a48;
+      --green-dim: rgba(0, 168, 89, .10);
+      --blue-dim: rgba(0, 76, 143, .07);
+      --blue-line: rgba(0, 76, 143, .15);
+      --green-line: rgba(0, 168, 89, .20);
+      --red: #c0392b;
+      --red-dim: rgba(192, 57, 43, .07);
+      --page: #f7f5f2;
+      --card: #ffffff;
+      --ink: #1a1a1f;
+      --body: #3d3d45;
+      --muted: #7a7a88;
+      --rule: #e4e2de;
+    }
+
+    *,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0 }
+    html { scroll-behavior: smooth }
+    body { background: var(--page); color: var(--body); font-family: 'Lora', Georgia, serif; min-height: 100vh }
+    .display { font-family: 'Playfair Display', Georgia, serif }
+    .mono { font-family: 'JetBrains Mono', monospace }
+
+    /* ── HEADER ── */
+    header { background: var(--blue); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 20px rgba(0,0,0,.18) }
+    .header-inner { max-width: 1200px; margin: 0 auto; padding: 0 clamp(1rem,5vw,3rem); height: 64px; display: flex; align-items: center; justify-content: space-between }
+    .logo-pill { background: rgba(255,255,255,.14); border: 1.5px solid rgba(255,255,255,.28); border-radius: 8px; padding: 5px 14px; backdrop-filter: blur(6px); box-shadow: 0 2px 10px rgba(0,0,0,.15),inset 0 1px 0 rgba(255,255,255,.18); display: flex; align-items: center; text-decoration: none }
+    .logo-pill img { height: 38px; width: auto }
+    .logo-fallback { font-family: 'Playfair Display', serif; font-weight: 900; font-size: 1.3rem; color: #fff; letter-spacing: .04em }
+    .header-center { position: absolute; left: 50%; transform: translateX(-50%); text-align: center; pointer-events: none }
+    .header-center .eyebrow { font-family: 'JetBrains Mono', monospace; font-size: .58rem; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.55); margin-bottom: 2px }
+    .header-center .h-title { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 900; color: #fff; letter-spacing: .01em }
+
+    /* ── BREADCRUMB ── */
+    .breadcrumb-bar { background: var(--blue-deep); border-bottom: 1px solid rgba(255,255,255,.07) }
+    .breadcrumb-inner { max-width: 1200px; margin: 0 auto; padding: .55rem clamp(1rem,5vw,3rem); display: flex; align-items: center; gap: .35rem; flex-wrap: wrap }
+    .breadcrumb-inner a, .breadcrumb-inner span { font-family: 'JetBrains Mono', monospace; font-size: .6rem; letter-spacing: .08em; text-transform: uppercase; text-decoration: none; color: rgba(255,255,255,.45); transition: color .15s }
+    .breadcrumb-inner a:hover { color: var(--green) }
+    .breadcrumb-inner .bc-sep { color: rgba(255,255,255,.2) }
+    .breadcrumb-inner .bc-current { color: rgba(255,255,255,.85) }
+
+    /* ── HERO ── */
+    .hero { background: var(--blue); background-image: repeating-linear-gradient(-55deg, rgba(255,255,255,.025) 0px, rgba(255,255,255,.025) 1px, transparent 1px, transparent 18px); padding: clamp(3rem,8vw,5.5rem) clamp(1rem,5vw,3rem) clamp(2.5rem,6vw,4.5rem); border-bottom: 4px solid var(--green) }
+    .hero-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr auto; gap: 2rem; align-items: end }
+    .hero-eyebrow { font-family: 'JetBrains Mono', monospace; font-size: .65rem; letter-spacing: .2em; text-transform: uppercase; color: var(--green); margin-bottom: 1.1rem; display: flex; align-items: center; gap: 10px }
+    .hero-eyebrow::before { content: ''; display: block; width: 28px; height: 1.5px; background: var(--green) }
+    .hero-title { font-family: 'Playfair Display', serif; font-size: clamp(2.4rem,5.5vw,4.2rem); font-weight: 900; line-height: 1.06; color: #fff }
+    .hero-title em { color: var(--green); font-style: italic }
+    .hero-sub { margin-top: 1.2rem; max-width: 540px; font-size: .93rem; line-height: 1.8; color: rgba(255,255,255,.65) }
+    .hero-meta { text-align: right; font-family: 'JetBrains Mono', monospace; font-size: .64rem; color: rgba(255,255,255,.4); letter-spacing: .07em; line-height: 2.1; border-left: 1px solid rgba(255,255,255,.12); padding-left: 1.8rem }
+    .hero-meta strong { display: block; font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--green); letter-spacing: 0; line-height: 1 }
+
+    /* ── QUICK NAV ── */
+    .quick-nav { background: var(--blue-deep); border-bottom: 1px solid rgba(255,255,255,.08) }
+    .quick-nav-inner { max-width: 1200px; margin: 0 auto; padding: .9rem clamp(1rem,5vw,3rem); display: flex; gap: .5rem; flex-wrap: wrap }
+    .qn-chip { font-family: 'JetBrains Mono', monospace; font-size: .6rem; letter-spacing: .09em; text-transform: uppercase; color: rgba(255,255,255,.45); text-decoration: none; border: 1px solid rgba(255,255,255,.1); border-radius: 3px; padding: 4px 10px; transition: color .15s, border-color .15s, background .15s }
+    .qn-chip:hover { color: var(--green); border-color: var(--green-line); background: rgba(0,168,89,.08) }
+
+    /* ── MAIN ── */
+    .main-wrap { max-width: 1200px; margin: 0 auto; padding: 0 clamp(1rem,5vw,3rem) 5rem }
+
+    /* ── ENTRY ── */
+    .entry { display: grid; grid-template-columns: 72px 1fr; gap: 0 2.2rem; padding: 3.5rem 0; border-bottom: 1px solid var(--rule); opacity: 0; transform: translateY(16px); transition: opacity .55s ease, transform .55s ease }
+    .entry.show { opacity: 1; transform: none }
+    .entry-num { font-family: 'Playfair Display', serif; font-weight: 900; font-size: 4.5rem; line-height: 1; color: rgba(0,76,143,.13); text-align: right; padding-top: 6px; user-select: none }
+    .entry-body { min-width: 0 }
+    .entry-label { font-family: 'JetBrains Mono', monospace; font-size: .62rem; letter-spacing: .18em; text-transform: uppercase; color: var(--green); margin-bottom: .45rem; display: flex; align-items: center; gap: 8px }
+    .entry-label::after { content: ''; flex: 1; max-width: 40px; height: 1px; background: var(--green-line) }
+    .entry-title { font-family: 'Playfair Display', serif; font-size: clamp(1.5rem,3vw,2rem); font-weight: 900; color: var(--blue); line-height: 1.1; margin-bottom: .8rem }
+    .entry-subtitle { font-size: .84rem; color: var(--muted); font-style: italic; border-left: 2.5px solid var(--green); padding-left: .75rem; margin-bottom: 1.4rem }
+
+    /* ── TABS ── */
+    .tabs { display: flex; gap: 0; border-bottom: 1.5px solid var(--rule); margin-bottom: 1.4rem }
+    .tab { font-family: 'JetBrains Mono', monospace; font-size: .62rem; letter-spacing: .1em; text-transform: uppercase; padding: 8px 16px; cursor: pointer; color: var(--muted); background: none; border: none; border-bottom: 2.5px solid transparent; margin-bottom: -1.5px; transition: color .15s, border-color .15s }
+    .tab:hover { color: var(--blue) }
+    .tab.active { color: var(--blue); border-bottom-color: var(--blue) }
+    .tab-panel { display: none }
+    .tab-panel.active { display: block }
+
+    /* ── CONTENT BLOCKS ── */
+    .def-block { background: var(--card); border: 1px solid var(--blue-line); border-left: 3px solid var(--blue); border-radius: 2px; padding: .95rem 1.15rem; margin-bottom: .8rem; font-size: .87rem; line-height: 1.72; color: var(--body); box-shadow: 0 1px 4px rgba(0,76,143,.05) }
+    .def-block strong { color: var(--blue) }
+    .def-block em { color: var(--green-dark); font-weight: 600 }
+    .def-block.green-accent { border-left-color: var(--green) }
+    .def-block.warn-accent { border-left-color: var(--red); background: #fff8f7 }
+    .def-block.dark-bg { background: var(--blue); border-color: var(--blue); color: #fff }
+    .def-block.dark-bg strong { color: var(--green) }
+
+    .struct-pill { font-family: 'JetBrains Mono', monospace; font-size: .72rem; color: var(--blue); background: var(--blue-dim); padding: 2px 7px; border-radius: 3px; display: inline-block; margin-bottom: .4rem }
+    .struct-pill.green { color: var(--green-dark); background: var(--green-dim) }
+    .struct-pill.red { color: var(--red); background: var(--red-dim) }
+
+    .wrong { color: var(--red); font-size: .82rem }
+    .right { color: var(--green-dark); font-size: .82rem }
+    .wrong::before { content: "✗  " }
+    .right::before { content: "✓  " }
+
+    .ex-list { list-style: none }
+    .ex-list li { font-style: italic; font-size: .87rem; color: var(--muted); padding: 6px 0; border-bottom: 1px solid var(--rule); line-height: 1.6 }
+    .ex-list li:last-child { border-bottom: none }
+    .ex-list li strong { color: var(--blue); font-style: normal; font-weight: 700 }
+    .ex-n { font-family: 'JetBrains Mono', monospace; font-size: .6rem; color: var(--green); margin-right: 6px; font-style: normal }
+
+    .mini-tbl { width: 100%; border-collapse: collapse; font-size: .82rem; margin-top: .6rem }
+    .mini-tbl thead th { font-family: 'JetBrains Mono', monospace; font-size: .6rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); font-weight: 400; padding: 7px 10px; border-bottom: 1.5px solid var(--rule); text-align: left }
+    .mini-tbl tbody td { padding: 7px 10px; border-bottom: 1px solid var(--rule); color: var(--body) }
+    .mini-tbl tbody tr:last-child td { border-bottom: none }
+    .mini-tbl tbody tr:hover td { background: var(--blue-dim) }
+
+    .t-blue { color: var(--blue); font-weight: 700; font-family: 'JetBrains Mono', monospace; font-size: .78rem }
+    .t-green { color: var(--green); font-weight: 700; font-family: 'JetBrains Mono', monospace; font-size: .78rem }
+    .t-red { color: var(--red); font-weight: 700; font-family: 'JetBrains Mono', monospace; font-size: .78rem }
+
+    .comp-tbl { width: 100%; border-collapse: collapse; font-size: .82rem; margin-top: .6rem }
+    .comp-tbl thead th { padding: 9px 14px; font-family: 'JetBrains Mono', monospace; font-size: .64rem; letter-spacing: .08em }
+    .comp-tbl thead .th-label { text-align: left; color: var(--muted); font-weight: 400 }
+    .comp-tbl thead .th-a { background: var(--blue); color: #fff; text-align: center }
+    .comp-tbl thead .th-b { background: var(--green); color: #fff; text-align: center }
+    .comp-tbl tbody td { padding: 8px 14px; border-top: 1px solid var(--rule); color: var(--body) }
+    .comp-tbl tbody td:first-child { font-family: 'JetBrains Mono', monospace; font-size: .62rem; letter-spacing: .06em; text-transform: uppercase; color: var(--muted) }
+    .comp-tbl tbody td:not(:first-child) { text-align: center }
+    .comp-tbl tbody tr:hover td { background: var(--blue-dim) }
+
+    .pro-tip { background: var(--blue-deep); color: #fff; border-left: 4px solid var(--green); border-radius: 2px; padding: 1rem 1.2rem; margin-top: .8rem; font-size: .86rem; line-height: 1.7 }
+    .pro-tip strong { color: var(--green) }
+
+    .double-col { display: grid; grid-template-columns: 1fr 1fr; gap: .8rem }
+
+    /* ── RULE ROWS (pitfalls) ── */
+    .rule-row { display: flex; align-items: flex-start; gap: 1rem; background: var(--card); border: 1px solid var(--blue-line); border-radius: 2px; padding: .85rem 1rem; margin-bottom: .6rem; box-shadow: 0 1px 4px rgba(0,76,143,.05) }
+    .rule-num-circle { width: 32px; height: 32px; border-radius: 50%; background: var(--red); color: #fff; font-family: 'Playfair Display', serif; font-weight: 900; font-size: 1rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0 }
+    .rule-content { flex: 1 }
+    .rule-title { font-family: 'JetBrains Mono', monospace; font-size: .7rem; font-weight: 700; color: var(--blue); letter-spacing: .07em; text-transform: uppercase; margin-bottom: .3rem }
+    .rule-body { font-size: .84rem; color: var(--body); line-height: 1.6 }
+    .rule-eg { font-family: 'JetBrains Mono', monospace; font-size: .72rem; color: var(--green-dark); margin-top: .3rem }
+
+    /* ── EXERCISES ── */
+    .exercises-section { margin-top: 4rem; padding-top: 3rem; border-top: 2px solid var(--blue) }
+    .section-hdr { display: flex; align-items: baseline; gap: 1.4rem; margin-bottom: 2rem; flex-wrap: wrap }
+    .section-hdr h2 { font-family: 'Playfair Display', serif; font-weight: 900; font-size: clamp(1.4rem,2.5vw,1.9rem); color: var(--blue) }
+    .section-hdr p { font-family: 'JetBrains Mono', monospace; font-size: .6rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted) }
+
+    #ex-tracker { display: flex; align-items: center; gap: 1rem; background: var(--card); border: 1px solid var(--blue-line); border-left: 3px solid var(--blue); padding: .8rem 1.2rem; margin-bottom: 2rem; border-radius: 2px; font-family: 'JetBrains Mono', monospace; font-size: .72rem; color: var(--muted) }
+
+    .ex-type-header { display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 1.2rem }
+    .ex-type-letter { width: 36px; height: 36px; border-radius: 50%; background: var(--blue); color: #fff; font-family: 'Playfair Display', serif; font-weight: 900; font-size: 1rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px }
+    .ex-type-title { font-family: 'Playfair Display', serif; font-weight: 900; font-size: 1.1rem; color: var(--blue); margin-bottom: .15rem }
+    .ex-type-desc { font-size: .8rem; color: var(--muted); line-height: 1.6 }
+
+    .ex-card { background: var(--card); border: 1px solid var(--blue-line); border-radius: 2px; padding: 1.4rem 1.6rem; margin-bottom: 1rem; box-shadow: 0 1px 6px rgba(0,76,143,.05) }
+    .ex-card-top { display: flex; align-items: baseline; gap: .8rem; margin-bottom: .8rem }
+    .ex-num { font-family: 'JetBrains Mono', monospace; font-size: .68rem; font-weight: 700; color: var(--green); background: var(--green-dim); padding: 2px 7px; border-radius: 2px; flex-shrink: 0 }
+    .ex-instruction { font-size: .83rem; color: var(--muted); line-height: 1.5 }
+    .ex-sentence { font-family: 'Lora', Georgia, serif; font-style: italic; font-size: .96rem; color: var(--ink); background: var(--page); padding: .7rem 1rem; border-left: 3px solid var(--blue-line); margin-bottom: 1rem; line-height: 1.6 }
+    .ex-opts-row { display: flex; gap: .5rem; flex-wrap: wrap }
+    .ex-opt { font-family: 'JetBrains Mono', monospace; font-size: .74rem; padding: 8px 14px; background: var(--page); border: 1.5px solid var(--rule); border-radius: 3px; cursor: pointer; color: var(--body); transition: background .14s, border-color .14s, color .14s }
+    .ex-opt:hover:not(:disabled) { background: var(--blue-dim); border-color: rgba(0,76,143,.3); color: var(--blue) }
+    .ex-opt.ex-correct { background: rgba(0,168,89,.1); border-color: var(--green); color: var(--green-dark); font-weight: 700 }
+    .ex-opt.ex-wrong { background: var(--red-dim); border-color: var(--red); color: var(--red) }
+    .ex-opt:disabled { cursor: default }
+    .ex-feedback { font-size: .82rem; font-style: italic; padding: 0; margin-top: .7rem; display: none; line-height: 1.5 }
+    .ex-feedback.ok { color: var(--green-dark); display: block }
+    .ex-feedback.err { color: var(--red); display: block }
+    .ex-feedback.info { color: var(--blue); display: block }
+
+    /* ── QUIZ ── */
+    .quiz-section { margin-top: 3.5rem; background: var(--card); border: 1px solid var(--blue-line); border-top: 4px solid var(--blue); box-shadow: 0 4px 24px rgba(0,76,143,.08) }
+    .quiz-header { background: var(--blue); padding: 1.6rem 2rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap }
+    .quiz-header .quiz-eyebrow { font-family: 'JetBrains Mono', monospace; font-size: .6rem; letter-spacing: .18em; text-transform: uppercase; color: var(--green); margin-bottom: .35rem }
+    .quiz-header .quiz-title { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 900; color: #fff }
+    .quiz-header .quiz-desc { font-size: .8rem; color: rgba(255,255,255,.55); margin-top: .2rem }
+    .quiz-body { display: grid; grid-template-columns: 1fr 220px; gap: 0 }
+    .quiz-left { padding: 2rem; border-right: 1px solid var(--rule) }
+    .quiz-right { padding: 2rem; display: flex; flex-direction: column; align-items: center; gap: .8rem }
+    .prog-wrap { margin-bottom: 1.6rem }
+    .prog-label { font-family: 'JetBrains Mono', monospace; font-size: .6rem; color: var(--muted); letter-spacing: .07em; display: flex; justify-content: space-between; margin-bottom: 5px }
+    .prog-track { height: 3px; background: var(--rule); border-radius: 2px; overflow: hidden }
+    .prog-fill { height: 100%; background: var(--green); border-radius: 2px; transition: width .4s ease }
+    #q-number { font-family: 'JetBrains Mono', monospace; font-size: .6rem; letter-spacing: .15em; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: .5rem }
+    #q-sentence { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; color: var(--ink); line-height: 1.55; margin-bottom: 1.5rem }
+    .quiz-opt { display: block; width: 100%; text-align: left; padding: 11px 15px; margin-bottom: .45rem; background: var(--page); border: 1.5px solid var(--rule); border-radius: 3px; cursor: pointer; font-family: 'JetBrains Mono', monospace; font-size: .8rem; color: var(--body); transition: background .14s, border-color .14s, color .14s }
+    .quiz-opt:hover:not(:disabled) { background: var(--blue-dim); border-color: rgba(0,76,143,.3); color: var(--blue) }
+    .quiz-opt.correct { background: rgba(0,168,89,.08); border-color: var(--green); color: var(--green-dark); font-weight: 700 }
+    .quiz-opt.wrong { background: var(--red-dim); border-color: var(--red); color: var(--red) }
+    #q-feedback { font-size: .82rem; font-style: italic; padding: 10px 14px; border-radius: 3px; margin-top: .9rem; display: none }
+    #q-feedback.ok { background: rgba(0,168,89,.08); color: var(--green-dark); border: 1px solid var(--green-line) }
+    #q-feedback.err { background: var(--red-dim); color: var(--red); border: 1px solid rgba(192,57,43,.25) }
+    #next-button { margin-top: 1.1rem; width: 100%; font-family: 'JetBrains Mono', monospace; font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; padding: 12px; background: var(--blue); color: #fff; border: none; border-radius: 3px; cursor: pointer; font-weight: 700; transition: background .15s; display: none }
+    #next-button:hover { background: var(--blue-mid) }
+    .score-label-sm { font-family: 'JetBrains Mono', monospace; font-size: .58rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted) }
+    #score-text { font-family: 'Playfair Display', serif; font-size: 2.4rem; font-weight: 900; color: var(--blue) }
+
+    /* ── FOOTER ── */
+    footer { background: var(--blue); border-top: 3px solid var(--green); padding: 2.8rem clamp(1rem,5vw,3rem); text-align: center }
+    footer .f-logo { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 900; color: #fff; margin-bottom: .3rem }
+    footer .f-sub { font-family: 'JetBrains Mono', monospace; font-size: .6rem; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.4) }
+    footer .f-accent { color: var(--green) }
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:700px) {
+      .hero-inner { grid-template-columns: 1fr }
+      .hero-meta { display: none }
+      .entry { grid-template-columns: 1fr }
+      .entry-num { display: none }
+      .quiz-body { grid-template-columns: 1fr }
+      .quiz-right { border-top: 1px solid var(--rule) }
+      .header-center { display: none }
+      .double-col { grid-template-columns: 1fr }
+    }
+
+    /* ── FONT SIZE BAR ── */
+    .font-bar { position: fixed; bottom: 0; left: 0; right: 0; z-index: 200; background: var(--blue-deep); border-top: 2px solid var(--green); display: flex; align-items: center; justify-content: center; gap: .6rem; padding: .5rem 1rem; box-shadow: 0 -2px 16px rgba(0,0,0,.22) }
+    .font-bar-label { font-family: 'JetBrains Mono', monospace; font-size: .58rem; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.45) }
+    .font-btn { height: 28px; min-width: 28px; padding: 0 8px; border-radius: 5px; border: 1.5px solid rgba(255,255,255,.22); background: rgba(255,255,255,.08); color: #fff; font-family: 'JetBrains Mono', monospace; font-size: .78rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background .14s, border-color .14s; user-select: none }
+    .font-btn:hover { background: rgba(255,255,255,.20); border-color: rgba(255,255,255,.55) }
+    .font-btn.active-size { background: var(--green); border-color: var(--green); color: #fff }
+    .font-sep { width: 1px; height: 18px; background: rgba(255,255,255,.15) }
+    body { padding-bottom: 48px }
+  </style>
+</head>
+
+<body>
+
+  <!-- ════ HEADER ════ -->
+  <header>
+    <div class="header-inner">
+      <a href="../index.html">
+        <div class="logo-pill">
+          <img src="../assets/images/logo-uts-2024.png" alt="UTS"
+            onerror="this.parentElement.innerHTML='<span class=\'logo-fallback\'>UTS</span>'">
+        </div>
+      </a>
+      <div class="header-center">
+        <p class="eyebrow">CELE &middot; English Language Program</p>
+        <p class="h-title display">Much vs. Many</p>
+      </div>
+      <a href="../index.html">
+        <div class="logo-pill">
+          <img src="../assets/images/logo_cele.png" alt="CELE"
+            onerror="this.parentElement.innerHTML='<span class=\'logo-fallback\'>CELE</span>'">
+        </div>
+      </a>
+    </div>
+  </header>
+
+  <!-- ════ BREADCRUMB ════ -->
+  <nav class="breadcrumb-bar">
+    <div class="breadcrumb-inner">
+      <a href="../index.html">Home</a><span class="bc-sep"> | </span>
+      <a href="../index.html#basic">Basic</a><span class="bc-sep"> | </span>
+      <span class="bc-current">Much vs. Many</span>
+    </div>
+  </nav>
+
+  <!-- ════ HERO ════ -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div>
+        <p class="hero-eyebrow">Grammar Module — Quantifiers</p>
+        <h1 class="hero-title display">Mastering<br><em>Much</em> &amp; <em>Many</em></h1>
+        <p class="hero-sub">Learn when to use <strong style="color:#fff">Much</strong> and <strong style="color:#fff">Many</strong> correctly. This guide covers countable vs. uncountable nouns, sentence usage, questions, the all-rounder <em>a lot of</em>, and the most common pitfalls to avoid.</p>
+      </div>
+      <div class="hero-meta">
+        <strong>7</strong>Topics<br>
+        <strong>6</strong>Exercises<br>
+        <strong>10</strong>Quiz items<br>
+        ——<br>
+        Much · Many<br>
+        A lot of
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ QUICK NAV ════ -->
+  <nav class="quick-nav">
+    <div class="quick-nav-inner">
+      <a class="qn-chip" href="#s1">01 Countable vs Uncountable</a>
+      <a class="qn-chip" href="#s2">02 Using Many</a>
+      <a class="qn-chip" href="#s3">03 Using Much</a>
+      <a class="qn-chip" href="#s4">04 A Lot of</a>
+      <a class="qn-chip" href="#s5">05 How Much / How Many</a>
+      <a class="qn-chip" href="#s6">06 Summary Table</a>
+      <a class="qn-chip" href="#s7">07 Common Pitfalls</a>
+      <a class="qn-chip" href="#exercises">↓ Exercises</a>
+      <a class="qn-chip" href="#quiz">↓ Quiz</a>
+    </div>
+  </nav>
+
+  <!-- ════ MAIN ════ -->
+  <div class="main-wrap">
+
+    <!-- 01 COUNTABLE VS UNCOUNTABLE -->
+    <article id="s1" class="entry">
+      <div class="entry-num display">01</div>
+      <div class="entry-body">
+        <p class="entry-label">Foundation</p>
+        <h2 class="entry-title display">Countable vs. Uncountable Nouns</h2>
+        <p class="entry-subtitle">Before choosing a quantifier, you must identify the noun type — this is the <em>key to everything</em>.</p>
+        <div class="tabs">
+          <button class="tab active" onclick="switchTab(this,'s1','overview')">Overview</button>
+          <button class="tab" onclick="switchTab(this,'s1','countable')">Countable</button>
+          <button class="tab" onclick="switchTab(this,'s1','uncountable')">Uncountable</button>
+          <button class="tab" onclick="switchTab(this,'s1','examples')">Examples</button>
+        </div>
+        <div id="s1-overview" class="tab-panel active">
+          <div class="def-block dark-bg" style="text-align:center;padding:1.3rem">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:.62rem;color:rgba(255,255,255,.45);letter-spacing:.14em;text-transform:uppercase">The Golden Rule</span><br>
+            <span style="font-family:'Playfair Display',serif;font-size:1.25rem;color:#fff;font-weight:700">
+              <span style="color:var(--green)">Many</span> + Countable Nouns &nbsp;·&nbsp; <span style="color:var(--green)">Much</span> + Uncountable Nouns
+            </span>
+          </div>
+          <div class="def-block" style="margin-top:.8rem">
+            The difference between <strong>Much</strong> and <strong>Many</strong> depends entirely on the type of noun they modify. Always ask yourself: <em>Can I count this noun individually?</em> If yes → use <em>Many</em>. If no → use <em>Much</em>.
+          </div>
+        </div>
+        <div id="s1-countable" class="tab-panel">
+          <div class="def-block green-accent">
+            <strong>Countable Nouns</strong> are things we can count as individual units. They have a singular and a plural form.
+          </div>
+          <ul class="ex-list">
+            <li><span class="ex-n">01</span>Apple / <strong>Apples</strong> — You can say "one apple, two apples."</li>
+            <li><span class="ex-n">02</span>Car / <strong>Cars</strong> — You can say "three cars."</li>
+            <li><span class="ex-n">03</span>Idea / <strong>Ideas</strong> — You can say "I have five ideas."</li>
+            <li><span class="ex-n">04</span>Person / <strong>People</strong> — You can say "ten people."</li>
+            <li><span class="ex-n">05</span>Book / <strong>Books</strong> — You can say "she read four books."</li>
+          </ul>
+        </div>
+        <div id="s1-uncountable" class="tab-panel">
+          <div class="def-block warn-accent">
+            <strong>Uncountable Nouns</strong> are substances, concepts, or masses that cannot be separated into discrete units. They usually <em>do not have a plural form</em>.
+          </div>
+          <ul class="ex-list">
+            <li><span class="ex-n">01</span><strong>Water</strong> — You cannot say "one water, two waters" (naturally).</li>
+            <li><span class="ex-n">02</span><strong>Time</strong> — You cannot count time as individual units.</li>
+            <li><span class="ex-n">03</span><strong>Money</strong> — Even though we count coins, "money" itself is uncountable.</li>
+            <li><span class="ex-n">04</span><strong>Music</strong> — You cannot say "one music."</li>
+            <li><span class="ex-n">05</span><strong>Advice / Information</strong> — Always singular and uncountable.</li>
+          </ul>
+        </div>
+        <div id="s1-examples" class="tab-panel">
+          <table class="mini-tbl">
+            <thead><tr><th>Noun</th><th>Type</th><th>Quantifier</th></tr></thead>
+            <tbody>
+              <tr><td>Books</td><td class="t-blue">Countable (Plural)</td><td class="t-green">Many books</td></tr>
+              <tr><td>Water</td><td class="t-red">Uncountable</td><td class="t-green">Much water</td></tr>
+              <tr><td>Friends</td><td class="t-blue">Countable (Plural)</td><td class="t-green">Many friends</td></tr>
+              <tr><td>Time</td><td class="t-red">Uncountable</td><td class="t-green">Much time</td></tr>
+              <tr><td>Cities</td><td class="t-blue">Countable (Plural)</td><td class="t-green">Many cities</td></tr>
+              <tr><td>Furniture</td><td class="t-red">Uncountable</td><td class="t-green">Much furniture</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </article>
+
+    <!-- 02 USING MANY -->
+    <article id="s2" class="entry">
+      <div class="entry-num display">02</div>
+      <div class="entry-body">
+        <p class="entry-label">Quantifier</p>
+        <h2 class="entry-title display">Using "Many"</h2>
+        <p class="entry-subtitle"><em>Many</em> is used exclusively with <em>plural countable nouns</em> — primarily in negatives and questions.</p>
+        <div class="tabs">
+          <button class="tab active" onclick="switchTab(this,'s2','usage')">Usage</button>
+          <button class="tab" onclick="switchTab(this,'s2','sentences')">Sentences</button>
+          <button class="tab" onclick="switchTab(this,'s2','note')">Formal Note</button>
+        </div>
+        <div id="s2-usage" class="tab-panel active">
+          <div class="def-block dark-bg" style="text-align:center;padding:1.3rem">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:.62rem;color:rgba(255,255,255,.45);letter-spacing:.14em;text-transform:uppercase">Structure</span><br>
+            <span style="font-family:'Playfair Display',serif;font-size:1.3rem;color:#fff;font-weight:700">
+              <span style="color:var(--green)">Many</span> + plural countable noun
+            </span>
+          </div>
+          <div class="def-block" style="margin-top:.8rem">
+            <strong>Primary use:</strong> Negative sentences and questions. In affirmative sentences, <em>Many</em> is used mainly in formal or academic contexts — in everyday speech, "a lot of" sounds more natural.
+          </div>
+        </div>
+        <div id="s2-sentences" class="tab-panel">
+          <div class="def-block warn-accent">
+            <span class="struct-pill red">Negative</span><br>
+            <span style="font-style:italic;color:var(--muted)">"I don't have <strong style="color:var(--blue)">many books</strong> on this subject."</span><br>
+            <span style="font-style:italic;color:var(--muted)">"There aren't <strong style="color:var(--blue)">many students</strong> in the room."</span>
+          </div>
+          <div class="def-block green-accent">
+            <span class="struct-pill green">Question</span><br>
+            <span style="font-style:italic;color:var(--muted)">"How <strong style="color:var(--blue)">many cities</strong> have you visited?"</span><br>
+            <span style="font-style:italic;color:var(--muted)">"Are there <strong style="color:var(--blue)">many people</strong> at the event?"</span>
+          </div>
+          <div class="def-block">
+            <span class="struct-pill">Affirmative (Formal)</span><br>
+            <span style="font-style:italic;color:var(--muted)">"<strong style="color:var(--blue)">Many experts</strong> agree that climate change is accelerating."</span><br>
+            <span style="font-style:italic;color:var(--muted)">"<strong style="color:var(--blue)">Many studies</strong> confirm this hypothesis."</span>
+          </div>
+        </div>
+        <div id="s2-note" class="tab-panel">
+          <div class="def-block green-accent">
+            In academic writing and formal contexts, <strong>Many</strong> can be used freely in affirmative sentences. However, in informal spoken English, native speakers typically prefer <em>"a lot of"</em> or <em>"lots of"</em> instead.
+          </div>
+          <ul class="ex-list">
+            <li><span class="ex-n">Formal</span>"<strong>Many</strong> researchers have studied this topic."</li>
+            <li><span class="ex-n">Casual</span>"<strong>A lot of</strong> researchers have studied this topic."</li>
+            <li><span class="ex-n">Formal</span>"<strong>Many</strong> factors influence the outcome."</li>
+            <li><span class="ex-n">Casual</span>"<strong>Lots of</strong> factors influence the outcome."</li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <!-- 03 USING MUCH -->
+    <article id="s3" class="entry">
+      <div class="entry-num display">03</div>
+      <div class="entry-body">
+        <p class="entry-label">Quantifier</p>
+        <h2 class="entry-title display">Using "Much"</h2>
+        <p class="entry-subtitle"><em>Much</em> is used exclusively with <em>uncountable nouns</em> — most natural in negatives and questions.</p>
+        <div class="tabs">
+          <button class="tab active" onclick="switchTab(this,'s3','usage')">Usage</button>
+          <button class="tab" onclick="switchTab(this,'s3','sentences')">Sentences</button>
+          <button class="tab" onclick="switchTab(this,'s3','tip')">Affirmative Tip</button>
+        </div>
+        <div id="s3-usage" class="tab-panel active">
+          <div class="def-block dark-bg" style="text-align:center;padding:1.3rem">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:.62rem;color:rgba(255,255,255,.45);letter-spacing:.14em;text-transform:uppercase">Structure</span><br>
+            <span style="font-family:'Playfair Display',serif;font-size:1.3rem;color:#fff;font-weight:700">
+              <span style="color:var(--green)">Much</span> + uncountable noun
+            </span>
+          </div>
+          <div class="def-block" style="margin-top:.8rem">
+            Like <em>Many</em>, <strong>Much</strong> is most common in <strong>negative sentences and questions</strong>. Using <em>Much</em> in a simple affirmative sentence often sounds unnatural or overly formal in everyday speech.
+          </div>
+        </div>
+        <div id="s3-sentences" class="tab-panel">
+          <div class="def-block warn-accent">
+            <span class="struct-pill red">Negative</span><br>
+            <span style="font-style:italic;color:var(--muted)">"There isn't <strong style="color:var(--blue)">much furniture</strong> in the office."</span><br>
+            <span style="font-style:italic;color:var(--muted)">"I don't have <strong style="color:var(--blue)">much time</strong> today."</span>
+          </div>
+          <div class="def-block green-accent">
+            <span class="struct-pill green">Question</span><br>
+            <span style="font-style:italic;color:var(--muted)">"Did you spend <strong style="color:var(--blue)">much money</strong> on your trip?"</span><br>
+            <span style="font-style:italic;color:var(--muted)">"Is there <strong style="color:var(--blue)">much water</strong> left in the bottle?"</span>
+          </div>
+          <div class="def-block">
+            <span class="struct-pill">Affirmative (with modifiers)</span><br>
+            <span style="font-style:italic;color:var(--muted)">"He has <strong style="color:var(--blue)">too much work</strong> to do today."</span><br>
+            <span style="font-style:italic;color:var(--muted)">"She has <strong style="color:var(--blue)">so much energy</strong>!"</span>
+          </div>
+        </div>
+        <div id="s3-tip" class="tab-panel">
+          <div class="def-block green-accent">
+            <strong>Make Much sound natural in affirmatives</strong> by adding a modifier: <em>too, so, as, very</em> before it. Without a modifier, "I have much luck" sounds archaic. With one: "I have <em>so much</em> luck" — perfectly natural!
+          </div>
+          <table class="mini-tbl">
+            <thead><tr><th>Modifier</th><th>Example</th></tr></thead>
+            <tbody>
+              <tr><td class="t-blue">too</td><td style="font-style:italic;color:var(--muted)">"There is <strong>too much</strong> noise here."</td></tr>
+              <tr><td class="t-blue">so</td><td style="font-style:italic;color:var(--muted)">"Thank you <strong>so much</strong> for your help."</td></tr>
+              <tr><td class="t-blue">as</td><td style="font-style:italic;color:var(--muted)">"Take <strong>as much</strong> time as you need."</td></tr>
+              <tr><td class="t-blue">very</td><td style="font-style:italic;color:var(--muted)">"It costs <strong>very much</strong> — but use 'a lot' instead."</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </article>
+
+    <!-- 04 A LOT OF -->
+    <article id="s4" class="entry">
+      <div class="entry-num display">04</div>
+      <div class="entry-body">
+        <p class="entry-label">The All-Rounder</p>
+        <h2 class="entry-title display">"A Lot of" / "Lots of"</h2>
+        <p class="entry-subtitle">In everyday spoken English, especially in <em>affirmative sentences</em>, we often replace <em>Much</em> and <em>Many</em> with <em>a lot of</em>.</p>
+        <div class="tabs">
+          <button class="tab active" onclick="switchTab(this,'s4','explain')">Explanation</button>
+          <button class="tab" onclick="switchTab(this,'s4','compare')">Comparison</button>
+          <button class="tab" onclick="switchTab(this,'s4','tip')">Pro Tip</button>
+        </div>
+        <div id="s4-explain" class="tab-panel active">
+          <div class="def-block green-accent">
+            <strong>"A lot of"</strong> and <strong>"Lots of"</strong> are informal alternatives to both <em>Much</em> and <em>Many</em>. They work with <em>both countable and uncountable nouns</em>, making them the safest option in everyday speech — especially in affirmative sentences.
+          </div>
+          <div class="def-block" style="margin-top:.5rem">
+            <strong>Countable:</strong> <em>"I have a lot of friends."</em><br>
+            <strong>Uncountable:</strong> <em>"I have a lot of energy."</em>
+          </div>
+        </div>
+        <div id="s4-compare" class="tab-panel">
+          <table class="comp-tbl">
+            <thead>
+              <tr>
+                <th class="th-label">Noun Type</th>
+                <th class="th-a">Formal (Much/Many)</th>
+                <th class="th-b">Natural/Casual (A lot of)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Countable (Plural)</td>
+                <td>I have <strong>many</strong> friends.</td>
+                <td>I have <strong>a lot of</strong> friends.</td>
+              </tr>
+              <tr>
+                <td>Uncountable</td>
+                <td>I have <strong>much</strong> energy.</td>
+                <td>I have <strong>a lot of</strong> energy.</td>
+              </tr>
+              <tr>
+                <td>Countable (Plural)</td>
+                <td>She has <strong>many</strong> ideas.</td>
+                <td>She has <strong>lots of</strong> ideas.</td>
+              </tr>
+              <tr>
+                <td>Uncountable</td>
+                <td>We need <strong>much</strong> water.</td>
+                <td>We need <strong>a lot of</strong> water.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div id="s4-tip" class="tab-panel">
+          <div class="pro-tip">
+            <strong>🎯 Pro Tip:</strong> If you aren't sure whether a noun is countable or uncountable, <strong>"a lot of"</strong> is your safest bet! It works in both cases and sounds natural in everyday conversation. Use <em>Much</em> and <em>Many</em> primarily in questions, negatives, or formal writing.
+          </div>
+          <div class="def-block" style="margin-top:.8rem">
+            <strong>Note:</strong> "A lot of" and "Lots of" are both informal. In formal writing (essays, reports), prefer <em>Much</em> or <em>Many</em> or use specific numbers.
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 05 HOW MUCH / HOW MANY -->
+    <article id="s5" class="entry">
+      <div class="entry-num display">05</div>
+      <div class="entry-body">
+        <p class="entry-label">Questions</p>
+        <h2 class="entry-title display">How Much vs. How Many?</h2>
+        <p class="entry-subtitle">The most frequent use in daily conversation — asking about <em>number</em> or <em>amount</em>.</p>
+        <div class="tabs">
+          <button class="tab active" onclick="switchTab(this,'s5','rules')">Rules</button>
+          <button class="tab" onclick="switchTab(this,'s5','examples')">Examples</button>
+          <button class="tab" onclick="switchTab(this,'s5','price')">Asking Prices</button>
+        </div>
+        <div id="s5-rules" class="tab-panel active">
+          <div class="double-col">
+            <div class="def-block green-accent">
+              <strong>How Many + Plural Countable</strong><br>
+              Used to ask about a specific <em>number</em> or quantity of things you can count.
+              <p style="margin-top:.5rem;font-style:italic;color:var(--muted)">"How many siblings do you have?"</p>
+            </div>
+            <div class="def-block warn-accent">
+              <strong>How Much + Uncountable</strong><br>
+              Used to ask about an <em>amount</em>, a degree, or a <em>price</em>.
+              <p style="margin-top:.5rem;font-style:italic;color:var(--muted)">"How much time do we have left?"</p>
+            </div>
+          </div>
+        </div>
+        <div id="s5-examples" class="tab-panel">
+          <ul class="ex-list">
+            <li><span class="ex-n">Many</span>"How <strong>many</strong> languages do you speak?" (languages = countable)</li>
+            <li><span class="ex-n">Much</span>"How <strong>much</strong> water is in the bottle?" (water = uncountable)</li>
+            <li><span class="ex-n">Many</span>"How <strong>many</strong> people were at the party?" (people = countable)</li>
+            <li><span class="ex-n">Much</span>"How <strong>much</strong> homework do we have?" (homework = uncountable)</li>
+            <li><span class="ex-n">Many</span>"How <strong>many</strong> countries have you visited?" (countries = countable)</li>
+            <li><span class="ex-n">Much</span>"How <strong>much</strong> information is available?" (information = uncountable)</li>
+          </ul>
+        </div>
+        <div id="s5-price" class="tab-panel">
+          <div class="def-block green-accent">
+            <strong>Special use — Asking for a price:</strong><br>
+            Use <em>"How much"</em> when you want to know the cost of something. Money is uncountable, so we always use <em>Much</em>.
+          </div>
+          <ul class="ex-list">
+            <li><span class="ex-n">Price</span>"<strong>How much</strong> is that laptop?" ✓</li>
+            <li><span class="ex-n">Price</span>"<strong>How much</strong> does this cost?" ✓</li>
+            <li><span class="ex-n">Price</span>"<strong>How much</strong> did you pay for your ticket?" ✓</li>
+            <li><span class="ex-n">Wrong</span><span class="wrong">"How many is that laptop?" ✗</span></li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <!-- 06 SUMMARY TABLE -->
+    <article id="s6" class="entry">
+      <div class="entry-num display">06</div>
+      <div class="entry-body">
+        <p class="entry-label">Summary</p>
+        <h2 class="entry-title display">Comparison Table</h2>
+        <p class="entry-subtitle">A quick-reference overview of the key differences between <em>Much</em> and <em>Many</em>.</p>
+        <table class="comp-tbl">
+          <thead>
+            <tr>
+              <th class="th-label">Feature</th>
+              <th class="th-a">Many</th>
+              <th class="th-b">Much</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Noun Type</td>
+              <td>Countable (Plural)</td>
+              <td>Uncountable (Singular/Mass)</td>
+            </tr>
+            <tr>
+              <td>Question Form</td>
+              <td>How many...? (Number)</td>
+              <td>How much...? (Amount/Price)</td>
+            </tr>
+            <tr>
+              <td>Best for...</td>
+              <td>Negative / Interrogative</td>
+              <td>Negative / Interrogative</td>
+            </tr>
+            <tr>
+              <td>Affirmative</td>
+              <td>Formal contexts</td>
+              <td>With modifiers (too, so, as)</td>
+            </tr>
+            <tr>
+              <td>Visual Example</td>
+              <td><strong>Many</strong> fingers 🖐</td>
+              <td><strong>Much</strong> sand 🏖</td>
+            </tr>
+            <tr>
+              <td>Everyday alternative</td>
+              <td colspan="2" style="text-align:center;font-style:italic">Use <strong>a lot of</strong> in affirmative sentences</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </article>
+
+    <!-- 07 COMMON PITFALLS -->
+    <article id="s7" class="entry">
+      <div class="entry-num display">07</div>
+      <div class="entry-body">
+        <p class="entry-label">Common Mistakes</p>
+        <h2 class="entry-title display">Common Pitfalls to Avoid</h2>
+        <p class="entry-subtitle">These are the three most frequent errors learners make — <em>avoid them and you'll sound like a native.</em></p>
+
+        <div class="rule-row">
+          <div class="rule-num-circle">1</div>
+          <div class="rule-content">
+            <p class="rule-title">The "Money" Trap</p>
+            <p class="rule-body">Even though we count coins and bills, the word <strong>"money"</strong> is grammatically <strong>uncountable</strong>. Always use <em>much money</em>, never <em>many money</em>.</p>
+            <p class="rule-eg">
+              <span class="wrong">"I don't have many money." ✗</span><br>
+              <span class="right">"I don't have much money." ✓</span>
+            </p>
+          </div>
+        </div>
+
+        <div class="rule-row">
+          <div class="rule-num-circle">2</div>
+          <div class="rule-content">
+            <p class="rule-title">The Singular Error</p>
+            <p class="rule-body"><em>Many</em> must always be followed by a <strong>plural noun</strong>. Adding it before a singular noun is always incorrect.</p>
+            <p class="rule-eg">
+              <span class="wrong">"Many student came to class." ✗</span><br>
+              <span class="right">"Many students came to class." ✓</span>
+            </p>
+          </div>
+        </div>
+
+        <div class="rule-row">
+          <div class="rule-num-circle">3</div>
+          <div class="rule-content">
+            <p class="rule-title">Overusing Much in Affirmations</p>
+            <p class="rule-body">Avoid saying <em>"I have much luck."</em> It sounds archaic and unnatural. In simple affirmative sentences, use <strong>"a lot of"</strong> or rephrase entirely.</p>
+            <p class="rule-eg">
+              <span class="wrong">"She has much experience." ✗ (sounds unnatural)</span><br>
+              <span class="right">"She has a lot of experience." ✓</span><br>
+              <span class="right">"She is very experienced." ✓</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ════ EXERCISES ════ -->
+    <section id="exercises" class="exercises-section">
+      <div class="section-hdr">
+        <h2 class="display">Practice Exercises</h2>
+        <p>6 exercises · 2 activity types · self-graded</p>
+      </div>
+
+      <div id="ex-tracker">
+        <span>Progress:</span>
+        <div style="flex:1;height:4px;background:var(--rule);border-radius:2px;overflow:hidden">
+          <div id="ex-prog-fill" style="height:100%;background:var(--green);width:0%;border-radius:2px;transition:width .4s ease"></div>
+        </div>
+        <span id="ex-prog-txt">0 / 6 completed</span>
+      </div>
+
+      <!-- MULTIPLE CHOICE -->
+      <div style="margin-bottom:2.5rem">
+        <div class="ex-type-header">
+          <div class="ex-type-letter">A</div>
+          <div>
+            <p class="ex-type-title">Multiple Choice — Much or Many?</p>
+            <p class="ex-type-desc">Choose the correct quantifier for each sentence.</p>
+          </div>
+        </div>
+
+        <!-- EX 1 -->
+        <div class="ex-card" id="card-ex1">
+          <div class="ex-card-top">
+            <span class="ex-num">EX 01</span>
+            <span class="ex-instruction">Choose the correct quantifier:</span>
+          </div>
+          <div class="ex-sentence">How ______ milk is in the fridge?</div>
+          <div class="ex-opts-row">
+            <button class="ex-opt" onclick="checkOpt(this,'ex1','much')">much</button>
+            <button class="ex-opt" onclick="checkOpt(this,'ex1','many')">many</button>
+          </div>
+          <p class="ex-feedback" id="ex1-fb"></p>
+        </div>
+
+        <!-- EX 2 -->
+        <div class="ex-card" id="card-ex2">
+          <div class="ex-card-top">
+            <span class="ex-num">EX 02</span>
+            <span class="ex-instruction">Choose the correct quantifier:</span>
+          </div>
+          <div class="ex-sentence">There aren't ______ people at the park today.</div>
+          <div class="ex-opts-row">
+            <button class="ex-opt" onclick="checkOpt(this,'ex2','much')">much</button>
+            <button class="ex-opt" onclick="checkOpt(this,'ex2','many')">many</button>
+          </div>
+          <p class="ex-feedback" id="ex2-fb"></p>
+        </div>
+
+        <!-- EX 3 -->
+        <div class="ex-card" id="card-ex3">
+          <div class="ex-card-top">
+            <span class="ex-num">EX 03</span>
+            <span class="ex-instruction">Choose the correct quantifier:</span>
+          </div>
+          <div class="ex-sentence">How ______ does this ticket cost?</div>
+          <div class="ex-opts-row">
+            <button class="ex-opt" onclick="checkOpt(this,'ex3','much')">much</button>
+            <button class="ex-opt" onclick="checkOpt(this,'ex3','many')">many</button>
+          </div>
+          <p class="ex-feedback" id="ex3-fb"></p>
+        </div>
+
+        <!-- EX 4 -->
+        <div class="ex-card" id="card-ex4">
+          <div class="ex-card-top">
+            <span class="ex-num">EX 04</span>
+            <span class="ex-instruction">Choose the correct quantifier:</span>
+          </div>
+          <div class="ex-sentence">She doesn't have ______ information about the event.</div>
+          <div class="ex-opts-row">
+            <button class="ex-opt" onclick="checkOpt(this,'ex4','much')">much</button>
+            <button class="ex-opt" onclick="checkOpt(this,'ex4','many')">many</button>
+          </div>
+          <p class="ex-feedback" id="ex4-fb"></p>
+        </div>
+
+        <!-- EX 5 -->
+        <div class="ex-card" id="card-ex5">
+          <div class="ex-card-top">
+            <span class="ex-num">EX 05</span>
+            <span class="ex-instruction">Choose the correct quantifier:</span>
+          </div>
+          <div class="ex-sentence">How ______ countries have you visited?</div>
+          <div class="ex-opts-row">
+            <button class="ex-opt" onclick="checkOpt(this,'ex5','much')">much</button>
+            <button class="ex-opt" onclick="checkOpt(this,'ex5','many')">many</button>
+          </div>
+          <p class="ex-feedback" id="ex5-fb"></p>
+        </div>
+
+        <!-- EX 6 -->
+        <div class="ex-card" id="card-ex6">
+          <div class="ex-card-top">
+            <span class="ex-num">EX 06</span>
+            <span class="ex-instruction">Choose the correct quantifier:</span>
+          </div>
+          <div class="ex-sentence">He spent too ______ money on new clothes.</div>
+          <div class="ex-opts-row">
+            <button class="ex-opt" onclick="checkOpt(this,'ex6','much')">much</button>
+            <button class="ex-opt" onclick="checkOpt(this,'ex6','many')">many</button>
+          </div>
+          <p class="ex-feedback" id="ex6-fb"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════ QUIZ ════ -->
+    <section id="quiz">
+      <div class="quiz-section">
+        <div class="quiz-header">
+          <div>
+            <p class="quiz-eyebrow">— Final Assessment</p>
+            <h2 class="quiz-title display">Much &amp; Many Quiz</h2>
+            <p class="quiz-desc">10 questions · choose the best answer for each</p>
+          </div>
+        </div>
+        <div class="quiz-body">
+          <div class="quiz-left">
+            <div class="prog-wrap">
+              <div class="prog-label">
+                <span id="q-number">Question 1 of 10</span>
+                <span id="prog-pct">10%</span>
+              </div>
+              <div class="prog-track">
+                <div class="prog-fill" id="prog-fill" style="width:10%"></div>
+              </div>
+            </div>
+            <span id="q-sentence"></span>
+            <div id="options-container"></div>
+            <div id="q-feedback"></div>
+            <button id="next-button">Next Question →</button>
+          </div>
+          <div class="quiz-right">
+            <p class="score-label-sm">Score</p>
+            <span id="score-text">0 / 10</span>
+            <canvas id="progressChart" width="140" height="140"></canvas>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div><!-- /main-wrap -->
+
+  <!-- ════ FOOTER ════ -->
+  <footer>
+    <p class="f-logo">CELE <span class="f-accent">·</span> UTS</p>
+    <p class="f-sub">English Language Program &nbsp;·&nbsp; Quantifiers Module &nbsp;·&nbsp; Much &amp; Many</p>
+  </footer>
+
+  <script>
+    /* ── TAB SWITCHER ── */
+    function switchTab(btn, widget, panel) {
+      const body = btn.closest('.entry-body') || btn.closest('.quiz-section');
+      body.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      body.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      const el = document.getElementById(widget + '-' + panel);
+      if (el) el.classList.add('active');
+    }
+
+    /* ── SCROLL REVEAL ── */
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('show'); observer.unobserve(e.target); } });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.entry').forEach(el => observer.observe(el));
+
+    /* ── EXERCISE TRACKER ── */
+    const exResults = {};
+    const TOTAL_EX = 6;
+    function markExercise(id, correct) {
+      if (exResults[id] !== undefined) return;
+      exResults[id] = correct;
+      const done = Object.keys(exResults).length;
+      document.getElementById('ex-prog-fill').style.width = (done / TOTAL_EX * 100) + '%';
+      document.getElementById('ex-prog-txt').textContent = done + ' / ' + TOTAL_EX + ' completed';
+    }
+
+    /* ── CORRECT ANSWERS ── */
+    const ANSWERS = {
+      ex1: 'much',   // milk = uncountable
+      ex2: 'many',   // people = countable
+      ex3: 'much',   // price = uncountable
+      ex4: 'much',   // information = uncountable
+      ex5: 'many',   // countries = countable
+      ex6: 'much'    // money = uncountable
+    };
+
+    const EXPLANATIONS = {
+      ex1: 'Milk is uncountable → "much milk."',
+      ex2: 'People is countable (plural) → "many people."',
+      ex3: 'Asking for a price uses "how much."',
+      ex4: 'Information is uncountable → "much information."',
+      ex5: 'Countries is countable (plural) → "many countries."',
+      ex6: 'Money is uncountable → "too much money."'
+    };
+
+    function checkOpt(btn, exId, chosen) {
+      if (exResults[exId] !== undefined) return;
+      const correct = ANSWERS[exId];
+      const isCorrect = chosen === correct;
+      const card = document.getElementById('card-' + exId);
+      card.querySelectorAll('.ex-opt').forEach(b => {
+        b.disabled = true;
+        if (b.textContent.trim() === correct) b.classList.add('ex-correct');
+        if (b.textContent.trim() === chosen && !isCorrect) b.classList.add('ex-wrong');
+      });
+      const fb = document.getElementById(exId + '-fb');
+      fb.className = 'ex-feedback ' + (isCorrect ? 'ok' : 'err');
+      fb.textContent = (isCorrect ? '✓ Correct! ' : '✗ Incorrect. The answer is "' + correct + '". ') + EXPLANATIONS[exId];
+      markExercise(exId, isCorrect);
+    }
+
+    /* ── QUIZ ── */
+    const QUESTIONS = [
+      { q: 'There is too _______ traffic on the highway today.', opts: ['much', 'many', 'a lot'], correct: 'much' },
+      { q: 'How _______ brothers and sisters do you have?', opts: ['much', 'many', 'lots'], correct: 'many' },
+      { q: '_______ experts believe that exercise is key to good health.', opts: ['Much', 'Many', 'A much'], correct: 'Many' },
+      { q: 'She doesn\'t have _______ experience in management.', opts: ['much', 'many', 'a many'], correct: 'much' },
+      { q: 'How _______ is this jacket?', opts: ['many', 'much', 'very'], correct: 'much' },
+      { q: 'We don\'t have _______ chairs for all the guests.', opts: ['much', 'many', 'very'], correct: 'many' },
+      { q: 'I drank so _______ coffee this morning that I can\'t sleep.', opts: ['many', 'much', 'a lot'], correct: 'much' },
+      { q: 'How _______ languages do you speak fluently?', opts: ['much', 'many', 'some'], correct: 'many' },
+      { q: 'There isn\'t _______ information available yet.', opts: ['many', 'much', 'some'], correct: 'much' },
+      { q: 'He didn\'t have _______ friends at his new school.', opts: ['much', 'many', 'very'], correct: 'many' },
+    ];
+
+    let idx = 0, score = 0, chart = null;
+
+    function initChart() {
+      chart = new Chart(document.getElementById('progressChart').getContext('2d'), {
+        type: 'doughnut',
+        data: { labels: ['Correct', 'Remaining'], datasets: [{ data: [0, 10], backgroundColor: ['#00a859', '#e4e2de'], borderWidth: 0 }] },
+        options: { responsive: false, cutout: '78%', plugins: { legend: { display: false } } }
+      });
+    }
+
+    function loadQ() {
+      const q = QUESTIONS[idx];
+      const pct = Math.round((idx + 1) / QUESTIONS.length * 100);
+      document.getElementById('q-number').textContent = 'Question ' + (idx + 1) + ' of ' + QUESTIONS.length;
+      document.getElementById('prog-pct').textContent = pct + '%';
+      document.getElementById('prog-fill').style.width = pct + '%';
+      document.getElementById('q-sentence').textContent = q.q;
+      document.getElementById('options-container').innerHTML = '';
+      const fb = document.getElementById('q-feedback');
+      fb.style.display = 'none'; fb.className = '';
+      document.getElementById('next-button').style.display = 'none';
+      const shuffled = [...q.opts].sort(() => Math.random() - .5);
+      shuffled.forEach(opt => {
+        const b = document.createElement('button');
+        b.className = 'quiz-opt';
+        b.textContent = opt;
+        b.onclick = () => checkAns(opt);
+        document.getElementById('options-container').appendChild(b);
+      });
+    }
+
+    function checkAns(sel) {
+      const correct = QUESTIONS[idx].correct;
+      document.querySelectorAll('.quiz-opt').forEach(b => {
+        b.disabled = true;
+        if (b.textContent === correct) b.classList.add('correct');
+        if (b.textContent === sel && sel !== correct) b.classList.add('wrong');
+      });
+      const fb = document.getElementById('q-feedback');
+      fb.style.display = 'block';
+      if (sel === correct) { score++; fb.textContent = '✓  Correct. Well done.'; fb.className = 'ok'; }
+      else { fb.textContent = '✗  Incorrect. The correct answer is "' + correct + '".'; fb.className = 'err'; }
+      document.getElementById('score-text').textContent = score + ' / ' + QUESTIONS.length;
+      chart.data.datasets[0].data = [score, QUESTIONS.length - score];
+      chart.update();
+      document.getElementById('next-button').style.display = 'block';
+    }
+
+    document.getElementById('next-button').onclick = () => {
+      idx++;
+      if (idx < QUESTIONS.length) { loadQ(); return; }
+      const pct = Math.round(score / QUESTIONS.length * 100);
+      const msg = pct >= 80 ? 'Excellent work.' : pct >= 60 ? 'Good effort. Keep practising.' : "Keep studying — you're making progress.";
+      document.querySelector('.quiz-section').innerHTML =
+        '<div style="text-align:center;padding:3.5rem 2rem">'
+        + '<p style="font-family:\'JetBrains Mono\',monospace;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--green);margin-bottom:.9rem">— Session Complete</p>'
+        + '<h2 style="font-family:\'Playfair Display\',serif;font-size:2.2rem;font-weight:900;color:var(--blue);margin-bottom:.7rem">' + msg + '</h2>'
+        + '<p style="color:var(--muted);font-size:.95rem;margin-bottom:.4rem">You answered <strong style="color:var(--blue)">' + score + '</strong> of ' + QUESTIONS.length + ' questions correctly.</p>'
+        + '<p style="font-family:\'Playfair Display\',serif;font-size:2.5rem;font-weight:900;color:var(--green);margin:1rem 0 2rem">' + pct + '%</p>'
+        + '<button onclick="location.reload()" style="font-family:\'JetBrains Mono\',monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;padding:13px 36px;background:var(--blue);color:#fff;border:none;border-radius:3px;cursor:pointer;font-weight:700;" onmouseover="this.style.background=\'#00367a\'" onmouseout="this.style.background=\'#004c8f\'">Retake Quiz</button>'
+        + '</div>';
+    };
+
+    window.onload = () => { initChart(); loadQ(); };
+  </script>
+
+  <!-- ════ FONT SIZE BAR ════ -->
+  <div class="font-bar" id="font-bar">
+    <span class="font-bar-label">Text size</span>
+    <div class="font-sep"></div>
+    <button class="font-btn" id="fb-sm" onclick="setSize('sm')" title="Small text">A<sup style="font-size:.55em">−</sup></button>
+    <button class="font-btn active-size" id="fb-md" onclick="setSize('md')" title="Normal text">A</button>
+    <button class="font-btn" id="fb-lg" onclick="setSize('lg')" title="Large text">A<sup style="font-size:.55em">+</sup></button>
+  </div>
+
+  <script>
+    (function () {
+      var sizes = { sm: 14, md: 16, lg: 19 };
+      var saved = localStorage.getItem('cele-font') || 'md';
+      function apply(key) {
+        document.documentElement.style.fontSize = sizes[key] + 'px';
+        localStorage.setItem('cele-font', key);
+        ['sm', 'md', 'lg'].forEach(function (k) {
+          var b = document.getElementById('fb-' + k);
+          if (b) b.classList.toggle('active-size', k === key);
+        });
+      }
+      window.setSize = apply;
+      apply(saved);
+    })();
+  </script>
+</body>
+</html>
