@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Describing Types of Weather — CELE UTS Slides</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --sky: #0077b6;
+      --sky-mid: #005f99;
+      --sky-deep: #003f6b;
+      --sun: #f4a200;
+      --sun-dim: rgba(244,162,0,.14);
+      --sky-dim: rgba(0,119,182,.08);
+      --sky-line: rgba(0,119,182,.18);
+      --rain: #48cae4;
+      --rain-dim: rgba(72,202,228,.12);
+      --storm: #c0392b;
+      --storm-dim: rgba(192,57,43,.08);
+      --green: #00a859;
+      --page: #f5f7fa;
+      --card: #ffffff;
+      --ink: #1a1a2e;
+      --body: #2d3a4a;
+      --muted: #6b7c93;
+      --rule: #dde3ec;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{font-size:16px}
+    body{background:#1a1a2e;font-family:'Lora',Georgia,serif;color:var(--body);overflow:hidden;height:100vh;display:flex;flex-direction:column;user-select:none}
+
+    /* TOP BAR */
+    .top-bar{background:var(--sky-deep);border-bottom:2px solid var(--sun);height:52px;flex-shrink:0;display:flex;align-items:center;justify-content:space-between;padding:0 1rem;gap:.5rem;z-index:10}
+    .top-logos{display:flex;align-items:center;gap:.6rem}
+    .logo-pill{background:rgba(255,255,255,.12);border:1.5px solid rgba(255,255,255,.25);border-radius:6px;padding:3px 10px;display:flex;align-items:center}
+    .logo-fallback{font-family:'Playfair Display',serif;font-weight:900;font-size:1rem;color:#fff}
+    .top-center{position:absolute;left:50%;transform:translateX(-50%);text-align:center;pointer-events:none}
+    .top-center .eyebrow{font-family:'JetBrains Mono',monospace;font-size:.5rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.45)}
+    .top-center .t-title{font-family:'Playfair Display',serif;font-size:.9rem;font-weight:900;color:#fff}
+    .top-actions{display:flex;align-items:center;gap:.35rem}
+    .tb-btn{height:30px;min-width:30px;padding:0 8px;border-radius:5px;border:1.5px solid rgba(255,255,255,.2);background:rgba(255,255,255,.07);color:rgba(255,255,255,.8);font-family:'JetBrains Mono',monospace;font-size:.7rem;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;transition:all .14s;white-space:nowrap}
+    .tb-btn:hover{background:rgba(255,255,255,.18);border-color:rgba(255,255,255,.5);color:#fff}
+    .tb-btn.active{background:var(--sun);border-color:var(--sun);color:#fff}
+    .tb-sep{width:1px;height:20px;background:rgba(255,255,255,.15);flex-shrink:0}
+
+    /* VIEWPORT */
+    .slide-viewport{flex:1;overflow:hidden;position:relative;display:flex;align-items:stretch}
+    .slides-track{display:flex;width:100%;height:100%;transition:transform .45s cubic-bezier(.4,0,.2,1)}
+    .slide{min-width:100%;height:100%;background:var(--page);display:flex;flex-direction:column;overflow:hidden}
+
+    /* COVER */
+    .slide-cover{background:var(--sky);background-image:repeating-linear-gradient(-55deg,rgba(255,255,255,.03) 0,rgba(255,255,255,.03) 1px,transparent 1px,transparent 18px);justify-content:center;align-items:flex-start}
+    .slide-cover-inner{max-width:900px;width:100%;padding:clamp(2rem,5vw,4rem) clamp(2rem,6vw,5rem);margin:auto 0;display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:center}
+    .cover-eyebrow{font-family:'JetBrains Mono',monospace;font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--sun);margin-bottom:1rem;display:flex;align-items:center;gap:10px}
+    .cover-eyebrow::after{content:'';flex:1;max-width:60px;height:1px;background:var(--sun);opacity:.5}
+    .cover-title{font-family:'Playfair Display',serif;font-size:clamp(2.4rem,5vw,4rem);font-weight:900;color:#fff;line-height:1.1;margin-bottom:1.2rem}
+    .cover-title em{font-style:italic;color:var(--sun)}
+    .cover-sub{font-size:.95rem;color:rgba(255,255,255,.78);line-height:1.72;margin-bottom:1.8rem;max-width:480px}
+    .cover-pills{display:flex;gap:.6rem;flex-wrap:wrap}
+    .cover-pill{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;padding:.35rem .85rem;border-radius:100px;border:1.5px solid rgba(255,255,255,.25);color:rgba(255,255,255,.7)}
+    .cover-graphic{font-size:clamp(5rem,12vw,9rem);line-height:1;text-align:center;filter:drop-shadow(0 8px 24px rgba(0,0,0,.3))}
+
+    /* CONTENT SLIDES */
+    .slide-header{background:var(--sky-deep);padding:.65rem clamp(1.2rem,4vw,2.5rem);display:flex;align-items:center;justify-content:space-between;border-bottom:2px solid var(--sun);flex-shrink:0}
+    .sh-left{display:flex;align-items:center;gap:1rem}
+    .sh-num{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.4);padding-right:.8rem;border-right:1px solid rgba(255,255,255,.15)}
+    .sh-title{font-family:'Playfair Display',serif;font-size:1rem;font-weight:900;color:#fff}
+    .sh-title em{color:var(--sun);font-style:italic}
+    .sh-emoji{font-size:1.4rem}
+    .slide-content{flex:1;overflow-y:auto;padding:clamp(1rem,3vw,1.8rem) clamp(1.2rem,4vw,2.5rem)}
+    .slide-content::-webkit-scrollbar{width:4px}
+    .slide-content::-webkit-scrollbar-track{background:transparent}
+    .slide-content::-webkit-scrollbar-thumb{background:var(--sky-line);border-radius:2px}
+
+    /* TOC SLIDE */
+    .toc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.9rem}
+    .toc-item{background:var(--card);border:1.5px solid var(--rule);border-radius:10px;padding:1rem 1.1rem;display:flex;align-items:center;gap:.7rem;cursor:pointer;transition:all .2s}
+    .toc-item:hover{border-color:var(--sky);background:var(--sky-dim);transform:translateY(-2px)}
+    .toc-item .ti-icon{font-size:1.5rem;width:38px;height:38px;display:flex;align-items:center;justify-content:center;border-radius:8px;flex-shrink:0}
+    .toc-item h4{font-family:'JetBrains Mono',monospace;font-size:.65rem;letter-spacing:.08em;text-transform:uppercase;color:var(--sky);margin-bottom:.15rem}
+    .toc-item p{font-size:.78rem;color:var(--muted)}
+
+    /* WEATHER SHOWCASE */
+    .weather-showcase{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:1rem;margin-bottom:1rem}
+    .w-tile{background:var(--card);border:1.5px solid var(--rule);border-radius:12px;overflow:hidden;text-align:center;transition:transform .2s,box-shadow .2s}
+    .w-tile:hover{transform:translateY(-3px);box-shadow:0 6px 24px rgba(0,0,0,.1)}
+    .w-tile-top{padding:1.2rem .8rem .6rem;font-size:3rem;line-height:1}
+    .w-tile-name{font-family:'Playfair Display',serif;font-size:.92rem;font-weight:700;color:var(--ink);padding:.3rem .6rem}
+    .w-tile-desc{font-size:.75rem;color:var(--muted);padding:.2rem .7rem .9rem;line-height:1.5}
+
+    /* DEF BLOCKS */
+    .def-block{background:var(--card);border:1.5px solid var(--rule);border-radius:10px;padding:.9rem 1.1rem;margin-bottom:.75rem;line-height:1.65;font-size:.88rem}
+    .def-block.sky-accent{border-left:4px solid var(--sky);background:var(--sky-dim)}
+    .def-block.sun-accent{border-left:4px solid var(--sun);background:var(--sun-dim)}
+    .def-block.rain-accent{border-left:4px solid var(--rain);background:var(--rain-dim)}
+    .def-block.storm-accent{border-left:4px solid var(--storm);background:var(--storm-dim)}
+    .def-block strong{color:var(--ink)}
+    .sample{display:block;font-style:italic;color:var(--sky);margin:.3rem 0 0 .2rem;font-size:.83rem}
+    .sample::before{content:'"';opacity:.5}
+    .sample::after{content:'"';opacity:.5}
+    .wrong{color:var(--storm);text-decoration:line-through}
+    .right{color:var(--green);font-weight:600}
+
+    /* TWO COLUMN */
+    .two-col{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+    .three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.8rem}
+    @media(max-width:700px){.two-col,.three-col{grid-template-columns:1fr}}
+
+    /* INTENSITY BAR */
+    .intensity-bar{display:flex;border-radius:6px;overflow:hidden;height:26px;margin:.5rem 0}
+    .int-seg{display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:.5rem;color:#fff;font-weight:700;letter-spacing:.04em;flex:1}
+
+    /* TABS */
+    .tabs{display:flex;gap:.35rem;margin-bottom:.8rem;flex-wrap:wrap}
+    .tab{font-family:'JetBrains Mono',monospace;font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;padding:.4rem .9rem;border-radius:5px;border:1.5px solid var(--rule);background:transparent;color:var(--muted);cursor:pointer;transition:all .15s}
+    .tab:hover{border-color:var(--sky);color:var(--sky)}
+    .tab.active{background:var(--sky);border-color:var(--sky);color:#fff}
+    .tab-panel{display:none}
+    .tab-panel.active{display:block}
+
+    /* VOCAB TABLE */
+    .vocab-table{width:100%;border-collapse:collapse;background:var(--card);border-radius:10px;overflow:hidden;border:1.5px solid var(--rule);font-size:.83rem}
+    .vocab-table thead{background:var(--sky)}
+    .vocab-table thead th{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:#fff;padding:.7rem .85rem;text-align:left}
+    .vocab-table tbody tr{border-bottom:1px solid var(--rule)}
+    .vocab-table tbody tr:hover{background:var(--sky-dim)}
+    .vocab-table tbody tr:last-child{border-bottom:none}
+    .vocab-table td{padding:.6rem .85rem;vertical-align:top;line-height:1.4}
+    .vocab-table td:first-child{font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--sky);font-weight:700}
+
+    /* DIALOGUE */
+    .dialogue-turn{display:flex;gap:.7rem;margin-bottom:.7rem;align-items:flex-start}
+    .dlg-avatar{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;border:2px solid var(--rule)}
+    .dlg-bubble{background:var(--sky-dim);border:1.5px solid var(--sky-line);border-radius:0 9px 9px 9px;padding:.6rem .9rem;font-size:.83rem;line-height:1.6;flex:1}
+    .dlg-bubble.b{background:var(--sun-dim);border-color:rgba(244,162,0,.25);border-radius:9px 0 9px 9px}
+    .dlg-name{font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.2rem}
+    .hl{background:rgba(0,119,182,.12);border-radius:3px;padding:0 2px;color:var(--sky);font-weight:600}
+
+    /* CHIP */
+    .chip-row{display:flex;flex-wrap:wrap;gap:.3rem;margin-top:.5rem}
+    .chip{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.06em;padding:.2rem .55rem;border-radius:100px}
+    .chip.sky{border:1.5px solid var(--sky);color:var(--sky);background:var(--sky-dim)}
+    .chip.sun{border:1.5px solid var(--sun);color:#b87800;background:var(--sun-dim)}
+    .chip.rain{border:1.5px solid var(--rain);color:#0077a6;background:var(--rain-dim)}
+    .chip.storm{border:1.5px solid var(--storm);color:var(--storm);background:var(--storm-dim)}
+    .chip.neutral{border:1.5px solid var(--rule);color:var(--muted)}
+
+    /* QUIZ */
+    .quiz-q{background:var(--card);border:1.5px solid var(--rule);border-radius:10px;padding:.9rem 1.1rem;margin-bottom:.75rem}
+    .quiz-q p{font-size:.88rem;margin-bottom:.6rem;line-height:1.6}
+    .quiz-opts{display:grid;grid-template-columns:1fr 1fr;gap:.35rem}
+    .quiz-opt{font-family:'Lora',serif;font-size:.82rem;padding:.5rem .8rem;border-radius:7px;border:1.5px solid var(--rule);background:transparent;cursor:pointer;text-align:left;transition:all .15s;color:var(--body)}
+    .quiz-opt:hover{border-color:var(--sky);background:var(--sky-dim)}
+    .quiz-opt.correct{border-color:var(--green);background:rgba(0,168,89,.1);color:var(--green)}
+    .quiz-opt.wrong{border-color:var(--storm);background:var(--storm-dim);color:var(--storm)}
+    .quiz-feedback{font-family:'JetBrains Mono',monospace;font-size:.65rem;letter-spacing:.08em;text-transform:uppercase;margin-top:.4rem;display:none}
+    .quiz-feedback.show{display:block}
+
+    /* BOTTOM NAV */
+    .bottom-bar{background:var(--sky-deep);border-top:1px solid rgba(255,255,255,.08);height:54px;flex-shrink:0;display:flex;align-items:center;justify-content:space-between;padding:0 1rem;gap:.5rem}
+    .nav-group{display:flex;align-items:center;gap:.4rem}
+    .nav-btn{height:32px;padding:0 12px;border-radius:5px;border:1.5px solid rgba(255,255,255,.2);background:rgba(255,255,255,.07);color:rgba(255,255,255,.8);font-family:'JetBrains Mono',monospace;font-size:.68rem;font-weight:700;cursor:pointer;transition:all .14s;white-space:nowrap}
+    .nav-btn:hover:not(:disabled){background:rgba(255,255,255,.18);border-color:rgba(255,255,255,.45);color:#fff}
+    .nav-btn:disabled{opacity:.3;cursor:not-allowed}
+    .nav-btn.primary{background:var(--sky);border-color:var(--sky-mid);color:#fff}
+    .nav-btn.primary:hover:not(:disabled){background:var(--sky-mid);border-color:var(--sky-deep)}
+    .progress-dots{display:flex;gap:5px;align-items:center}
+    .dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.2);cursor:pointer;transition:all .2s}
+    .dot.active{background:var(--sun);width:20px;border-radius:10px}
+    .dot.visited{background:rgba(255,255,255,.45)}
+    .slide-counter{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.55);text-align:center;line-height:1.3}
+    .slide-counter strong{color:#fff;font-size:.9rem}
+    .kbd-hint{font-family:'JetBrains Mono',monospace;font-size:.55rem;letter-spacing:.12em;color:rgba(255,255,255,.3);text-transform:uppercase}
+  </style>
+</head>
+
+<body>
+
+  <!-- TOP BAR -->
+  <div class="top-bar">
+    <div class="top-logos">
+      <div class="logo-pill"><span class="logo-fallback">CELE · UTS</span></div>
+    </div>
+    <div class="top-center">
+      <div class="eyebrow">English Language · A2 – B1</div>
+      <div class="t-title">Describing Types of Weather</div>
+    </div>
+    <div class="top-actions">
+      <button class="tb-btn" id="fb-sm" onclick="setSize('sm')">A</button>
+      <button class="tb-btn active" id="fb-md" onclick="setSize('md')" style="font-size:.85rem">A</button>
+      <button class="tb-btn" id="fb-lg" onclick="setSize('lg')" style="font-size:1rem">A</button>
+      <span class="tb-sep"></span>
+      <button class="tb-btn" id="fs-btn" onclick="toggleFullscreen()">⛶ Full</button>
+    </div>
+  </div>
+
+  <!-- SLIDE VIEWPORT -->
+  <div class="slide-viewport">
+    <div class="slides-track" id="track">
+
+      <!-- ══ SLIDE 1: COVER ══ -->
+      <div class="slide slide-cover">
+        <div class="slide-cover-inner">
+          <div>
+            <p class="cover-eyebrow">Topic — Weather &amp; Vocabulary</p>
+            <h1 class="cover-title">Describing Types<br>of <em>Weather</em></h1>
+            <p class="cover-sub">Learn the essential vocabulary to describe sunshine, rain, storms, snow, fog, and more — with real examples and expressions used by native English speakers every day.</p>
+            <div class="cover-pills">
+              <span class="cover-pill">Level: A2 – B1</span>
+              <span class="cover-pill">8 Weather Types</span>
+              <span class="cover-pill">50+ Words &amp; Phrases</span>
+              <span class="cover-pill">Practice Quiz Included</span>
+            </div>
+          </div>
+          <div class="cover-graphic">⛅</div>
+        </div>
+      </div>
+
+      <!-- ══ SLIDE 2: TABLE OF CONTENTS ══ -->
+      <div class="slide">
+        <div class="slide-header">
+          <div class="sh-left">
+            <div class="sh-num">Overview</div>
+            <div class="sh-title">What We Will <em>Cover</em></div>
+          </div>
+          <div class="sh-emoji">📋</div>
+        </div>
+        <div class="slide-content">
+          <div class="toc-grid">
+            <div class="toc-item" onclick="goTo(2)"><div class="ti-icon" style="background:var(--sky-dim)">🌍</div><div><h4>Introduction</h4><p>Why weather vocabulary matters</p></div></div>
+            <div class="toc-item" onclick="goTo(3)"><div class="ti-icon" style="background:var(--sun-dim)">☀️</div><div><h4>Sunny &amp; Hot</h4><p>Clear skies, heat &amp; sunshine</p></div></div>
+            <div class="toc-item" onclick="goTo(4)"><div class="ti-icon" style="background:#f0f2f5">☁️</div><div><h4>Cloudy &amp; Overcast</h4><p>Grey skies &amp; fog</p></div></div>
+            <div class="toc-item" onclick="goTo(5)"><div class="ti-icon" style="background:var(--rain-dim)">🌧️</div><div><h4>Rainy &amp; Wet</h4><p>Drizzle, showers &amp; downpours</p></div></div>
+            <div class="toc-item" onclick="goTo(6)"><div class="ti-icon" style="background:var(--storm-dim)">⛈️</div><div><h4>Stormy &amp; Windy</h4><p>Thunder, lightning &amp; gales</p></div></div>
+            <div class="toc-item" onclick="goTo(7)"><div class="ti-icon" style="background:#eaf4fb">❄️</div><div><h4>Cold &amp; Snowy</h4><p>Frost, ice &amp; blizzards</p></div></div>
+            <div class="toc-item" onclick="goTo(8)"><div class="ti-icon" style="background:var(--sky-dim)">💬</div><div><h4>Conversations</h4><p>Real dialogues &amp; expressions</p></div></div>
+            <div class="toc-item" onclick="goTo(9)"><div class="ti-icon" style="background:rgba(0,168,89,.1)">✏️</div><div><h4>Practice Quiz</h4><p>Test your knowledge</p></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ SLIDE 3: INTRODUCTION ══ -->
+      <div class="slide">
+        <div class="slide-header">
+          <div class="sh-left">
+            <div class="sh-num">Slide 01</div>
+            <div class="sh-title">Why Learn <em>Weather Vocabulary?</em></div>
+          </div>
+          <div class="sh-emoji">🌍</div>
+        </div>
+        <div class="slide-content">
+          <div class="def-block sky-accent">
+            <strong>Weather</strong> is the #1 small talk topic in English-speaking countries. Knowing how to describe, ask about, and discuss weather conditions makes you sound natural and confident in everyday English.
+          </div>
+          <div class="two-col">
+            <div>
+              <div class="def-block">
+                <strong>🗣️ Small Talk</strong><br>
+                Weather is a safe, neutral, universal topic. British English speakers in particular use it constantly to start conversations with strangers and friends alike.
+                <span class="sample">Lovely day, isn't it?</span>
+                <span class="sample">Dreadful weather we're having!</span>
+              </div>
+              <div class="def-block">
+                <strong>📡 Practical Use</strong><br>
+                You need weather vocabulary to understand forecasts, travel guides, news reports, and to make plans with others safely.
+                <span class="sample">The forecast says heavy rain and strong winds tonight.</span>
+              </div>
+            </div>
+            <div>
+              <div class="def-block sun-accent">
+                <strong>🌡️ Temperature Reference</strong><br>
+                <div style="margin-top:.5rem">
+                  <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.35rem;font-size:.82rem"><span style="font-size:1.1rem">🥶</span><strong>Freezing</strong> — below 0°C / 32°F</div>
+                  <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.35rem;font-size:.82rem"><span style="font-size:1.1rem">🧥</span><strong>Cold</strong> — 0–10°C / 32–50°F</div>
+                  <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.35rem;font-size:.82rem"><span style="font-size:1.1rem">🌂</span><strong>Cool / Mild</strong> — 10–18°C / 50–64°F</div>
+                  <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.35rem;font-size:.82rem"><span style="font-size:1.1rem">😊</span><strong>Warm</strong> — 18–27°C / 64–80°F</div>
+                  <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.35rem;font-size:.82rem"><span style="font-size:1.1rem">🥵</span><strong>Hot / Scorching</strong> — 30°C+ / 86°F+</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="def-block" style="border-left:4px solid var(--green);background:rgba(0,168,89,.07)">
+            <strong>💡 Key Grammar Point:</strong> To describe the weather, we usually say <em>"It is..."</em> or use <em>"It's + adjective"</em>.<br>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:.8rem;color:var(--body)">It's <strong>sunny</strong>. · It's <strong>raining</strong>. · It's <strong>cold</strong> today. · The weather is <strong>beautiful</strong>.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ SLIDE 4: SUNNY ══ -->
+      <div class="slide">
+        <div class="slide-header">
+          <div class="sh-left">
+            <div class="sh-num">Slide 02</div>
+            <div class="sh-title">☀️ Sunny &amp; <em>Warm</em> Weather</div>
+          </div>
+          <div class="sh-emoji">☀️</div>
+        </div>
+        <div class="slide-content">
+          <div class="weather-showcase">
+            <div class="w-tile"><div class="w-tile-top" style="background:linear-gradient(135deg,#fff7e0,#ffd166)">☀️</div><div class="w-tile-name">Sunny</div><div class="w-tile-desc">Bright sunshine, no clouds</div></div>
+            <div class="w-tile"><div class="w-tile-top" style="background:linear-gradient(135deg,#fff3cc,#ffe08a)">🌤️</div><div class="w-tile-name">Partly Cloudy</div><div class="w-tile-desc">Some clouds but still sunny</div></div>
+            <div class="w-tile"><div class="w-tile-top" style="background:linear-gradient(135deg,#ffddaa,#f4a200)">🥵</div><div class="w-tile-name">Scorching</div><div class="w-tile-desc">Extremely hot; very intense sun</div></div>
+            <div class="w-tile"><div class="w-tile-top" style="background:linear-gradient(135deg,#e8f4e8,#c5e8c5)">🌈</div><div class="w-tile-name">Fine &amp; Fair</div><div class="w-tile-desc">Clear, pleasant, no rain</div></div>
+          </div>
+          <div class="two-col">
+            <div class="def-block sun-accent">
+              <strong>Key Adjectives (sunny):</strong>
+              <div class="chip-row">
+                <span class="chip sun">sunny</span><span class="chip sun">bright</span><span class="chip sun">clear</span><span class="chip sun">warm</span><span class="chip sun">hot</span><span class="chip sun">scorching</span><span class="chip sun">blazing</span><span class="chip sun">glorious</span><span class="chip sun">gorgeous</span><span class="chip sun">balmy</span><span class="chip sun">fine</span><span class="chip sun">fair</span>
+              </div>
+            </div>
+            <div class="def-block">
+              <strong>Example Sentences:</strong>
+              <span class="sample">What a gorgeous, sunny day — let's have a picnic!</span>
+              <span class="sample">It's warm and clear with a gentle breeze.</span>
+              <span class="sample">It's absolutely blazing outside — I need shade!</span>
+              <span class="sample">It's a lovely, balmy evening. Perfect for a walk.</span>
+            </div>
+          </div>
+          <div class="def-block sky-accent">
+            <strong>⚠️ Humid vs. Dry Heat:</strong> <em>Humid</em> (hot + moisture, sticky feeling) vs. <em>Dry heat</em> (hot without moisture, common in deserts). Both are hot but feel very different!
+            <span class="sample">It's so humid today — my shirt is sticking to me.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ SLIDE 5: CLOUDY ══ -->
+      <div class="slide">
+        <div class="slide-header">
+          <div class="sh-left">
+            <div class="sh-num">Slide 03</div>
+            <div class="sh-title">☁️ Cloudy, Overcast &amp; <em>Foggy</em></div>
+          </div>
+          <div class="sh-emoji">☁️</div>
+        </div>
+        <div class="slide-content">
+          <div class="weather-showcase">
+            <div class="w-tile"><div class="w-tile-top" style="background:linear-gradient(135deg,#e8eef5,#c5d0dc)">🌥️</div><div class="w-tile-name">Cloudy</div><div class="w-tile-desc">Lots of clouds; some blue sky</div></div>
+            <div class="w-tile"><div class="w-tile-top" style="background:linear-gradient(135deg,#b8c4cc,#8a9ba6)">☁️</div><div class="w-tile-name">Overcast</div><div class="w-tile-desc">Sky completely covered, grey</div></div>
+            <div class="w-tile"><div class="w-tile-top" style="background:linear-gradient(135deg,#d5dde2,#9eacb5)">🌫️</div><div class="w-tile-name">Foggy</div><div class="w-tile-desc">Very thick mist, low visibility</div></div>
+            <div class="w-tile"><div class="w-tile-top" style="background:linear-gradient(135deg,#e2e8ed,#b5c0c8)">🌁</div><div class="w-tile-name">Misty / Hazy</div><div class="w-tile-desc">Light mist, soft atmosphere</div></div>
+          </div>
+          <div class="def-block sky-accent">
+            <strong>🔑 Key Difference — Cloudy vs. Overcast:</strong><br>
+            <em>Cloudy</em> = many clouds BUT you can still see some patches of blue sky.<br>
+            <em>Overcast</em> = the sky is <strong>completely</strong> covered by grey clouds — no blue visible at all.
+            <span class="sample">It's quite cloudy, but I don't think it will rain.</span>
+            <span class="sample">It's totally overcast — you should take an umbrella.</span>
+          </div>
+          <div class="two-col">
+            <div class="def-block">
+              <strong>☁️ Cloud Vocabulary:</strong>
+              <div class="chip-row">
+                <span class="chip neutral">cloudy</span><span class="chip neutral">overcast</span><span class="chip neutral">grey</span><span class="chip neutral">dull</span><span class="chip neutral">gloomy</span><span class="chip neutral">dreary</span><span class="chip neutral">leaden sky</span>
+              </div>
+            </div>
+            <div class="def-block">
+              <strong>🌫️ Fog &amp; Mist:</strong><br>
+              <em>Fog</em> — thick; reduces visibility to under 1 km<br>
+              <em>Mist</em> — thin; visibility still relatively good<br>
+              <em>Haze</em> — caused by dust, smoke, or heat
+              <span class="sample">The valley was covered in a thick morning mist.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ SLIDE 6: RAINY ══ -->
+      <div class="slide">
+        <div class="slide-header">
+          <div class="sh-left">
+            <div class="sh-num">Slide 04</div>
+            <div class="sh-title">🌧️ Rainy &amp; <em>Wet</em> Weather</div>
+          </div>
+          <div class="sh-emoji">🌧️</div>
+        </div>
+        <div class="slide-content">
+          <div class="def-block rain-accent" style="margin-bottom:.6rem">
+            <strong>🌧️ Rain Intensity Scale — from lightest to heaviest:</strong>
+            <div class="intensity-bar" style="margin-top:.6rem">
+              <div class="int-seg" style="background:#90e0ef">Drizzle</div>
+              <div class="int-seg" style="background:#48cae4">Light Rain</div>
+              <div class="int-seg" style="background:#00b4d8">Shower</div>
+              <div class="int-seg" style="background:#0096c7">Rain</div>
+              <div class="int-seg" style="background:#0077b6">Heavy Rain</div>
+              <div class="int-seg" style="background:#023e8a">Downpour</div>
+              <div class="int-seg" style="background:#03045e">Torrential</div>
+            </div>
+          </div>
+          <div class="three-col">
+            <div class="def-block">
+              <strong>🌦️ Drizzle</strong><br>
+              Very light, fine rain. You barely get wet. A light jacket is enough.
+              <span class="sample">It's just drizzling — no need for an umbrella.</span>
+            </div>
+            <div class="def-block">
+              <strong>🌧️ Shower</strong><br>
+              Brief, moderate rain. Comes and goes. Common in spring.
+              <span class="sample">A few showers are expected in the afternoon.</span>
+            </div>
+            <div class="def-block">
+              <strong>⛈️ Downpour</strong><br>
+              Very heavy rain. You get completely soaked in seconds.
+              <span class="sample">We got caught in a terrible downpour!</span>
+            </div>
+          </div>
+          <div class="two-col">
+            <div class="def-block sky-accent">
+              <strong>Useful Rain Verbs:</strong><br>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:.78rem;line-height:2">to drizzle · to rain · to pour · to bucket down · to spit (BrE) · to lash down</span>
+            </div>
+            <div class="def-block">
+              <strong>🗣️ Common Expressions:</strong>
+              <span class="sample">It's raining cats and dogs!</span>
+              <span class="sample">The rain is really coming down now.</span>
+              <span class="sample">We got soaked to the skin.</span>
+              <span class="sample">The heavens have opened!</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ SLIDE 7: STORMY ══ -->
+      <div class="slide">
+        <div class="slide-header">
+          <div class="sh-left">
+            <div class="sh-num">Slide 05</div>
+            <div class="sh-title">⛈️ Stormy &amp; <em>Windy</em> Weather</div>
+          </div>
+          <div class="sh-emoji">⛈️</div>
+        </div>
+        <div class="slide-content">
+          <div class="weather-showcase">
+            <div class="w-tile"><div class="w-tile-top" style="background:linear-gradient(135deg,#d5dde2,#9eacb5)">💨</div><div class="w-tile-name">Breezy</div><div class="w-tile-desc">Gentle, pleasant wind</div></div>
+            <div class="w-tile"><div class="w-tile-top" style="background:linear-gradient(135deg,#8a9ba6,#5a6a75)">🌬️</div><div class="w-tile-name">Windy / Gusty</div><div class="w-tile-desc">Strong, irregular bursts of wind</div></div>
+            <div class="w-tile"><div class="w-tile-top" style="background:linear-gradient(135deg,#4a5568,#2d3748)">🌪️</div><div class="w-tile-name">Gale</div><div class="w-tile-desc">Dangerously strong wind</div></div>
+            <div class="w-tile"><div class="w-tile-top" style="background:linear-gradient(135deg,#2d3748,#1a202c)">⚡</div><div class="w-tile-name">Thunderstorm</div><div class="w-tile-desc">Rain + thunder + lightning</div></div>
+          </div>
+          <div class="def-block storm-accent">
+            <strong>⚡ Thunder vs. Lightning:</strong><br>
+            <em>Lightning</em> → the bright flash of electricity you <strong>see</strong> in the sky.<br>
+            <em>Thunder</em> → the loud rumbling sound you <strong>hear</strong> after the lightning.<br>
+            Light is faster than sound, so you always see lightning <em>before</em> you hear thunder!
+            <span class="sample">I can see lightning on the horizon — a storm is coming.</span>
+          </div>
+          <div class="two-col">
+            <div class="def-block">
+              <strong>💨 Wind Scale:</strong>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:.72rem;line-height:2;margin-top:.3rem;color:var(--body)">
+                calm → breath of air → breeze → gusty → strong wind → gale → storm → hurricane
+              </div>
+            </div>
+            <div class="def-block sky-accent">
+              <strong>Storm Vocabulary:</strong>
+              <div class="chip-row">
+                <span class="chip storm">stormy</span><span class="chip storm">thunderstorm</span><span class="chip storm">lightning</span><span class="chip storm">thunder</span><span class="chip storm">gale-force</span><span class="chip storm">hurricane</span><span class="chip storm">cyclone</span><span class="chip storm">tornado</span>
+              </div>
+              <span class="sample">A severe storm warning has been issued for tonight.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ SLIDE 8: COLD ══ -->
+      <div class="slide">
+        <div class="slide-header">
+          <div class="sh-left">
+            <div class="sh-num">Slide 06</div>
+            <div class="sh-title">❄️ Cold, Frosty &amp; <em>Snowy</em> Weather</div>
+          </div>
+          <div class="sh-emoji">❄️</div>
+        </div>
+        <div class="slide-content">
+          <div class="weather-showcase">
+            <div class="w-tile"><div class="w-tile-top" style="background:linear-gradient(135deg,#e0f0fb,#b0d5f0)">🥶</div><div class="w-tile-name">Cold / Chilly</div><div class="w-tile-desc">Uncomfortably low temperature</div></div>
+            <div class="w-tile"><div class="w-tile-top" style="background:linear-gradient(135deg,#cce8f8,#90cde8)">🌡️</div><div class="w-tile-name">Freezing</div><div class="w-tile-desc">At or below 0°C / 32°F</div></div>
+            <div class="w-tile"><div class="w-tile-top" style="background:linear-gradient(135deg,#e8f6fb,#d0edf8)">❄️</div><div class="w-tile-name">Frost / Icy</div><div class="w-tile-desc">Ice crystals on surfaces</div></div>
+            <div class="w-tile"><div class="w-tile-top" style="background:linear-gradient(135deg,#f0f8ff,#d5ecf9)">🌨️</div><div class="w-tile-name">Snowy / Blizzard</div><div class="w-tile-desc">Snow; blizzard = snow + gales</div></div>
+          </div>
+          <div class="two-col">
+            <div>
+              <div class="def-block sky-accent">
+                <strong>❄️ Cold Vocabulary Spectrum:</strong><br>
+                <em>nippy</em> (informal) → <em>chilly</em> → <em>cold</em> → <em>bitter</em> → <em>freezing</em> → <em>sub-zero</em>
+                <span class="sample">It's a bit nippy this morning — wear a jacket!</span>
+                <span class="sample">It's absolutely bitter out there — don't go without a coat.</span>
+              </div>
+              <div class="def-block">
+                <strong>🌨️ Snow Vocabulary:</strong><br>
+                <em>snowflake</em> — a single ice crystal<br>
+                <em>sleet</em> — mix of rain and snow<br>
+                <em>hail</em> — balls of frozen ice<br>
+                <em>black ice</em> — invisible thin ice on roads (dangerous!)
+              </div>
+            </div>
+            <div class="def-block storm-accent">
+              <strong>⚠️ Extreme Cold Expressions:</strong>
+              <span class="sample">It's absolutely freezing out there!</span>
+              <span class="sample">The roads are icy — drive very carefully.</span>
+              <span class="sample">There was a heavy frost last night — everything is white.</span>
+              <span class="sample">A blizzard is forecast — the airport may close.</span>
+              <span class="sample">The lake has frozen over.</span>
+              <span class="sample">Sub-zero temperatures are expected until Friday.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ SLIDE 9: CONVERSATIONS ══ -->
+      <div class="slide">
+        <div class="slide-header">
+          <div class="sh-left">
+            <div class="sh-num">Slide 07</div>
+            <div class="sh-title">💬 Real <em>Conversations</em></div>
+          </div>
+          <div class="sh-emoji">💬</div>
+        </div>
+        <div class="slide-content">
+          <div class="tabs">
+            <button class="tab active" onclick="switchTab(this,'dlg','small')">Small Talk</button>
+            <button class="tab" onclick="switchTab(this,'dlg','plan')">Planning</button>
+            <button class="tab" onclick="switchTab(this,'dlg','expr')">Key Expressions</button>
+          </div>
+
+          <div id="dlg-small" class="tab-panel active">
+            <div class="dialogue-turn">
+              <div class="dlg-avatar">👩</div>
+              <div><div class="dlg-name">Anna</div><div class="dlg-bubble"><span class="hl">What's the weather like</span> today? I forgot to check before leaving.</div></div>
+            </div>
+            <div class="dialogue-turn" style="flex-direction:row-reverse">
+              <div class="dlg-avatar">👨</div>
+              <div style="text-align:right"><div class="dlg-name">Ben</div><div class="dlg-bubble b">It's <span class="hl">quite overcast</span> and <span class="hl">chilly</span>. The forecast says there'll be some <span class="hl">showers</span> later.</div></div>
+            </div>
+            <div class="dialogue-turn">
+              <div class="dlg-avatar">👩</div>
+              <div><div class="dlg-name">Anna</div><div class="dlg-bubble">That's a shame. I hope it <span class="hl">clears up</span> later. I'll grab my umbrella just in case.</div></div>
+            </div>
+            <div class="dialogue-turn" style="flex-direction:row-reverse">
+              <div class="dlg-avatar">👨</div>
+              <div style="text-align:right"><div class="dlg-name">Ben</div><div class="dlg-bubble b">Good idea! Apparently it should be <span class="hl">sunny and warm</span> tomorrow though.</div></div>
+            </div>
+          </div>
+
+          <div id="dlg-plan" class="tab-panel">
+            <div class="dialogue-turn">
+              <div class="dlg-avatar">👧</div>
+              <div><div class="dlg-name">Lucia</div><div class="dlg-bubble">Should we still go to the beach this weekend? What does the forecast say?</div></div>
+            </div>
+            <div class="dialogue-turn" style="flex-direction:row-reverse">
+              <div class="dlg-avatar">🧑</div>
+              <div style="text-align:right"><div class="dlg-name">Carlos</div><div class="dlg-bubble b">Saturday looks <span class="hl">warm and sunny</span>, but Sunday is forecast to be <span class="hl">stormy</span> with <span class="hl">heavy rain</span> and <span class="hl">gale-force winds</span>.</div></div>
+            </div>
+            <div class="dialogue-turn">
+              <div class="dlg-avatar">👧</div>
+              <div><div class="dlg-name">Lucia</div><div class="dlg-bubble">Let's go Saturday then! I don't want to get <span class="hl">caught in a downpour</span>. We can come back before the <span class="hl">storm hits</span>.</div></div>
+            </div>
+          </div>
+
+          <div id="dlg-expr" class="tab-panel">
+            <div class="def-block sun-accent">
+              <strong>☀️ Good Weather:</strong><br>
+              <em>What gorgeous weather!</em> · <em>It's glorious outside.</em> · <em>Make the most of the sunshine.</em> · <em>It really lifts your spirits!</em>
+            </div>
+            <div class="def-block rain-accent">
+              <strong>🌧️ Bad Weather:</strong><br>
+              <em>Dreadful weather, isn't it?</em> · <em>I'm absolutely soaked!</em> · <em>It's raining cats and dogs.</em> · <em>The weather has taken a turn for the worse.</em>
+            </div>
+            <div class="def-block storm-accent">
+              <strong>⛈️ Extreme Weather:</strong><br>
+              <em>A severe weather warning has been issued.</em> · <em>The roads are treacherous.</em> · <em>We're under a freeze warning tonight.</em> · <em>The storm caused a lot of damage.</em>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ SLIDE 10: PRACTICE QUIZ ══ -->
+      <div class="slide">
+        <div class="slide-header">
+          <div class="sh-left">
+            <div class="sh-num">Slide 08</div>
+            <div class="sh-title">✏️ <em>Practice Quiz</em></div>
+          </div>
+          <div class="sh-emoji">🧠</div>
+        </div>
+        <div class="slide-content">
+
+          <div class="tabs">
+            <button class="tab active" onclick="switchTab(this,'qz','q1')">Question 1</button>
+            <button class="tab" onclick="switchTab(this,'qz','q2')">Question 2</button>
+            <button class="tab" onclick="switchTab(this,'qz','q3')">Question 3</button>
+            <button class="tab" onclick="switchTab(this,'qz','q4')">Question 4</button>
+          </div>
+
+          <div id="qz-q1" class="tab-panel active">
+            <div class="quiz-q">
+              <p><strong>1.</strong> The sky is completely grey and no blue is visible at all. There is no sunshine. Which word best describes this?</p>
+              <div class="quiz-opts">
+                <button class="quiz-opt" onclick="answer(this,false)">A. Partly cloudy</button>
+                <button class="quiz-opt" onclick="answer(this,true)">B. Overcast</button>
+                <button class="quiz-opt" onclick="answer(this,false)">C. Misty</button>
+                <button class="quiz-opt" onclick="answer(this,false)">D. Breezy</button>
+              </div>
+              <div class="quiz-feedback" id="fb-q1"></div>
+            </div>
+          </div>
+
+          <div id="qz-q2" class="tab-panel">
+            <div class="quiz-q">
+              <p><strong>2.</strong> Which sentence uses the correct vocabulary for <em>very heavy rain</em>?</p>
+              <div class="quiz-opts">
+                <button class="quiz-opt" onclick="answer(this,false)">A. It's just drizzling.</button>
+                <button class="quiz-opt" onclick="answer(this,false)">B. There's a light shower.</button>
+                <button class="quiz-opt" onclick="answer(this,true)">C. It's a torrential downpour!</button>
+                <button class="quiz-opt" onclick="answer(this,false)">D. It's a bit nippy today.</button>
+              </div>
+              <div class="quiz-feedback" id="fb-q2"></div>
+            </div>
+          </div>
+
+          <div id="qz-q3" class="tab-panel">
+            <div class="quiz-q">
+              <p><strong>3.</strong> You can hear a loud rumbling sound during a storm. What is the correct word?</p>
+              <div class="quiz-opts">
+                <button class="quiz-opt" onclick="answer(this,false)">A. Lightning</button>
+                <button class="quiz-opt" onclick="answer(this,false)">B. Hail</button>
+                <button class="quiz-opt" onclick="answer(this,true)">C. Thunder</button>
+                <button class="quiz-opt" onclick="answer(this,false)">D. Gale</button>
+              </div>
+              <div class="quiz-feedback" id="fb-q3"></div>
+            </div>
+          </div>
+
+          <div id="qz-q4" class="tab-panel">
+            <div class="quiz-q">
+              <p><strong>4.</strong> Which is the correct way to say "It is raining very heavily" informally in British English?</p>
+              <div class="quiz-opts">
+                <button class="quiz-opt" onclick="answer(this,false)">A. It's sprinkling a little.</button>
+                <button class="quiz-opt" onclick="answer(this,true)">B. It's bucketing down!</button>
+                <button class="quiz-opt" onclick="answer(this,false)">C. It's a bit drizzly.</button>
+                <button class="quiz-opt" onclick="answer(this,false)">D. There's a light shower.</button>
+              </div>
+              <div class="quiz-feedback" id="fb-q4"></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ══ SLIDE 11: END ══ -->
+      <div class="slide slide-cover">
+        <div class="slide-cover-inner" style="grid-template-columns:1fr">
+          <div style="text-align:center">
+            <p class="cover-eyebrow" style="justify-content:center">— End of Presentation</p>
+            <h2 class="cover-title" style="font-size:clamp(2rem,4vw,3.2rem)">Keep <em>observing</em> the weather!</h2>
+            <p class="cover-sub" style="margin:1rem auto 2rem;text-align:center;max-width:500px">The best way to learn weather vocabulary is to describe what you see outside every day — in English! Review this presentation anytime and complete the exercises in the full study guide.</p>
+            <div style="display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap">
+              <button onclick="goTo(0)" style="font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;padding:11px 24px;background:var(--sun);color:#fff;border:none;border-radius:4px;cursor:pointer;font-weight:700">↺ Restart</button>
+              <button onclick="goTo(1)" style="font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;padding:11px 24px;background:rgba(255,255,255,.12);color:#fff;border:1.5px solid rgba(255,255,255,.3);border-radius:4px;cursor:pointer;font-weight:700">≡ Contents</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /slides-track -->
+  </div><!-- /slide-viewport -->
+
+  <!-- BOTTOM NAV -->
+  <div class="bottom-bar">
+    <div class="nav-group">
+      <button class="nav-btn" id="btn-reset" onclick="resetPresentation()" title="Restart">↺ Reset</button>
+      <button class="nav-btn" id="btn-contents" onclick="goTo(1)" title="Contents">≡ Contents</button>
+    </div>
+    <div class="nav-group">
+      <button class="nav-btn primary" id="btn-prev" onclick="prev()">← Prev</button>
+      <div class="progress-dots" id="dots"></div>
+      <button class="nav-btn primary" id="btn-next" onclick="next()">Next →</button>
+    </div>
+    <div class="nav-group">
+      <div class="slide-counter"><strong id="curr-num">1</strong> / <span id="total-num">10</span><br><span style="font-size:.48rem;opacity:.6">SLIDE</span></div>
+      <span class="kbd-hint" style="display:none" id="kbd-hint">← →</span>
+    </div>
+  </div>
+
+  <script>
+    const SIZES = { sm: 13, md: 16, lg: 19 };
+    function setSize(key) {
+      document.documentElement.style.fontSize = SIZES[key] + 'px';
+      localStorage.setItem('cele-weather-font', key);
+      ['sm','md','lg'].forEach(k => {
+        const b = document.getElementById('fb-' + k);
+        if (b) b.classList.toggle('active', k === key);
+      });
+    }
+    setSize(localStorage.getItem('cele-weather-font') || 'md');
+
+    function switchTab(btn, prefix, id) {
+      btn.closest('.tabs').querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      btn.classList.add('active');
+      const scope = btn.closest('.slide-content') || btn.closest('.slide');
+      scope.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      document.getElementById(prefix + '-' + id).classList.add('active');
+    }
+
+    function answer(btn, correct) {
+      const q = btn.closest('.quiz-q');
+      if (q.dataset.answered) return;
+      q.dataset.answered = '1';
+      q.querySelectorAll('.quiz-opt').forEach(b => b.disabled = true);
+      btn.classList.add(correct ? 'correct' : 'wrong');
+      const fb = q.querySelector('.quiz-feedback');
+      fb.style.display = 'block';
+      fb.style.color = correct ? 'var(--green)' : 'var(--storm)';
+      fb.textContent = correct ? '✓ Correct! Well done.' : '✗ Not quite — the correct answer is highlighted in green.';
+      if (!correct) {
+        q.querySelectorAll('.quiz-opt').forEach(b => {
+          if (b.getAttribute('onclick') && b.getAttribute('onclick').includes('true')) b.classList.add('correct');
+        });
+      }
+    }
+
+    const track = document.getElementById('track');
+    const slides = Array.from(track.children);
+    const TOTAL = slides.length;
+    let current = 0;
+    const visited = new Set([0]);
+
+    document.getElementById('total-num').textContent = TOTAL;
+
+    const dotsEl = document.getElementById('dots');
+    slides.forEach((_, i) => {
+      const d = document.createElement('span');
+      d.className = 'dot' + (i === 0 ? ' active' : '');
+      d.title = 'Slide ' + (i + 1);
+      d.onclick = () => goTo(i);
+      dotsEl.appendChild(d);
+    });
+
+    function goTo(n) {
+      if (n < 0 || n >= TOTAL) return;
+      current = n;
+      visited.add(n);
+      track.style.transform = 'translateX(-' + (n * 100) + '%)';
+      document.getElementById('curr-num').textContent = n + 1;
+      document.getElementById('btn-prev').disabled = n === 0;
+      document.getElementById('btn-next').disabled = n === TOTAL - 1;
+      Array.from(dotsEl.children).forEach((d, i) => {
+        d.classList.toggle('active', i === n);
+        d.classList.toggle('visited', visited.has(i) && i !== n);
+      });
+    }
+
+    function next() { goTo(current + 1) }
+    function prev() { goTo(current - 1) }
+
+    function resetPresentation() {
+      visited.clear();
+      slides.forEach(slide => {
+        slide.querySelectorAll('.tabs').forEach(tabGroup => {
+          const tabs = tabGroup.querySelectorAll('.tab');
+          const scope = tabGroup.closest('.slide-content') || tabGroup.closest('.slide');
+          scope.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+          tabs.forEach(t => t.classList.remove('active'));
+          if (tabs[0]) {
+            tabs[0].classList.add('active');
+            try { eval(tabs[0].getAttribute('onclick').replace('this', 'tabs[0]')) } catch(e){}
+          }
+        });
+        slide.querySelectorAll('.quiz-q').forEach(q => {
+          delete q.dataset.answered;
+          q.querySelectorAll('.quiz-opt').forEach(b => { b.disabled = false; b.classList.remove('correct','wrong'); });
+          const fb = q.querySelector('.quiz-feedback');
+          if (fb) { fb.style.display = 'none'; fb.textContent = ''; }
+        });
+      });
+      goTo(0);
+    }
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight' || e.key === 'PageDown') { e.preventDefault(); next(); }
+      if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); prev(); }
+      if (e.key === 'Home') { e.preventDefault(); goTo(0); }
+      if (e.key === 'End') { e.preventDefault(); goTo(TOTAL - 1); }
+      if (e.key === 'f' || e.key === 'F') toggleFullscreen();
+    });
+
+    let touchX = null;
+    document.addEventListener('touchstart', e => { touchX = e.touches[0].clientX }, { passive: true });
+    document.addEventListener('touchend', e => {
+      if (touchX === null) return;
+      const dx = e.changedTouches[0].clientX - touchX;
+      if (Math.abs(dx) > 50) { dx < 0 ? next() : prev() }
+      touchX = null;
+    });
+
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(() => {});
+        document.getElementById('fs-btn').textContent = '✕ Exit';
+      } else {
+        document.exitFullscreen();
+        document.getElementById('fs-btn').textContent = '⛶ Full';
+      }
+    }
+    document.addEventListener('fullscreenchange', () => {
+      const btn = document.getElementById('fs-btn');
+      if (btn) btn.textContent = document.fullscreenElement ? '✕ Exit' : '⛶ Full';
+    });
+
+    setTimeout(() => { document.getElementById('kbd-hint').style.display = 'block' }, 3000);
+    goTo(0);
+  </script>
+</body>
+</html>
